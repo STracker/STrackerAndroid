@@ -1,4 +1,4 @@
-+STrackerAndroid
-+===============
-+
-+Repository of STracker Android Client
+STrackerAndroid
+===============
+
+Repository of STracker Android Client
