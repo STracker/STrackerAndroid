@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/.metadata/.plugins/org.eclipse.jdt.core
+1166785899.index
+2656723380.index
+2348106205.index

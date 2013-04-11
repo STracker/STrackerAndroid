@@ -1,26 +1,37 @@
-*.pydevproject
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
 
-# External tool builders
-.externalToolBuilders/
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
 
-# Locally stored "Eclipse launch configurations"
-*.launch
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
 
-# CDT-specific
-.cproject
-
-# PDT-specific
-.buildpath
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
