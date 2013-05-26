@@ -30,38 +30,44 @@ public final class R {
         public static final int ic_messages=0x7f020002;
         public static final int ic_profile=0x7f020003;
         public static final int ic_tv=0x7f020004;
+        public static final int img_no_poster=0x7f020005;
     }
     public static final class id {
-        public static final int action_friends=0x7f090006;
-        public static final int action_messages=0x7f090007;
-        public static final int action_profile=0x7f090004;
-        public static final int action_search=0x7f090000;
-        public static final int action_series=0x7f090005;
-        public static final int action_settings=0x7f090008;
-        public static final int form_friend=0x7f090003;
-        public static final int form_genre=0x7f090002;
-        public static final int form_name=0x7f090001;
+        public static final int action_friends=0x7f090009;
+        public static final int action_messages=0x7f09000a;
+        public static final int action_profile=0x7f090007;
+        public static final int action_search=0x7f090003;
+        public static final int action_series=0x7f090008;
+        public static final int action_settings=0x7f09000b;
+        public static final int form_friend=0x7f090006;
+        public static final int form_genre=0x7f090005;
+        public static final int form_name=0x7f090004;
+        public static final int poster_id=0x7f090001;
+        public static final int title_description=0x7f090002;
+        public static final int title_name=0x7f090000;
     }
     public static final class layout {
         public static final int activity_genre=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int activity_result=0x7f030002;
+        public static final int activity_tvshow=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f080000;
     }
     public static final class string {
-        public static final int action_friends=0x7f06000c;
-        public static final int action_messages=0x7f060010;
+        public static final int action_friends=0x7f06000d;
+        public static final int action_messages=0x7f060011;
         /**  Menu Items 
          */
-        public static final int action_profile=0x7f06000b;
-        public static final int action_search=0x7f06000f;
-        public static final int action_series=0x7f06000d;
-        public static final int action_settings=0x7f06000e;
+        public static final int action_profile=0x7f06000c;
+        public static final int action_search=0x7f060010;
+        public static final int action_series=0x7f06000e;
+        public static final int action_settings=0x7f06000f;
         public static final int app_name=0x7f060000;
         public static final int async_task=0x7f060004;
         public static final int next_episode=0x7f060002;
+        public static final int poster_desc=0x7f06000b;
         public static final int search_hint=0x7f060001;
         public static final int serie_airday=0x7f060008;
         public static final int serie_desc=0x7f060006;
@@ -72,9 +78,9 @@ public final class R {
         public static final int serie_rating=0x7f06000a;
         public static final int serie_runtime=0x7f060007;
         public static final int start_btn=0x7f060003;
-        public static final int subitem_search_by_genre=0x7f060012;
-        public static final int subitem_search_by_name=0x7f060011;
-        public static final int subitem_search_friend=0x7f060013;
+        public static final int subitem_search_by_genre=0x7f060013;
+        public static final int subitem_search_by_name=0x7f060012;
+        public static final int subitem_search_friend=0x7f060014;
     }
     public static final class style {
         /** 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="src.stracker.json.TvShowSerializer"/>
-<fullyQualifiedTypeName name="src.stracker.model.TvShow"/>
 <fullyQualifiedTypeName name="android.widget.ListView"/>
 <fullyQualifiedTypeName name="android.widget.ListAdapter"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -9,7 +8,6 @@
 <fullyQualifiedTypeName name="android.database.sqlite.SQLiteOpenHelper"/>
 <fullyQualifiedTypeName name="android.content.ContentValues"/>
 <fullyQualifiedTypeName name="android.database.Cursor"/>
-<fullyQualifiedTypeName name="roboguice.inject.InjectView"/>
 <fullyQualifiedTypeName name="android.view.ViewGroup"/>
 <fullyQualifiedTypeName name="roboguice.activity.RoboActivity"/>
 <fullyQualifiedTypeName name="roboguice.inject.RoboApplicationProvider"/>
@@ -26,24 +24,39 @@
 <fullyQualifiedTypeName name="src.stracker.R.menu"/>
 <fullyQualifiedTypeName name="roboguice.activity.RoboListActivity"/>
 <fullyQualifiedTypeName name="android.widget.ArrayAdapter"/>
-<fullyQualifiedTypeName name="src.stracker.R.id"/>
 <fullyQualifiedTypeName name="android.R"/>
 <fullyQualifiedTypeName name="android.R.layout"/>
 <fullyQualifiedTypeName name="src.stracker.json.TvShowSynopseSerializer"/>
-<fullyQualifiedTypeName name="android.content.Context"/>
-<fullyQualifiedTypeName name="src.stracker.json.JSONLocator"/>
 <fullyQualifiedTypeName name="android.widget.Toast"/>
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="org.json.JSONArray"/>
 <fullyQualifiedTypeName name="src.stracker.tasks.SearchByGenreRequest"/>
-<fullyQualifiedTypeName name="roboguice.inject.ContentView"/>
-<fullyQualifiedTypeName name="src.stracker.R.layout"/>
 <fullyQualifiedTypeName name="android.app.Activity"/>
 <fullyQualifiedTypeName name="src.stracker.ResultActivity"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="android.os.Bundle"/>
-<fullyQualifiedTypeName name="android.os.Parcelable"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="src.stracker.model.TvShowSynopse"/>
+<fullyQualifiedTypeName name="src.stracker.R.layout"/>
+<fullyQualifiedTypeName name="roboguice.inject.ContentView"/>
+<fullyQualifiedTypeName name="android.os.Parcelable"/>
+<fullyQualifiedTypeName name="roboguice.inject.InjectView"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
+<fullyQualifiedTypeName name="src.stracker.R.id"/>
+<fullyQualifiedTypeName name="android.widget.ImageView"/>
+<fullyQualifiedTypeName name="src.stracker.tasks.TvShowRequest"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="android.os.AsyncTask"/>
+<fullyQualifiedTypeName name="android.graphics.Bitmap"/>
+<fullyQualifiedTypeName name="src.stracker.tasks.ImageRequest"/>
+<fullyQualifiedTypeName name="android.app.AlertDialog"/>
+<fullyQualifiedTypeName name="android.content.DialogInterface"/>
+<fullyQualifiedTypeName name="android.widget.EditText"/>
+<fullyQualifiedTypeName name="src.stracker.model.TvShow"/>
+<fullyQualifiedTypeName name="src.stracker.TvShowActivity"/>
+<fullyQualifiedTypeName name="src.stracker.json.JSONLocator"/>
+<fullyQualifiedTypeName name="src.stracker.tasks.SearchByNameRequest"/>
+<fullyQualifiedTypeName name="android.content.Context"/>
 </qualifiedTypeNameHistroy>

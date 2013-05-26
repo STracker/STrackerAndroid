@@ -1,0 +1,18 @@
+package src.stracker.tasks;
+
+import android.widget.Toast;
+import src.stracker.model.TvShow;
+
+public class SearchByNameRequest extends AbstractBaseTask<TvShow> {
+
+	@Override
+	public void onResult(String result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onError(String error) {
+		Toast.makeText(context, error, Toast.LENGTH_SHORT).show(); 
+	}
+}

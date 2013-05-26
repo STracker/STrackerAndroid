@@ -1,0 +1,15 @@
+package src.stracker;
+
+import android.os.Bundle;
+import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
+
+@ContentView(R.layout.activity_tvshow)
+public class TvShowActivity extends RoboActivity {
+
+	
+	@Override 
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState); 
+	}
+}

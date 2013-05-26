@@ -24,5 +24,6 @@
         </activity>
         <activity android:name="src.stracker.GenreActivity" />
         <activity android:name="src.stracker.ResultActivity" />
+        <activity android:name="src.stracker.TvShowActivity" />
     </application>	
 </manifest>

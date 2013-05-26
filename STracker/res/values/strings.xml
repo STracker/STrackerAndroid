@@ -13,6 +13,7 @@
 	<string name="serie_airday">Airday: </string>
 	<string name="serie_genres">Genres: </string>
 	<string name="serie_rating">Rating: </string>
+	<string name="poster_desc">Poster</string>
 	
 	<!-- Menu Items -->
 	<string name="action_profile">Profile</string>

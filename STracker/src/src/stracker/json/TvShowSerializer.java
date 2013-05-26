@@ -16,16 +16,16 @@ public class TvShowSerializer implements ISerialize<TvShow> {
 		try {
 			JSONObject jObj = new JSONObject(json);
 			tvShow = new TvShow(
-					jObj.getString("Id"),
+					jObj.getString("TvShowId"),
 					jObj.getString("Name"),
 					jObj.getString("Description"),
-					getGenres(jObj.getJSONArray("Genres")),
-					jObj.getInt("Rating"),
-					null,
-					null,
 					jObj.getString("AirDay"),
 					jObj.getInt("Runtime"),
-					null
+					//getGenres(jObj.getJSONArray("Genres")),
+					jObj.getInt("Rating"),
+					getPoster(jObj.getJSONArray("Artworks"))
+					//null,
+					//null
 					);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -38,6 +38,18 @@ public class TvShowSerializer implements ISerialize<TvShow> {
 		try {
 			for(int i = 0; i < arr.length(); i++){
 				ret.add(Genre.values()[arr.getInt(i)]);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+	
+	private String getPoster(JSONArray arr){
+		String ret = "";
+		try {
+			for(int i = 0; i < arr.length();){
+				return arr.getJSONObject(i).getString("ImageUrl");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
