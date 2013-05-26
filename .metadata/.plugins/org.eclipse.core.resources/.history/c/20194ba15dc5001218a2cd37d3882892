@@ -1,0 +1,16 @@
+package src.stracker;
+
+import android.os.Bundle;
+import roboguice.activity.RoboListActivity;
+
+public class GenreActivity extends RoboListActivity {
+	
+	private STrackerApp _app;
+	
+	@Override 
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState); 
+        _app = (STrackerApp) getApplication();
+	}
+
+}

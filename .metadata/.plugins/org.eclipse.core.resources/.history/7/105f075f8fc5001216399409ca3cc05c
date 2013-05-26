@@ -1,0 +1,28 @@
+package src.stracker.json;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import src.stracker.model.*;
+
+public class TvShowSynopseSerializer implements ISerialize<TvShowSynopse> {
+
+	@Override
+	public String serialize(TvShowSynopse object) {
+		throw new UnsupportedOperationException();
+	}
+  
+	@Override
+	public TvShowSynopse deserialize(String json) {
+		TvShowSynopse tvShow = null;
+		try {
+			JSONObject jObj = new JSONObject(json);
+			tvShow = new TvShowSynopse(
+					jObj.getString("Id"),
+					jObj.getString("Name")
+					);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return tvShow;
+	}
+}

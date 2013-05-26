@@ -11,11 +11,6 @@ import src.stracker.model.*;
 public class TvShowSerializer implements ISerialize<TvShow> {
 
 	@Override
-	public String serialize(TvShow object) {
-		throw new UnsupportedOperationException();
-	}
-  
-	@Override
 	public TvShow deserialize(String json) {
 		TvShow tvShow = null;
 		try {

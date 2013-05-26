@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<typeInfoHistroy/>
+<typeInfoHistroy>
+<typeInfo handle="=STracker/\/Users\/diogomatos\/Documents\/Eclipse Workspace\/STrackerAndroid\/STracker\/libs\/roboguice-2.0.jar&lt;roboguice.inject(RoboApplicationProvider.class[RoboApplicationProvider" modifiers="33" timestamp="1367525842000"/>
+<typeInfo handle="=STracker/\/Users\/diogomatos\/Documents\/Eclipse Workspace\/STrackerAndroid\/STracker\/libs\/guice-3.0-no_aop.jar&lt;com.google.inject(AbstractModule.class[AbstractModule" modifiers="1057" timestamp="1367525848000"/>
+<typeInfo handle="=STracker/src&lt;src.stracker.tasks{AbstractBaseTask.java[AbstractBaseTask" modifiers="1025" timestamp="1369525354000"/>
+<typeInfo handle="=STracker/\/Users\/diogomatos\/Documents\/Eclipse Workspace\/STrackerAndroid\/STracker\/libs\/roboguice-2.0.jar&lt;roboguice.activity(RoboListActivity.class[RoboListActivity" modifiers="33" timestamp="1367525842000"/>
+</typeInfoHistroy>

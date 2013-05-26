@@ -1,0 +1,27 @@
+package src.stracker.tasks;
+
+import android.content.Context;
+import src.stracker.json.JSONLocator;
+import src.stracker.json.TvShowSynopseSerializer;
+import src.stracker.model.TvShowSynopse;
+
+public class SearchByGenreRequest extends AbstractBaseTask<TvShowSynopse> {
+
+	private TvShowSynopseSerializer _serializer;
+	
+	public SearchByGenreRequest(Context context) {
+		super(context);
+		_serializer = (TvShowSynopseSerializer) JSONLocator.getInstance().getSerializer(TvShowSynopse.class);
+	}
+	
+	@Override
+	public void onResult(String result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onError(String error) {
+		// TODO Auto-generated method stub
+	}
+}

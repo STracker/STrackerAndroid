@@ -1,0 +1,5 @@
+package src.stracker.tasks;
+
+public class SearchByGenreRequest extends AbstractBaseTask<T> {
+
+}

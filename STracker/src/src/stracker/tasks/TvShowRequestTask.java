@@ -2,38 +2,35 @@ package src.stracker.tasks;
 
 import java.util.List;
 
+import roboguice.inject.InjectView;
 import src.stracker.R;
+import src.stracker.json.JSONLocator;
 import src.stracker.json.TvShowSerializer;
 import src.stracker.model.Genre;
 import src.stracker.model.TvShow;
-import android.app.Activity;
 import android.content.Context;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/*
 public class TvShowRequestTask extends AbstractBaseTask<String> {
 	
-	private TextView serieName, serieDesc, serieGenre, serieAirday, serieRuntime;
-	private Button btnGetInfo;
-	private RatingBar ratingBar;
+	@InjectView(R.id.btn_start)   Button btnGetInfo; 
+	@InjectView(R.id.txt_name)    TextView serieName;
+	@InjectView(R.id.txt_desc)    TextView serieDesc;
+	@InjectView(R.id.txt_genres)  TextView serieGenre;
+	@InjectView(R.id.txt_airday)  TextView serieAirday;
+	@InjectView(R.id.txt_runtime) TextView serieRuntime;
+	@InjectView(R.id.rating_bar)  RatingBar ratingBar;  
+	
 	private TvShowSerializer _tvShowSerializer;
 	
 	public TvShowRequestTask(Context context) {
 		super(context);
-		Activity activity = (context instanceof Activity) ? (Activity) context : null;
-		serieName    = (TextView) activity.findViewById(R.id.txt_name);
-		serieDesc    = (TextView) activity.findViewById(R.id.txt_desc);
-		serieRuntime = (TextView) activity.findViewById(R.id.txt_runtime);
-		serieAirday  = (TextView) activity.findViewById(R.id.txt_airday);
-		serieGenre   = (TextView) activity.findViewById(R.id.txt_genres);
-		
-		btnGetInfo = (Button) activity.findViewById(R.id.btn_start);
-		ratingBar = (RatingBar) activity.findViewById(R.id.rating_bar);
-		_tvShowSerializer = new TvShowSerializer();
+		_tvShowSerializer = (TvShowSerializer) JSONLocator.getInstance().getSerializer(TvShow.class);
 	}
-
+	
 	@Override
 	public void onResult(String result) {
 		try {
@@ -64,4 +61,6 @@ public class TvShowRequestTask extends AbstractBaseTask<String> {
     	}
     	return ret.toString();
     }
+    
 }
+*/

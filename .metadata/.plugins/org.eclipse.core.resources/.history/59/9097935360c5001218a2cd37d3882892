@@ -1,0 +1,6 @@
+package src.stracker.model;
+
+public class TvShowSynopse {
+	private String Id;
+	private String Name;
+}

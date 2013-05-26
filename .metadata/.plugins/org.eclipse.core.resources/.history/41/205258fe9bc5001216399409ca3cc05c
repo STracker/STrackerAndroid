@@ -1,0 +1,9 @@
+package src.stracker;
+
+import roboguice.activity.RoboListActivity;
+import roboguice.inject.ContentView;
+
+@ContentView(R.layout.activity_result)
+public class ResultActivity extends RoboListActivity {
+
+}

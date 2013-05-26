@@ -1,0 +1,54 @@
+package src.stracker;
+
+import roboguice.activity.RoboListActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
+import src.stracker.tasks.TvShowRequestTask;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.content.Context;
+import android.content.Intent;
+
+@ContentView(R.layout.activity_main)
+public class MainActivity extends RoboListActivity {
+	 
+	@InjectView(R.id.btn_start)  Button btnGetInfo; 
+    
+	private String URL = "http://strackerserverdev.apphb.com/api/tvshows/tt1520211";
+	private Context _context = (Context) this;
+	private TvShowRequestTask _requestTask;
+	     
+	@Override 
+	public void onCreate(Bundle savedInstanceState) {
+		Log.d("TAG","Antes do super");
+		super.onCreate(savedInstanceState); 
+		Log.d("TAG","Antes do setContentView");
+		//setContentView(R.layout.activity_main);  
+		btnGetInfo.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			   	//btnGetInfo.setEnabled(false);
+			   	//_requestTask = (TvShowRequestTask) new TvShowRequestTask(_context).execute(URL);
+				startActivity(new Intent(_context,TestActivity.class));
+			}
+		});
+	}
+	
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    
+    @Override
+    public void onStop(){
+    	super.onStop();
+    	if(_requestTask != null)
+    		_requestTask.cancel(true);
+    }
+}

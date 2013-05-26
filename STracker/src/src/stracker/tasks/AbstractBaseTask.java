@@ -10,6 +10,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -19,6 +20,7 @@ public abstract class AbstractBaseTask<T> extends AsyncTask<String, Integer, Str
 	public Context context;
 	public ProgressDialog dialog;
 	public Exception exception;
+	public Activity activity;
 
 	protected AbstractBaseTask() {
 	}
@@ -40,7 +42,6 @@ public abstract class AbstractBaseTask<T> extends AsyncTask<String, Integer, Str
 		HttpGet request = new HttpGet(uris[0]);
 		HttpResponse response;
 		String responseString = null;
-		publishProgress(50);
 		try {
 			request.setHeader("Cache-Control", "no-cache"); 
 			request.setHeader("Accept", "application/json");

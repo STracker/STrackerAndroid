@@ -1,40 +1,51 @@
 package src.stracker;
 
-import src.stracker.tasks.TvShowRequestTask;
+import roboguice.activity.RoboListActivity;
+import roboguice.inject.ContentView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
-import android.content.Context;
-
-public class MainActivity extends Activity {
-	
-	private Button btnGetInfo;
-	private String URL = "http://strackerserverdev.apphb.com/api/tvshows/tt1520211";
-	private Context _context = (Context) this;
-	
-	@Override
+import android.view.MenuItem;
+  
+@ContentView(R.layout.activity_main)
+public class MainActivity extends RoboListActivity {
+    
+      
+	@Override 
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-	         
-		btnGetInfo = (Button) findViewById(R.id.btn_start);
-		
-		btnGetInfo.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-			   	btnGetInfo.setEnabled(false);
-			   	new TvShowRequestTask(_context).execute(URL);
-			}
-		});
+		super.onCreate(savedInstanceState); 
 	}
 	
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);   
         return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	switch(item.getItemId()){
+    	case R.id.action_profile:
+    		break;
+    	case R.id.action_series:
+    		break;
+    	case R.id.action_messages:
+    		break;
+    	case R.id.action_friends:
+    		break;
+    	case R.id.action_settings:
+    		break;
+    	case R.id.form_friend:
+    		break;
+    	case R.id.form_genre:
+    		startActivity(new Intent(this,GenreActivity.class));
+    		break;
+    	case R.id.form_name:
+    		break;
+    	}
+    	return true;
     }
 }
