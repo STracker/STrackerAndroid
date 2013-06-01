@@ -16,7 +16,7 @@ public class GenreActivity extends RoboListActivity {
 	private final String[] _elems = { "Action", "Adventure", "Animation", "Biography", "Comedy", "Crime", 
 			"Documentary", "Drama", "Family", "Fantasy", "Film-Noir", "History", "Horror", "Music", 
 			"Musical", "Mystery", "Romance","Sci-Fi", "Short", "Sport", "Thriller", "War", "Western"
-	}; 
+	};
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {

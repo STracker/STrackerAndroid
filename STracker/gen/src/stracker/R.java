@@ -25,12 +25,13 @@ public final class R {
         public static final int padding_medium=0x7f040002;
     }
     public static final class drawable {
-        public static final int ic_friends=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int ic_messages=0x7f020002;
-        public static final int ic_profile=0x7f020003;
-        public static final int ic_tv=0x7f020004;
-        public static final int img_no_poster=0x7f020005;
+        public static final int bckgnd_pattern=0x7f020000;
+        public static final int ic_friends=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
+        public static final int ic_messages=0x7f020003;
+        public static final int ic_profile=0x7f020004;
+        public static final int ic_tv=0x7f020005;
+        public static final int img_no_poster=0x7f020006;
     }
     public static final class id {
         public static final int action_friends=0x7f090009;
@@ -51,6 +52,7 @@ public final class R {
         public static final int activity_main=0x7f030001;
         public static final int activity_result=0x7f030002;
         public static final int activity_tvshow=0x7f030003;
+        public static final int backrepeat=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f080000;

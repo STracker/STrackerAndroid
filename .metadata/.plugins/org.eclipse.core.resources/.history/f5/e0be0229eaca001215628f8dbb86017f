@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@layout/backrepeat" >
+    android:background="@drawable/bckgnd_pattern" >
 
     <TextView 
         android:id="@+id/title_name"
@@ -13,8 +13,7 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:textSize="14sp"
-        android:textIsSelectable="false" 
-        android:textColor="#0000FF" />
+        android:textIsSelectable="false" />
     
     <ImageView
         android:id="@+id/poster_id"
@@ -30,7 +29,6 @@
         android:src="@string/serie_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textIsSelectable="false"
-        android:textColor="@android:color/white" />
+        android:textIsSelectable="false" />
 
 </LinearLayout>

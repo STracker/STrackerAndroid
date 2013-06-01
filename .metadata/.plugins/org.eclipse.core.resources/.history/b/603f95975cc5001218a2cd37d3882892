@@ -1,7 +1,0 @@
-package src.stracker;
-
-import RoboListActivity;
-
-public class GenreActivity extends RoboListActivity {
-
-}
