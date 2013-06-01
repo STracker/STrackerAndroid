@@ -1,10 +1,10 @@
 package src.stracker;
 
-import java.net.URL;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.BinaryHttpResponseHandler;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,27 +26,18 @@ public class TvShowActivity extends RoboActivity {
 		TvShow tvshow = getIntent().getParcelableExtra("tvshow");
 		_name.setText(tvshow.getName());
 		_description.setText(tvshow.getDescription());
-	
-		new ImageRequest().execute(tvshow.getUrl());	
+		showPoster(tvshow);
 	}
 	
-	private class ImageRequest extends AsyncTask<String, Integer, Bitmap> {
-		
-		@Override
-		protected Bitmap doInBackground(String... params) {
-			URL newurl;
-	    	try{
-	        	newurl = new URL(params[0]);
-				return BitmapFactory.decodeStream(newurl.openConnection() .getInputStream()); 
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }	
-	    	return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Bitmap result) {
-			_poster.setImageBitmap(Bitmap.createScaledBitmap(result, 168, 251, false));
-		}
+	private void showPoster(TvShow tvshow){
+		AsyncHttpClient client = new AsyncHttpClient();
+		String[] allowedContentTypes = new String[] { "image/png", "image/jpeg" };
+		client.get(tvshow.getUrl(), new BinaryHttpResponseHandler(allowedContentTypes) {
+		    @Override
+		    public void onSuccess(byte[] fileData) {
+		        Bitmap result = BitmapFactory.decodeByteArray(fileData,0,fileData.length);
+		    	_poster.setImageBitmap(Bitmap.createScaledBitmap(result, 168, 251, false));
+		    }
+		});
 	}
 }

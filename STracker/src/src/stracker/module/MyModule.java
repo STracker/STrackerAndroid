@@ -1,9 +1,6 @@
 package src.stracker.module;
 
-import src.stracker.MainActivity;
-
 import android.util.Log;
-
 import com.google.inject.AbstractModule;
 
 public class MyModule extends AbstractModule {

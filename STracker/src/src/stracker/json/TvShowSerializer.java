@@ -1,8 +1,5 @@
 package src.stracker.json;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +29,8 @@ public class TvShowSerializer implements ISerialize<TvShow> {
 		}
 		return tvShow;
 	}
-
+	
+	/*
 	private List<Genre> getGenres(JSONArray arr){
 		List<Genre> ret = new LinkedList<Genre>();
 		try {
@@ -44,7 +42,7 @@ public class TvShowSerializer implements ISerialize<TvShow> {
 		}
 		return ret;
 	}
-	
+	*/
 	private String getPoster(JSONArray arr){
 		String ret = "";
 		try {

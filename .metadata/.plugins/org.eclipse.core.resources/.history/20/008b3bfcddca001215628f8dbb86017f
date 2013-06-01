@@ -1,0 +1,43 @@
+/**
+ * 
+ */
+package src.stracker.asynchttp;
+
+import src.stracker.json.TvShowSerializer;
+import android.content.Context;
+
+/**
+ * @author diogomatos
+ *
+ */
+public class TvShowRequest extends AbstractAsyncHttp {
+	
+	private TvShowSerializer _tvShowSerializer;
+	
+	/**
+	 * @param context
+	 */
+	public TvShowRequest(Context context) {
+		super(context);
+		// TODO Auto-generated constructor stub
+	}
+
+	/* (non-Javadoc)
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccess(java.lang.String)
+	 */
+	@Override
+	protected void onSuccess(String response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/* (non-Javadoc)
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onError(java.lang.Throwable, java.lang.String)
+	 */
+	@Override
+	protected void onError(Throwable e, String response) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

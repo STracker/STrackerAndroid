@@ -2,7 +2,6 @@ package src.stracker;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,7 +9,7 @@ import android.widget.ListView;
 import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 import src.stracker.model.TvShowSynopse;
-import src.stracker.tasks.TvShowRequest;
+import src.stracker.asynchttp.TvShowRequest;
 
 @ContentView(R.layout.activity_result)
 public class ResultActivity extends RoboListActivity {

@@ -2,7 +2,7 @@ package src.stracker;
 
 import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
-import src.stracker.tasks.SearchByNameRequest;
+import src.stracker.asynchttp.SearchByNameRequest;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -76,7 +76,7 @@ public class MainActivity extends RoboListActivity {
         		new DialogInterface.OnClickListener() {
 	                public void onClick(DialogInterface dialog, int id) {
 	                	String url = _app.getURL()+"tvshows?name="+input.getText();
-	                    new SearchByNameRequest(_context).execute(url.replaceAll(" ", "+"));
+	                	new SearchByNameRequest(_context).execute(url.replaceAll(" ", "+"));
 	                }
         });
         AlertDialog alertDialog = adBuilder.create();

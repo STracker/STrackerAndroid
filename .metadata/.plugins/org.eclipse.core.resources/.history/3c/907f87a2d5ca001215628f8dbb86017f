@@ -1,0 +1,32 @@
+package src.stracker.asynchttp;
+
+import android.content.Context;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+public abstract class AbstractAsyncHttp<T> {
+
+	private AsyncHttpClient _client;
+	private Context _context;
+	
+	public AbstractAsyncHttp(Context context){
+		_context = context;
+		_client = new AsyncHttpClient();
+		_client.addHeader("Cache-Control", "no-cache");
+		_client.addHeader("Accept", "application/json");
+	}
+	
+	public T execute(String url){
+		_client.get(url, new AsyncHttpResponseHandler() {
+		    @Override
+		    public void onSuccess(String response) {
+		        System.out.println(response);
+		    }
+		    
+		    @Override
+		    public void onFailure(Throwable e, String response){
+		    	
+		    }
+		});	
+	}
+}

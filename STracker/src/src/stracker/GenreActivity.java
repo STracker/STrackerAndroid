@@ -6,7 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
-import src.stracker.tasks.SearchByGenreRequest;
+import src.stracker.asynchttp.SearchByGenreRequest;
  
 @ContentView(R.layout.activity_genre)
 public class GenreActivity extends RoboListActivity {

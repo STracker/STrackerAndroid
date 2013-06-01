@@ -1,0 +1,11 @@
+package src.stracker.asynchttp;
+
+import android.content.Context;
+import com.loopj.android.http.AsyncHttpClient;
+
+public abstract class AbstractAsyncHttp {
+
+	private AsyncHttpClient _client = new AsyncHttpClient();
+	private Context _context;
+	
+}
