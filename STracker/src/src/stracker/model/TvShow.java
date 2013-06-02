@@ -1,5 +1,8 @@
 package src.stracker.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,13 +15,14 @@ public class TvShow implements Parcelable{
 	private int Runtime;
 	private int Rating;
 	private String Url;
+	private List<String> Genres;
 	
 	public TvShow(Parcel in){
 		readFromParcel(in);
 	}
 	
 	public TvShow(String id, String name, String description, String airday,
-			int runtime, int rating, String url) {
+			int runtime, int rating, String url, List<String> genres) {
 		super();
 		Id = id;
 		Name = name;
@@ -27,6 +31,7 @@ public class TvShow implements Parcelable{
 		Runtime = runtime;
 		Rating = rating;
 		Url = url;
+		Genres = genres;
 	}
 
 	/*
@@ -99,6 +104,13 @@ public class TvShow implements Parcelable{
 		Runtime = runtime;
 	}
 	
+	public List<String> getGenres() {
+		return Genres;
+	}
+
+	public void setGenres(List<String> genres) {
+		Genres = genres;
+	}
 	/*
 	public List<Artwork> getArtworks() {
 		return Artworks;
@@ -155,6 +167,7 @@ public class TvShow implements Parcelable{
 		dest.writeInt(Runtime);
 		dest.writeInt(Rating);
 		dest.writeString(Url);
+	    dest.writeStringList(Genres);
 	}	
 	
 	public void readFromParcel(Parcel in){
@@ -165,6 +178,9 @@ public class TvShow implements Parcelable{
 		setRuntime(in.readInt());
 		setRating(in.readInt());
 		setUrl(in.readString());
+		List<String> stringList = new ArrayList<String>();
+		in.readStringList(stringList);
+		setGenres(stringList);
 	}
 	
 	public static final Parcelable.Creator<TvShow> CREATOR =

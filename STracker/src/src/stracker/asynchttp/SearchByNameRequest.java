@@ -43,6 +43,6 @@ public class SearchByNameRequest extends AbstractAsyncHttp {
 	 */
 	@Override
 	protected void onErrorHook(Throwable e, String response) {
-		Toast.makeText(_context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show(); 
+		Toast.makeText(_context, "We don't know this TvShow yet!", Toast.LENGTH_SHORT).show(); 
 	}
 }

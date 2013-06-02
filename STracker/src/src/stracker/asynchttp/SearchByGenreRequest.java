@@ -49,6 +49,6 @@ public class SearchByGenreRequest extends AbstractAsyncHttp {
 	 */
 	@Override
 	protected void onErrorHook(Throwable e, String response) {
-		Toast.makeText(_context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show(); 
+		Toast.makeText(_context, "No results for selected Genre", Toast.LENGTH_SHORT).show(); 
 	}
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@layout/backrepeat" >
+
+    <TextView 
+        android:id="@+id/title_name"
+        android:src="@string/serie_name"
+        android:textIsSelectable="false"
+        style="@style/SerieTitle" />
+    
+    <LinearLayout 
+        android:layout_width="wrap_content"
+   		android:layout_height="wrap_content"
+    	android:orientation="horizontal"  >
+    
+	    <ImageView
+	        android:id="@+id/poster_id"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp"
+	        android:paddingLeft="10sp"
+	        android:contentDescription="@string/poster_desc"
+	        android:src="@drawable/img_no_poster" />
+	    
+	    <LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+		    
+	        <TextView 
+	            android:id="@+id/serie_airday"
+	            android:src="@string/serie_airday"
+        		android:textIsSelectable="false" 
+	            android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content" />
+	        
+	        <TextView 
+	            android:id="@+id/serie_runtime"
+	            android:src="@string/serie_runtime"
+        		android:textIsSelectable="false" 
+	            android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content" />
+	        
+	    </LinearLayout>
+    </LinearLayout>
+    
+    <TextView 
+        android:id="@+id/title_description"
+        android:src="@string/serie_desc"
+        android:textIsSelectable="false" 
+        style="@style/SerieDescription"/>
+
+</LinearLayout>
