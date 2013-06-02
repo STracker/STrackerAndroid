@@ -20,13 +20,15 @@ import android.widget.Toast;
 public class SearchByGenreRequest extends AbstractAsyncHttp {
 
 	private TvShowSynopseSerializer _serializer;
+	protected String _genre;
 	
 	/**
 	 * @param context
 	 */
-	public SearchByGenreRequest(Context context) {
+	public SearchByGenreRequest(Context context, String genre) {
 		super(context);
 		_serializer = (TvShowSynopseSerializer) JSONLocator.getInstance().getSerializer(TvShowSynopse.class);
+		_genre = genre;
 	}
 
 	/* (non-Javadoc)
@@ -37,7 +39,9 @@ public class SearchByGenreRequest extends AbstractAsyncHttp {
 		try{
 			ArrayList<TvShowSynopse> list = _serializer.deserialize(response);
 			Intent intent = new Intent(_context,ResultActivity.class);
+			intent.putExtra("type", "TVSHOWSYNOPSE");
 			intent.putExtra("list", list);
+			intent.putExtra("genre", _genre);
 			_context.startActivity(intent);
 		}catch(Exception e){
 			onErrorHook(e,e.getClass().getSimpleName());

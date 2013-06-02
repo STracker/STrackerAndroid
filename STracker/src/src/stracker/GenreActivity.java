@@ -24,12 +24,13 @@ public class GenreActivity extends RoboListActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
+		setTitle("List of Genres");
         _app = (STrackerApp) getApplication();
         _adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, _elems){
         	@Override
         	public View getView(int position, View convertView, ViewGroup parent){
-        		View view =super.getView(position, convertView, parent);
-                TextView textView=(TextView) view.findViewById(android.R.id.text1);
+        		View view = super.getView(position, convertView, parent);
+                TextView textView = (TextView) view.findViewById(android.R.id.text1);
                 textView.setTextColor(Color.WHITE);
                 return view;
         	}
@@ -39,6 +40,6 @@ public class GenreActivity extends RoboListActivity {
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		new SearchByGenreRequest(this).execute(_app.getURL()+"tvshows?genre="+_elems[position]);
+		new SearchByGenreRequest(this,_elems[position]).execute(_app.getURL()+"tvshows?genre="+_elems[position]);
 	}
 }

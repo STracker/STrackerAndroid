@@ -1,5 +1,0 @@
-package src.stracker.tasks;
-
-public class ImageRequest extends AbstractBaseTask<T> {
-
-}

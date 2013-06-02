@@ -1,0 +1,15 @@
+package src.stracker.json;
+
+import java.util.ArrayList;
+
+import src.stracker.model.SeasonSynopse;
+
+public class SeasonSynopseSerializer implements ISerialize<ArrayList<SeasonSynopse>> {
+
+	@Override
+	public ArrayList<SeasonSynopse> deserialize(String json) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

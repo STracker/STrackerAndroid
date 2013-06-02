@@ -25,4 +25,10 @@
 	<string name="subitem_search_by_name">Search by Name</string>
 	<string name="subitem_search_by_genre">Search by Genre</string>
 	<string name="subitem_search_friend">Search Friend</string>
+	
+	<!-- Menu TvShow -->
+	<string name="action_more_info">Information</string>
+	<string name="subitem_seasons">Seasons</string>
+	<string name="subitem_comments">Comments</string>
+	<string name="subitem_cast">Cast</string>
 </resources>

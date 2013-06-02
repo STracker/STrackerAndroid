@@ -178,21 +178,24 @@ public final class R {
         public static final int img_no_poster=0x7f020006;
     }
     public static final class id {
-        public static final int action_friends=0x7f0a000c;
-        public static final int action_messages=0x7f0a000d;
-        public static final int action_profile=0x7f0a000a;
-        public static final int action_search=0x7f0a0006;
-        public static final int action_series=0x7f0a000b;
-        public static final int action_settings=0x7f0a000e;
-        public static final int form_friend=0x7f0a0009;
-        public static final int form_genre=0x7f0a0008;
-        public static final int form_name=0x7f0a0007;
-        public static final int poster_id=0x7f0a0001;
-        public static final int serie_airday=0x7f0a0002;
-        public static final int serie_genre=0x7f0a0004;
-        public static final int serie_runtime=0x7f0a0003;
-        public static final int title_description=0x7f0a0005;
-        public static final int title_name=0x7f0a0000;
+        public static final int action_friends=0x7f0a000b;
+        public static final int action_messages=0x7f0a000c;
+        public static final int action_more_info=0x7f0a000e;
+        public static final int action_profile=0x7f0a0009;
+        public static final int action_search=0x7f0a0005;
+        public static final int action_series=0x7f0a000a;
+        public static final int action_settings=0x7f0a000d;
+        public static final int form_cast=0x7f0a0010;
+        public static final int form_comments=0x7f0a0011;
+        public static final int form_friend=0x7f0a0008;
+        public static final int form_genre=0x7f0a0007;
+        public static final int form_name=0x7f0a0006;
+        public static final int form_seasons=0x7f0a000f;
+        public static final int poster_id=0x7f0a0000;
+        public static final int serie_airday=0x7f0a0001;
+        public static final int serie_genre=0x7f0a0003;
+        public static final int serie_runtime=0x7f0a0002;
+        public static final int title_description=0x7f0a0004;
     }
     public static final class layout {
         public static final int activity_genre=0x7f030000;
@@ -203,10 +206,14 @@ public final class R {
     }
     public static final class menu {
         public static final int main=0x7f090000;
+        public static final int tvshow=0x7f090001;
     }
     public static final class string {
         public static final int action_friends=0x7f06000d;
         public static final int action_messages=0x7f060011;
+        /**  Menu TvShow 
+         */
+        public static final int action_more_info=0x7f060015;
         /**  Menu Items 
          */
         public static final int action_profile=0x7f06000c;
@@ -227,9 +234,12 @@ public final class R {
         public static final int serie_rating=0x7f06000a;
         public static final int serie_runtime=0x7f060007;
         public static final int start_btn=0x7f060003;
+        public static final int subitem_cast=0x7f060018;
+        public static final int subitem_comments=0x7f060017;
         public static final int subitem_search_by_genre=0x7f060013;
         public static final int subitem_search_by_name=0x7f060012;
         public static final int subitem_search_friend=0x7f060014;
+        public static final int subitem_seasons=0x7f060016;
     }
     public static final class style {
         /** 

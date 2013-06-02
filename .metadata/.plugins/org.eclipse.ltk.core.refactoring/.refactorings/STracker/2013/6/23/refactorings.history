@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;src.stracker.json.EpisodeSynopse.java&apos; to &apos;EpisodeSynopseSerializer.java&apos;&#x0A;- Original project: &apos;STracker&apos;&#x0A;- Original element: &apos;src.stracker.json.EpisodeSynopse.java&apos;&#x0A;- Renamed element: &apos;src.stracker.json.EpisodeSynopseSerializer.java&apos;" description="Rename compilation unit &apos;EpisodeSynopse.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;src.stracker.json{EpisodeSynopse.java" name="EpisodeSynopseSerializer.java" references="false" stamp="1370197633821" version="1.0"/>
+</session>

@@ -1,0 +1,44 @@
+/**
+ * 
+ */
+package src.stracker.asynchttp;
+
+import src.stracker.json.JSONLocator;
+import src.stracker.json.SeasonSynopseSerializer;
+import src.stracker.model.SeasonSynopse;
+import android.content.Context;
+
+/**
+ * @author diogomatos
+ *
+ */
+public class SeasonsRequest extends AbstractAsyncHttp {
+
+	private SeasonSynopseSerializer _serializer;
+	
+	/**
+	 * @param context
+	 */
+	public SeasonsRequest(Context context) {
+		super(context);
+		_serializer = (SeasonSynopseSerializer) JSONLocator.getInstance().getSerializer(SeasonSynopse.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
+	 */
+	@Override
+	protected void onSuccessHook(String response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/* (non-Javadoc)
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onErrorHook(java.lang.Throwable, java.lang.String)
+	 */
+	@Override
+	protected void onErrorHook(Throwable e, String response) {
+		// TODO Auto-generated method stub
+
+	}
+}

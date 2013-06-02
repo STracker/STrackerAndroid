@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="android.database.sqlite.SQLiteOpenHelper"/>
-<fullyQualifiedTypeName name="android.content.ContentValues"/>
-<fullyQualifiedTypeName name="android.database.Cursor"/>
-<fullyQualifiedTypeName name="android.view.ViewGroup"/>
-<fullyQualifiedTypeName name="roboguice.activity.RoboActivity"/>
-<fullyQualifiedTypeName name="roboguice.inject.RoboApplicationProvider"/>
-<fullyQualifiedTypeName name="src.stracker.MainActivity"/>
-<fullyQualifiedTypeName name="android.util.Log"/>
-<fullyQualifiedTypeName name="android.view.View"/>
-<fullyQualifiedTypeName name="android.database.sqlite.SQLiteDatabase"/>
 <fullyQualifiedTypeName name="com.stracker.dbhelper.STrackerHelper"/>
 <fullyQualifiedTypeName name="android.database.SQLException"/>
 <fullyQualifiedTypeName name="com.stracker.model.TvShowInfo"/>
@@ -30,19 +20,15 @@
 <fullyQualifiedTypeName name="src.stracker.ResultActivity"/>
 <fullyQualifiedTypeName name="android.content.Intent"/>
 <fullyQualifiedTypeName name="android.os.Bundle"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="src.stracker.model.TvShowSynopse"/>
 <fullyQualifiedTypeName name="src.stracker.R.layout"/>
 <fullyQualifiedTypeName name="roboguice.inject.ContentView"/>
 <fullyQualifiedTypeName name="android.os.Parcelable"/>
 <fullyQualifiedTypeName name="roboguice.inject.InjectView"/>
-<fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="java.net.URL"/>
 <fullyQualifiedTypeName name="android.graphics.BitmapFactory"/>
-<fullyQualifiedTypeName name="src.stracker.R.id"/>
 <fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="src.stracker.tasks.TvShowRequest"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="android.graphics.Bitmap"/>
 <fullyQualifiedTypeName name="src.stracker.tasks.ImageRequest"/>
 <fullyQualifiedTypeName name="android.app.AlertDialog"/>
@@ -50,7 +36,6 @@
 <fullyQualifiedTypeName name="android.widget.EditText"/>
 <fullyQualifiedTypeName name="src.stracker.model.TvShow"/>
 <fullyQualifiedTypeName name="src.stracker.TvShowActivity"/>
-<fullyQualifiedTypeName name="src.stracker.json.JSONLocator"/>
 <fullyQualifiedTypeName name="src.stracker.tasks.SearchByNameRequest"/>
 <fullyQualifiedTypeName name="android.os.AsyncTask.Status"/>
 <fullyQualifiedTypeName name="android.os.AsyncTask"/>
@@ -60,4 +45,19 @@
 <fullyQualifiedTypeName name="com.loopj.android.http.AsyncHttpResponseHandler"/>
 <fullyQualifiedTypeName name="com.loopj.android.http.AsyncHttpClient"/>
 <fullyQualifiedTypeName name="com.loopj.android.http.BinaryHttpResponseHandler"/>
+<fullyQualifiedTypeName name="src.stracker.R.id"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="src.stracker.model.Genre"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="android.widget.TextView"/>
+<fullyQualifiedTypeName name="android.graphics.Color"/>
+<fullyQualifiedTypeName name="src.stracker.json.SeasonSynopseSerializer"/>
+<fullyQualifiedTypeName name="src.stracker.model.SeasonSynopse"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="src.stracker.json.EpisodeSynopseSerializer"/>
+<fullyQualifiedTypeName name="src.stracker.json.JSONLocator"/>
+<fullyQualifiedTypeName name="src.stracker.model.EpisodeSynopse"/>
+<fullyQualifiedTypeName name="src.stracker.asynchttp.EpisodesRequest"/>
+<fullyQualifiedTypeName name="src.stracker.asynchttp.SeasonsRequest"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
 </qualifiedTypeNameHistroy>

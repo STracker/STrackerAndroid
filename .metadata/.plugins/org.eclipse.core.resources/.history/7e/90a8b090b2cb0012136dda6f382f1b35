@@ -1,0 +1,44 @@
+/**
+ * 
+ */
+package src.stracker.asynchttp;
+
+import src.stracker.json.EpisodeSynopseSerializer;
+import src.stracker.json.JSONLocator;
+import src.stracker.model.EpisodeSynopse;
+import android.content.Context;
+import android.widget.Toast;
+
+/**
+ * @author diogomatos
+ *
+ */
+public class EpisodesRequest extends AbstractAsyncHttp {
+
+	private EpisodeSynopseSerializer _serializer;
+	
+	/**
+	 * @param context
+	 */
+	public EpisodesRequest(Context context) {
+		super(context);
+		_serializer = (EpisodeSynopseSerializer) JSONLocator.getInstance().getSerializer(EpisodeSynopse.class);
+	}
+
+	/* (non-Javadoc)
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
+	 */
+	@Override
+	protected void onSuccessHook(String response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/* (non-Javadoc)
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onErrorHook(java.lang.Throwable, java.lang.String)
+	 */
+	@Override
+	protected void onErrorHook(Throwable e, String response) {
+		Toast.makeText(_context, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();  
+	}
+}

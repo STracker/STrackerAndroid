@@ -1,5 +1,0 @@
-package src.stracker.tasks;
-
-public class SearchByNameRequest extends AbstractBaseTask<TvShow> {
-
-}

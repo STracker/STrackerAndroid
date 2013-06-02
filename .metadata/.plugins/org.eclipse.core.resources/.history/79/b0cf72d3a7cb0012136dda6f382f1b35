@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_search"
+        android:orderInCategory="600"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/action_search" >
+        <menu>
+            <item android:id="@+id/form_name"
+                  android:title="@string/subitem_search_by_name" />
+            <item android:id="@+id/form_genre"
+                  android:title="@string/subitem_search_by_genre" />
+            <item android:id="@+id/form_friend"
+                  android:title="@string/subitem_search_friend" />
+        </menu>
+    </item>
+</menu>
