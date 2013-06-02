@@ -15,6 +15,7 @@ import roboguice.inject.ContentView;
 import src.stracker.model.EpisodeSynopse;
 import src.stracker.model.SeasonSynopse;
 import src.stracker.model.TvShowSynopse;
+import src.stracker.asynchttp.EpisodeRequest;
 import src.stracker.asynchttp.EpisodesRequest;
 import src.stracker.asynchttp.TvShowRequest;
 
@@ -27,6 +28,7 @@ public class ResultActivity extends RoboListActivity {
 	private ArrayList<SeasonSynopse> _seasonList;
 	private ArrayList<EpisodeSynopse> _episodeList;
 	private String _tvShowId;
+	private int _seasonNumber;
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,8 @@ public class ResultActivity extends RoboListActivity {
            
         //List of episodes synopses
         if(getIntent().getStringExtra("type").equals("EPISODESYNOPSE")){
-        	setTitle("Season " + getIntent().getIntExtra("seasonNumber", 999));
+        	_seasonNumber = getIntent().getIntExtra("seasonNumber", 999);
+        	setTitle("Season " + _seasonNumber);
         	_tvShowId = getIntent().getStringExtra("tvShowId");
         	_episodeList = getIntent().getParcelableArrayListExtra("list");
         	for(EpisodeSynopse synopse : _episodeList)
@@ -66,7 +69,7 @@ public class ResultActivity extends RoboListActivity {
         		View view =super.getView(position, convertView, parent);
                 TextView textView=(TextView) view.findViewById(android.R.id.text1);
                 textView.setTextColor(Color.WHITE);
-                return view;
+                return view; 
         	}
         };
         setListAdapter(_adapter);
@@ -81,6 +84,10 @@ public class ResultActivity extends RoboListActivity {
 		else if(_seasonList != null){
 			SeasonSynopse season = _seasonList.get(position);
 			new EpisodesRequest(this, season.getNumber()).execute(_app.getURL()+"tvshows/" + _tvShowId + "/seasons/"+ season.getNumber());
+		}
+		else if(_episodeList != null){
+			EpisodeSynopse episode = _episodeList.get(position);
+			new EpisodeRequest(this).execute(_app.getURL()+"tvshows/" + _tvShowId + "/seasons/" + _seasonNumber + "/episodes/" + episode.getNumber());
 		}
 	}
 }

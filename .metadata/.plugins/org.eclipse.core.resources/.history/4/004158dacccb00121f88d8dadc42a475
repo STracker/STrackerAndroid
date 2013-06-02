@@ -1,0 +1,5 @@
+package src.stracker.json;
+
+public class EpisodeSerializer implements ISerialize<Episode> {
+
+}

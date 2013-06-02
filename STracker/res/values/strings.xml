@@ -31,4 +31,10 @@
 	<string name="subitem_seasons">Seasons</string>
 	<string name="subitem_comments">Comments</string>
 	<string name="subitem_cast">Cast</string>
+	
+	<!-- Episode Information -->
+	<string name="banner_desc">Banner</string>
+	<string name="episode_desc">Description</string>
+	<string name="episode_info">Episode Info</string>
+	<string name="episode_rating">Rating</string>
 </resources>
