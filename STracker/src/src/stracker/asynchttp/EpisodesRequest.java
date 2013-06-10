@@ -4,9 +4,6 @@
 package src.stracker.asynchttp;
 
 import java.util.ArrayList;
-
-import org.json.JSONObject;
-
 import src.stracker.ResultActivity;
 import src.stracker.json.EpisodeSynopseSerializer;
 import src.stracker.json.JSONLocator;
@@ -40,13 +37,10 @@ public class EpisodesRequest extends AbstractAsyncHttp {
 	protected void onSuccessHook(String response) {
 		try{
 			ArrayList<EpisodeSynopse> list = _serializer.deserialize(response);
-			JSONObject jObj = new JSONObject(response);
-			String tvShowId = jObj.getString("TvShowId");
 			Intent intent = new Intent(_context,ResultActivity.class);
 			intent.putExtra("type", "EPISODESYNOPSE");
 			intent.putExtra("list", list);
 			intent.putExtra("seasonNumber", _seasonNumber);
-			intent.putExtra("tvShowId", tvShowId);
 			_context.startActivity(intent);
 		}catch(Exception e){
 			onErrorHook(e,e.getClass().getSimpleName());

@@ -7,25 +7,25 @@ public class Episode implements Parcelable {
 
 	private String Name;
 	private int Number;
-	private int Rating;
+	private String Date;
 	private String TvShowId;
 	private String Description;
-	private String URL;
+	private String PosterUrl;
 	private int SeasonNumber;
 	
 	public Episode(Parcel in){
 		readFromParcel(in);
 	}
 	
-	public Episode(String name, int number, int rating, String tvShowId,
-			String description, String uRL, int seasonNumber) {
+	public Episode(String name, int number, String date, String tvShowId,
+			String description, String posterUrl, int seasonNumber) {
 		super();
 		Name = name;
 		Number = number;
-		Rating = rating;
+		Date = date;
 		TvShowId = tvShowId;
 		Description = description;
-		URL = uRL;
+		PosterUrl = posterUrl;
 		SeasonNumber = seasonNumber;
 	}
 	
@@ -45,12 +45,12 @@ public class Episode implements Parcelable {
 		Number = number;
 	}
 
-	public int getRating() {
-		return Rating;
+	public String getDate() {
+		return Date;
 	}
 
-	public void setRating(int rating) {
-		Rating = rating;
+	public void setDate(String date) {
+		Date = date;
 	}
 
 	public String getTvShowId() {
@@ -69,12 +69,12 @@ public class Episode implements Parcelable {
 		Description = description;
 	}
 
-	public String getURL() {
-		return URL;
+	public String getPosterUrl() {
+		return PosterUrl;
 	}
 
-	public void setURL(String uRL) {
-		URL = uRL;
+	public void setPosterUrl(String uRL) {
+		PosterUrl = uRL;
 	}
 
 	public int getSeasonNumber() {
@@ -94,20 +94,20 @@ public class Episode implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(Name);
 		dest.writeInt(Number);
-		dest.writeInt(Rating);
+		dest.writeString(Date);
 		dest.writeString(TvShowId);
 		dest.writeString(Description);
-		dest.writeString(URL);
+		dest.writeString(PosterUrl);
 		dest.writeInt(SeasonNumber);
 	}
 	
 	public void readFromParcel(Parcel in){
 		setName(in.readString());
 		setNumber(in.readInt());
-		setRating(in.readInt());
+		setDate(in.readString());
 		setTvShowId(in.readString());
 		setDescription(in.readString());
-		setURL(in.readString());
+		setPosterUrl(in.readString());
 		setSeasonNumber(in.readInt());
 	}
 	

@@ -18,7 +18,8 @@ public class EpisodeSynopseSerializer implements ISerialize<ArrayList<EpisodeSyn
 		        JSONObject jObj = jsonArray.getJSONObject(i);
 		        episodes.add(new EpisodeSynopse(
 					jObj.getInt("EpisodeNumber"),
-					jObj.getString("Name")
+					jObj.getString("Name"),
+					jObj.getString("Uri")
 					));
 			}
 		} catch (JSONException e) {

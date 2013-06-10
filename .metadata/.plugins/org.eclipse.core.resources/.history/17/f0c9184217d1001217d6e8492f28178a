@@ -1,0 +1,11 @@
+package src.stracker.json;
+
+import src.stracker.model.GenreSynopse;
+
+public class GenresSerializer implements ISerialize<GenreSynopse> {
+
+	@Override
+	public GenreSynopse deserialize(String json) {
+		return null;
+	}
+}

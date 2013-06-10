@@ -1,0 +1,92 @@
+package src.stracker;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.BinaryHttpResponseHandler;
+
+import android.app.ListActivity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import roboguice.activity.RoboListActivity;
+import roboguice.inject.ContentView;
+import roboguice.inject.InjectView;
+import src.stracker.model.Actor;
+
+//@ContentView(R.layout.activity_actors)
+public class ActorsActivity extends ListActivity {
+	
+	private ArrayList<Actor> _actors;
+	private ActorsAdapter _adapter;
+	
+	@Override 
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState); 
+		setContentView(R.layout.activity_actors);
+		_actors = getIntent().getParcelableArrayListExtra("list");
+		_adapter = new ActorsAdapter(this, _actors);
+		setListAdapter(_adapter);
+	}
+	
+	private class ActorsAdapter extends ArrayAdapter<Actor>{
+
+		private LayoutInflater _inflater;
+		
+		public ActorsAdapter(Context context, List<Actor> elems){
+			super(context, R.layout.actor_row, elems);
+			_inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View vi=convertView;
+			ValueHolder holder = new ValueHolder();
+	        if(convertView==null){
+	            vi = _inflater.inflate(R.layout.actor_row, null);
+	            holder.photo = (ImageView) findViewById(R.id.actor_photo); 
+	            holder.name = (TextView) findViewById(R.id.actor_name);
+	            holder.characterName = (TextView) findViewById(R.id.char_name);
+	            vi.setTag(holder);
+	        }
+	        else
+	        	holder = (ValueHolder) vi.getTag();
+	        	        
+	        Actor actor = getItem(position);	        
+	        // Setting all values in listview
+	        holder.name.setText(actor.getName());
+	        holder.characterName.setText(actor.getCharacterName());
+	        showPhoto(holder.photo, actor.getPhotoUrl());
+	        return vi;
+		}	
+		
+		private void showPhoto(final ImageView photo, String url){
+			AsyncHttpClient client = new AsyncHttpClient();
+			String[] allowedContentTypes = new String[] { "image/png", "image/jpeg" };
+			client.get(url, new BinaryHttpResponseHandler(allowedContentTypes) {
+			    @Override
+			    public void onSuccess(byte[] fileData) {
+			    	if (fileData != null){
+			    		Bitmap result = BitmapFactory.decodeByteArray(fileData,0,fileData.length);
+			    		photo.setImageBitmap(Bitmap.createScaledBitmap(result, 50, 50, false));
+			    	}
+			    }
+			});
+		}
+		
+		private class ValueHolder{
+			ImageView photo;
+			TextView name;
+			TextView characterName;
+		}
+	}
+}

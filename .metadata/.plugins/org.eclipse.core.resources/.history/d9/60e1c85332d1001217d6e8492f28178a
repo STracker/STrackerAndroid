@@ -1,0 +1,39 @@
+package src.stracker.json;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import src.stracker.model.*;
+
+public class TvShowSerializer implements ISerialize<TvShow> {
+
+	private SeasonSynopseSerializer _seasonSerializer = (SeasonSynopseSerializer) JSONLocator.getInstance().getSerializer(SeasonSynopse.class);
+	private GenresSerializer _genreSerializer = (GenresSerializer) JSONLocator.getInstance().getSerializer(GenreSynopse.class);
+	private ActorSerializer _actorSerializer = (ActorSerializer) JSONLocator.getInstance().getSerializer(Actor.class);
+	
+	@Override
+	public TvShow deserialize(String json) {
+		TvShow tvShow = null;
+		try {
+			JSONObject jObj = new JSONObject(json);
+			tvShow = new TvShow(
+					jObj.getString("TvShowId"),
+					jObj.getString("Name"),
+					jObj.getString("Description"),
+					jObj.getString("AirDay"),
+					jObj.getInt("Runtime"),
+					jObj.getString("AirTime"),
+					jObj.getString("FirstAired"),
+					jObj.getJSONObject("Poster").getString("ImageUrl"),
+					_genreSerializer.deserialize(jObj.getJSONArray("Genres").toString()),
+					_seasonSerializer.deserialize(jObj.getJSONArray("SeasonSynopses").toString())
+					);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return tvShow;
+	}
+}

@@ -19,15 +19,13 @@ import android.widget.Toast;
 public class SeasonsRequest extends AbstractAsyncHttp {
 
 	private SeasonSynopseSerializer _serializer;
-	private String _tvShowId;
 	
 	/**
 	 * @param context
 	 */
-	public SeasonsRequest(Context context, String tvShowId) {
+	public SeasonsRequest(Context context) {
 		super(context);
 		_serializer = (SeasonSynopseSerializer) JSONLocator.getInstance().getSerializer(SeasonSynopse.class);
-		_tvShowId = tvShowId;
 	}
 
 	/* (non-Javadoc)
@@ -40,7 +38,6 @@ public class SeasonsRequest extends AbstractAsyncHttp {
 			Intent intent = new Intent(_context,ResultActivity.class);
 			intent.putExtra("type", "SEASONSYNOPSE");
 			intent.putExtra("list", list);
-			intent.putExtra("tvShowId", _tvShowId);
 			_context.startActivity(intent);
 		}catch(Exception e){
 			onErrorHook(e,e.getClass().getSimpleName());

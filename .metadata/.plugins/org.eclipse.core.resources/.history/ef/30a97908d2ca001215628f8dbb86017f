@@ -1,5 +1,0 @@
-package src.stracker.asynchttp;
-
-public class AbstractAsyncHttp {
-
-}

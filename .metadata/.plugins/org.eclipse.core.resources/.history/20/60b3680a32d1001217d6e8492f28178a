@@ -1,0 +1,13 @@
+package src.stracker.json;
+
+import java.util.ArrayList;
+
+import src.stracker.model.Actor;
+
+public class ActorSerializer implements ISerialize<ArrayList<Actor>> {
+
+	@Override
+	public ArrayList<Actor> deserialize(String json) {
+		return null;
+	}
+}

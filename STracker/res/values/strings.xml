@@ -37,4 +37,10 @@
 	<string name="episode_desc">Description</string>
 	<string name="episode_info">Episode Info</string>
 	<string name="episode_rating">Rating</string>
+	
+	<!-- Actor Information -->
+	<string name="photo_desc">Photo</string>
+	<string name="actor_name">Actor Name</string>
+	<string name="char_name">Character Name</string>
+	<string name="actor_arrow">Right Arrow</string>
 </resources>

@@ -7,15 +7,17 @@ public class EpisodeSynopse implements Parcelable {
 
 	private int Number;
 	private String Name;
+	private String Uri;
 	
 	public EpisodeSynopse(Parcel in){
 		readFromParcel(in);
 	}
 	
-	public EpisodeSynopse(int number, String name) {
+	public EpisodeSynopse(int number, String name, String uri) {
 		super();
 		Number = number;
 		Name = name;
+		Uri = uri;
 	}
 
 	@Override
@@ -39,15 +41,25 @@ public class EpisodeSynopse implements Parcelable {
 		Name = name;
 	}
 
+	public String getUri() {
+		return Uri;
+	}
+
+	public void setUri(String uri) {
+		Uri = uri;
+	}
+
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeInt(Number);
 		dest.writeString(Name);
+		dest.writeString(Uri);
 	}
 	
 	public void readFromParcel(Parcel in){
 		setNumber(in.readInt());
 		setName(in.readString());
+		setUri(in.readString());
 	}
 	
 	public static final Parcelable.Creator<EpisodeSynopse> CREATOR =

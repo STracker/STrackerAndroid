@@ -16,7 +16,8 @@ public class SeasonSynopseSerializer implements ISerialize<ArrayList<SeasonSynop
 			for (int i = 0; i < jsonArray.length(); i++) {
 		        JSONObject jObj = jsonArray.getJSONObject(i);
 			    seasons.add(new SeasonSynopse(
-					jObj.getInt("SeasonNumber")
+					jObj.getInt("SeasonNumber"),
+					jObj.getString("Uri")
 					));
 			}
 		} catch (JSONException e) {

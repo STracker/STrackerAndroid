@@ -6,14 +6,24 @@ import android.os.Parcelable;
 public class SeasonSynopse implements Parcelable{
 
 	private int Number;
+	private String Uri;
 	
     public SeasonSynopse(Parcel in){
     	readFromParcel(in);
     }
 	
-	public SeasonSynopse(int number) {
+	public SeasonSynopse(int number, String uri) {
 		super();
 		Number = number;
+		Uri = uri;
+	}
+
+	public String getUri() {
+		return Uri;
+	}
+
+	public void setUri(String uri) {
+		Uri = uri;
 	}
 
 	public int getNumber() {
@@ -32,10 +42,12 @@ public class SeasonSynopse implements Parcelable{
 	@Override
 	public void writeToParcel(Parcel dest, int arg1) {
 		dest.writeInt(Number);
+		dest.writeString(Uri);
 	}
 	
 	public void readFromParcel(Parcel in){
 		setNumber(in.readInt());
+		setUri(in.readString());
 	}
 
 	public static final Parcelable.Creator<SeasonSynopse> CREATOR =

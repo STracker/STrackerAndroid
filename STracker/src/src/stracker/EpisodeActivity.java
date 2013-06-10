@@ -27,7 +27,6 @@ public class EpisodeActivity extends RoboActivity {
 		_episode = getIntent().getParcelableExtra("episode");
 		setTitle(_episode.getName());
 		_episodeInfo.setText("Season: " + _episode.getSeasonNumber() + " Episode: " + _episode.getNumber());
-		//_rating.setText(_episode.getRating());
 		_description.setText(_episode.getDescription());
 		showBanner(_episode);
 	}
@@ -35,7 +34,7 @@ public class EpisodeActivity extends RoboActivity {
 	private void showBanner(Episode episode){
 		AsyncHttpClient client = new AsyncHttpClient();
 		String[] allowedContentTypes = new String[] { "image/png", "image/jpeg" };
-		client.get(episode.getURL(), new BinaryHttpResponseHandler(allowedContentTypes) {
+		client.get(episode.getPosterUrl(), new BinaryHttpResponseHandler(allowedContentTypes) {
 		    @Override
 		    public void onSuccess(byte[] fileData) {
 		        Bitmap result = BitmapFactory.decodeByteArray(fileData,0,fileData.length);

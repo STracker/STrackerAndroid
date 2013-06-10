@@ -1,7 +1,6 @@
 package src.stracker.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,25 +12,40 @@ public class TvShow implements Parcelable{
 	private String Description;
 	private String Airday;
 	private int Runtime;
-	private int Rating;
-	private String Url;
-	private List<String> Genres;
+	private String AirTime;
+	private String FirstAired;
+	private String PosterUrl;
+	private ArrayList<GenreSynopse> Genres;
+	private ArrayList<SeasonSynopse> Seasons;
+	private ArrayList<Actor> Actors;
 	
 	public TvShow(Parcel in){
 		readFromParcel(in);
 	}
 	
-	public TvShow(String id, String name, String description, String airday,
-			int runtime, int rating, String url, List<String> genres) {
+	public TvShow(String id, String name, String description, String airday, int runtime, 
+			String airtime, String firstaired, String url, ArrayList<GenreSynopse> genres, 
+			ArrayList<SeasonSynopse> seasons, ArrayList<Actor> actors) {
 		super();
 		Id = id;
 		Name = name;
 		Description = description;
 		Airday = airday;
 		Runtime = runtime;
-		Rating = rating;
-		Url = url;
+		AirTime = airtime;
+		FirstAired = firstaired;
+		PosterUrl = url;
 		Genres = genres;
+		Seasons = seasons;
+		Actors = actors;
+	}
+
+	public ArrayList<Actor> getActors() {
+		return Actors;
+	}
+
+	public void setActors(ArrayList<Actor> actors) {
+		Actors = actors;
 	}
 
 	/*
@@ -80,12 +94,20 @@ public class TvShow implements Parcelable{
 		Description = description;
 	}
 
-	public int getRating() {
-		return Rating;
+	public String getAirTime() {
+		return AirTime;
 	}
 
-	public void setRating(int rating) {
-		Rating = rating;
+	public void setAirTime(String airTime) {
+		AirTime = airTime;
+	}
+
+	public String getFirstAired() {
+		return FirstAired;
+	}
+
+	public void setFirstAired(String firstAired) {
+		FirstAired = firstAired;
 	}
 
 	public String getAirday() {
@@ -104,13 +126,14 @@ public class TvShow implements Parcelable{
 		Runtime = runtime;
 	}
 	
-	public List<String> getGenres() {
+	public ArrayList<GenreSynopse> getGenres() {
 		return Genres;
 	}
 
-	public void setGenres(List<String> genres) {
+	public void setGenres(ArrayList<GenreSynopse> genres) {
 		Genres = genres;
 	}
+	
 	/*
 	public List<Artwork> getArtworks() {
 		return Artworks;
@@ -145,12 +168,20 @@ public class TvShow implements Parcelable{
 	}
 	*/
 
-	public String getUrl() {
-		return Url;
+	public ArrayList<SeasonSynopse> getSeasons() {
+		return Seasons;
 	}
 
-	public void setUrl(String url) {
-		Url = url;
+	public void setSeasons(ArrayList<SeasonSynopse> seasons) {
+		Seasons = seasons;
+	}
+
+	public String getPosterUrl() {
+		return PosterUrl;
+	}
+
+	public void setPosterUrl(String url) {
+		PosterUrl = url;
 	}
 
 	@Override
@@ -165,9 +196,12 @@ public class TvShow implements Parcelable{
 		dest.writeString(Description);
 		dest.writeString(Airday);
 		dest.writeInt(Runtime);
-		dest.writeInt(Rating);
-		dest.writeString(Url);
-	    dest.writeStringList(Genres);
+		dest.writeString(AirTime);
+		dest.writeString(FirstAired);
+		dest.writeString(PosterUrl);
+	    dest.writeTypedList(Genres);
+	    dest.writeTypedList(Seasons);
+	    dest.writeTypedList(Actors);
 	}	
 	
 	public void readFromParcel(Parcel in){
@@ -176,11 +210,16 @@ public class TvShow implements Parcelable{
 		setDescription(in.readString());
 		setAirday(in.readString());
 		setRuntime(in.readInt());
-		setRating(in.readInt());
-		setUrl(in.readString());
-		List<String> stringList = new ArrayList<String>();
-		in.readStringList(stringList);
-		setGenres(stringList);
+		setAirTime(in.readString());
+		setFirstAired(in.readString());
+		setPosterUrl(in.readString());
+		//Initialize list before passing the elements
+		Genres = new ArrayList<GenreSynopse>();
+		in.readTypedList(Genres, GenreSynopse.CREATOR);
+		Seasons = new ArrayList<SeasonSynopse>();
+		in.readTypedList(Seasons, SeasonSynopse.CREATOR);
+		Actors = new ArrayList<Actor>();
+		in.readTypedList(Actors, Actor.CREATOR);
 	}
 	
 	public static final Parcelable.Creator<TvShow> CREATOR =

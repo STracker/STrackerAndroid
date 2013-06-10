@@ -6,11 +6,15 @@ import android.os.Parcelable;
 public class TvShowSynopse implements Parcelable{
 	private String Id;
 	private String Name;
+	private String Uri;
+	private String PosterUrl;
 	
-	public TvShowSynopse(String id, String name) {
+	public TvShowSynopse(String id, String name, String uri, String posterUrl) {
 		super();
 		Id = id;
 		Name = name;
+		Uri = uri;
+		PosterUrl = posterUrl;
 	}
 
 	public TvShowSynopse(Parcel in){
@@ -33,6 +37,22 @@ public class TvShowSynopse implements Parcelable{
 		Name = name;
 	}
 
+	public String getUri() {
+		return Uri;
+	}
+
+	public void setUri(String uri) {
+		Uri = uri;
+	}
+
+	public String getPosterUrl() {
+		return PosterUrl;
+	}
+
+	public void setPosterUrl(String posterUrl) {
+		PosterUrl = posterUrl;
+	}
+
 	@Override
 	public int describeContents() {
 		return 0;
@@ -42,12 +62,15 @@ public class TvShowSynopse implements Parcelable{
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(Id);
 		dest.writeString(Name);
-		
+		dest.writeString(Uri);
+		dest.writeString(PosterUrl);
 	}
 	
 	public void readFromParcel(Parcel in){
 		setId(in.readString());
 		setName(in.readString());
+		setUri(in.readString());
+		setPosterUrl(in.readString());
 	}
 	
 	public static final Parcelable.Creator<TvShowSynopse> CREATOR =

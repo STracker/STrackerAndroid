@@ -1,0 +1,36 @@
+package src.stracker.model;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Actor implements Parcelable{
+	
+	private String Name;
+	private String CharacterName;
+	private String PhotoUrl;
+
+	public Actor(int id, String name, Artwork photo, String characterName) {
+		super();
+		CharacterName = characterName;
+	}
+
+	public String getCharacterName() {
+		return CharacterName;
+	}
+
+	public void setCharacterName(String characterName) {
+		CharacterName = characterName;
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		// TODO Auto-generated method stub
+		
+	}
+}

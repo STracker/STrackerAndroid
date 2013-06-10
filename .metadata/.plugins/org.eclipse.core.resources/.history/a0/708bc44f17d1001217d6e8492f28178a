@@ -1,0 +1,13 @@
+package src.stracker.json;
+
+import java.util.ArrayList;
+
+import src.stracker.model.GenreSynopse;
+
+public class GenresSerializer implements ISerialize<ArrayList<GenreSynopse>> {
+
+	@Override
+	public ArrayList<GenreSynopse> deserialize(String json) {
+		return null;
+	}
+}

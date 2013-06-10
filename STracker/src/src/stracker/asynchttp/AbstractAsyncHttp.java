@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 /**
  * @author diogomatos
@@ -11,7 +12,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
  */
 public abstract class AbstractAsyncHttp {
 
-	private AsyncHttpClient _client;
+	protected AsyncHttpClient _client;
 	protected Context _context;
 	private ProgressDialog _dialog;
 	
@@ -24,6 +25,7 @@ public abstract class AbstractAsyncHttp {
 		_client = new AsyncHttpClient();
 		_client.addHeader("Cache-Control", "no-cache");
 		_client.addHeader("Accept", "application/json");
+		//_client.addHeader("Content-Type", "application/x-www-form-urlencoded");
 	}
 	
 	/**
@@ -50,7 +52,23 @@ public abstract class AbstractAsyncHttp {
 		});	
 	}
 	
+	public void post(String url){
+		RequestParams requestParams = new RequestParams();
+		//requestParams.put("userId", "100005516760836");
+		requestParams.put("TvShowId", "tt0306414");
+		_client.post(url,requestParams,new AsyncHttpResponseHandler() {
+		    @Override
+		    public void onSuccess(String response) {
+		    	onSuccessHook(response);
+		    }
+		    
+		    @Override
+		    public void onFailure(Throwable e, String response){
+		    	onErrorHook(e,response);
+		    }
+		});
+	}
+	
 	protected abstract void onSuccessHook(String response);
 	protected abstract void onErrorHook(Throwable e,String response);
-	
 }

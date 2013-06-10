@@ -1,0 +1,11 @@
+package src.stracker.json;
+
+import src.stracker.model.Actor;
+
+public class ActorSerializer implements ISerialize<Actor> {
+
+	@Override
+	public Actor deserialize(String json) {
+		return null;
+	}
+}

@@ -3,10 +3,16 @@
  */
 package src.stracker.asynchttp;
 
-import src.stracker.TvShowActivity;
+import java.util.ArrayList;
+
+import org.apache.http.NoHttpResponseException;
+
+import src.stracker.ResultActivity;
+import src.stracker.STrackerApp;
 import src.stracker.json.JSONLocator;
-import src.stracker.json.TvShowSerializer;
-import src.stracker.model.TvShow;
+import src.stracker.json.TvShowSynopseSerializer;
+import src.stracker.model.TvShowSynopse;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -17,14 +23,18 @@ import android.widget.Toast;
  */
 public class SearchByNameRequest extends AbstractAsyncHttp {
 
-	private TvShowSerializer _serializer;
+	private TvShowSynopseSerializer _serializer;
+	private Context _context;
+	private STrackerApp _app;
 	
 	/**
 	 * @param context
 	 */
 	public SearchByNameRequest(Context context) {
 		super(context);
-		_serializer = (TvShowSerializer) JSONLocator.getInstance().getSerializer(TvShow.class);
+		_context = context;
+		_app = (STrackerApp) ((Activity) context).getApplication();
+		_serializer = (TvShowSynopseSerializer) JSONLocator.getInstance().getSerializer(TvShowSynopse.class);
 	}
 
 	/* (non-Javadoc)
@@ -32,10 +42,18 @@ public class SearchByNameRequest extends AbstractAsyncHttp {
 	 */
 	@Override
 	protected void onSuccessHook(String response) {
-		TvShow tvshow = _serializer.deserialize(response);
-		Intent intent = new Intent(_context,TvShowActivity.class);
-		intent.putExtra("tvshow", tvshow);
-		_context.startActivity(intent);
+		ArrayList<TvShowSynopse> list = _serializer.deserialize(response);
+		if (list.size() == 0) onErrorHook(new NoHttpResponseException(""), "");
+		if (list.size() == 1){
+			TvShowSynopse tvshow = list.get(0);
+			new TvShowRequest(_context).execute(_app.getURL()+tvshow.getUri());
+		}
+		else {
+			Intent intent = new Intent(_context,ResultActivity.class);
+			intent.putExtra("type", "TVSHOWSYNOPSE");
+			intent.putExtra("list", list);
+			intent.putExtra("genre", "Search Results...");
+		}
 	}
 
 	/* (non-Javadoc)

@@ -1,0 +1,45 @@
+/**
+ * 
+ */
+package src.stracker.asynchttp;
+
+import src.stracker.json.GenresSerializer;
+import src.stracker.json.JSONLocator;
+import src.stracker.model.GenreSynopse;
+import android.content.Context;
+
+/**
+ * @author diogomatos
+ *
+ */
+public class GenresRequest extends AbstractAsyncHttp {
+
+	private GenresSerializer _serializer;
+	
+	/**
+	 * @param context
+	 */
+	public GenresRequest(Context context) {
+		super(context);
+		_serializer = (GenresSerializer) JSONLocator.getInstance().getSerializer(GenreSynopse.class);
+		// TODO Auto-generated constructor stub
+	}
+
+	/* (non-Javadoc)
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
+	 */
+	@Override
+	protected void onSuccessHook(String response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/* (non-Javadoc)
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onErrorHook(java.lang.Throwable, java.lang.String)
+	 */
+	@Override
+	protected void onErrorHook(Throwable e, String response) {
+		// TODO Auto-generated method stub
+
+	}
+}

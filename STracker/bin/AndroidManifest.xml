@@ -26,5 +26,6 @@
         <activity android:name="src.stracker.ResultActivity" />
         <activity android:name="src.stracker.TvShowActivity" />
         <activity android:name="src.stracker.EpisodeActivity" />
+        <activity android:name="src.stracker.ActorsActivity" />
     </application>	
 </manifest>

@@ -1,9 +1,11 @@
 package src.stracker;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BinaryHttpResponseHandler;
+
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -14,7 +16,7 @@ import android.widget.TextView;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
-import src.stracker.asynchttp.SeasonsRequest;
+import src.stracker.model.GenreSynopse;
 import src.stracker.model.TvShow;
 
 @ContentView(R.layout.activity_tvshow)
@@ -25,13 +27,13 @@ public class TvShowActivity extends RoboActivity {
 	@InjectView(R.id.serie_airday) TextView _airday;
 	@InjectView(R.id.serie_runtime) TextView _runtime;	
 	@InjectView(R.id.serie_genre) TextView _genres;
-	private STrackerApp _app;
+	//private STrackerApp _app;
 	private TvShow _tvshow;
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_app = (STrackerApp) getApplication();
+		//_app = (STrackerApp) getApplication();
 		
 		_tvshow = getIntent().getParcelableExtra("tvshow");
 		setTitle(_tvshow.getName());
@@ -54,9 +56,15 @@ public class TvShowActivity extends RoboActivity {
     {
     	switch(item.getItemId()){
     	case R.id.form_seasons:
-    		new SeasonsRequest(this,_tvshow.getId()).execute(_app.getURL()+"/tvshows/"+_tvshow.getId()+"/seasons");
+    		Intent intent_seasons = new Intent(this,ResultActivity.class);
+    		intent_seasons.putExtra("type", "SEASONSYNOPSE");
+    		intent_seasons.putExtra("list", _tvshow.getSeasons());
+			startActivity(intent_seasons);
     		break;
     	case R.id.form_cast:
+    		Intent intent_cast = new Intent(this,ActorsActivity.class);
+    		intent_cast.putExtra("list", _tvshow.getActors());
+    		startActivity(intent_cast);
     		break;
     	case R.id.form_comments:
     		break;
@@ -67,7 +75,7 @@ public class TvShowActivity extends RoboActivity {
 	private void showPoster(TvShow tvshow){
 		AsyncHttpClient client = new AsyncHttpClient();
 		String[] allowedContentTypes = new String[] { "image/png", "image/jpeg" };
-		client.get(tvshow.getUrl(), new BinaryHttpResponseHandler(allowedContentTypes) {
+		client.get(tvshow.getPosterUrl(), new BinaryHttpResponseHandler(allowedContentTypes) {
 		    @Override
 		    public void onSuccess(byte[] fileData) {
 		        Bitmap result = BitmapFactory.decodeByteArray(fileData,0,fileData.length);
@@ -76,10 +84,10 @@ public class TvShowActivity extends RoboActivity {
 		});
 	}
 	
-	private String genreToString(List<String> genres){
+	private String genreToString(ArrayList<GenreSynopse> genres){
 		StringBuilder ret = new StringBuilder("Genres: ");
 		for(int i = 0; i < genres.size(); i++){
-			ret.append(genres.get(i));
+			ret.append(genres.get(i).getId());
 			if(i != (genres.size() - 1))
 				ret.append(", ");
 		}

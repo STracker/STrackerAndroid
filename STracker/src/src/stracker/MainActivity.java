@@ -2,12 +2,13 @@ package src.stracker;
 
 import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
+import src.stracker.asynchttp.GenresRequest;
 import src.stracker.asynchttp.SearchByNameRequest;
+import src.stracker.asynchttp.SubscribeAsyncHttp;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,13 +45,16 @@ public class MainActivity extends RoboListActivity {
     	case R.id.action_messages:
     		break;
     	case R.id.action_friends:
+    		new SubscribeAsyncHttp(this).post(_app.getURL()+"users/100005516760836/subscriptions");
+    		//new SubscribeAsyncHttp(this).execute(_app.getURL()+"tvshows/tt0303461/ratings");
     		break;
     	case R.id.action_settings:
     		break;
     	case R.id.form_friend:
     		break;
     	case R.id.form_genre:
-    		startActivity(new Intent(this,GenreActivity.class));
+    		//startActivity(new Intent(this,GenreActivity.class));
+    		new GenresRequest(this).execute(_app.getURL()+"genres");
     		break;
     	case R.id.form_name:
     		initSearchByName();
