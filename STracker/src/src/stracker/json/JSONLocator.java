@@ -11,6 +11,9 @@ import src.stracker.model.SeasonSynopse;
 import src.stracker.model.TvShow;
 import src.stracker.model.TvShowSynopse;
 
+/**
+ * This class represents a singleton object that have all the Json serializers.
+ */
 public class JSONLocator {
 
 	private Dictionary<Class<?>, ISerialize<?>> _dictionary;
@@ -27,10 +30,16 @@ public class JSONLocator {
 		_dictionary.put(TvShow.class,         new TvShowSerializer());
 	}
 	
+	/**
+	 * Return the aggregate of serializers
+	 */
 	public ISerialize<?> getSerializer(Class<?> cls){
 		return _dictionary.get(cls);
 	}
 	
+	/**
+	 * Return the locator
+	 */
 	public static JSONLocator getInstance(){
 		if (_singleton == null)
 			_singleton = new JSONLocator();

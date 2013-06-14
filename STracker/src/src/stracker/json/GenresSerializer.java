@@ -6,8 +6,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import src.stracker.model.GenreSynopse;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an array of genre synopses
+ */
 public class GenresSerializer implements ISerialize<ArrayList<GenreSynopse>> {
 
+	/**
+	 * (non-Javadoc)
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public ArrayList<GenreSynopse> deserialize(String json) {
 		ArrayList<GenreSynopse> genres = new ArrayList<GenreSynopse>();

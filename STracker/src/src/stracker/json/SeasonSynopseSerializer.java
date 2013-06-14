@@ -6,8 +6,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import src.stracker.model.SeasonSynopse;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an array of season synopses
+ */
 public class SeasonSynopseSerializer implements ISerialize<ArrayList<SeasonSynopse>> {
 
+	/**
+	 * (non-Javadoc)
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public ArrayList<SeasonSynopse> deserialize(String json) {
 		ArrayList<SeasonSynopse> seasons = new ArrayList<SeasonSynopse>();

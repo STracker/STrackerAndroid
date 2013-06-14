@@ -1,5 +1,0 @@
-package src.stracker.json;
-
-public class EpisodeSynopse implements ISerialize<T> {
-
-}

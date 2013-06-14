@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 /**
  * @author diogomatos
- *
+ * This implementation represents a search of tv shows by it's name
  */
 public class SearchByNameRequest extends AbstractAsyncHttp {
 
@@ -37,7 +37,8 @@ public class SearchByNameRequest extends AbstractAsyncHttp {
 		_serializer = (TvShowSynopseSerializer) JSONLocator.getInstance().getSerializer(TvShowSynopse.class);
 	}
 
-	/* (non-Javadoc)
+	/** 
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
 	 */
 	@Override
@@ -53,10 +54,12 @@ public class SearchByNameRequest extends AbstractAsyncHttp {
 			intent.putExtra("type", "TVSHOWSYNOPSE");
 			intent.putExtra("list", list);
 			intent.putExtra("genre", "Search Results...");
+			_context.startActivity(intent);
 		}
 	}
 
-	/* (non-Javadoc)
+	/** 
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onErrorHook(java.lang.Throwable, java.lang.String)
 	 */
 	@Override

@@ -12,6 +12,9 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import src.stracker.model.Episode;
 
+/**
+ * This Activity represents the information about an episode of a tv show
+ */
 @ContentView(R.layout.activity_episode)
 public class EpisodeActivity extends RoboActivity {
 
@@ -21,6 +24,10 @@ public class EpisodeActivity extends RoboActivity {
 	@InjectView(R.id.banner_id) ImageView _banner;
 	private Episode _episode;
 	
+	/**
+	 * (non-Javadoc)
+	 * @see roboguice.activity.RoboActivity#onCreate(android.os.Bundle)
+	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
@@ -31,6 +38,10 @@ public class EpisodeActivity extends RoboActivity {
 		showBanner(_episode);
 	}
 	
+	/**
+	 * This method makes an asynchronous http request to get the banner of the episode received by parameter
+	 * @param episode - Represent an episode from a tv show
+	 */
 	private void showBanner(Episode episode){
 		AsyncHttpClient client = new AsyncHttpClient();
 		String[] allowedContentTypes = new String[] { "image/png", "image/jpeg" };

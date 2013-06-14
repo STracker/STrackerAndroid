@@ -17,20 +17,32 @@ import android.widget.TextView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BinaryHttpResponseHandler;
 
+/**
+ * This class represents the adapter to a list of Actors
+ */
 public class ActorsAdapter extends ArrayAdapter<Actor>{
 
 	private LayoutInflater _inflater;
 	
+	/**
+	 * @param context - Represents the context of an Activity
+	 * @param elems - Represents a list of Actors
+	 */
 	public ActorsAdapter(Context context, List<Actor> elems){
 		super(context, R.layout.actor_row, elems);
 		_inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
+	/**
+	 * (non-Javadoc)
+	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View vi=convertView;
+		View vi = convertView;
 		ValueHolder holder = new ValueHolder();
-        if(convertView==null){
+        //If the convertView is not yet constructed, affect the holder and save it in a Tag inside the view
+		if(convertView == null){
             vi = _inflater.inflate(R.layout.actor_row, null);
             holder.photo = (ImageView) vi.findViewById(R.id.actor_photo); 
             holder.name =  (TextView)  vi.findViewById(R.id.actor_name);
@@ -48,6 +60,11 @@ public class ActorsAdapter extends ArrayAdapter<Actor>{
         return vi;
 	}	
 	
+	/**
+	 * This method makes an asynchronous http request to get the photo in the url received by parameter
+	 * @param photo - Represent the view object where the photo will be posted
+	 * @param url - Represent the url of an image
+	 */
 	private void showPhoto(final ImageView photo, String url){
 		AsyncHttpClient client = new AsyncHttpClient();
 		String[] allowedContentTypes = new String[] { "image/png", "image/jpeg" };
@@ -62,6 +79,9 @@ public class ActorsAdapter extends ArrayAdapter<Actor>{
 		});
 	}
 	
+	/**
+	 * This class is used to save the properties of a row in the list view
+	 */
 	private static class ValueHolder{
 		ImageView photo;
 		TextView name;

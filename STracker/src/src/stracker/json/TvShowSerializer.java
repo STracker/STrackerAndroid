@@ -4,16 +4,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import src.stracker.model.*;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to a tv show
+ */
 public class TvShowSerializer implements ISerialize<TvShow> {
 
-	//private SeasonSynopseSerializer _seasonSerializer = (SeasonSynopseSerializer) JSONLocator.getInstance().getSerializer(SeasonSynopse.class);
-	//private GenresSerializer _genreSerializer = (GenresSerializer) JSONLocator.getInstance().getSerializer(GenreSynopse.class);
-	//private ActorSerializer _actorSerializer = (ActorSerializer) JSONLocator.getInstance().getSerializer(Actor.class);
-	
 	private SeasonSynopseSerializer _seasonSerializer = new SeasonSynopseSerializer();
     private GenresSerializer _genreSerializer = new GenresSerializer();
     private ActorSerializer _actorSerializer = new ActorSerializer();
     
+    /**
+     * (non-Javadoc)
+     * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+     */
 	@Override
 	public TvShow deserialize(String json) {
 		TvShow tvShow = null;

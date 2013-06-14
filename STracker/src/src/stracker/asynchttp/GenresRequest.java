@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 /**
  * @author diogomatos
- *
+ * This implementation represents a request to a list of genres
  */
 public class GenresRequest extends AbstractAsyncHttp {
 
@@ -29,7 +29,8 @@ public class GenresRequest extends AbstractAsyncHttp {
 		_serializer = (GenresSerializer) JSONLocator.getInstance().getSerializer(GenreSynopse.class);
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
 	 */
 	@Override
@@ -44,7 +45,8 @@ public class GenresRequest extends AbstractAsyncHttp {
 		}
 	}
 
-	/* (non-Javadoc)
+	/**
+	 *  (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onErrorHook(java.lang.Throwable, java.lang.String)
 	 */
 	@Override

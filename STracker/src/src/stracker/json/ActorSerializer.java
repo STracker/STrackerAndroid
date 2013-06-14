@@ -8,8 +8,16 @@ import org.json.JSONObject;
 
 import src.stracker.model.Actor;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an array of actors
+ */
 public class ActorSerializer implements ISerialize<ArrayList<Actor>> {
 
+	/**
+	 * (non-Javadoc)
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public ArrayList<Actor> deserialize(String json) {
 		ArrayList<Actor> actors = new ArrayList<Actor>();

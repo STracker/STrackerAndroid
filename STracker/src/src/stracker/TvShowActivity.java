@@ -19,6 +19,9 @@ import roboguice.inject.InjectView;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.TvShow;
 
+/**
+ * This Activity is used to show all information about a tv show.
+ */
 @ContentView(R.layout.activity_tvshow)
 public class TvShowActivity extends RoboActivity {
 
@@ -30,6 +33,10 @@ public class TvShowActivity extends RoboActivity {
 	//private STrackerApp _app;
 	private TvShow _tvshow;
 	
+	/**
+	 * (non-Javadoc)
+	 * @see roboguice.activity.RoboActivity#onCreate(android.os.Bundle)
+	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
@@ -44,6 +51,10 @@ public class TvShowActivity extends RoboActivity {
 		showPoster(_tvshow);
 	}
 	
+	/**
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -51,6 +62,11 @@ public class TvShowActivity extends RoboActivity {
         return true;
     }
 	
+	/**
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 * This method defines the callback's when a button of the menu is pressed
+	 */
 	@Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -72,6 +88,10 @@ public class TvShowActivity extends RoboActivity {
     	return true;
     }
 	
+	/**
+	 * This method makes an asynchronous http request to get the poster of the tv show received by parameter
+	 * @param tvshow - Represent a tv show
+	 */
 	private void showPoster(TvShow tvshow){
 		AsyncHttpClient client = new AsyncHttpClient();
 		String[] allowedContentTypes = new String[] { "image/png", "image/jpeg" };
@@ -84,6 +104,10 @@ public class TvShowActivity extends RoboActivity {
 		});
 	}
 	
+	/**
+	 * This method creates a string with all the Genres of a tv show
+	 * @param genres - Receive a list of genre synopses
+	 */
 	private String genreToString(ArrayList<GenreSynopse> genres){
 		StringBuilder ret = new StringBuilder("Genres: ");
 		for(int i = 0; i < genres.size(); i++){

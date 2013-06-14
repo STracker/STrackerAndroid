@@ -1,7 +1,0 @@
-package src.stracker;
-
-import roboguice.activity.RoboActivity;
-
-public class EpisodeActivity extends RoboActivity {
-
-}

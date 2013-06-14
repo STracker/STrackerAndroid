@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 /**
  * @author diogomatos
- *
+ * This implementation represents a request a search of tv shows by it's genre
  */
 public class SearchByGenreRequest extends AbstractAsyncHttp {
 
@@ -31,7 +31,8 @@ public class SearchByGenreRequest extends AbstractAsyncHttp {
 		_genre = genre;
 	}
 
-	/* (non-Javadoc)
+	/** 
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
 	 */
 	@Override
@@ -48,7 +49,8 @@ public class SearchByGenreRequest extends AbstractAsyncHttp {
 		}
 	}
 
-	/* (non-Javadoc)
+	/** 
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onErrorHook(java.lang.Throwable, java.lang.String)
 	 */
 	@Override

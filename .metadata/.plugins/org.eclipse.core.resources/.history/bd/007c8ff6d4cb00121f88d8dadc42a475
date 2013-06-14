@@ -1,9 +1,0 @@
-package src.stracker;
-
-import roboguice.activity.RoboActivity;
-import roboguice.inject.ContentView;
-
-@ContentView(R.layout.activity_episode)
-public class EpisodeActivity extends RoboActivity {
-
-}

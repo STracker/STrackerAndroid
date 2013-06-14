@@ -19,6 +19,10 @@ import src.stracker.asynchttp.EpisodeRequest;
 import src.stracker.asynchttp.EpisodesRequest;
 import src.stracker.asynchttp.TvShowRequest;
 
+/**
+ * This Activity represents a list of synopses results.
+ * When a request to the STracker Server is a list of synopses this Activity is used to show the results.
+ */
 @ContentView(R.layout.activity_result)
 public class ResultActivity extends RoboListActivity {
 
@@ -61,6 +65,7 @@ public class ResultActivity extends RoboListActivity {
         		elems.add(synopse.getNumber() + _separator + synopse.getName());
         }
         
+        //Create the list view adapter with the specific results
         _adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, elems){
         	@Override
         	public View getView(int position, View convertView, ViewGroup parent){
@@ -73,6 +78,11 @@ public class ResultActivity extends RoboListActivity {
         setListAdapter(_adapter);
 	}
 	
+	/**
+	 * (non-Javadoc)
+	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
+	 * When a list result is pressed make the specific request according the type of the results
+	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		if(_arrayList != null){

@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 /**
  * @author diogomatos
- *
+ * This implementation represents a request to an episode of a tv show
  */
 public class EpisodeRequest extends AbstractAsyncHttp {
 
@@ -27,7 +27,8 @@ public class EpisodeRequest extends AbstractAsyncHttp {
 		_serializer = (EpisodeSerializer) JSONLocator.getInstance().getSerializer(Episode.class);
 	}
 
-	/* (non-Javadoc)
+	/** 
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
 	 */
 	@Override
@@ -42,7 +43,8 @@ public class EpisodeRequest extends AbstractAsyncHttp {
 		}
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onErrorHook(java.lang.Throwable, java.lang.String)
 	 */
 	@Override

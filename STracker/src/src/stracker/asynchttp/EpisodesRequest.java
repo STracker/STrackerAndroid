@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 /**
  * @author diogomatos
- *
+ * This implementation represents a request to a list of episodes of a season from a tv show
  */
 public class EpisodesRequest extends AbstractAsyncHttp {
 
@@ -30,7 +30,8 @@ public class EpisodesRequest extends AbstractAsyncHttp {
 		_seasonNumber = seasonNumber;
 	}
 
-	/* (non-Javadoc)
+	/** 
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
 	 */
 	@Override
@@ -47,7 +48,8 @@ public class EpisodesRequest extends AbstractAsyncHttp {
 		}
 	}
 
-	/* (non-Javadoc)
+	/** 
+	 * (non-Javadoc)
 	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onErrorHook(java.lang.Throwable, java.lang.String)
 	 */
 	@Override

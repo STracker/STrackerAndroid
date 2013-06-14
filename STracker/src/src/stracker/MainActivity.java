@@ -13,20 +13,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-  
+
+/**
+ * This Activity is the initial activity of STracker Android application.
+ */
 @ContentView(R.layout.activity_main)
 public class MainActivity extends RoboListActivity {
     
 	private STrackerApp _app;
 	private Context _context;
-        
+    
+	/**
+	 * (non-Javadoc)
+	 * @see roboguice.activity.RoboListActivity#onCreate(android.os.Bundle)
+	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		_app = (STrackerApp) getApplication();
 		_context = (this);
 	}
-	 
+	
+	/**
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -34,6 +45,11 @@ public class MainActivity extends RoboListActivity {
         return true;
     }
     
+    /**
+     * (non-Javadoc)
+     * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+     * This method defines the callback's when a button of the menu is pressed
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -53,7 +69,6 @@ public class MainActivity extends RoboListActivity {
     	case R.id.form_friend:
     		break;
     	case R.id.form_genre:
-    		//startActivity(new Intent(this,GenreActivity.class));
     		new GenresRequest(this).execute(_app.getURL()+"genres");
     		break;
     	case R.id.form_name:
@@ -63,6 +78,9 @@ public class MainActivity extends RoboListActivity {
     	return true;
     }
     
+    /**
+     * This method pop's up an AlertDialog to begin the Search a tv show by the name.
+     */
     private void initSearchByName(){
     	AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
         adBuilder.setMessage("Enter TvShow's Name:");
