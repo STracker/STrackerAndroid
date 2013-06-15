@@ -1,17 +1,13 @@
 package src.stracker;
 
 import java.util.ArrayList;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.BinaryHttpResponseHandler;
+import com.loopj.android.image.SmartImageView;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -26,10 +22,11 @@ import src.stracker.model.TvShow;
 public class TvShowActivity extends RoboActivity {
 
 	@InjectView(R.id.title_description) TextView _description;
-	@InjectView(R.id.poster_id) ImageView _poster;
+	@InjectView(R.id.poster_id) SmartImageView _poster;
 	@InjectView(R.id.serie_airday) TextView _airday;
 	@InjectView(R.id.serie_runtime) TextView _runtime;	
 	@InjectView(R.id.serie_genre) TextView _genres;
+	@InjectView(R.id.serie_date) TextView _date;
 	//private STrackerApp _app;
 	private TvShow _tvshow;
 	
@@ -48,7 +45,9 @@ public class TvShowActivity extends RoboActivity {
 		_airday.setText("Airday: " + _tvshow.getAirday());
 		_runtime.setText("Runtime: " + _tvshow.getRuntime() + " min");
 		_genres.setText(genreToString(_tvshow.getGenres()));
-		showPoster(_tvshow);
+		_poster.setImageUrl(_tvshow.getPosterUrl());
+		_poster.setLayoutParams(new LayoutParams(168,251));
+		_date.setText("Date: "+ _tvshow.getFirstAired() + " " + _tvshow.getAirTime());
 	}
 	
 	/**
@@ -87,22 +86,6 @@ public class TvShowActivity extends RoboActivity {
     	}
     	return true;
     }
-	
-	/**
-	 * This method makes an asynchronous http request to get the poster of the tv show received by parameter
-	 * @param tvshow - Represent a tv show
-	 */
-	private void showPoster(TvShow tvshow){
-		AsyncHttpClient client = new AsyncHttpClient();
-		String[] allowedContentTypes = new String[] { "image/png", "image/jpeg" };
-		client.get(tvshow.getPosterUrl(), new BinaryHttpResponseHandler(allowedContentTypes) {
-		    @Override
-		    public void onSuccess(byte[] fileData) {
-		        Bitmap result = BitmapFactory.decodeByteArray(fileData,0,fileData.length);
-		    	_poster.setImageBitmap(Bitmap.createScaledBitmap(result, 168, 251, false));
-		    }
-		});
-	}
 	
 	/**
 	 * This method creates a string with all the Genres of a tv show

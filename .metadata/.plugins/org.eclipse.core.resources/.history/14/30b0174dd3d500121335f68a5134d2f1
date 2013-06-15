@@ -1,0 +1,23 @@
+package src.stracker.first_activity;
+
+import android.view.LayoutInflater;
+import android.view.View;
+
+/**
+ * This class represents an item in listview 
+ */
+public class ItemEntry implements IEntry {
+
+	@Override
+	public int getViewType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public View getView(LayoutInflater inflater, View convertView) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

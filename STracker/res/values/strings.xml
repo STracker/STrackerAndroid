@@ -13,6 +13,7 @@
 	<string name="serie_airday">Airday: </string>
 	<string name="serie_genres">Genres: </string>
 	<string name="serie_rating">Rating: </string>
+	<string name="serie_date">Date: </string>
 	<string name="poster_desc">Poster</string>
 	
 	<!-- Menu Items -->
@@ -37,10 +38,15 @@
 	<string name="episode_desc">Description</string>
 	<string name="episode_info">Episode Info</string>
 	<string name="episode_rating">Rating</string>
+	<string name="episode_date">Date</string>
 	
 	<!-- Actor Information -->
 	<string name="photo_desc">Photo</string>
 	<string name="actor_name">Actor Name</string>
 	<string name="char_name">Character Name</string>
 	<string name="actor_arrow">Right Arrow</string>
+	
+	<!-- Main ListView Information -->
+	<string name="header_entry">Header</string>
+	<string name="item_entry">Item</string>
 </resources>

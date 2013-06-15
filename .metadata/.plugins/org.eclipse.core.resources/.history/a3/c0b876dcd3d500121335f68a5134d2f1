@@ -1,0 +1,39 @@
+package src.stracker.adapters;
+
+import java.util.List;
+import src.stracker.first_activity.EntryType;
+import src.stracker.first_activity.IEntry;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+
+public class MainListAdapter extends ArrayAdapter<IEntry> {
+	
+    private LayoutInflater mInflater;
+
+    private List<IEntry> items;
+
+    public MainListAdapter(Context context, List<IEntry> items) {
+        super(context, 0, items);
+        this.items = items;
+        mInflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return EntryType.values().length;
+
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return items.get(position).getViewType();
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return items.get(position).getView(mInflater, convertView);
+    }
+}

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal" >
     
-    <ImageView
+    <com.loopj.android.image.SmartImageView
         android:id="@+id/actor_photo"
         android:layout_width="80dip"
         android:layout_height="100dip"

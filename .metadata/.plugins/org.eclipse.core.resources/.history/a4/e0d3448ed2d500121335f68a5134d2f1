@@ -1,0 +1,39 @@
+package src.stracker.first_activity;
+
+import android.view.LayoutInflater;
+import android.view.View;
+
+/**
+ * This class represents an header in listview 
+ */
+public class HeaderEntry implements IEntry {
+
+	private final String         name;
+
+    public HeaderEntry(LayoutInflater inflater, String name) {
+        this.name = name;
+    }
+
+    @Override
+    public int getViewType() {
+        return EntryType.HEADER_ITEM.ordinal();
+    }
+
+    @Override
+    public View getView(LayoutInflater inflater, View convertView) {
+        View view;
+        if (convertView == null) {
+            view = (View) inflater.inflate(R.layout.header, null);
+            // Do some initialization
+        } else {
+            view = convertView;
+        }
+
+        TextView text = (TextView) view.findViewById(R.id.separator);
+        text.setText(name);
+
+        return view;
+    }
+
+
+}

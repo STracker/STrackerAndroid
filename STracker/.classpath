@@ -9,5 +9,6 @@
 	<classpathentry exported="true" kind="lib" path="/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/STracker/libs/roboguice-2.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/STracker/libs/javax.inject.jar"/>
 	<classpathentry exported="true" kind="lib" path="/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/STracker/libs/android-async-http-1.4.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/STracker/libs/android-smart-image-view-1.0.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
