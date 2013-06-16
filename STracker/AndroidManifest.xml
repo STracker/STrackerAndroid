@@ -27,5 +27,6 @@
         <activity android:name="src.stracker.TvShowActivity" />
         <activity android:name="src.stracker.EpisodeActivity" />
         <activity android:name="src.stracker.ActorsActivity" />
+        <activity android:name="src.stracker.CalendarActivity" />
     </application>	
 </manifest>

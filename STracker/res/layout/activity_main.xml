@@ -5,6 +5,14 @@
     android:orientation="vertical"
     android:background="@layout/backrepeat"  >
     
+    <TextView 
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#757678"
+        android:textColor="@color/Khaki"
+        android:text="@string/toprated_header" />
+    
     <ListView
         android:id="@android:id/list"
         android:layout_width="match_parent"

@@ -1,0 +1,30 @@
+package src.stracker.adapters;
+
+import java.util.List;
+
+import com.loopj.android.image.SmartImageView;
+
+import src.stracker.R;
+import src.stracker.model.TvShowSynopse;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+public class TvShowSynopseAdapter extends ArrayAdapter<TvShowSynopse>{
+
+	private LayoutInflater _inflater;
+	
+	public TvShowSynopseAdapter(Context context, List<TvShowSynopse> elems){
+		super(context,R.layout.tvshowsynopse_row,elems);
+		_inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
+	
+	/**
+	 * This class is used to save the properties of a row in the list view
+	 */
+	private static class ValueHolder{
+		SmartImageView photo;
+		TextView name;
+	}
+}

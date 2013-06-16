@@ -46,7 +46,9 @@
 	<string name="char_name">Character Name</string>
 	<string name="actor_arrow">Right Arrow</string>
 	
-	<!-- Main ListView Information -->
+	<!-- Calendar ListView Information -->
 	<string name="header_entry">Header</string>
 	<string name="item_entry">Item</string>
+	<string name="action_calendar">Calendar</string>
+	<string name="toprated_header">Top Rated STracker TvShows</string>
 </resources>
