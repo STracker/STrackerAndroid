@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="12" version="2.0">
+<workbench progressCount="10" version="2.0">
 <workbenchAdvisor/>
-<window height="729" maximized="true" width="1280" x="0" y="22">
+<window height="729" maximized="true" width="1024" x="21" y="22">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="250"/>
@@ -16,9 +16,9 @@
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="100" y="22"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="62" y="22"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="62" y="22"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="98" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="54" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="54" y="22"/>
+<coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.debug.ui.launch.toolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="32" y="22"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
@@ -26,8 +26,8 @@
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="com.android.ide.eclipse.editors.CommonXmlEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="com.android.ide.eclipse.editors.CommonXmlEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -36,28 +36,10 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-<part id="1"/>
-<part id="2"/>
-<part id="3"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" partName="MainActivity.java" path="/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/STracker/src/src/stracker/MainActivity.java" title="MainActivity.java" tooltip="STracker/src/src/stracker/MainActivity.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/STracker/src/src/stracker/MainActivity.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1054" selectionTopPixel="179"/>
-</editor>
-<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="item_entry.xml" partName="item_entry.xml" path="/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/STracker/res/layout/item_entry.xml" title="item_entry.xml" tooltip="STracker/res/layout/item_entry.xml" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/STracker/res/layout/item_entry.xml"/>
-</editor>
-<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="header_entry.xml" partName="header_entry.xml" path="/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/STracker/res/layout/header_entry.xml" title="header_entry.xml" tooltip="STracker/res/layout/header_entry.xml" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/STracker/res/layout/header_entry.xml"/>
-</editor>
-<editor id="com.android.ide.eclipse.editors.CommonXmlEditor" name="styles.xml" partName="styles.xml" path="/Users/diogomatos/Documents/Eclipse Workspace/STrackerAndroid/STracker/res/values/styles.xml" title="styles.xml" tooltip="STracker/res/values/styles.xml" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/STracker/res/values/styles.xml"/>
-</editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.views.ProgressView" partName="Progress">
@@ -87,9 +69,6 @@
 <view id="com.android.ide.eclipse.ddms.views.NetworkStatsView" partName="Network Statistics"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Errors (1 item)"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="90" org.eclipse.ui.ide.markerType="90" org.eclipse.ui.ide.pathField="120" org.eclipse.ui.ide.resourceField="90" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -138,7 +117,7 @@
 </view>
 <view id="com.android.ide.eclipse.ddms.views.AllocTrackerView" partName="Allocation Tracker"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="0" fixed="0" version="0.016">
 <descriptor class="com.android.ide.eclipse.ddms.Perspective" id="com.android.ide.eclipse.ddms.Perspective" label="DDMS"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -298,8 +277,8 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.25" ratioLeft="254" ratioRight="762" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.72888285" ratioLeft="535" ratioRight="199" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="com.android.ide.eclipse.ddms.views.LogCatView" appearance="2" expanded="2">
+<info folder="true" part="bottom" ratio="0.624025" ratioLeft="400" ratioRight="241" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
@@ -445,160 +424,12 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory>
-<editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/STracker/src/src/stracker/MainActivity.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/STracker/src/src/stracker/adapters/ActorsAdapter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/STracker/src/src/stracker/TvShowActivity.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/STracker/res/layout/activity_episode.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/STracker/src/src/stracker/EpisodeActivity.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/STracker/src/src/stracker/model/TvShow.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/STracker/src/src/stracker/adapters/MainListAdapter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/STracker/src/src/stracker/first_activity/ItemEntry.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/STracker/res/layout/item_entry.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/STracker/res/layout/header_entry.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/STracker/src/src/stracker/first_activity/HeaderEntry.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/STracker/res/layout/item_entry.xml"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" path="/STracker/res/values/styles.xml"/>
-</editors>
-<item historyLabel="TvShow.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="EpisodeActivity.java" index="4">
-<position info="not_deleted" x="127" y="0"/>
-</item>
-<item historyLabel="activity_episode.xml" index="3"/>
-<item historyLabel="TvShowActivity.java" index="2">
-<position info="not_deleted" x="1747" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainListAdapter.java" index="6">
-<position info="not_deleted" x="1097" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1621" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="949" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1215" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1327" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1327" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1327" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1316" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1316" y="0"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1316" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1316" y="0"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1250" y="0"/>
-</item>
-<item historyLabel="ActorsAdapter.java" index="1">
-<position info="not_deleted" x="1928" y="80"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="653" y="0"/>
-</item>
-<item historyLabel="item_entry.xml" index="8"/>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1215" y="0"/>
-</item>
-<item historyLabel="header_entry.xml" index="9"/>
-<item historyLabel="HeaderEntry.java" index="10">
-<position info="not_deleted" x="1042" y="0"/>
-</item>
-<item historyLabel="header_entry.xml" index="9"/>
-<item historyLabel="HeaderEntry.java" index="10">
-<position info="not_deleted" x="1042" y="0"/>
-</item>
-<item historyLabel="HeaderEntry.java" index="10">
-<position info="not_deleted" x="1075" y="0"/>
-</item>
-<item historyLabel="HeaderEntry.java" index="10">
-<position info="not_deleted" x="1180" y="0"/>
-</item>
-<item historyLabel="ItemEntry.java" index="7">
-<position info="not_deleted" x="1215" y="0"/>
-</item>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="item_entry.xml" index="11"/>
-<item historyLabel="header_entry.xml" index="9"/>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="1979" y="0"/>
-</item>
-<item historyLabel="item_entry.xml" index="11"/>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="1054" y="0"/>
-</item>
-<item historyLabel="item_entry.xml" index="11"/>
-<item historyLabel="header_entry.xml" index="9"/>
-<item historyLabel="styles.xml" index="12"/>
-<item historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="1054" y="0"/>
-</item>
-<item historyLabel="item_entry.xml" index="11"/>
-<item historyLabel="header_entry.xml" index="9"/>
-<item active="true" historyLabel="MainActivity.java" index="0">
-<position info="not_deleted" x="1054" y="0"/>
-</item>
-</navigationHistory>
+<navigationHistory/>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="left"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="right"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -607,55 +438,54 @@
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.HeapStatus"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
-<trimItem IMemento.internal.id="bottom"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="styles.xml" tooltip="STracker/res/values/styles.xml">
-<persistable path="/STracker/res/values/styles.xml"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="header_entry.xml" tooltip="STracker/res/layout/header_entry.xml">
 <persistable path="/STracker/res/layout/header_entry.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="item_entry.xml" tooltip="STracker/res/layout/item_entry.xml">
-<persistable path="/STracker/res/layout/item_entry.xml"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HeaderEntry.java" tooltip="STracker/src/src/stracker/first_activity/HeaderEntry.java">
-<persistable path="/STracker/src/src/stracker/first_activity/HeaderEntry.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ActorsAdapter.java" tooltip="STracker/src/src/stracker/adapters/ActorsAdapter.java">
-<persistable path="/STracker/src/src/stracker/adapters/ActorsAdapter.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ItemEntry.java" tooltip="STracker/src/src/stracker/first_activity/ItemEntry.java">
-<persistable path="/STracker/src/src/stracker/first_activity/ItemEntry.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainListAdapter.java" tooltip="STracker/src/src/stracker/adapters/MainListAdapter.java">
-<persistable path="/STracker/src/src/stracker/adapters/MainListAdapter.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TvShow.java" tooltip="STracker/src/src/stracker/model/TvShow.java">
-<persistable path="/STracker/src/src/stracker/model/TvShow.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Episode.java" tooltip="STracker/src/src/stracker/model/Episode.java">
-<persistable path="/STracker/src/src/stracker/model/Episode.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="strings.xml" tooltip="STracker/res/values/strings.xml">
 <persistable path="/STracker/res/values/strings.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="EpisodeActivity.java" tooltip="STracker/src/src/stracker/EpisodeActivity.java">
-<persistable path="/STracker/src/src/stracker/EpisodeActivity.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_main.xml" tooltip="STracker/res/layout/activity_main.xml">
+<persistable path="/STracker/res/layout/activity_main.xml"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_tvshow.xml" tooltip="STracker/res/layout/activity_tvshow.xml">
-<persistable path="/STracker/res/layout/activity_tvshow.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GenreActivity.java" tooltip="STracker/src/src/stracker/GenreActivity.java">
+<persistable path="/STracker/src/src/stracker/GenreActivity.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="main.xml" tooltip="STracker/res/menu/main.xml">
-<persistable path="/STracker/res/menu/main.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainActivity.java" tooltip="STracker/src/src/stracker/MainActivity.java">
+<persistable path="/STracker/src/src/stracker/MainActivity.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="backrepeat.xml" tooltip="STracker/res/layout/backrepeat.xml">
-<persistable path="/STracker/res/layout/backrepeat.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ActorsAdapter.java" tooltip="STracker/src/src/stracker/adapters/ActorsAdapter.java">
+<persistable path="/STracker/src/src/stracker/adapters/ActorsAdapter.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="activity_episode.xml" tooltip="STracker/res/layout/activity_episode.xml">
-<persistable path="/STracker/res/layout/activity_episode.xml"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainListAdapter.java" tooltip="STracker/src/src/stracker/adapters/MainListAdapter.java">
+<persistable path="/STracker/src/src/stracker/adapters/MainListAdapter.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TvShowSynopseAdapter.java" tooltip="STracker/src/src/stracker/adapters/TvShowSynopseAdapter.java">
+<persistable path="/STracker/src/src/stracker/adapters/TvShowSynopseAdapter.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="Choreographer.class" tooltip="android.view.Choreographer">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=STracker/\/Users\/diogomatos\/Documents\/Eclipse ADT - Bundle\/sdk\/platforms\/android-17\/android.jar&lt;android.view(Choreographer.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ActorsActivity.java" tooltip="STracker/src/src/stracker/ActorsActivity.java">
+<persistable path="/STracker/src/src/stracker/ActorsActivity.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="actor_row.xml" tooltip="STracker/res/layout/actor_row.xml">
+<persistable path="/STracker/res/layout/actor_row.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.android.ide.eclipse.editors.CommonXmlEditor" name="tvshowsynopse_row.xml" tooltip="STracker/res/layout/tvshowsynopse_row.xml">
+<persistable path="/STracker/res/layout/tvshowsynopse_row.xml"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TvShowSynopse.java" tooltip="STracker/src/src/stracker/model/TvShowSynopse.java">
+<persistable path="/STracker/src/src/stracker/model/TvShowSynopse.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TopRatedService.java" tooltip="STracker/src/src/stracker/services/TopRatedService.java">
+<persistable path="/STracker/src/src/stracker/services/TopRatedService.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SearchByGenreRequest.java" tooltip="STracker/src/src/stracker/asynchttp/SearchByGenreRequest.java">
+<persistable path="/STracker/src/src/stracker/asynchttp/SearchByGenreRequest.java"/>
 </file>
 </mruList>
 </workbench>
