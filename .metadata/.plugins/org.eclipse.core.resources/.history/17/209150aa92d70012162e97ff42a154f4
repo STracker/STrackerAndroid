@@ -7,8 +7,8 @@ import android.app.Application;
  */
 public class STrackerApp extends Application {
 	
-	private final String _ApiURL = "http://stracker.apphb.com/api/";
-	private final String _URL = "http://stracker.apphb.com/";
+	private final String _ApiURL = "http://strackerserverdev.apphb.com/api/";
+	private final String _URL = "http://strackerserverdev.apphb.com/";
 	
 	public String getApiURL() {
 		return _ApiURL;
