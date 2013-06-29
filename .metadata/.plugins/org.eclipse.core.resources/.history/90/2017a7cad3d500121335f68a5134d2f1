@@ -1,7 +1,0 @@
-package src.stracker.adapters;
-
-import android.widget.ArrayAdapter;
-
-public class MainListAdapter extends ArrayAdapter<IEntry> {
-
-}
