@@ -2,6 +2,8 @@ package src.stracker.asynchttp;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.widget.Toast;
+
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -16,7 +18,7 @@ public abstract class AbstractAsyncHttp {
 	protected AsyncHttpClient _client;
 	protected Context _context;
 	private ProgressDialog _dialog;
-	
+
 	/**
 	 * @param context
 	 */
@@ -28,7 +30,7 @@ public abstract class AbstractAsyncHttp {
 		_client.addHeader("Accept", "application/json");
 		//_client.addHeader("Content-Type", "application/x-www-form-urlencoded");
 	}
-	
+
 	/**
 	 * This method execute a GET http method to the url that receives by parameter.
 	 * @param url
@@ -37,39 +39,64 @@ public abstract class AbstractAsyncHttp {
 		//Waiting message
 		_dialog.setMessage("loading...");
 		_dialog.show();
-		
+
 		//make http request
 		_client.get(url, new AsyncHttpResponseHandler() {
-		    @Override
-		    public void onSuccess(String response) {
-		    	if (_dialog.isShowing()) _dialog.dismiss();
-		    	onSuccessHook(response);
-		    }
-		    
-		    @Override
-		    public void onFailure(Throwable e, String response){
-		    	if (_dialog.isShowing()) _dialog.dismiss();
-		    	onErrorHook(e,response);
-		    }
+			@Override
+			public void onSuccess(String response) {
+				if (_dialog.isShowing()) _dialog.dismiss();
+				onSuccessHook(response);
+			}
+
+			@Override
+			public void onFailure(Throwable e, String response){
+				if (_dialog.isShowing()) _dialog.dismiss();
+				onErrorHook(e,response);
+			}
 		});	
 	}
-	
+
 	public void post(String url){
 		RequestParams requestParams = new RequestParams();
 		//requestParams.put("userId", "100005516760836");
 		requestParams.put("TvShowId", "tt0306414");
 		_client.post(url,requestParams,new AsyncHttpResponseHandler() {
-		    @Override
-		    public void onSuccess(String response) {
-		    	onSuccessHook(response);
-		    }
-		    
-		    @Override
-		    public void onFailure(Throwable e, String response){
-		    	onErrorHook(e,response);
-		    }
+			@Override
+			public void onSuccess(String response) {
+				onSuccessHook(response);
+			}
+
+			@Override
+			public void onFailure(Throwable e, String response){
+				onErrorHook(e,response);
+			}
 		});
 	}
+
+
+	public void userGet(String url, String header) {
+		//Waiting message
+		_dialog.setMessage("loading...");
+		_dialog.show();
+		
+		_client.addHeader("Authorization", header);
+		
+		//make http request
+		_client.get(url, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(String response) {
+				if (_dialog.isShowing()) _dialog.dismiss();
+				onSuccessHook(response);
+			}
+
+			@Override
+			public void onFailure(Throwable e, String response){
+				if (_dialog.isShowing()) _dialog.dismiss();
+				onErrorHook(e,response);
+			}
+		});	
+	}
+
 	/**
 	 * This method must implement the behavior of the class after the http method returns successfully.
 	 */
