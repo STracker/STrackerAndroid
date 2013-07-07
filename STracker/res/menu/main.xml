@@ -50,12 +50,5 @@
         android:showAsAction="never"
         android:icon="@drawable/ic_messages"
         android:title="@string/action_messages"/>
-    
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="500"
-        android:showAsAction="never"
-        android:icon="@android:drawable/ic_menu_preferences"
-        android:title="@string/action_settings"/>
        
 </menu>

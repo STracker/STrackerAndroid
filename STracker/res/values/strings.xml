@@ -5,6 +5,8 @@
 	<string name="next_episode">Next Episodes</string>
 	<string name="start_btn">Serie Request!</string>
 	<string name="async_task">Serie Information</string>
+	<string name="app_id">516839011711939</string>
+	<string name="fb_login">To perform this action you need to login!</string>
 	
 	<!-- Information about TvShow -->
 	<string name="serie_name">Name: </string>
@@ -51,4 +53,9 @@
 	<string name="item_entry">Item</string>
 	<string name="action_calendar">Calendar</string>
 	<string name="toprated_header">Top Rated STracker TvShows</string>
+	
+	<!-- Profile Information -->
+	<string name="profile_name">Profile Name</string>
+	<string name="profile_photo">Profile Photo</string>
+	<string name="profile_email">Profile Email</string>
 </resources>

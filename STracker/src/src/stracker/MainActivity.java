@@ -1,38 +1,28 @@
 package src.stracker;
 
-import java.net.URL;
 import java.util.ArrayList;
-import roboguice.activity.RoboListActivity;
-import roboguice.inject.ContentView;
 import src.stracker.adapters.TvShowSynopseAdapter;
 import src.stracker.asynchttp.GenresRequest;
-import src.stracker.asynchttp.SearchByNameRequest;
 import src.stracker.asynchttp.TopRatedRequest;
 import src.stracker.asynchttp.TvShowRequest;
 import src.stracker.asynchttp.UserRequest;
 import src.stracker.model.TvShowSynopse;
-import HawkClient.HawkClient;
-import HawkClient.HawkCredentials;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import src.stracker.utils.Utils;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ListView;
 
 /**
  * This Activity is the initial activity of STracker Android application.
  */
-@ContentView(R.layout.activity_main)
-public class MainActivity extends RoboListActivity {
+//@ContentView(R.layout.activity_main)
+public class MainActivity extends ListActivity {
 
 	private STrackerApp _app;
-	private Context _context;
 	private ArrayList<TvShowSynopse> _elems;
 
 	/**
@@ -42,11 +32,16 @@ public class MainActivity extends RoboListActivity {
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
+		setContentView(R.layout.activity_main);
 		_app = (STrackerApp) getApplication();
-		_context = (this);
-		new TopRatedRequest(this).execute(_app.getApiURL()+"tvshows/toprated");
+		
+		if(Utils.checkConectivity(this, _app)){
+			//Request top rated shows
+			new TopRatedRequest(this).execute(_app.getApiURL()+"tvshows/toprated");
+		}
+		_app.logout();
 	} 
-
+	
 	/**
 	 * (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
@@ -54,7 +49,7 @@ public class MainActivity extends RoboListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);   
+		getMenuInflater().inflate(R.menu.main, menu); 
 		return true;
 	}
 
@@ -66,48 +61,43 @@ public class MainActivity extends RoboListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		switch(item.getItemId()){
-		case R.id.action_profile:
-			break;
-		case R.id.action_series:
-			break;
-		case R.id.action_messages:
-			break;
-		case R.id.action_friends:
-			//new SubscribeAsyncHttp(this).post(_app.getApiURL()+"users/100005516760836/subscriptions");
-			//new SubscribeAsyncHttp(this).execute(_app.getURL()+"tvshows/tt0303461/ratings");
-			try {
-				URL url = new URL(_app.getApiURL()+"user");
-				String method = "GET";
-				Long time = System.currentTimeMillis();
-				Long timestamp = time / 1000000L;
-				String nonce = "LawkW";
-
-				HawkCredentials credentials = new HawkCredentials("100005516760836", "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn");
-
-				String header = HawkClient.createAuthorizationHeader(url, method, timestamp+"", nonce, credentials, null, null);
-				
-				new UserRequest(this).userGet(_app.getApiURL()+"user", header);
-				
-			} catch (Exception e) {
-				Log.d("TEST", e.getLocalizedMessage());
+		if(Utils.checkConectivity(this, _app)){
+			if (item.getItemId() == R.id.action_profile  ||
+			    item.getItemId() == R.id.action_series   ||
+			    item.getItemId() == R.id.action_friends  ||
+			    item.getItemId() == R.id.action_messages ||
+			    item.getItemId() == R.id.form_friend )
+				if(!Utils.checkLogin(this, _app))
+					return true;
 			}
-
-			break;
-		case R.id.action_settings:
-			break;
-		case R.id.form_friend:
-			break;
-		case R.id.form_genre:
-			new GenresRequest(this).execute(_app.getApiURL()+"genres");
-			break;
-		case R.id.form_name:
-			initSearchByName();
-			break;
-		case R.id.action_calendar:
-			startActivity(new Intent(this,CalendarActivity.class));
-			break;
-		}
+			switch(item.getItemId()){
+				case R.id.action_profile:
+					Utils.checkLogin(this, _app);
+					startActivity(new Intent(this,ProfileActivity.class));
+					break;
+				case R.id.action_series:
+					Utils.checkLogin(this, _app);
+					break;
+				case R.id.action_messages:
+					Utils.checkLogin(this, _app);
+					break;
+				case R.id.action_friends:
+					Utils.checkLogin(this, _app);
+					new UserRequest(this).authorizedGet(_app.getApiURL()+"user",_app);
+					break;
+				case R.id.form_friend:
+					Utils.checkLogin(this, _app);
+					break;
+				case R.id.form_genre:
+					new GenresRequest(this).execute(_app.getApiURL()+"genres");
+					break;
+				case R.id.form_name:
+					Utils.initSearchByName(this, _app);
+					break;
+				case R.id.action_calendar:
+					startActivity(new Intent(this,CalendarActivity.class));
+					break;
+			}
 		return true;
 	}
 
@@ -128,32 +118,5 @@ public class MainActivity extends RoboListActivity {
 		_elems = synopses;
 		TvShowSynopseAdapter adapter = new TvShowSynopseAdapter(this, synopses);
 		setListAdapter(adapter);
-	}
-
-	/**
-	 * This method pop's up an AlertDialog to begin the Search a tv show by the name.
-	 */
-	private void initSearchByName(){
-		AlertDialog.Builder adBuilder = new AlertDialog.Builder(this);
-		adBuilder.setMessage("Enter TvShow's Name:");
-		adBuilder.setCancelable(true);
-		// Set an EditText view to get user input 
-		final EditText input = new EditText(this);
-		adBuilder.setView(input);
-		adBuilder.setPositiveButton("Cancel",
-				new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
-			}
-		}); 
-		adBuilder.setNegativeButton("Search",
-				new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface dialog, int id) {
-				String url = _app.getApiURL()+"tvshows?name="+input.getText();
-				new SearchByNameRequest(_context).execute(url.replaceAll(" ", "+"));
-			}
-		});
-		AlertDialog alertDialog = adBuilder.create();
-		alertDialog.show();
 	}
 }
