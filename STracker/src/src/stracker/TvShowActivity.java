@@ -3,17 +3,23 @@ package src.stracker;
 import java.util.ArrayList;
 import com.loopj.android.image.SmartImageView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+import src.stracker.asynchttp.TvShowRatingRequest;
 import src.stracker.model.GenreSynopse;
+import src.stracker.model.Ratings;
 import src.stracker.model.TvShow;
+import src.stracker.utils.Utils;
 
 /**
  * This Activity is used to show all information about a tv show.
@@ -27,8 +33,13 @@ public class TvShowActivity extends RoboActivity {
 	@InjectView(R.id.serie_runtime) TextView _runtime;	
 	@InjectView(R.id.serie_genre) TextView _genres;
 	@InjectView(R.id.serie_date) TextView _date;
-	//private STrackerApp _app;
+	@InjectView(R.id.ratingBarTvShow) RatingBar _rating;
+	@InjectView(R.id.rating_tvshow_avg) TextView _ratingAvg;
+	@InjectView(R.id.rating_tvshow_total) TextView _ratingTotal;
+	
+	private STrackerApp _app;
 	private TvShow _tvshow;
+	private Activity _context = this;
 	
 	/**
 	 * (non-Javadoc)
@@ -37,10 +48,10 @@ public class TvShowActivity extends RoboActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		//_app = (STrackerApp) getApplication();
-		
+		_app = (STrackerApp) getApplication();
 		_tvshow = getIntent().getParcelableExtra("tvshow");
 		setTitle(_tvshow.getName());
+		new TvShowRatingRequest(this).execute(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/ratings");
 		_description.setText(_tvshow.getDescription());
 		_airday.setText("Airday: " + _tvshow.getAirday());
 		_runtime.setText("Runtime: " + _tvshow.getRuntime() + " min");
@@ -48,6 +59,16 @@ public class TvShowActivity extends RoboActivity {
 		_poster.setImageUrl(_tvshow.getPosterUrl());
 		_poster.setLayoutParams(new LayoutParams(168,251));
 		_date.setText("Date: "+ _tvshow.getFirstAired() + " " + _tvshow.getAirTime());
+		
+		_rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {	
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				if(!Utils.checkLogin(_context, _app))
+					return;
+				Utils.initRatingSubmission(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/ratings" , _context, _app, (int) rating);
+			}
+		});
 	}
 	
 	/**
@@ -99,5 +120,10 @@ public class TvShowActivity extends RoboActivity {
 				ret.append(", ");
 		}
 		return ret.toString();
+	}
+	
+	public void onRatingSuccess(Ratings rating){
+		_ratingAvg.setText("Average: " + rating.getRating());
+		_ratingTotal.setText("Total: " + rating.getTotal());
 	}
 }

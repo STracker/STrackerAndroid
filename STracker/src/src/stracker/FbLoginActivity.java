@@ -14,6 +14,7 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
+import com.loopj.android.http.RequestParams;
 
 import src.stracker.asynchttp.DummyRequest;
 import src.stracker.model.FBUser;
@@ -58,7 +59,12 @@ public class FbLoginActivity extends Activity {
 						_app.setFbUser(new FBUser(user.getName(),user.getId(), user.asMap().get("email").toString()));
 					}
 					_dialog.dismiss();
-					new DummyRequest(_context).authorizedPost(_app.getApiURL()+"user", _app);
+					RequestParams requestParams = new RequestParams();
+					requestParams.put("Id", _app.getFbUser().getId());
+					requestParams.put("Name", _app.getFbUser().getName());
+					requestParams.put("Email", _app.getFbUser().getEmail());
+					requestParams.put("Photo", _app.getFbUser().getPhotoUrl());
+					new DummyRequest(_context).authorizedPost(_app.getApiURL()+"user", _app, requestParams);
 					finish();		
 				}
 			});

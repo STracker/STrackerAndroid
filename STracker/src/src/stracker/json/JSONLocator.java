@@ -7,6 +7,7 @@ import src.stracker.model.Actor;
 import src.stracker.model.Episode;
 import src.stracker.model.EpisodeSynopse;
 import src.stracker.model.GenreSynopse;
+import src.stracker.model.Ratings;
 import src.stracker.model.SeasonSynopse;
 import src.stracker.model.TvShow;
 import src.stracker.model.TvShowSynopse;
@@ -28,6 +29,7 @@ public class JSONLocator {
 		_dictionary.put(GenreSynopse.class,   new GenresSerializer());
 		_dictionary.put(Actor.class,          new ActorSerializer());
 		_dictionary.put(TvShow.class,         new TvShowSerializer());
+		_dictionary.put(Ratings.class,        new RatingsSerializer());
 	}
 	
 	/**

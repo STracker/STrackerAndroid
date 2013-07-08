@@ -27,7 +27,7 @@ public class MainActivity extends ListActivity {
 
 	/**
 	 * (non-Javadoc)
-	 * @see roboguice.activity.RoboListActivity#onCreate(android.os.Bundle)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MainActivity extends ListActivity {
 			//Request top rated shows
 			new TopRatedRequest(this).execute(_app.getApiURL()+"tvshows/toprated");
 		}
-		_app.logout();
+		//_app.logout();
 	} 
 	
 	/**

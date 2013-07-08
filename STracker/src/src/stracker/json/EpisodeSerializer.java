@@ -25,7 +25,7 @@ public class EpisodeSerializer implements ISerialize<Episode> {
 					jObj.getString("Date"),
 					jObj.getString("TvShowId"),
 					jObj.getString("Description"),
-					jObj.getJSONObject("Poster").getString("ImageUrl"),
+					jObj.getString("Poster"),
 					jObj.getInt("SeasonNumber")
 					);
 		} catch (JSONException e) {

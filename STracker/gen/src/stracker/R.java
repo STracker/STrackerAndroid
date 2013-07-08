@@ -374,66 +374,72 @@ containing a value of this type.
         public static final int img_unknown=0x7f020027;
     }
     public static final class id {
-        public static final int action_calendar=0x7f04002f;
-        public static final int action_friends=0x7f040036;
-        public static final int action_messages=0x7f040037;
-        public static final int action_more_info=0x7f040038;
-        public static final int action_profile=0x7f040034;
-        public static final int action_search=0x7f040030;
-        public static final int action_series=0x7f040035;
-        public static final int actor_name=0x7f040013;
-        public static final int actor_photo=0x7f040012;
+        public static final int action_calendar=0x7f040035;
+        public static final int action_friends=0x7f04003c;
+        public static final int action_messages=0x7f04003d;
+        public static final int action_more_info=0x7f04003e;
+        public static final int action_profile=0x7f04003a;
+        public static final int action_search=0x7f040036;
+        public static final int action_series=0x7f04003b;
+        public static final int actor_name=0x7f040019;
+        public static final int actor_photo=0x7f040018;
         public static final int banner_id=0x7f040003;
-        public static final int char_name=0x7f040014;
-        public static final int com_facebook_login_activity_progress_bar=0x7f040017;
-        public static final int com_facebook_picker_activity_circle=0x7f040016;
-        public static final int com_facebook_picker_checkbox=0x7f040019;
-        public static final int com_facebook_picker_checkbox_stub=0x7f04001d;
-        public static final int com_facebook_picker_divider=0x7f040021;
-        public static final int com_facebook_picker_done_button=0x7f040020;
-        public static final int com_facebook_picker_image=0x7f04001a;
-        public static final int com_facebook_picker_list_section_header=0x7f04001e;
-        public static final int com_facebook_picker_list_view=0x7f040015;
-        public static final int com_facebook_picker_profile_pic_stub=0x7f04001b;
-        public static final int com_facebook_picker_row_activity_circle=0x7f040018;
-        public static final int com_facebook_picker_title=0x7f04001c;
-        public static final int com_facebook_picker_title_bar=0x7f040023;
-        public static final int com_facebook_picker_title_bar_stub=0x7f040022;
-        public static final int com_facebook_picker_top_bar=0x7f04001f;
-        public static final int com_facebook_placepickerfragment_search_box_stub=0x7f040024;
-        public static final int com_facebook_usersettingsfragment_login_button=0x7f040029;
-        public static final int com_facebook_usersettingsfragment_logo_image=0x7f040027;
-        public static final int com_facebook_usersettingsfragment_profile_name=0x7f040028;
+        public static final int char_name=0x7f04001a;
+        public static final int com_facebook_login_activity_progress_bar=0x7f04001d;
+        public static final int com_facebook_picker_activity_circle=0x7f04001c;
+        public static final int com_facebook_picker_checkbox=0x7f04001f;
+        public static final int com_facebook_picker_checkbox_stub=0x7f040023;
+        public static final int com_facebook_picker_divider=0x7f040027;
+        public static final int com_facebook_picker_done_button=0x7f040026;
+        public static final int com_facebook_picker_image=0x7f040020;
+        public static final int com_facebook_picker_list_section_header=0x7f040024;
+        public static final int com_facebook_picker_list_view=0x7f04001b;
+        public static final int com_facebook_picker_profile_pic_stub=0x7f040021;
+        public static final int com_facebook_picker_row_activity_circle=0x7f04001e;
+        public static final int com_facebook_picker_title=0x7f040022;
+        public static final int com_facebook_picker_title_bar=0x7f040029;
+        public static final int com_facebook_picker_title_bar_stub=0x7f040028;
+        public static final int com_facebook_picker_top_bar=0x7f040025;
+        public static final int com_facebook_placepickerfragment_search_box_stub=0x7f04002a;
+        public static final int com_facebook_usersettingsfragment_login_button=0x7f04002f;
+        public static final int com_facebook_usersettingsfragment_logo_image=0x7f04002d;
+        public static final int com_facebook_usersettingsfragment_profile_name=0x7f04002e;
         public static final int episode_date=0x7f040005;
-        public static final int episode_desc=0x7f040006;
+        public static final int episode_desc=0x7f040009;
         public static final int episode_info=0x7f040004;
-        public static final int form_cast=0x7f04003a;
-        public static final int form_comments=0x7f04003b;
-        public static final int form_friend=0x7f040033;
-        public static final int form_genre=0x7f040032;
-        public static final int form_name=0x7f040031;
-        public static final int form_seasons=0x7f040039;
-        public static final int header_text=0x7f04002a;
+        public static final int form_cast=0x7f040040;
+        public static final int form_comments=0x7f040041;
+        public static final int form_friend=0x7f040039;
+        public static final int form_genre=0x7f040038;
+        public static final int form_name=0x7f040037;
+        public static final int form_seasons=0x7f04003f;
+        public static final int header_text=0x7f040030;
         public static final int large=0x7f040002;
-        public static final int list_episode=0x7f04002b;
-        public static final int list_tvshowName=0x7f04002c;
-        public static final int loginBtn=0x7f040008;
-        public static final int login_text=0x7f040007;
+        public static final int list_episode=0x7f040031;
+        public static final int list_tvshowName=0x7f040032;
+        public static final int loginBtn=0x7f04000b;
+        public static final int login_text=0x7f04000a;
         public static final int normal=0x7f040001;
-        public static final int picker_subtitle=0x7f040026;
-        public static final int poster_id=0x7f04000c;
-        public static final int profile_email=0x7f04000b;
-        public static final int profile_name=0x7f04000a;
-        public static final int profile_photo_id=0x7f040009;
-        public static final int search_box=0x7f040025;
-        public static final int serie_airday=0x7f04000d;
-        public static final int serie_date=0x7f040010;
-        public static final int serie_genre=0x7f04000f;
-        public static final int serie_runtime=0x7f04000e;
+        public static final int picker_subtitle=0x7f04002c;
+        public static final int poster_id=0x7f04000f;
+        public static final int profile_email=0x7f04000e;
+        public static final int profile_name=0x7f04000d;
+        public static final int profile_photo_id=0x7f04000c;
+        public static final int ratingBarEpisode=0x7f040006;
+        public static final int ratingBarTvShow=0x7f040014;
+        public static final int rating_episode_avg=0x7f040007;
+        public static final int rating_episode_total=0x7f040008;
+        public static final int rating_tvshow_avg=0x7f040015;
+        public static final int rating_tvshow_total=0x7f040016;
+        public static final int search_box=0x7f04002b;
+        public static final int serie_airday=0x7f040010;
+        public static final int serie_date=0x7f040013;
+        public static final int serie_genre=0x7f040012;
+        public static final int serie_runtime=0x7f040011;
         public static final int small=0x7f040000;
-        public static final int title_description=0x7f040011;
-        public static final int tvshow_name_row=0x7f04002e;
-        public static final int tvshow_photo_row=0x7f04002d;
+        public static final int title_description=0x7f040017;
+        public static final int tvshow_name_row=0x7f040034;
+        public static final int tvshow_photo_row=0x7f040033;
     }
     public static final class layout {
         public static final int activity_actors=0x7f030000;
@@ -469,26 +475,26 @@ containing a value of this type.
         public static final int tvshow=0x7f0a0001;
     }
     public static final class string {
-        public static final int action_calendar=0x7f050040;
-        public static final int action_friends=0x7f050029;
-        public static final int action_messages=0x7f05002d;
+        public static final int action_calendar=0x7f050044;
+        public static final int action_friends=0x7f05002b;
+        public static final int action_messages=0x7f05002f;
         /**  Menu TvShow 
  Menu TvShow 
  Menu TvShow 
  Menu TvShow 
          */
-        public static final int action_more_info=0x7f050031;
+        public static final int action_more_info=0x7f050033;
         /**  Menu Items 
  Menu Items 
  Menu Items 
  Menu Items 
          */
-        public static final int action_profile=0x7f050028;
-        public static final int action_search=0x7f05002c;
-        public static final int action_series=0x7f05002a;
-        public static final int action_settings=0x7f05002b;
-        public static final int actor_arrow=0x7f05003d;
-        public static final int actor_name=0x7f05003b;
+        public static final int action_profile=0x7f05002a;
+        public static final int action_search=0x7f05002e;
+        public static final int action_series=0x7f05002c;
+        public static final int action_settings=0x7f05002d;
+        public static final int actor_arrow=0x7f050041;
+        public static final int actor_name=0x7f05003f;
         public static final int app_id=0x7f05001e;
         public static final int app_name=0x7f050019;
         public static final int async_task=0x7f05001d;
@@ -497,8 +503,8 @@ containing a value of this type.
  Episode Information 
  Episode Information 
          */
-        public static final int banner_desc=0x7f050035;
-        public static final int char_name=0x7f05003c;
+        public static final int banner_desc=0x7f050037;
+        public static final int char_name=0x7f050040;
         public static final int com_facebook_choose_friends=0x7f05000f;
         public static final int com_facebook_dialogloginactivity_ok_button=0x7f050000;
         public static final int com_facebook_internet_permission_error_message=0x7f050013;
@@ -524,31 +530,35 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_log_in_button=0x7f050008;
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f050009;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f05000a;
-        public static final int episode_date=0x7f050039;
-        public static final int episode_desc=0x7f050036;
-        public static final int episode_info=0x7f050037;
-        public static final int episode_rating=0x7f050038;
+        public static final int episode_date=0x7f05003b;
+        public static final int episode_desc=0x7f050038;
+        public static final int episode_info=0x7f050039;
+        public static final int episode_rating=0x7f05003a;
         public static final int fb_login=0x7f05001f;
         /**  Calendar ListView Information 
  Calendar ListView Information 
  Calendar ListView Information 
  Calendar ListView Information 
          */
-        public static final int header_entry=0x7f05003e;
-        public static final int item_entry=0x7f05003f;
+        public static final int header_entry=0x7f050042;
+        public static final int item_entry=0x7f050043;
         public static final int next_episode=0x7f05001b;
         /**  Actor Information 
  Actor Information 
  Actor Information 
  Actor Information 
          */
-        public static final int photo_desc=0x7f05003a;
+        public static final int photo_desc=0x7f05003e;
         public static final int poster_desc=0x7f050027;
-        public static final int profile_email=0x7f050044;
+        public static final int profile_email=0x7f050048;
         /**  Profile Information 
          */
-        public static final int profile_name=0x7f050042;
-        public static final int profile_photo=0x7f050043;
+        public static final int profile_name=0x7f050046;
+        public static final int profile_photo=0x7f050047;
+        public static final int rating_episode_avg=0x7f05003c;
+        public static final int rating_episode_total=0x7f05003d;
+        public static final int rating_tvshow_avg=0x7f050028;
+        public static final int rating_tvshow_total=0x7f050029;
         public static final int search_hint=0x7f05001a;
         public static final int serie_airday=0x7f050023;
         public static final int serie_date=0x7f050026;
@@ -563,13 +573,13 @@ containing a value of this type.
         public static final int serie_rating=0x7f050025;
         public static final int serie_runtime=0x7f050022;
         public static final int start_btn=0x7f05001c;
-        public static final int subitem_cast=0x7f050034;
-        public static final int subitem_comments=0x7f050033;
-        public static final int subitem_search_by_genre=0x7f05002f;
-        public static final int subitem_search_by_name=0x7f05002e;
-        public static final int subitem_search_friend=0x7f050030;
-        public static final int subitem_seasons=0x7f050032;
-        public static final int toprated_header=0x7f050041;
+        public static final int subitem_cast=0x7f050036;
+        public static final int subitem_comments=0x7f050035;
+        public static final int subitem_search_by_genre=0x7f050031;
+        public static final int subitem_search_by_name=0x7f050030;
+        public static final int subitem_search_friend=0x7f050032;
+        public static final int subitem_seasons=0x7f050034;
+        public static final int toprated_header=0x7f050045;
     }
     public static final class style {
         /** 

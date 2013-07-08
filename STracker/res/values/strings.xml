@@ -17,6 +17,8 @@
 	<string name="serie_rating">Rating: </string>
 	<string name="serie_date">Date: </string>
 	<string name="poster_desc">Poster</string>
+	<string name="rating_tvshow_avg">Average: </string>
+	<string name="rating_tvshow_total">Total: </string>
 	
 	<!-- Menu Items -->
 	<string name="action_profile">Profile</string>
@@ -41,6 +43,8 @@
 	<string name="episode_info">Episode Info</string>
 	<string name="episode_rating">Rating</string>
 	<string name="episode_date">Date</string>
+	<string name="rating_episode_avg">Average</string>
+	<string name="rating_episode_total">Total</string>
 	
 	<!-- Actor Information -->
 	<string name="photo_desc">Photo</string>

@@ -1,7 +1,10 @@
 package src.stracker.utils;
 
+import com.loopj.android.http.RequestParams;
+
 import src.stracker.FbLoginActivity;
 import src.stracker.STrackerApp;
+import src.stracker.asynchttp.DummyRequest;
 import src.stracker.asynchttp.SearchByNameRequest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -51,5 +54,31 @@ public class Utils {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * This method pop's up an AlertDialog to begin the rating submission.
+	 */
+	public static void initRatingSubmission(final String url, final Activity activity, final STrackerApp app, final int rating){
+		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
+		adBuilder.setMessage("Do you really want to submit the Rating?");
+		adBuilder.setCancelable(true);
+		adBuilder.setPositiveButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		}); 
+		adBuilder.setNegativeButton("Submit",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				RequestParams requestParams = new RequestParams();
+				requestParams.put("Id", app.getFbUser().getId());
+				requestParams.put("rating", rating+"");
+				new DummyRequest(activity).authorizedPost(url, app, requestParams);
+			}
+		});
+		AlertDialog alertDialog = adBuilder.create();
+		alertDialog.show();
 	}
 }

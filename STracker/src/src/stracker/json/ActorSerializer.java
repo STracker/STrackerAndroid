@@ -28,7 +28,7 @@ public class ActorSerializer implements ISerialize<ArrayList<Actor>> {
 			    actors.add(new Actor(
 					jObj.getString("Name"),
 					jObj.getString("CharacterName"),
-					jObj.getJSONObject("Photo").getString("ImageUrl")
+					jObj.getString("Photo")
 					));
 			}
 		} catch (JSONException e) {

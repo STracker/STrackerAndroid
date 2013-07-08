@@ -9,7 +9,6 @@ import HawkClient.HawkClient;
 import HawkClient.HawkCredentials;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -64,13 +63,7 @@ public abstract class AbstractAsyncHttp {
 		});	
 	}
 
-	public void authorizedPost(String url, STrackerApp app){
-		RequestParams requestParams = new RequestParams();
-		requestParams.put("Id", app.getFbUser().getId());
-		requestParams.put("Name", app.getFbUser().getName());
-		requestParams.put("Email", app.getFbUser().getEmail());
-		requestParams.put("Photo", app.getFbUser().getPhotoUrl());
-		
+	public void authorizedPost(String url, STrackerApp app, RequestParams requestParams){
 		_client.addHeader("Authorization", getAuthorizationHeaderPost(url, app, requestParams));
 		_client.post(url,requestParams,new AsyncHttpResponseHandler() {
 			@Override
@@ -122,7 +115,6 @@ public abstract class AbstractAsyncHttp {
 		Long time = System.currentTimeMillis();
 		Long timestamp = time / 1000L;
 		String nonce = "LawkW";
-		Log.d("Timestamp", timestamp+"");
 		HawkCredentials credentials = new HawkCredentials(app.getFbUser().getId(), app.getHawkKey());
 		String header = "";
 		try {
@@ -147,17 +139,14 @@ public abstract class AbstractAsyncHttp {
 		Long time = System.currentTimeMillis();
 		Long timestamp = time / 1000L;
 		String nonce = "LawkW";
-		Log.d("Timestamp", timestamp+"");
 		HawkCredentials credentials = new HawkCredentials(app.getFbUser().getId(), app.getHawkKey());
 		String header = "";
 		try {
-			Log.d("PARAMS", requestParams.toString());
 			//header = HawkClient.createAuthorizationHeaderWithPayloadValidation(objUrl, method, timestamp+"", nonce, credentials, requestParams.toString(), null,"application/x-www-form-urlenconded");
 			header = HawkClient.createAuthorizationHeader(objUrl, method, timestamp+"", nonce, credentials, null, null);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		Log.d("HEADER",header);
 		return header;
 	}
 	

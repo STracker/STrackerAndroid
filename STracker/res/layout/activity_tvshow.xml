@@ -63,6 +63,39 @@
 	    </LinearLayout>
     </LinearLayout>
     
+    <RatingBar
+        android:id="@+id/ratingBarTvShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:numStars="5"
+        android:stepSize="1.0" />
+    
+    <LinearLayout 
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_marginTop="15dp" >
+	    
+	    <TextView 
+	            android:id="@+id/rating_tvshow_avg"
+	            android:src="@string/rating_tvshow_avg"
+        		android:textIsSelectable="false" 
+        		android:textColor="@color/Snow"
+        		android:paddingLeft="5sp"
+	            android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content" />
+        
+	    <TextView 
+	            android:id="@+id/rating_tvshow_total"
+	            android:src="@string/rating_tvshow_total"
+        		android:textIsSelectable="false" 
+        		android:textColor="@color/Snow"
+        		android:paddingLeft="20sp"
+	            android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content" />  
+    </LinearLayout>
+    
     <ScrollView 
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content" >

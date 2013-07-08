@@ -16,6 +16,6 @@ public class DummyRequest extends AbstractAsyncHttp {
 
 	@Override
 	protected void onErrorHook(Throwable e, String response) {
-	Log.d("DummyError", response);
+		Log.d("DummyError", response);
 	}
 }

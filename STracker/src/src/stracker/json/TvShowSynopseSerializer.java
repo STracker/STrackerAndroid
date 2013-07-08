@@ -28,7 +28,7 @@ public class TvShowSynopseSerializer implements ISerialize<ArrayList<TvShowSynop
 					jObj.getString("Id"),
 					jObj.getString("Name"),
 					jObj.getString("Uri"),
-					jObj.getJSONObject("Poster").getString("ImageUrl")
+					jObj.getString("Poster")
 					));
 			}
 		} catch (JSONException e) {

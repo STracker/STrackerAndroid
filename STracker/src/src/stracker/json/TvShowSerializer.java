@@ -31,7 +31,7 @@ public class TvShowSerializer implements ISerialize<TvShow> {
 					jObj.getInt("Runtime"),
 					jObj.getString("AirTime"),
 					jObj.getString("FirstAired"),
-					jObj.getJSONObject("Poster").getString("ImageUrl"),
+					jObj.getString("Poster"),
 					_genreSerializer.deserialize(jObj.getJSONArray("Genres").toString()),
 					_seasonSerializer.deserialize(jObj.getJSONArray("SeasonSynopses").toString()),
 					_actorSerializer.deserialize(jObj.getJSONArray("Actors").toString())
