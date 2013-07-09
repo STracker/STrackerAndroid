@@ -73,8 +73,7 @@ public class Utils {
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				RequestParams requestParams = new RequestParams();
-				requestParams.put("Id", app.getFbUser().getId());
-				requestParams.put("rating", rating+"");
+				requestParams.put("", rating+"");
 				new DummyRequest(activity).authorizedPost(url, app, requestParams);
 			}
 		});

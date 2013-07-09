@@ -64,7 +64,7 @@ public class FbLoginActivity extends Activity {
 					requestParams.put("Name", _app.getFbUser().getName());
 					requestParams.put("Email", _app.getFbUser().getEmail());
 					requestParams.put("Photo", _app.getFbUser().getPhotoUrl());
-					new DummyRequest(_context).authorizedPost(_app.getApiURL()+"user", _app, requestParams);
+					new DummyRequest(_context).authorizedPost(_app.getApiURL()+"users", _app, requestParams);
 					finish();		
 				}
 			});

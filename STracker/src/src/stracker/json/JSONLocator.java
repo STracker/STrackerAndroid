@@ -3,6 +3,7 @@ package src.stracker.json;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import src.stracker.model.Comment;
 import src.stracker.model.Actor;
 import src.stracker.model.Episode;
 import src.stracker.model.EpisodeSynopse;
@@ -30,6 +31,7 @@ public class JSONLocator {
 		_dictionary.put(Actor.class,          new ActorSerializer());
 		_dictionary.put(TvShow.class,         new TvShowSerializer());
 		_dictionary.put(Ratings.class,        new RatingsSerializer());
+		_dictionary.put(Comment.class,        new CommentsSerializer());
 	}
 	
 	/**

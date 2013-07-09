@@ -62,4 +62,12 @@
 	<string name="profile_name">Profile Name</string>
 	<string name="profile_photo">Profile Photo</string>
 	<string name="profile_email">Profile Email</string>
+	
+	<!-- Comment Information -->
+	<string name="comment_user_label">User: </string>
+	<string name="comment_user">user</string>
+	<string name="comment_text">comment</string>
+	<string name="comment_btn">Info</string>
+	<string name="act_comment_user">comment</string>
+	<string name="title_comment">Comment Text</string>
 </resources>

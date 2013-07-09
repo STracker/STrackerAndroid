@@ -15,6 +15,7 @@ import android.widget.TextView;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+import src.stracker.asynchttp.CommentsRequest;
 import src.stracker.asynchttp.TvShowRatingRequest;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.Ratings;
@@ -103,7 +104,8 @@ public class TvShowActivity extends RoboActivity {
     		startActivity(intent_cast);
     		break;
     	case R.id.form_comments:
-    		break;
+    		new CommentsRequest(this).execute(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/comments");
+    		break; 
     	}
     	return true;
     }
@@ -124,6 +126,6 @@ public class TvShowActivity extends RoboActivity {
 	
 	public void onRatingSuccess(Ratings rating){
 		_ratingAvg.setText("Average: " + rating.getRating());
-		_ratingTotal.setText("Total: " + rating.getTotal());
+		_ratingTotal.setText("from: " + rating.getTotal());
 	}
 }
