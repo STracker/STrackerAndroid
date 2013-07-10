@@ -12,9 +12,9 @@ import src.stracker.model.Comment;
 public class CommentActivity extends RoboActivity {
 
 	@InjectView(R.id.act_comment_user) TextView _userName;
-	@InjectView(R.id.comment_text) TextView _commentText;
+	@InjectView(R.id.comment_text_act) TextView _commentText;
 	@InjectView(R.id.act_comment_profile) Button _profileBtn;
-
+  
 	private STrackerApp _app;
 	private Comment _comment;
 	
@@ -22,6 +22,8 @@ public class CommentActivity extends RoboActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		_app = (STrackerApp) getApplication();
-		
+		_comment = getIntent().getParcelableExtra("comment");
+		_userName.setText(_comment.getUserName());
+		_commentText.setText(_comment.getBody());
 	}	
 }

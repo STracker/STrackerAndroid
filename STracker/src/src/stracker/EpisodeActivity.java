@@ -25,7 +25,7 @@ public class EpisodeActivity extends RoboActivity {
 	@InjectView(R.id.rating_episode_avg) TextView _ratingAvg;
 	@InjectView(R.id.rating_episode_total) TextView _ratingTotal;
 	private Episode _episode;
-	private STrackerApp _app;
+	private STrackerApp _app; 
 	
 	/**
 	 * (non-Javadoc)

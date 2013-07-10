@@ -1,6 +1,8 @@
 package src.stracker;
 
 import java.util.ArrayList;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -34,6 +36,8 @@ public class CommentsActivity extends RoboListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		
+		Intent intent = new Intent(this, CommentActivity.class);
+		intent.putExtra("comment", _comments.get(position));
+		startActivity(intent);
 	}
 }

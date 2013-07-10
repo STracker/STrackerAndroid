@@ -13,8 +13,10 @@
         <Button 
             android:id="@+id/act_comment_profile"
             android:src="@string/comment_btn"
+            android:text="@string/comment_btn"
             android:paddingRight="5sp"
        		android:layout_gravity="right"
+       		android:textColor="@color/Snow"
             android:layout_width="wrap_content"
         	android:layout_height="wrap_content" />
         
@@ -24,6 +26,7 @@
        		android:textIsSelectable="false" 
        		android:textColor="@color/Snow"
        		android:paddingLeft="15sp"
+       		android:textSize="24sp"
             android:layout_width="match_parent"
         	android:layout_height="wrap_content" />
         
@@ -31,12 +34,12 @@
     
     <TextView
             android:id="@+id/title_comment"
-            android:src="@string/title_comment"
+            android:text="@string/title_comment"
        		android:textIsSelectable="false" 
-       		android:textColor="@color/Blue"
+       		android:textColor="@color/Snow"
             android:layout_width="match_parent"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="24sp"
         	android:layout_height="wrap_content" />
     
     <TextView
@@ -44,6 +47,7 @@
             android:src="@string/comment_text"
        		android:textIsSelectable="false" 
        		android:textColor="@color/Snow"
+       		android:paddingLeft="15sp"
             android:layout_width="match_parent"
         	android:layout_height="match_parent" />
 
