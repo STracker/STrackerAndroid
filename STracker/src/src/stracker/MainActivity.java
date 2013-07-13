@@ -73,7 +73,9 @@ public class MainActivity extends ListActivity {
 			switch(item.getItemId()){
 				case R.id.action_profile:
 					Utils.checkLogin(this, _app);
-					startActivity(new Intent(this,ProfileActivity.class));
+					Intent intentProfile = new Intent(this,ProfileActivity.class);
+					intentProfile.putExtra("user", _app.getFbUser());
+					startActivity(intentProfile);
 					break;
 				case R.id.action_series:
 					Utils.checkLogin(this, _app);

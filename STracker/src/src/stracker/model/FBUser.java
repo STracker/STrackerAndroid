@@ -1,6 +1,9 @@
 package src.stracker.model;
 
-public class FBUser {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class FBUser implements Parcelable{
 	
 	private String Name;
 	private String Id;
@@ -14,6 +17,10 @@ public class FBUser {
 		PhotoUrl = "http://graph.facebook.com/"+id+"/picture?type=large";
 	}
 
+	public FBUser(Parcel in){
+		readFromParcel(in);
+	}
+	
 	public String getName() {
 		return Name;
 	}
@@ -45,4 +52,35 @@ public class FBUser {
 	public void setEmail(String email) {
 		Email = email;
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(Id);
+		dest.writeString(Name);
+		dest.writeString(Email);
+		dest.writeString(PhotoUrl);
+	}
+	
+	public void readFromParcel(Parcel in){
+		setId(in.readString());
+		setName(in.readString());
+		setEmail(in.readString());
+		setPhotoUrl(in.readString());
+	}
+	
+	public static final Parcelable.Creator<FBUser> CREATOR =
+		    new Parcelable.Creator<FBUser>() {
+	            public FBUser createFromParcel(Parcel in) {
+	                return new FBUser(in);
+	            }
+	 
+	            public FBUser[] newArray(int size) {
+	                return new FBUser[size];
+	            }
+	        };
 }
