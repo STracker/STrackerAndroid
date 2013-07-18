@@ -40,7 +40,7 @@ public abstract class AbstractAsyncHttp {
 	 * This method execute a GET http method to the url that receives by parameter.
 	 * @param url
 	 */
-	public void execute(String url){
+	public void get(String url){
 		//Waiting message
 		_dialog.setMessage("loading...");
 		_dialog.show();
@@ -51,20 +51,38 @@ public abstract class AbstractAsyncHttp {
 		_client.get(url, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
-				if (_dialog.isShowing()) _dialog.dismiss();
 				onSuccessHook(response);
 			}
 
 			@Override
 			public void onFailure(Throwable e, String response){
-				if (_dialog.isShowing()) _dialog.dismiss();
 				onErrorHook(e,response);
 			}
 		});	
 	}
+	
+	public void authorizedGet(String url,STrackerApp app) {
+		//Waiting message
+		_dialog.setMessage("loading...");
+		_dialog.show();
+		_client.addHeader("Authorization", getAuthorizationHeader("GET",url, app));
+		
+		//make http request
+		_client.get(url, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(String response) {
+				onSuccessHook(response);
+			}
 
+			@Override
+			public void onFailure(Throwable e, String response){
+				onErrorHook(e,response);
+			}
+		});	
+	}
+	
 	public void authorizedPost(String url, STrackerApp app, RequestParams requestParams){
-		_client.addHeader("Authorization", getAuthorizationHeaderPost(url, app, requestParams));
+		_client.addHeader("Authorization", getAuthorizationHeader("POST",url, app));
 		_client.post(url,requestParams,new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
@@ -77,72 +95,38 @@ public abstract class AbstractAsyncHttp {
 			}
 		});
 	}
-
-
-	public void authorizedGet(String url,STrackerApp app) {
-		//Waiting message
-		_dialog.setMessage("loading...");
-		_dialog.show();
-		_client.addHeader("Authorization", getAuthorizationHeaderGet(url, app));
-		
-		//make http request
-		_client.get(url, new AsyncHttpResponseHandler() {
+	
+	public void authorizedDelete(String url, STrackerApp app){
+		_client.addHeader("Authorization", getAuthorizationHeader("DELETE",url, app));
+		_client.delete(url,new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(String response) {
-				if (_dialog.isShowing()) _dialog.dismiss();
 				onSuccessHook(response);
 			}
 
 			@Override
 			public void onFailure(Throwable e, String response){
-				if (_dialog.isShowing()) _dialog.dismiss();
 				onErrorHook(e,response);
 			}
-		});	
+		});
 	}
 	
 	/**
 	 * Build and return authorization header according Hawk Protocol specifications
 	 */
-	private String getAuthorizationHeaderGet(String url, STrackerApp app){
+	private String getAuthorizationHeader(String method, String url, STrackerApp app){
 		URL objUrl = null;
 		try {
 			objUrl = new URL(url);
 		} catch (MalformedURLException e1) {
 			e1.printStackTrace();
 		}
-		String method = "GET";
 		Long time = System.currentTimeMillis();
 		Long timestamp = time / 1000L;
 		String nonce = "LawkW";
 		HawkCredentials credentials = new HawkCredentials(app.getFbUser().getId(), app.getHawkKey());
 		String header = "";
 		try {
-			header = HawkClient.createAuthorizationHeader(objUrl, method, timestamp+"", nonce, credentials, null, null);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		return header;
-	}
-
-	/**
-	 * Build and return authorization header according Hawk Protocol specifications
-	 */
-	private String getAuthorizationHeaderPost(String url, STrackerApp app, RequestParams requestParams){
-		URL objUrl = null;
-		try {
-			objUrl = new URL(url);
-		} catch (MalformedURLException e1) {
-			e1.printStackTrace();
-		}
-		String method = "POST";
-		Long time = System.currentTimeMillis();
-		Long timestamp = time / 1000L;
-		String nonce = "LawkW";
-		HawkCredentials credentials = new HawkCredentials(app.getFbUser().getId(), app.getHawkKey());
-		String header = "";
-		try {
-			//header = HawkClient.createAuthorizationHeaderWithPayloadValidation(objUrl, method, timestamp+"", nonce, credentials, requestParams.toString(), null,"application/x-www-form-urlenconded");
 			header = HawkClient.createAuthorizationHeader(objUrl, method, timestamp+"", nonce, credentials, null, null);
 		} catch (Exception e1) {
 			e1.printStackTrace();

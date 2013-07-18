@@ -87,15 +87,15 @@ public class ResultActivity extends RoboListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		if(_arrayList != null){
 			TvShowSynopse tvshow = _arrayList.get(position);
-			new TvShowRequest(this).execute(_app.getApiURL()+tvshow.getUri());
+			new TvShowRequest(this).get(_app.getApiURL()+tvshow.getUri());
 		}
 		else if(_seasonList != null){
 			SeasonSynopse season = _seasonList.get(position);
-			new EpisodesRequest(this, season.getNumber()).execute(_app.getApiURL()+season.getUri());
+			new EpisodesRequest(this, season.getNumber()).get(_app.getApiURL()+season.getUri());
 		}
 		else if(_episodeList != null){
 			EpisodeSynopse episode = _episodeList.get(position);
-			new EpisodeRequest(this).execute(_app.getApiURL()+episode.getUri());
+			new EpisodeRequest(this).get(_app.getApiURL()+episode.getUri());
 		}
 	}
 }

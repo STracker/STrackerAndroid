@@ -10,14 +10,16 @@ public class Comment implements Parcelable {
 	private String Uri;
 	private String UserName;
 	private String UserUri;
+	private String UserId;
 	
-	public Comment(String id, String body, String uri, String userName, String userUri) {
+	public Comment(String id, String body, String uri, String userName, String userUri, String userId) {
 		super();
 		Id = id;
 		Body = body;
 		Uri = uri;
 		UserName = userName;
 		UserUri = userUri;
+		UserId = userId;
 	}
 	
 	public String getUri() {
@@ -64,6 +66,14 @@ public class Comment implements Parcelable {
 		UserUri = userUri;
 	}
 
+	public String getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(String userId) {
+		UserId = userId;
+	}
+
 	@Override
 	public int describeContents() {
 		return 0;
@@ -76,6 +86,7 @@ public class Comment implements Parcelable {
 		in.writeString(Uri);
 		in.writeString(UserName);
 		in.writeString(UserUri);
+		in.writeString(UserId);
 	}
 	
 	public void readFromParcel(Parcel in){
@@ -84,6 +95,7 @@ public class Comment implements Parcelable {
 		setUri(in.readString());
 		setUserName(in.readString());
 		setUserUri(in.readString());
+		setUserId(in.readString());
 	}
 	
 	public static final Parcelable.Creator<Comment> CREATOR =

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RatingBar;
+import android.widget.Toast;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import roboguice.activity.RoboActivity;
@@ -52,7 +53,7 @@ public class TvShowActivity extends RoboActivity {
 		_app = (STrackerApp) getApplication();
 		_tvshow = getIntent().getParcelableExtra("tvshow");
 		setTitle(_tvshow.getName());
-		new TvShowRatingRequest(this).execute(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/ratings");
+		new TvShowRatingRequest(this).get(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/ratings");
 		_description.setText(_tvshow.getDescription());
 		_airday.setText("Airday: " + _tvshow.getAirday());
 		_runtime.setText("Runtime: " + _tvshow.getRuntime() + " min");
@@ -68,6 +69,7 @@ public class TvShowActivity extends RoboActivity {
 				if(!Utils.checkLogin(_context, _app))
 					return;
 				Utils.initRatingSubmission(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/ratings" , _context, _app, (int) rating);
+				Toast.makeText(_context, "Your rating will be processed", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -104,7 +106,7 @@ public class TvShowActivity extends RoboActivity {
     		startActivity(intent_cast);
     		break;
     	case R.id.form_comments:
-    		new CommentsRequest(this).execute(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/comments");
+    		new CommentsRequest(this,_tvshow.getId()).get(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/comments");
     		break; 
     	}
     	return true;
@@ -126,6 +128,6 @@ public class TvShowActivity extends RoboActivity {
 	
 	public void onRatingSuccess(Ratings rating){
 		_ratingAvg.setText("Average: " + rating.getRating());
-		_ratingTotal.setText("from: " + rating.getTotal());
+		_ratingTotal.setText("from: " + rating.getTotal() + " users");
 	}
 }

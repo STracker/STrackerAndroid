@@ -37,7 +37,7 @@ public class MainActivity extends ListActivity {
 		
 		if(Utils.checkConectivity(this, _app)){
 			//Request top rated shows
-			new TopRatedRequest(this).execute(_app.getApiURL()+"tvshows/toprated");
+			new TopRatedRequest(this).get(_app.getApiURL()+"tvshows/toprated");
 		}
 		//_app.logout();
 	} 
@@ -91,7 +91,7 @@ public class MainActivity extends ListActivity {
 					Utils.checkLogin(this, _app);
 					break;
 				case R.id.form_genre:
-					new GenresRequest(this).execute(_app.getApiURL()+"genres");
+					new GenresRequest(this).get(_app.getApiURL()+"genres");
 					break;
 				case R.id.form_name:
 					Utils.initSearchByName(this, _app);
@@ -110,7 +110,7 @@ public class MainActivity extends ListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		new TvShowRequest(this).execute(_app.getApiURL()+_elems.get(position).getUri());
+		new TvShowRequest(this).get(_app.getApiURL()+_elems.get(position).getUri());
 	}
 
 	/**

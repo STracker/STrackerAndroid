@@ -13,9 +13,11 @@ import android.widget.Toast;
 public class CommentsRequest extends AbstractAsyncHttp {
 
 	private CommentsSerializer _serializer;
+	private String _tvshowId;
 	
-	public CommentsRequest(Context context){
+	public CommentsRequest(Context context, String tvshowId){
 		super(context);
+		_tvshowId = tvshowId;
 		_serializer = (CommentsSerializer) JSONLocator.getInstance().getSerializer(Comment.class);
 	}
 	
@@ -25,6 +27,7 @@ public class CommentsRequest extends AbstractAsyncHttp {
 			ArrayList<Comment> list = _serializer.deserialize(response);
 			Intent intent = new Intent(_context,CommentsActivity.class);
 			intent.putExtra("list", list);
+			intent.putExtra("id", _tvshowId);
 			_context.startActivity(intent);
 		}catch(Exception e){
 			onErrorHook(e,e.getClass().getSimpleName());

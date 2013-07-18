@@ -47,7 +47,7 @@ public class SearchByNameRequest extends AbstractAsyncHttp {
 		if (list.size() == 0) onErrorHook(new NoHttpResponseException(""), "");
 		if (list.size() == 1){
 			TvShowSynopse tvshow = list.get(0);
-			new TvShowRequest(_context).execute(_app.getApiURL()+tvshow.getUri());
+			new TvShowRequest(_context).get(_app.getApiURL()+tvshow.getUri());
 		}
 		else {
 			Intent intent = new Intent(_context,ResultActivity.class);

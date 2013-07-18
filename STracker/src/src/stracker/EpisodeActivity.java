@@ -37,7 +37,7 @@ public class EpisodeActivity extends RoboActivity {
 		_app = (STrackerApp) getApplication();
 		_episode = getIntent().getParcelableExtra("episode");
 		setTitle(_episode.getName());
-		new EpisodeRatingRequest(this).execute(_app.getApiURL() + "tvshows/" + _episode.getTvShowId() + 
+		new EpisodeRatingRequest(this).get(_app.getApiURL() + "tvshows/" + _episode.getTvShowId() + 
 																  "/seasons/" + _episode.getSeasonNumber() + 
 																  "/episodes/" + _episode.getNumber() + 
 																  "/ratings");

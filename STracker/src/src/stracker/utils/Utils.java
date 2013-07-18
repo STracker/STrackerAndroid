@@ -35,19 +35,25 @@ public class Utils {
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				String url = app.getApiURL()+"tvshows?name="+input.getText();
-				new SearchByNameRequest(activity).execute(url.replaceAll(" ", "+"));
+				new SearchByNameRequest(activity).get(url.replaceAll(" ", "+"));
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();
 		alertDialog.show();
 	}
 	
+	/**
+	 * This method check if the application user is logged in with facebook
+	 */
 	public static boolean checkLogin(Activity activity, STrackerApp app){
 		if(!app.isLoggedIn())
 			activity.startActivity(new Intent(activity,FbLoginActivity.class));
 		return app.isLoggedIn();
 	}
 	
+	/**
+	 * This method check if the device has internet connectivity
+	 */
 	public static boolean checkConectivity(Activity activity, STrackerApp app){
 		if(!app.verifyInternetConnection()){
 			Toast.makeText(activity, "No internet connection!", Toast.LENGTH_SHORT).show();
@@ -74,6 +80,33 @@ public class Utils {
 			public void onClick(DialogInterface dialog, int id) {
 				RequestParams requestParams = new RequestParams();
 				requestParams.put("", rating+"");
+				new DummyRequest(activity).authorizedPost(url, app, requestParams);
+			}
+		});
+		AlertDialog alertDialog = adBuilder.create();
+		alertDialog.show();
+	}
+	
+	/**
+	 * This method pop's up an AlertDialog to begin the rating submission.
+	 */
+	public static void addComment(final String url, final Activity activity, final STrackerApp app){
+		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
+		adBuilder.setMessage("Please insert text comment:");
+		final EditText input = new EditText(activity);
+		adBuilder.setView(input);
+		adBuilder.setCancelable(true);
+		adBuilder.setPositiveButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		}); 
+		adBuilder.setNegativeButton("Submit",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				RequestParams requestParams = new RequestParams();
+				requestParams.put("", input.getText().toString());
 				new DummyRequest(activity).authorizedPost(url, app, requestParams);
 			}
 		});

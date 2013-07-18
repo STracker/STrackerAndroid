@@ -14,7 +14,7 @@ public class UserSerializer implements ISerialize<FBUser> {
 			JSONObject jObj = new JSONObject(json);
 			user = new FBUser(
 								jObj.getString("Name"), 
-								jObj.getString("Id"), 
+								jObj.getString("Key"), 
 								jObj.getString("Email"));
 		} catch (JSONException e) {
 			e.printStackTrace();

@@ -63,6 +63,6 @@ public class GenreActivity extends RoboListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		new SearchByGenreRequest(this,_elems.get(position)).execute(_app.getApiURL()+_arrayList.get(position).getUri());
+		new SearchByGenreRequest(this,_elems.get(position)).get(_app.getApiURL()+_arrayList.get(position).getUri());
 	}
 }

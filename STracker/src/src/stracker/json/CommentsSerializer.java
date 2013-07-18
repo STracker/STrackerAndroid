@@ -22,7 +22,8 @@ public class CommentsSerializer implements ISerialize<ArrayList<Comment>> {
 									jObj.getString("Body"),
 									jObj.getString("Uri"),
 									jObj.getJSONObject("User").getString("Name"),
-									jObj.getJSONObject("User").getString("Uri")
+									jObj.getJSONObject("User").getString("Uri"),
+									jObj.getJSONObject("User").getString("Id")
 							));
 			}
 		} catch (JSONException e) {
