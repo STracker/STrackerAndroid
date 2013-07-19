@@ -2,7 +2,6 @@ package src.stracker;
 
 import java.util.ArrayList;
 import com.loopj.android.image.SmartImageView;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.RatingBar;
-import android.widget.Toast;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import roboguice.activity.RoboActivity;
@@ -69,7 +67,6 @@ public class TvShowActivity extends RoboActivity {
 				if(!Utils.checkLogin(_context, _app))
 					return;
 				Utils.initRatingSubmission(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/ratings" , _context, _app, (int) rating);
-				Toast.makeText(_context, "Your rating will be processed", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -106,7 +103,7 @@ public class TvShowActivity extends RoboActivity {
     		startActivity(intent_cast);
     		break;
     	case R.id.form_comments:
-    		new CommentsRequest(this,_tvshow.getId()).get(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/comments");
+    		new CommentsRequest(this,"tvshows/" + _tvshow.getId() + "/comments").get(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/comments");
     		break; 
     	}
     	return true;

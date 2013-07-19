@@ -1,7 +1,6 @@
 package src.stracker.utils;
 
-import com.loopj.android.http.RequestParams;
-
+import java.util.HashMap;
 import src.stracker.FbLoginActivity;
 import src.stracker.STrackerApp;
 import src.stracker.asynchttp.DummyRequest;
@@ -78,9 +77,9 @@ public class Utils {
 		adBuilder.setNegativeButton("Submit",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				RequestParams requestParams = new RequestParams();
-				requestParams.put("", rating+"");
-				new DummyRequest(activity).authorizedPost(url, app, requestParams);
+				HashMap<String, String> params = new HashMap<String, String>();
+				params.put("", rating+"");
+				new DummyRequest(activity).authorizedPost(url, app, params);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();
@@ -88,7 +87,7 @@ public class Utils {
 	}
 	
 	/**
-	 * This method pop's up an AlertDialog to begin the rating submission.
+	 * This method pop's up an AlertDialog to write new comment
 	 */
 	public static void addComment(final String url, final Activity activity, final STrackerApp app){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
@@ -105,9 +104,9 @@ public class Utils {
 		adBuilder.setNegativeButton("Submit",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				RequestParams requestParams = new RequestParams();
-				requestParams.put("", input.getText().toString());
-				new DummyRequest(activity).authorizedPost(url, app, requestParams);
+				HashMap<String, String> params = new HashMap<String, String>();
+				params.put("", input.getText().toString());
+				new DummyRequest(activity).authorizedPost(url, app, params);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();

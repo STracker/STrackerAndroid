@@ -71,7 +71,6 @@ public class CommentActivity extends RoboActivity {
     			break;
     		if(_app.getFbUser().getId().equals(_comment.getUserId())){
     			new DummyRequest(this).authorizedDelete(_app.getApiURL() + _comment.getUri(), _app);
-    			Toast.makeText(_context, "Your comment will be processed", Toast.LENGTH_SHORT).show();
     			finish();
     		} else {
     			Toast.makeText(this, "You don't have permission to delete this comment!", Toast.LENGTH_SHORT).show();

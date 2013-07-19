@@ -1,5 +1,7 @@
 package src.stracker.model;
 
+import java.util.ArrayList;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,13 +14,16 @@ public class Episode implements Parcelable {
 	private String Description;
 	private String PosterUrl;
 	private int SeasonNumber;
+	private ArrayList<Person> Directors;
+	private ArrayList<Person> GuestActors;
 	
 	public Episode(Parcel in){
 		readFromParcel(in);
 	}
 	
 	public Episode(String name, int number, String date, String tvShowId,
-			String description, String posterUrl, int seasonNumber) {
+			String description, String posterUrl, int seasonNumber, ArrayList<Person> directors, 
+			ArrayList<Person> guestActors) {
 		super();
 		Name = name;
 		Number = number;
@@ -27,8 +32,26 @@ public class Episode implements Parcelable {
 		Description = description;
 		PosterUrl = posterUrl;
 		SeasonNumber = seasonNumber;
+		Directors = directors;
+		GuestActors = guestActors;
 	}
 	
+	public ArrayList<Person> getDirectors() {
+		return Directors;
+	}
+
+	public void setDirectors(ArrayList<Person> directors) {
+		Directors = directors;
+	}
+
+	public ArrayList<Person> getGuestActors() {
+		return GuestActors;
+	}
+
+	public void setGuestActors(ArrayList<Person> guestActors) {
+		GuestActors = guestActors;
+	}
+
 	public String getName() {
 		return Name;
 	}
@@ -99,6 +122,8 @@ public class Episode implements Parcelable {
 		dest.writeString(Description);
 		dest.writeString(PosterUrl);
 		dest.writeInt(SeasonNumber);
+		dest.writeTypedList(Directors);
+		dest.writeTypedList(GuestActors);
 	}
 	
 	public void readFromParcel(Parcel in){
@@ -109,6 +134,11 @@ public class Episode implements Parcelable {
 		setDescription(in.readString());
 		setPosterUrl(in.readString());
 		setSeasonNumber(in.readInt());
+		//Initialize list's before passing the elements
+		Directors = new ArrayList<Person>();
+		in.readTypedList(Directors, Person.CREATOR);
+		GuestActors = new ArrayList<Person>();
+		in.readTypedList(GuestActors, Person.CREATOR);
 	}
 	
 	public static final Parcelable.Creator<Episode> CREATOR =

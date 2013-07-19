@@ -19,7 +19,7 @@ public class CommentsActivity extends RoboListActivity {
 	private CommentsAdapter _adapter;
 	private ArrayList<Comment> _comments;
 	private STrackerApp _app;
-	private String _tvshowId;
+	private String _uri;
 	
 	/**
 	 * (non-Javadoc)
@@ -31,7 +31,7 @@ public class CommentsActivity extends RoboListActivity {
 		_app = (STrackerApp) getApplication();
 		setTitle("Comments");
 		_comments = getIntent().getParcelableArrayListExtra("list");
-		_tvshowId = getIntent().getStringExtra("id");
+		_uri = getIntent().getStringExtra("uri");
 		_adapter = new CommentsAdapter(this, _comments);
 		setListAdapter(_adapter);
 	}
@@ -71,7 +71,7 @@ public class CommentsActivity extends RoboListActivity {
     	case R.id.action_add_comment:
     		if(!Utils.checkLogin(this, _app))
     			break;
-    		Utils.addComment(_app.getApiURL() + "tvshows/"+ _tvshowId +"/comments", this, _app);
+    		Utils.addComment(_app.getApiURL() + _uri, this, _app);
     		break; 
     	}
     	return true;

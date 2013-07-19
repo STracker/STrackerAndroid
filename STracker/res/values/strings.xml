@@ -70,4 +70,8 @@
 	<string name="comment_btn">Info</string>
 	<string name="act_comment_user">comment</string>
 	<string name="title_comment">Comment Text</string>
+	
+	<!-- Menu Episode -->
+	<string name="subitem_directors">Directors</string>
+	<string name="subitem_guest_actors">Guest Actors</string>
 </resources>

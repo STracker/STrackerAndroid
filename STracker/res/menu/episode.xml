@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_more_info"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_more"
+        android:title="@string/action_more_info" >
+        <menu>
+            <item android:id="@+id/form_directors"
+                  android:title="@string/subitem_directors" />
+            <item android:id="@+id/form_guest_actors"
+                  android:title="@string/subitem_guest_actors" />
+            <item android:id="@+id/form_episode_comments"
+                  android:title="@string/subitem_comments" />
+        </menu>
+	</item>
+</menu>

@@ -1,23 +1,17 @@
 package src.stracker.model;
 
-public class Person {
-	protected int Id;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Person implements Parcelable{
 	protected String Name;
-	protected Artwork Photo;
 
-	public Person(int id, String name, Artwork photo) {
-		super();
-		Id = id;
+	public Person(String name) {
 		Name = name;
-		Photo = photo;
 	}
-
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
+	
+	public Person(Parcel in){
+		readFromParcel(in);
 	}
 
 	public String getName() {
@@ -28,11 +22,28 @@ public class Person {
 		Name = name;
 	}
 
-	public Artwork getPhoto() {
-		return Photo;
+	@Override
+	public int describeContents() {
+		return 0;
 	}
 
-	public void setPhoto(Artwork photo) {
-		Photo = photo;
+	@Override
+	public void writeToParcel(Parcel in, int flag) {
+		in.writeString(Name);
 	}
+	
+	public void readFromParcel(Parcel in){
+		setName(in.readString());
+	}
+	
+	public static final Parcelable.Creator<Person> CREATOR =
+		    new Parcelable.Creator<Person>() {
+	            public Person createFromParcel(Parcel in) {
+	                return new Person(in);
+	            }
+	 
+	            public Person[] newArray(int size) {
+	                return new Person[size];
+	            }
+	        };
 }

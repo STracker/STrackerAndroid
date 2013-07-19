@@ -10,6 +10,8 @@ import src.stracker.model.Episode;
  */
 public class EpisodeSerializer implements ISerialize<Episode> {
 
+	private PersonSerializer _serializer = new PersonSerializer();
+	
 	/**
 	 * (non-Javadoc)
 	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
@@ -26,7 +28,9 @@ public class EpisodeSerializer implements ISerialize<Episode> {
 					jObj.getString("TvShowId"),
 					jObj.getString("Description"),
 					jObj.getString("Poster"),
-					jObj.getInt("SeasonNumber")
+					jObj.getInt("SeasonNumber"),
+					_serializer.deserialize(jObj.getJSONArray("Directors").toString()),
+					_serializer.deserialize(jObj.getJSONArray("GuestActors").toString())
 					);
 		} catch (JSONException e) {
 			e.printStackTrace();

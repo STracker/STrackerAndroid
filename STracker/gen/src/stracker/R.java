@@ -379,14 +379,14 @@ containing a value of this type.
         public static final int act_comment_profile=0x7f040003;
         public static final int act_comment_user=0x7f040004;
         public static final int action_add_comment=0x7f04003f;
-        public static final int action_calendar=0x7f040040;
+        public static final int action_calendar=0x7f040044;
         public static final int action_delete_comment=0x7f04003e;
-        public static final int action_friends=0x7f040047;
-        public static final int action_messages=0x7f040048;
-        public static final int action_more_info=0x7f040049;
-        public static final int action_profile=0x7f040045;
-        public static final int action_search=0x7f040041;
-        public static final int action_series=0x7f040046;
+        public static final int action_friends=0x7f04004b;
+        public static final int action_messages=0x7f04004c;
+        public static final int action_more_info=0x7f040040;
+        public static final int action_profile=0x7f040049;
+        public static final int action_search=0x7f040045;
+        public static final int action_series=0x7f04004a;
         public static final int actor_name=0x7f04001d;
         public static final int actor_photo=0x7f04001c;
         public static final int banner_id=0x7f040007;
@@ -417,12 +417,15 @@ containing a value of this type.
         public static final int episode_date=0x7f040009;
         public static final int episode_desc=0x7f04000d;
         public static final int episode_info=0x7f040008;
-        public static final int form_cast=0x7f04004b;
-        public static final int form_comments=0x7f04004c;
-        public static final int form_friend=0x7f040044;
-        public static final int form_genre=0x7f040043;
-        public static final int form_name=0x7f040042;
-        public static final int form_seasons=0x7f04004a;
+        public static final int form_cast=0x7f04004e;
+        public static final int form_comments=0x7f04004f;
+        public static final int form_directors=0x7f040041;
+        public static final int form_episode_comments=0x7f040043;
+        public static final int form_friend=0x7f040048;
+        public static final int form_genre=0x7f040047;
+        public static final int form_guest_actors=0x7f040042;
+        public static final int form_name=0x7f040046;
+        public static final int form_seasons=0x7f04004d;
         public static final int header_text=0x7f040039;
         public static final int large=0x7f040002;
         public static final int list_episode=0x7f04003a;
@@ -487,8 +490,9 @@ containing a value of this type.
     public static final class menu {
         public static final int comment=0x7f0a0000;
         public static final int comments=0x7f0a0001;
-        public static final int main=0x7f0a0002;
-        public static final int tvshow=0x7f0a0003;
+        public static final int episode=0x7f0a0002;
+        public static final int main=0x7f0a0003;
+        public static final int tvshow=0x7f0a0004;
     }
     public static final class string {
         public static final int act_comment_user=0x7f05004d;
@@ -598,6 +602,10 @@ containing a value of this type.
         public static final int start_btn=0x7f05001c;
         public static final int subitem_cast=0x7f050036;
         public static final int subitem_comments=0x7f050035;
+        /**  Menu Episode 
+         */
+        public static final int subitem_directors=0x7f05004f;
+        public static final int subitem_guest_actors=0x7f050050;
         public static final int subitem_search_by_genre=0x7f050031;
         public static final int subitem_search_by_name=0x7f050030;
         public static final int subitem_search_friend=0x7f050032;

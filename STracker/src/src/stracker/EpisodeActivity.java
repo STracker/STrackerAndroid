@@ -1,15 +1,23 @@
 package src.stracker;
 
 import com.loopj.android.image.SmartImageView;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+import src.stracker.asynchttp.CommentsRequest;
 import src.stracker.asynchttp.EpisodeRatingRequest;
 import src.stracker.model.Episode;
 import src.stracker.model.Ratings;
+import src.stracker.utils.Utils;
 
 /**
  * This Activity represents the information about an episode of a tv show
@@ -26,6 +34,7 @@ public class EpisodeActivity extends RoboActivity {
 	@InjectView(R.id.rating_episode_total) TextView _ratingTotal;
 	private Episode _episode;
 	private STrackerApp _app; 
+	private Activity _context;
 	
 	/**
 	 * (non-Javadoc)
@@ -36,19 +45,73 @@ public class EpisodeActivity extends RoboActivity {
 		super.onCreate(savedInstanceState); 
 		_app = (STrackerApp) getApplication();
 		_episode = getIntent().getParcelableExtra("episode");
+		_context = this;
 		setTitle(_episode.getName());
-		new EpisodeRatingRequest(this).get(_app.getApiURL() + "tvshows/" + _episode.getTvShowId() + 
-																  "/seasons/" + _episode.getSeasonNumber() + 
-																  "/episodes/" + _episode.getNumber() + 
-																  "/ratings");
+		new EpisodeRatingRequest(this).get(_app.getApiURL() + "tvshows/"   + _episode.getTvShowId() + 
+															  "/seasons/"  + _episode.getSeasonNumber() + 
+															  "/episodes/" + _episode.getNumber() + 
+															  "/ratings");
 		_episodeInfo.setText("Season: " + _episode.getSeasonNumber() + " Episode: " + _episode.getNumber());
 		_description.setText(_episode.getDescription());
 		_banner.setImageUrl(_episode.getPosterUrl());
 		_date.setText("Release Date: " + _episode.getDate());
+		
+		_rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {	
+			@Override
+			public void onRatingChanged(RatingBar ratingBar, float rating,
+					boolean fromUser) {
+				if(!Utils.checkLogin(_context, _app))
+					return;
+				Utils.initRatingSubmission(_app.getApiURL() + "tvshows/"  + _episode.getTvShowId() + 
+															  "/seasons/"  + _episode.getSeasonNumber() + 
+															  "/episodes/" + _episode.getNumber() + 
+															  "/ratings" , _context, _app, (int) rating);
+			}
+		});
 	}
 	
 	public void onRatingSuccess(Ratings rating){
 		_ratingAvg.setText("Average: " + rating.getRating());
 		_ratingTotal.setText("Total: " + rating.getTotal());
 	}
+	
+	/**
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.episode, menu);   
+        return true;
+    }
+	/**
+	 * (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 * This method defines the callback's when a button of the menu is pressed
+	 */
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+    	switch(item.getItemId()){
+    	case R.id.form_directors:
+    		Intent intent_directors = new Intent(this,PersonsActivity.class);
+    		intent_directors.putExtra("list", _episode.getDirectors());
+			startActivity(intent_directors);
+    		break;
+    	case R.id.form_guest_actors:
+    		Intent intent_guest_actors = new Intent(this,PersonsActivity.class);
+    		intent_guest_actors.putExtra("list", _episode.getGuestActors());
+    		startActivity(intent_guest_actors);
+    		break;
+    	case R.id.form_episode_comments:
+    		String uri = "tvshows/"  + _episode.getTvShowId() + 
+					  	 "/seasons/"  + _episode.getSeasonNumber() + 
+					  	 "/episodes/" + _episode.getNumber() + 
+					  	 "/comments";
+    		new CommentsRequest(this,uri).get(_app.getApiURL() + uri);
+    		break; 
+    	}
+    	return true;
+    }
 }

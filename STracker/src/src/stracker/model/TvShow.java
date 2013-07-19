@@ -48,28 +48,6 @@ public class TvShow implements Parcelable{
 		Actors = actors;
 	}
 
-	/*
-	private List<Artwork> Artworks;
-	private List<Actor> Actors;
-	private List<Genre> Genres;
-	private Person Creator;
-	
-	public TvShow(String id, String name, String description,
-			List<Genre> genres, int rating, List<Artwork> artworks,
-			List<Actor> actors, String airday, int runtime, Person creator) {
-		super();
-		Id = id;
-		Name = name;
-		Description = description;
-		Genres = genres;
-		Rating = rating;
-		Artworks = artworks;
-		Actors = actors;
-		Airday = airday;
-		Runtime = runtime;
-		Creator = creator;
-	}
-    */
 	public String getId() {
 		return Id;
 	}
@@ -133,40 +111,6 @@ public class TvShow implements Parcelable{
 	public void setGenres(ArrayList<GenreSynopse> genres) {
 		Genres = genres;
 	}
-	
-	/*
-	public List<Artwork> getArtworks() {
-		return Artworks;
-	}
-
-	public void setArtworks(List<Artwork> artworks) {
-		Artworks = artworks;
-	}
-
-	public List<Actor> getActors() {
-		return Actors;
-	}
-
-	public void setActors(List<Actor> actors) {
-		Actors = actors;
-	}
-	
-	public List<Genre> getGenres() {
-		return Genres;
-	}
-
-	public void setGenres(List<Genre> genres) {
-		Genres = genres;
-	}
-
-	public Person getCreator() {
-		return Creator;
-	}
-
-	public void setCreator(Person creator) {
-		Creator = creator;
-	}
-	*/
 
 	public ArrayList<SeasonSynopse> getSeasons() {
 		return Seasons;
