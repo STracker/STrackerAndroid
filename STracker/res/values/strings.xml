@@ -36,6 +36,7 @@
 	<string name="subitem_seasons">Seasons</string>
 	<string name="subitem_comments">Comments</string>
 	<string name="subitem_cast">Cast</string>
+	<string name="subitem_subscribe">Subscribe</string>
 	
 	<!-- Episode Information -->
 	<string name="banner_desc">Banner</string>
@@ -45,6 +46,7 @@
 	<string name="episode_date">Date</string>
 	<string name="rating_episode_avg">Average</string>
 	<string name="rating_episode_total">Total</string>
+	<string name="episodes_watched">Episodes Watched: </string>
 	
 	<!-- Actor Information -->
 	<string name="photo_desc">Photo</string>

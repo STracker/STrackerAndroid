@@ -1,6 +1,8 @@
 package src.stracker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.loopj.android.image.SmartImageView;
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +17,7 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import src.stracker.asynchttp.CommentsRequest;
+import src.stracker.asynchttp.DummyRequest;
 import src.stracker.asynchttp.TvShowRatingRequest;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.Ratings;
@@ -36,7 +39,7 @@ public class TvShowActivity extends RoboActivity {
 	@InjectView(R.id.ratingBarTvShow) RatingBar _rating;
 	@InjectView(R.id.rating_tvshow_avg) TextView _ratingAvg;
 	@InjectView(R.id.rating_tvshow_total) TextView _ratingTotal;
-	
+	 
 	private STrackerApp _app;
 	private TvShow _tvshow;
 	private Activity _context = this;
@@ -104,6 +107,13 @@ public class TvShowActivity extends RoboActivity {
     		break;
     	case R.id.form_comments:
     		new CommentsRequest(this,"tvshows/" + _tvshow.getId() + "/comments").get(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/comments");
+    		break; 
+    	case R.id.form_subscribe_tvshow:
+    		if(!Utils.checkLogin(_context, _app))
+				break;
+    		HashMap<String, String> params = new HashMap<String, String>();
+    		params.put("", _tvshow.getId());
+    		new DummyRequest(this).authorizedPost(_app.getApiURL() + "usersubscriptions", _app, params);
     		break; 
     	}
     	return true;

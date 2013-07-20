@@ -11,6 +11,7 @@ import src.stracker.model.FBUser;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.Ratings;
 import src.stracker.model.SeasonSynopse;
+import src.stracker.model.Subscription;
 import src.stracker.model.TvShow;
 import src.stracker.model.TvShowSynopse;
 
@@ -34,6 +35,7 @@ public class JSONLocator {
 		_dictionary.put(Ratings.class,        new RatingsSerializer());
 		_dictionary.put(Comment.class,        new CommentsSerializer());
 		_dictionary.put(FBUser.class, 		  new UserSerializer());
+		_dictionary.put(Subscription.class,   new SubscriptionSerializer());
 	}
 	
 	/**

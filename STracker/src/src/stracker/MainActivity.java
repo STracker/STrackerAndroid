@@ -3,6 +3,7 @@ package src.stracker;
 import java.util.ArrayList;
 import src.stracker.adapters.TvShowSynopseAdapter;
 import src.stracker.asynchttp.GenresRequest;
+import src.stracker.asynchttp.SubscriptionsRequest;
 import src.stracker.asynchttp.TopRatedRequest;
 import src.stracker.asynchttp.TvShowRequest;
 import src.stracker.asynchttp.UserRequest;
@@ -39,7 +40,6 @@ public class MainActivity extends ListActivity {
 			//Request top rated shows
 			new TopRatedRequest(this).get(_app.getApiURL()+"tvshows/toprated");
 		}
-		//_app.logout();
 	} 
 	
 	/**
@@ -79,6 +79,7 @@ public class MainActivity extends ListActivity {
 					break;
 				case R.id.action_series:
 					Utils.checkLogin(this, _app);
+					new SubscriptionsRequest(this).authorizedGet(_app.getApiURL() + "usersubscriptions", _app);
 					break;
 				case R.id.action_messages:
 					Utils.checkLogin(this, _app);

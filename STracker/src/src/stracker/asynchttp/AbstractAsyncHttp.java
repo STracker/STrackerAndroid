@@ -7,11 +7,9 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import src.stracker.STrackerApp;
-import HawkClient.HawkClient;
-import HawkClient.HawkCredentials;
+import HawkClient.*;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -100,10 +98,8 @@ public abstract class AbstractAsyncHttp {
 		}
 		Long time = System.currentTimeMillis();
 		Long timestamp = time / 1000L;
-		String nonce = "Lwak";//HawkClient.generateNonce();
-		//HawkCredentials credentials = new HawkCredentials(app.getFbUser().getId(), app.getHawkKey());
-		HawkCredentials credentials = new HawkCredentials("100001194244053", app.getHawkKey());
-		
+		String nonce = "NONO";//HawkClient.generateNonce();
+		HawkCredentials credentials = new HawkCredentials(app.getFbUser().getId(), app.getHawkKey());
 		String header = "";
 		try {
 			if(method.equals("POST")){
@@ -131,7 +127,6 @@ public abstract class AbstractAsyncHttp {
 			}
 		}
 		payload.setLength(payload.length() - 1);
-		Log.d("Payload",payload.toString());
 		return new PostParams(requestParams, payload.toString()); 
 	}
 	

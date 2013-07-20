@@ -13,6 +13,8 @@
                   android:title="@string/subitem_cast" />
             <item android:id="@+id/form_comments"
                   android:title="@string/subitem_comments" />
+            <item android:id="@+id/form_subscribe_tvshow"
+                  android:title="@string/subitem_subscribe" />
         </menu>
     </item>
 </menu>

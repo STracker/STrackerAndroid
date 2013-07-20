@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:id="@+id/LinearLayout03"
+    android:layout_width="fill_parent" 
+    android:paddingLeft="10sp" 
+    android:paddingRight="10sp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:paddingTop="2sp" >
+        <TextView 
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent" 
+            android:id="@+id/subs_tvshow_name"
+            android:text="@string/serie_name" 
+            android:typeface="sans" 
+            android:textSize="16sp" 
+            android:textColor="@color/Snow"
+            android:textStyle="bold" />
+        <LinearLayout 
+            android:id="@+id/LinearLayout04"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+                <TextView 
+                    android:id="@+id/subs_episodes_watched" 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:textColor="@color/Gray"
+                    android:textStyle="bold"
+                    android:text="@string/episodes_watched" 
+                    android:textSize="13sp" />
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" 
+                    android:textColor="@color/LightGrey"
+                    android:text="@string/episode_desc"
+                    android:id="@+id/subs_watched" 
+                    android:textSize="13sp" />
+        </LinearLayout> 
+</LinearLayout>
