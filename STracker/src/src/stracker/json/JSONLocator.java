@@ -7,13 +7,14 @@ import src.stracker.model.Comment;
 import src.stracker.model.Actor;
 import src.stracker.model.Episode;
 import src.stracker.model.EpisodeSynopse;
-import src.stracker.model.FBUser;
+import src.stracker.model.User;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.Ratings;
 import src.stracker.model.SeasonSynopse;
 import src.stracker.model.Subscription;
 import src.stracker.model.TvShow;
 import src.stracker.model.TvShowSynopse;
+import src.stracker.model.UserSynopse;
 
 /**
  * This class represents a singleton object that have all the Json serializers.
@@ -34,8 +35,9 @@ public class JSONLocator {
 		_dictionary.put(TvShow.class,         new TvShowSerializer());
 		_dictionary.put(Ratings.class,        new RatingsSerializer());
 		_dictionary.put(Comment.class,        new CommentsSerializer());
-		_dictionary.put(FBUser.class, 		  new UserSerializer());
+		_dictionary.put(User.class, 		  new UserSerializer());
 		_dictionary.put(Subscription.class,   new SubscriptionSerializer());
+		_dictionary.put(UserSynopse.class,    new FriendsSerializer());
 	}
 	
 	/**

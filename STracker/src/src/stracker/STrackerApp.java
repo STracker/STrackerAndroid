@@ -1,6 +1,6 @@
 package src.stracker;
 
-import src.stracker.model.FBUser;
+import src.stracker.model.User;
 import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -14,7 +14,7 @@ public class STrackerApp extends Application {
 	private final String _ApiURL = "http://strackerserverdev.apphb.com/api/";
 	private final String _URL = "http://strackerserverdev.apphb.com/";
 	private final String _HawkKey = "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn";
-	private FBUser _fbUser;
+	private User _fbUser;
 	
 	public String getApiURL() {
 		return _ApiURL;
@@ -24,12 +24,12 @@ public class STrackerApp extends Application {
 		return _URL;
 	}
 	
-	public void setFbUser(FBUser user){
+	public void setFbUser(User user){
 		if(_fbUser == null)
 			_fbUser = user;
 	}
 	
-	public FBUser getFbUser(){
+	public User getFbUser(){
 		return _fbUser;
 	}
 	

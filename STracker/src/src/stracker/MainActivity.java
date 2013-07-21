@@ -2,11 +2,12 @@ package src.stracker;
 
 import java.util.ArrayList;
 import src.stracker.adapters.TvShowSynopseAdapter;
+import src.stracker.asynchttp.CalendarRequest;
+import src.stracker.asynchttp.FriendsRequest;
 import src.stracker.asynchttp.GenresRequest;
 import src.stracker.asynchttp.SubscriptionsRequest;
 import src.stracker.asynchttp.TopRatedRequest;
 import src.stracker.asynchttp.TvShowRequest;
-import src.stracker.asynchttp.UserRequest;
 import src.stracker.model.TvShowSynopse;
 import src.stracker.utils.Utils;
 import android.app.ListActivity;
@@ -86,10 +87,11 @@ public class MainActivity extends ListActivity {
 					break;
 				case R.id.action_friends:
 					Utils.checkLogin(this, _app);
-					new UserRequest(this).authorizedGet(_app.getApiURL()+"user",_app);
+					new FriendsRequest(this).authorizedGet(_app.getApiURL()+"userfriends", _app);
 					break;
 				case R.id.form_friend:
 					Utils.checkLogin(this, _app);
+					Utils.initSearchFriend(this, _app);
 					break;
 				case R.id.form_genre:
 					new GenresRequest(this).get(_app.getApiURL()+"genres");
@@ -98,7 +100,8 @@ public class MainActivity extends ListActivity {
 					Utils.initSearchByName(this, _app);
 					break;
 				case R.id.action_calendar:
-					startActivity(new Intent(this,CalendarActivity.class));
+					Utils.checkLogin(this, _app);
+					new CalendarRequest(this).authorizedGet(_app.getApiURL()+"newepisodes", _app);
 					break;
 			}
 		return true;

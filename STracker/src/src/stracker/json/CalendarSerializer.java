@@ -10,7 +10,7 @@ import src.stracker.model.EpisodeSynopse;
  * @author diogomatos
  * This class represent the serializer to an array of episode synopses
  */
-public class EpisodeSynopseSerializer implements ISerialize<ArrayList<EpisodeSynopse>> {
+public class CalendarSerializer implements ISerialize<ArrayList<EpisodeSynopse>> {
 
 	/**
 	 * (non-Javadoc)
@@ -20,8 +20,7 @@ public class EpisodeSynopseSerializer implements ISerialize<ArrayList<EpisodeSyn
 	public ArrayList<EpisodeSynopse> deserialize(String json) {
 		ArrayList<EpisodeSynopse> episodes = new ArrayList<EpisodeSynopse>();
 		try {
-			JSONObject jObject = new JSONObject(json);
-			JSONArray jsonArray = jObject.getJSONArray("EpisodeSynopses");
+			JSONArray jsonArray = new JSONArray(json);
 			for (int i = 0; i < jsonArray.length(); i++) {
 		        JSONObject jObj = jsonArray.getJSONObject(i);
 		        episodes.add(new EpisodeSynopse(

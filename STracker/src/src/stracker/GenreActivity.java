@@ -18,7 +18,7 @@ import src.stracker.model.GenreSynopse;
 /**
  * This Activity represents a list of genres available in STracker Server
  */
-@ContentView(R.layout.activity_genre)
+@ContentView(R.layout.activity_list)
 public class GenreActivity extends RoboListActivity {
 	
 	private STrackerApp _app;

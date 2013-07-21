@@ -10,6 +10,7 @@ import src.stracker.STrackerApp;
 import HawkClient.*;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -54,6 +55,7 @@ public abstract class AbstractAsyncHttp {
 		//Waiting message
 		_dialog.setMessage("loading...");
 		_dialog.show();
+		Log.d("header", getAuthorizationHeader("GET",url, app, null));
 		_client.addHeader("Authorization", getAuthorizationHeader("GET",url, app, null));
 		_client.get(url, _handler);
 	}

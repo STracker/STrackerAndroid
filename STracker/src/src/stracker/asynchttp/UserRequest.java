@@ -3,7 +3,7 @@ package src.stracker.asynchttp;
 import src.stracker.ProfileActivity;
 import src.stracker.json.JSONLocator;
 import src.stracker.json.UserSerializer;
-import src.stracker.model.FBUser;
+import src.stracker.model.User;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -14,12 +14,12 @@ public class UserRequest extends AbstractAsyncHttp {
 	
 	public UserRequest(Context context) {
 		super(context);
-		_serializer = (UserSerializer) JSONLocator.getInstance().getSerializer(FBUser.class);
+		_serializer = (UserSerializer) JSONLocator.getInstance().getSerializer(User.class);
 	}
 
 	@Override
 	protected void onSuccessHook(String response) {
-		FBUser user = _serializer.deserialize(response);
+		User user = _serializer.deserialize(response);
 		Intent intent = new Intent(_context,ProfileActivity.class);
 		intent.putExtra("user", user);
 		_context.startActivity(intent);

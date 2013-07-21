@@ -13,7 +13,7 @@ import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 import src.stracker.model.Person;
 
-@ContentView(R.layout.activity_result)
+@ContentView(R.layout.activity_list)
 public class PersonsActivity extends RoboListActivity {
 
 	private ArrayAdapter<String> _adapter;

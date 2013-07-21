@@ -3,21 +3,21 @@ package src.stracker.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class FBUser implements Parcelable{
+public class User implements Parcelable{
 	
 	private String Name;
 	private String Id;
 	private String PhotoUrl;
 	private String Email;
 	
-	public FBUser(String name, String id, String email){
+	public User(String name, String id, String email){
 		Name = name;
 		Id = id;
 		Email = email;
 		PhotoUrl = "http://graph.facebook.com/"+id+"/picture?type=large";
 	}
 
-	public FBUser(Parcel in){
+	public User(Parcel in){
 		readFromParcel(in);
 	}
 	
@@ -73,14 +73,14 @@ public class FBUser implements Parcelable{
 		setPhotoUrl(in.readString());
 	}
 	
-	public static final Parcelable.Creator<FBUser> CREATOR =
-		    new Parcelable.Creator<FBUser>() {
-	            public FBUser createFromParcel(Parcel in) {
-	                return new FBUser(in);
+	public static final Parcelable.Creator<User> CREATOR =
+		    new Parcelable.Creator<User>() {
+	            public User createFromParcel(Parcel in) {
+	                return new User(in);
 	            }
 	 
-	            public FBUser[] newArray(int size) {
-	                return new FBUser[size];
+	            public User[] newArray(int size) {
+	                return new User[size];
 	            }
 	        };
 }

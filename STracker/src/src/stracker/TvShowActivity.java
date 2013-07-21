@@ -94,7 +94,7 @@ public class TvShowActivity extends RoboActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
     	switch(item.getItemId()){
-    	case R.id.form_seasons:
+    	case R.id.form_seasons: 
     		Intent intent_seasons = new Intent(this,ResultActivity.class);
     		intent_seasons.putExtra("type", "SEASONSYNOPSE");
     		intent_seasons.putExtra("list", _tvshow.getSeasons());

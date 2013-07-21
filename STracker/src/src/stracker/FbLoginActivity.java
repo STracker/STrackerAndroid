@@ -17,7 +17,7 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
 import src.stracker.asynchttp.DummyRequest;
-import src.stracker.model.FBUser;
+import src.stracker.model.User;
 
 public class FbLoginActivity extends Activity {
 	
@@ -56,11 +56,10 @@ public class FbLoginActivity extends Activity {
 				@Override
 				public void onCompleted(GraphUser user, Response response) {
 					if(user != null){
-						_app.setFbUser(new FBUser(user.getName(),user.getId(), user.asMap().get("email").toString()));
+						_app.setFbUser(new User(user.getName(),user.getId(), user.asMap().get("email").toString()));
 					}
 					_dialog.dismiss();
 					HashMap<String, String> params = new HashMap<String, String>();
-					params.put("Id", _app.getFbUser().getId());
 					params.put("Name", _app.getFbUser().getName());
 					params.put("Email", _app.getFbUser().getEmail());
 					params.put("Photo", _app.getFbUser().getPhotoUrl());

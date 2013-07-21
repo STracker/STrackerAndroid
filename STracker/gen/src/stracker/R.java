@@ -380,15 +380,16 @@ containing a value of this type.
         public static final int LinearLayout04=0x7f04003e;
         public static final int act_comment_profile=0x7f040003;
         public static final int act_comment_user=0x7f040004;
-        public static final int action_add_comment=0x7f040044;
-        public static final int action_calendar=0x7f040049;
-        public static final int action_delete_comment=0x7f040043;
-        public static final int action_friends=0x7f040050;
-        public static final int action_messages=0x7f040051;
-        public static final int action_more_info=0x7f040045;
-        public static final int action_profile=0x7f04004e;
-        public static final int action_search=0x7f04004a;
-        public static final int action_series=0x7f04004f;
+        public static final int action_add_comment=0x7f040046;
+        public static final int action_add_user=0x7f040054;
+        public static final int action_calendar=0x7f04004b;
+        public static final int action_delete_comment=0x7f040045;
+        public static final int action_friends=0x7f040052;
+        public static final int action_messages=0x7f040053;
+        public static final int action_more_info=0x7f040047;
+        public static final int action_profile=0x7f040050;
+        public static final int action_search=0x7f04004c;
+        public static final int action_series=0x7f040051;
         public static final int actor_name=0x7f04001d;
         public static final int actor_photo=0x7f04001c;
         public static final int banner_id=0x7f040007;
@@ -419,16 +420,16 @@ containing a value of this type.
         public static final int episode_date=0x7f040009;
         public static final int episode_desc=0x7f04000d;
         public static final int episode_info=0x7f040008;
-        public static final int form_cast=0x7f040053;
-        public static final int form_comments=0x7f040054;
-        public static final int form_directors=0x7f040046;
-        public static final int form_episode_comments=0x7f040048;
-        public static final int form_friend=0x7f04004d;
-        public static final int form_genre=0x7f04004c;
-        public static final int form_guest_actors=0x7f040047;
-        public static final int form_name=0x7f04004b;
-        public static final int form_seasons=0x7f040052;
-        public static final int form_subscribe_tvshow=0x7f040055;
+        public static final int form_cast=0x7f040056;
+        public static final int form_comments=0x7f040057;
+        public static final int form_directors=0x7f040048;
+        public static final int form_episode_comments=0x7f04004a;
+        public static final int form_friend=0x7f04004f;
+        public static final int form_genre=0x7f04004e;
+        public static final int form_guest_actors=0x7f040049;
+        public static final int form_name=0x7f04004d;
+        public static final int form_seasons=0x7f040055;
+        public static final int form_subscribe_tvshow=0x7f040058;
         public static final int header_text=0x7f040039;
         public static final int large=0x7f040002;
         public static final int list_episode=0x7f04003a;
@@ -460,47 +461,46 @@ containing a value of this type.
         public static final int title_description=0x7f04001b;
         public static final int tvshow_name_row=0x7f040042;
         public static final int tvshow_photo_row=0x7f040041;
+        public static final int user_name=0x7f040044;
+        public static final int user_photo=0x7f040043;
     }
     public static final class layout {
-        public static final int activity_actors=0x7f030000;
-        public static final int activity_calendar=0x7f030001;
-        public static final int activity_comment=0x7f030002;
-        public static final int activity_comments=0x7f030003;
-        public static final int activity_episode=0x7f030004;
-        public static final int activity_genre=0x7f030005;
-        public static final int activity_list=0x7f030006;
-        public static final int activity_login=0x7f030007;
-        public static final int activity_main=0x7f030008;
-        public static final int activity_profile=0x7f030009;
-        public static final int activity_result=0x7f03000a;
-        public static final int activity_tvshow=0x7f03000b;
-        public static final int actor_row=0x7f03000c;
-        public static final int backrepeat=0x7f03000d;
-        public static final int com_facebook_friendpickerfragment=0x7f03000e;
-        public static final int com_facebook_login_activity_layout=0x7f03000f;
-        public static final int com_facebook_picker_activity_circle_row=0x7f030010;
-        public static final int com_facebook_picker_checkbox=0x7f030011;
-        public static final int com_facebook_picker_image=0x7f030012;
-        public static final int com_facebook_picker_list_row=0x7f030013;
-        public static final int com_facebook_picker_list_section_header=0x7f030014;
-        public static final int com_facebook_picker_search_box=0x7f030015;
-        public static final int com_facebook_picker_title_bar=0x7f030016;
-        public static final int com_facebook_picker_title_bar_stub=0x7f030017;
-        public static final int com_facebook_placepickerfragment=0x7f030018;
-        public static final int com_facebook_placepickerfragment_list_row=0x7f030019;
-        public static final int com_facebook_usersettingsfragment=0x7f03001a;
-        public static final int comment_row=0x7f03001b;
-        public static final int header_entry=0x7f03001c;
-        public static final int item_entry=0x7f03001d;
-        public static final int subscription_row=0x7f03001e;
-        public static final int tvshowsynopse_row=0x7f03001f;
+        public static final int activity_comment=0x7f030000;
+        public static final int activity_episode=0x7f030001;
+        public static final int activity_list=0x7f030002;
+        public static final int activity_login=0x7f030003;
+        public static final int activity_main=0x7f030004;
+        public static final int activity_profile=0x7f030005;
+        public static final int activity_tvshow=0x7f030006;
+        public static final int actor_row=0x7f030007;
+        public static final int backrepeat=0x7f030008;
+        public static final int com_facebook_friendpickerfragment=0x7f030009;
+        public static final int com_facebook_login_activity_layout=0x7f03000a;
+        public static final int com_facebook_picker_activity_circle_row=0x7f03000b;
+        public static final int com_facebook_picker_checkbox=0x7f03000c;
+        public static final int com_facebook_picker_image=0x7f03000d;
+        public static final int com_facebook_picker_list_row=0x7f03000e;
+        public static final int com_facebook_picker_list_section_header=0x7f03000f;
+        public static final int com_facebook_picker_search_box=0x7f030010;
+        public static final int com_facebook_picker_title_bar=0x7f030011;
+        public static final int com_facebook_picker_title_bar_stub=0x7f030012;
+        public static final int com_facebook_placepickerfragment=0x7f030013;
+        public static final int com_facebook_placepickerfragment_list_row=0x7f030014;
+        public static final int com_facebook_usersettingsfragment=0x7f030015;
+        public static final int comment_row=0x7f030016;
+        public static final int header_entry=0x7f030017;
+        public static final int item_entry=0x7f030018;
+        public static final int subscription_row=0x7f030019;
+        public static final int tvshowsynopse_row=0x7f03001a;
+        public static final int user_row=0x7f03001b;
     }
     public static final class menu {
         public static final int comment=0x7f0a0000;
         public static final int comments=0x7f0a0001;
         public static final int episode=0x7f0a0002;
         public static final int main=0x7f0a0003;
-        public static final int tvshow=0x7f0a0004;
+        public static final int profile=0x7f0a0004;
+        public static final int tvshow=0x7f0a0005;
     }
     public static final class string {
         public static final int act_comment_user=0x7f05004f;
@@ -622,6 +622,18 @@ containing a value of this type.
         public static final int subitem_subscribe=0x7f050037;
         public static final int title_comment=0x7f050050;
         public static final int toprated_header=0x7f050047;
+        public static final int uri_episode_comments=0x7f050059;
+        public static final int uri_episode_rating=0x7f05005a;
+        public static final int uri_genres=0x7f050055;
+        /**  Application URI's 
+         */
+        public static final int uri_host_api=0x7f050053;
+        public static final int uri_tvshow_comments=0x7f05005b;
+        public static final int uri_tvshow_rating=0x7f05005c;
+        public static final int uri_tvshow_toprated=0x7f050058;
+        public static final int uri_user_friends=0x7f050056;
+        public static final int uri_user_newepisodes=0x7f050057;
+        public static final int uri_user_subscriptions=0x7f050054;
     }
     public static final class style {
         /** 

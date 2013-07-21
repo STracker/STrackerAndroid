@@ -4,6 +4,7 @@ import java.util.HashMap;
 import src.stracker.FbLoginActivity;
 import src.stracker.STrackerApp;
 import src.stracker.asynchttp.DummyRequest;
+import src.stracker.asynchttp.FriendsRequest;
 import src.stracker.asynchttp.SearchByNameRequest;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -107,6 +108,33 @@ public class Utils {
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("", input.getText().toString());
 				new DummyRequest(activity).authorizedPost(url, app, params);
+			}
+		});
+		AlertDialog alertDialog = adBuilder.create();
+		alertDialog.show();
+	}
+	
+	/**
+	 * This method pop's up an AlertDialog to begin the Search a friend in STracker.
+	 */
+	public static void initSearchFriend(final Activity activity, final STrackerApp app){
+		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
+		adBuilder.setMessage("Enter Friend's Name:");
+		adBuilder.setCancelable(true);
+		// Set an EditText view to get user input 
+		final EditText input = new EditText(activity);
+		adBuilder.setView(input);
+		adBuilder.setPositiveButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		}); 
+		adBuilder.setNegativeButton("Search",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				String url = app.getApiURL()+"users?name="+input.getText();
+				new FriendsRequest(activity).authorizedGet(url.replaceAll(" ", "+"), app);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();

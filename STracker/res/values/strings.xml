@@ -76,4 +76,16 @@
 	<!-- Menu Episode -->
 	<string name="subitem_directors">Directors</string>
 	<string name="subitem_guest_actors">Guest Actors</string>
+	
+	<!-- Application URI's -->
+	<string name="uri_host_api">http://strackerserverdev.apphb.com/api/</string>
+	<string name="uri_user_subscriptions">usersubscriptions</string>
+	<string name="uri_genres">genres</string>
+	<string name="uri_user_friends">userfriends</string>
+	<string name="uri_user_newepisodes">newepisodes</string>
+	<string name="uri_tvshow_toprated">tvshows/toprated</string>
+	<string name="uri_episode_comments">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber/comments"</string>
+	<string name="uri_episode_rating">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber/ratings"</string>
+	<string name="uri_tvshow_comments">tvshows/tvShowId/comments"</string>
+	<string name="uri_tvshow_rating">tvshows/tvShowId/ratings"</string>
 </resources>

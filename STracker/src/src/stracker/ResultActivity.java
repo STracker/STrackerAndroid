@@ -23,7 +23,7 @@ import src.stracker.asynchttp.TvShowRequest;
  * This Activity represents a list of synopses results.
  * When a request to the STracker Server is a list of synopses this Activity is used to show the results.
  */
-@ContentView(R.layout.activity_result)
+@ContentView(R.layout.activity_list)
 public class ResultActivity extends RoboListActivity {
 
 	private ArrayAdapter<String> _adapter;
@@ -31,7 +31,6 @@ public class ResultActivity extends RoboListActivity {
 	private ArrayList<TvShowSynopse> _arrayList;
 	private ArrayList<SeasonSynopse> _seasonList;
 	private ArrayList<EpisodeSynopse> _episodeList;
-	private int _seasonNumber;
 	private final String _separator = ". ";
 	
 	@Override 
@@ -58,8 +57,8 @@ public class ResultActivity extends RoboListActivity {
            
         //List of episodes synopses
         if(getIntent().getStringExtra("type").equals("EPISODESYNOPSE")){
-        	_seasonNumber = getIntent().getIntExtra("seasonNumber", 999);
-        	setTitle("Season " + _seasonNumber);
+        	String title = getIntent().getStringExtra("title");
+        	setTitle(title);
         	_episodeList = getIntent().getParcelableArrayListExtra("list");
         	for(EpisodeSynopse synopse : _episodeList)
         		elems.add(synopse.getNumber() + _separator + synopse.getName());

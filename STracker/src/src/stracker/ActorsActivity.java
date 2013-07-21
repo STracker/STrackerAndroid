@@ -10,7 +10,7 @@ import src.stracker.model.Actor;
 /**
  * This Activity represents the list of Actors from a tv show
  */
-@ContentView(R.layout.activity_actors)
+@ContentView(R.layout.activity_list)
 public class ActorsActivity extends RoboListActivity {
 	
 	private ArrayList<Actor> _actors;

@@ -41,7 +41,7 @@ public class EpisodesRequest extends AbstractAsyncHttp {
 			Intent intent = new Intent(_context,ResultActivity.class);
 			intent.putExtra("type", "EPISODESYNOPSE");
 			intent.putExtra("list", list);
-			intent.putExtra("seasonNumber", _seasonNumber);
+			intent.putExtra("title", "Season " + _seasonNumber);
 			_context.startActivity(intent);
 		}catch(Exception e){
 			onErrorHook(e,e.getClass().getSimpleName());

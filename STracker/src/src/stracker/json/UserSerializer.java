@@ -3,16 +3,16 @@ package src.stracker.json;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import src.stracker.model.FBUser;
+import src.stracker.model.User;
 
-public class UserSerializer implements ISerialize<FBUser> {
+public class UserSerializer implements ISerialize<User> {
 
 	@Override
-	public FBUser deserialize(String json) {
-		FBUser user = null;
+	public User deserialize(String json) {
+		User user = null;
 		try {
 			JSONObject jObj = new JSONObject(json);
-			user = new FBUser(
+			user = new User(
 								jObj.getString("Name"), 
 								jObj.getString("Key"), 
 								jObj.getString("Email"));

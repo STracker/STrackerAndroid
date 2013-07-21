@@ -13,7 +13,7 @@ import src.stracker.adapters.CommentsAdapter;
 import src.stracker.model.Comment;
 import src.stracker.utils.Utils;
 
-@ContentView(R.layout.activity_comments)
+@ContentView(R.layout.activity_list)
 public class CommentsActivity extends RoboListActivity {
 
 	private CommentsAdapter _adapter;
