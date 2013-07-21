@@ -61,7 +61,7 @@ public class ProfileActivity extends RoboActivity {
     	case R.id.action_add_user:
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("",_user.getId());
-    		new DummyRequest(this).authorizedPost(_app.getApiURL()+"userfriends", _app, params);
+    		new DummyRequest(this).authorizedPost(getString(R.string.uri_host_api)+getString(R.string.uri_user_friends), _app, params);
     		break;
     	}
     	return true;

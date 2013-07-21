@@ -71,7 +71,7 @@ public class CommentsActivity extends RoboListActivity {
     	case R.id.action_add_comment:
     		if(!Utils.checkLogin(this, _app))
     			break;
-    		Utils.addComment(_app.getApiURL() + _uri, this, _app);
+    		Utils.addComment(getString(R.string.uri_host_api) + _uri, this, _app);
     		break; 
     	}
     	return true;

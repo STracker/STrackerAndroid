@@ -11,18 +11,7 @@ import android.net.NetworkInfo;
  */
 public class STrackerApp extends Application {
 	
-	private final String _ApiURL = "http://strackerserverdev.apphb.com/api/";
-	private final String _URL = "http://strackerserverdev.apphb.com/";
-	private final String _HawkKey = "werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn";
 	private User _fbUser;
-	
-	public String getApiURL() {
-		return _ApiURL;
-	}
-	
-	public String getURL() {
-		return _URL;
-	}
 	
 	public void setFbUser(User user){
 		if(_fbUser == null)
@@ -32,11 +21,7 @@ public class STrackerApp extends Application {
 	public User getFbUser(){
 		return _fbUser;
 	}
-	
-	public String getHawkKey(){
-		return _HawkKey;
-	}
-	
+
 	public void logout(){
 		setFbUser(null);
 	}

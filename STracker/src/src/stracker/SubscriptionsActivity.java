@@ -16,7 +16,6 @@ public class SubscriptionsActivity extends RoboListActivity {
 
 	private SubscriptionAdapter _adapter;
 	private ArrayList<Subscription> _subscriptions;
-	private STrackerApp _app;
 	
 	/**
 	 * (non-Javadoc)
@@ -26,7 +25,6 @@ public class SubscriptionsActivity extends RoboListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setTitle("Subscriptions");
-		_app = (STrackerApp) getApplication();
 		_subscriptions = getIntent().getParcelableArrayListExtra("list");
 		_adapter = new SubscriptionAdapter(this, _subscriptions);
 		setListAdapter(_adapter);
@@ -40,6 +38,6 @@ public class SubscriptionsActivity extends RoboListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		TvShowSynopse tvshow = _subscriptions.get(position).getTvShowSynope();
-		new TvShowRequest(this).get(_app.getApiURL()+tvshow.getUri());
+		new TvShowRequest(this).get(getString(R.string.uri_host_api)+tvshow.getUri());
 	}
 }

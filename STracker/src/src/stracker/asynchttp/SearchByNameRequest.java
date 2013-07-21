@@ -7,12 +7,11 @@ import java.util.ArrayList;
 
 import org.apache.http.NoHttpResponseException;
 
+import src.stracker.R;
 import src.stracker.ResultActivity;
-import src.stracker.STrackerApp;
 import src.stracker.json.JSONLocator;
 import src.stracker.json.TvShowSynopseSerializer;
 import src.stracker.model.TvShowSynopse;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -25,7 +24,6 @@ public class SearchByNameRequest extends AbstractAsyncHttp {
 
 	private TvShowSynopseSerializer _serializer;
 	private Context _context;
-	private STrackerApp _app;
 	
 	/**
 	 * @param context
@@ -33,7 +31,6 @@ public class SearchByNameRequest extends AbstractAsyncHttp {
 	public SearchByNameRequest(Context context) {
 		super(context);
 		_context = context;
-		_app = (STrackerApp) ((Activity) context).getApplication();
 		_serializer = (TvShowSynopseSerializer) JSONLocator.getInstance().getSerializer(TvShowSynopse.class);
 	}
 
@@ -47,7 +44,7 @@ public class SearchByNameRequest extends AbstractAsyncHttp {
 		if (list.size() == 0) onErrorHook(new NoHttpResponseException(""), "");
 		if (list.size() == 1){
 			TvShowSynopse tvshow = list.get(0);
-			new TvShowRequest(_context).get(_app.getApiURL()+tvshow.getUri());
+			new TvShowRequest(_context).get(_context.getString(R.string.uri_host_api)+tvshow.getUri());
 		}
 		else {
 			Intent intent = new Intent(_context,ResultActivity.class);

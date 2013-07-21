@@ -27,7 +27,6 @@ import src.stracker.asynchttp.TvShowRequest;
 public class ResultActivity extends RoboListActivity {
 
 	private ArrayAdapter<String> _adapter;
-	private STrackerApp _app;
 	private ArrayList<TvShowSynopse> _arrayList;
 	private ArrayList<SeasonSynopse> _seasonList;
 	private ArrayList<EpisodeSynopse> _episodeList;
@@ -36,7 +35,6 @@ public class ResultActivity extends RoboListActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_app = (STrackerApp) getApplication();
         List<String> elems = new ArrayList<String>();
         
         //List of tvshow synopses
@@ -86,15 +84,15 @@ public class ResultActivity extends RoboListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		if(_arrayList != null){
 			TvShowSynopse tvshow = _arrayList.get(position);
-			new TvShowRequest(this).get(_app.getApiURL()+tvshow.getUri());
+			new TvShowRequest(this).get(getString(R.string.uri_host_api)+tvshow.getUri());
 		}
 		else if(_seasonList != null){
 			SeasonSynopse season = _seasonList.get(position);
-			new EpisodesRequest(this, season.getNumber()).get(_app.getApiURL()+season.getUri());
+			new EpisodesRequest(this).get(getString(R.string.uri_host_api)+season.getUri());
 		}
 		else if(_episodeList != null){
 			EpisodeSynopse episode = _episodeList.get(position);
-			new EpisodeRequest(this).get(_app.getApiURL()+episode.getUri());
+			new EpisodeRequest(this).get(getString(R.string.uri_host_api)+episode.getUri());
 		}
 	}
 }

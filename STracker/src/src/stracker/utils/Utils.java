@@ -2,6 +2,7 @@ package src.stracker.utils;
 
 import java.util.HashMap;
 import src.stracker.FbLoginActivity;
+import src.stracker.R;
 import src.stracker.STrackerApp;
 import src.stracker.asynchttp.DummyRequest;
 import src.stracker.asynchttp.FriendsRequest;
@@ -18,7 +19,7 @@ public class Utils {
 	/**
 	 * This method pop's up an AlertDialog to begin the Search a tv show by the name.
 	 */
-	public static void initSearchByName(final Activity activity, final STrackerApp app){
+	public static void initSearchByName(final Activity activity){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
 		adBuilder.setMessage("Enter TvShow's Name:");
 		adBuilder.setCancelable(true);
@@ -34,7 +35,7 @@ public class Utils {
 		adBuilder.setNegativeButton("Search",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				String url = app.getApiURL()+"tvshows?name="+input.getText();
+				String url = activity.getString(R.string.uri_host_api)+activity.getString(R.string.uri_tvshow_search)+input.getText();
 				new SearchByNameRequest(activity).get(url.replaceAll(" ", "+"));
 			}
 		});
@@ -133,7 +134,7 @@ public class Utils {
 		adBuilder.setNegativeButton("Search",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				String url = app.getApiURL()+"users?name="+input.getText();
+				String url = activity.getString(R.string.uri_host_api)+activity.getString(R.string.uri_user_search)+input.getText();
 				new FriendsRequest(activity).authorizedGet(url.replaceAll(" ", "+"), app);
 			}
 		});

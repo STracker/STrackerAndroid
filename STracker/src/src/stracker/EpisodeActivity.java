@@ -47,10 +47,13 @@ public class EpisodeActivity extends RoboActivity {
 		_episode = getIntent().getParcelableExtra("episode");
 		_context = this;
 		setTitle(_episode.getName());
-		new EpisodeRatingRequest(this).get(_app.getApiURL() + "tvshows/"   + _episode.getTvShowId() + 
-															  "/seasons/"  + _episode.getSeasonNumber() + 
-															  "/episodes/" + _episode.getNumber() + 
-															  "/ratings");
+		//build rating uri
+		String uri = getString(R.string.uri_episode_rating);
+		uri = uri.replace("tvShowId", _episode.getTvShowId());
+		uri = uri.replace("seasonNumber", _episode.getSeasonNumber()+"");
+		uri = uri.replace("episodeNumber", _episode.getNumber()+"");
+		
+		new EpisodeRatingRequest(this).get(getString(R.string.uri_host_api) + uri);
 		_episodeInfo.setText("Season: " + _episode.getSeasonNumber() + " Episode: " + _episode.getNumber());
 		_description.setText(_episode.getDescription());
 		_banner.setImageUrl(_episode.getPosterUrl());
@@ -62,10 +65,11 @@ public class EpisodeActivity extends RoboActivity {
 					boolean fromUser) {
 				if(!Utils.checkLogin(_context, _app))
 					return;
-				Utils.initRatingSubmission(_app.getApiURL() + "tvshows/"  + _episode.getTvShowId() + 
-															  "/seasons/"  + _episode.getSeasonNumber() + 
-															  "/episodes/" + _episode.getNumber() + 
-															  "/ratings" , _context, _app, (int) rating);
+				String uri = getString(R.string.uri_episode_rating);
+				uri = uri.replace("tvShowId", _episode.getTvShowId());
+				uri = uri.replace("seasonNumber", _episode.getSeasonNumber()+"");
+				uri = uri.replace("episodeNumber", _episode.getNumber()+"");
+				Utils.initRatingSubmission(getString(R.string.uri_host_api) + uri , _context, _app, (int) rating);
 			}
 		});
 	}
@@ -105,11 +109,11 @@ public class EpisodeActivity extends RoboActivity {
     		startActivity(intent_guest_actors);
     		break;
     	case R.id.form_episode_comments:
-    		String uri = "tvshows/"  + _episode.getTvShowId() + 
-					  	 "/seasons/"  + _episode.getSeasonNumber() + 
-					  	 "/episodes/" + _episode.getNumber() + 
-					  	 "/comments";
-    		new CommentsRequest(this,uri).get(_app.getApiURL() + uri);
+    		String uri = getString(R.string.uri_episode_comments);
+    		uri = uri.replace("tvShowId", _episode.getTvShowId());
+    		uri = uri.replace("seasonNumber", _episode.getSeasonNumber()+"");
+    		uri = uri.replace("episodeNumber", _episode.getNumber()+"");;
+    		new CommentsRequest(this,uri).get(getString(R.string.uri_host_api) + uri);
     		break; 
     	}
     	return true;

@@ -7,6 +7,7 @@ import com.loopj.android.image.SmartImageView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout.LayoutParams;
@@ -54,7 +55,12 @@ public class TvShowActivity extends RoboActivity {
 		_app = (STrackerApp) getApplication();
 		_tvshow = getIntent().getParcelableExtra("tvshow");
 		setTitle(_tvshow.getName());
-		new TvShowRatingRequest(this).get(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/ratings");
+		//Build rating uri
+		String uri = getString(R.string.uri_tvshow_rating);
+		uri = uri.replace("tvShowId", _tvshow.getId());
+		Log.d("URI", uri);
+		new TvShowRatingRequest(this).get(getString(R.string.uri_host_api) + uri);
+		
 		_description.setText(_tvshow.getDescription());
 		_airday.setText("Airday: " + _tvshow.getAirday());
 		_runtime.setText("Runtime: " + _tvshow.getRuntime() + " min");
@@ -69,7 +75,9 @@ public class TvShowActivity extends RoboActivity {
 					boolean fromUser) {
 				if(!Utils.checkLogin(_context, _app))
 					return;
-				Utils.initRatingSubmission(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/ratings" , _context, _app, (int) rating);
+				String uri = getString(R.string.uri_tvshow_rating);
+				uri = uri.replace("tvShowId", _tvshow.getId());
+				Utils.initRatingSubmission(getString(R.string.uri_host_api) + uri , _context, _app, (int) rating);
 			}
 		});
 	}
@@ -106,14 +114,14 @@ public class TvShowActivity extends RoboActivity {
     		startActivity(intent_cast);
     		break;
     	case R.id.form_comments:
-    		new CommentsRequest(this,"tvshows/" + _tvshow.getId() + "/comments").get(_app.getApiURL() + "tvshows/" + _tvshow.getId() + "/comments");
+    		String uri = getString(R.string.uri_tvshow_comments);
+    		uri = uri.replace("tvShowId", _tvshow.getId());
+    		new CommentsRequest(this,uri).get(getString(R.string.uri_host_api) + uri);
     		break; 
     	case R.id.form_subscribe_tvshow:
-    		if(!Utils.checkLogin(_context, _app))
-				break;
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("", _tvshow.getId());
-    		new DummyRequest(this).authorizedPost(_app.getApiURL() + "usersubscriptions", _app, params);
+    		new DummyRequest(this).authorizedPost(getString(R.string.uri_host_api) + getString(R.string.uri_user_subscriptions), _app, params);
     		break; 
     	}
     	return true;

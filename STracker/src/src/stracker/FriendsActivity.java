@@ -37,6 +37,6 @@ public class FriendsActivity extends RoboListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		UserSynopse user = _users.get(position);
-		new UserRequest(this).authorizedGet(_app.getApiURL()+user.getUri(),_app);
+		new UserRequest(this).authorizedGet(getString(R.string.uri_host_api)+user.getUri(),_app);
 	}
 }

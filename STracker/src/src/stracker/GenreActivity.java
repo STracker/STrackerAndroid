@@ -21,7 +21,6 @@ import src.stracker.model.GenreSynopse;
 @ContentView(R.layout.activity_list)
 public class GenreActivity extends RoboListActivity {
 	
-	private STrackerApp _app;
 	private ArrayAdapter<String> _adapter;
 	private ArrayList<GenreSynopse> _arrayList;
 	private List<String> _elems;
@@ -34,7 +33,6 @@ public class GenreActivity extends RoboListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setTitle("List of Genres");
-        _app = (STrackerApp) getApplication();
     	_arrayList = getIntent().getParcelableArrayListExtra("list");
     	_elems = new ArrayList<String>();
     	
@@ -63,6 +61,6 @@ public class GenreActivity extends RoboListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		new SearchByGenreRequest(this,_elems.get(position)).get(_app.getApiURL()+_arrayList.get(position).getUri());
+		new SearchByGenreRequest(this,_elems.get(position)).get(getString(R.string.uri_host_api)+_arrayList.get(position).getUri());
 	}
 }

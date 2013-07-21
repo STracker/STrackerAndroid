@@ -39,7 +39,7 @@ public class MainActivity extends ListActivity {
 		
 		if(Utils.checkConectivity(this, _app)){
 			//Request top rated shows
-			new TopRatedRequest(this).get(_app.getApiURL()+"tvshows/toprated");
+			new TopRatedRequest(this).get(getString(R.string.uri_host_api)+getString(R.string.uri_tvshow_toprated));
 		}
 	} 
 	
@@ -79,29 +79,24 @@ public class MainActivity extends ListActivity {
 					startActivity(intentProfile);
 					break;
 				case R.id.action_series:
-					Utils.checkLogin(this, _app);
-					new SubscriptionsRequest(this).authorizedGet(_app.getApiURL() + "usersubscriptions", _app);
+					new SubscriptionsRequest(this).authorizedGet(getString(R.string.uri_host_api) + getString(R.string.uri_user_subscriptions), _app);
 					break;
 				case R.id.action_messages:
-					Utils.checkLogin(this, _app);
 					break;
 				case R.id.action_friends:
-					Utils.checkLogin(this, _app);
-					new FriendsRequest(this).authorizedGet(_app.getApiURL()+"userfriends", _app);
+					new FriendsRequest(this).authorizedGet(getString(R.string.uri_host_api)+getString(R.string.uri_user_friends), _app);
 					break;
 				case R.id.form_friend:
-					Utils.checkLogin(this, _app);
 					Utils.initSearchFriend(this, _app);
 					break;
 				case R.id.form_genre:
-					new GenresRequest(this).get(_app.getApiURL()+"genres");
+					new GenresRequest(this).get(getString(R.string.uri_host_api)+getString(R.string.uri_genres));
 					break;
 				case R.id.form_name:
-					Utils.initSearchByName(this, _app);
+					Utils.initSearchByName(this);
 					break;
 				case R.id.action_calendar:
-					Utils.checkLogin(this, _app);
-					new CalendarRequest(this).authorizedGet(_app.getApiURL()+"newepisodes", _app);
+					new CalendarRequest(this).authorizedGet(getString(R.string.uri_host_api)+getString(R.string.uri_user_newepisodes), _app);
 					break;
 			}
 		return true;
@@ -114,7 +109,7 @@ public class MainActivity extends ListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		new TvShowRequest(this).get(_app.getApiURL()+_elems.get(position).getUri());
+		new TvShowRequest(this).get(getString(R.string.uri_host_api)+_elems.get(position).getUri());
 	}
 
 	/**
