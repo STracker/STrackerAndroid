@@ -30,6 +30,7 @@ public abstract class AbstractAsyncHttp {
 	protected Context _context;
 	private ProgressDialog _dialog;
 	final int DEFAULT_TIMEOUT = 30000;
+	protected STrackerApp _app;
 
 	/**
 	 * @param context
@@ -39,6 +40,7 @@ public abstract class AbstractAsyncHttp {
 		_dialog = new ProgressDialog(context); 
 		_client = new AsyncHttpClient();
 		_client.setTimeout(DEFAULT_TIMEOUT);
+		_app = (STrackerApp) _context.getApplicationContext();
 	}
 
 	/**
@@ -54,25 +56,25 @@ public abstract class AbstractAsyncHttp {
 		_client.get(url, _handler);
 	}
 	
-	public void authorizedGet(String url,STrackerApp app) {
-		if(!Utils.checkLogin((Activity)_context, app)) return;
+	public void authorizedGet(String url) {
+		if(!Utils.checkLogin((Activity)_context, _app)) return;
 		//Waiting message
 		_dialog.setMessage("loading...");
 		_dialog.show();
-		_client.addHeader("Authorization", getAuthorizationHeader("GET",url, app, null));
+		_client.addHeader("Authorization", getAuthorizationHeader("GET",url, null));
 		_client.get(url, _handler);
 	}
 	
-	public void authorizedPost(String url, STrackerApp app, HashMap<String, String> params){
-		if(!Utils.checkLogin((Activity)_context, app)) return;
+	public void authorizedPost(String url, HashMap<String, String> params){
+		if(!Utils.checkLogin((Activity)_context, _app)) return;
 		PostParams postParams = buildRequestBody(params);
-		_client.addHeader("Authorization", getAuthorizationHeader("POST",url, app, postParams.payload));
+		_client.addHeader("Authorization", getAuthorizationHeader("POST",url, postParams.payload));
 		_client.post(url,postParams.params,_handler);
 	}
 	
-	public void authorizedDelete(String url, STrackerApp app){
-		if(!Utils.checkLogin((Activity)_context, app)) return;
-		_client.addHeader("Authorization", getAuthorizationHeader("DELETE",url, app, null));
+	public void authorizedDelete(String url){
+		if(!Utils.checkLogin((Activity)_context, _app)) return;
+		_client.addHeader("Authorization", getAuthorizationHeader("DELETE",url, null));
 		_client.delete(url,_handler);
 	}
 	
@@ -96,7 +98,7 @@ public abstract class AbstractAsyncHttp {
 	/**
 	 * Build and return authorization header according Hawk Protocol specifications
 	 */
-	private String getAuthorizationHeader(String method, String url, STrackerApp app, String payload){
+	private String getAuthorizationHeader(String method, String url, String payload){
 		URL objUrl = null;
 		try {
 			objUrl = new URL(url);
@@ -106,7 +108,7 @@ public abstract class AbstractAsyncHttp {
 		Long time = System.currentTimeMillis();
 		Long timestamp = time / 1000L;
 		String nonce = "NONO";//HawkClient.generateNonce();
-		HawkCredentials credentials = new HawkCredentials(app.getFbUser().getId(), _context.getString(R.string.hawk_key));
+		HawkCredentials credentials = new HawkCredentials(_app.getFbUser().getId(), _context.getString(R.string.hawk_key));
 		String header = "";
 		try {
 			if(method.equals("POST")){

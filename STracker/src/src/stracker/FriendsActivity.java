@@ -15,7 +15,6 @@ public class FriendsActivity extends RoboListActivity {
 
 	private ArrayList<UserSynopse> _users;
 	private UserAdapter _adapter;
-	private STrackerApp _app;
 	
 	/**
 	 * (non-Javadoc)
@@ -24,7 +23,6 @@ public class FriendsActivity extends RoboListActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_app = (STrackerApp) getApplication();
 		_users = getIntent().getParcelableArrayListExtra("list");
 		_adapter = new UserAdapter(this, _users);
 		setListAdapter(_adapter);
@@ -37,6 +35,6 @@ public class FriendsActivity extends RoboListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		UserSynopse user = _users.get(position);
-		new UserRequest(this).authorizedGet(getString(R.string.uri_host_api)+user.getUri(),_app);
+		new UserRequest(this).authorizedGet(getString(R.string.uri_host_api)+user.getUri());
 	}
 }

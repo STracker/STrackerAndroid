@@ -9,6 +9,7 @@ import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.MainListAdapter;
 import src.stracker.asynchttp.EpisodeRequest;
+import src.stracker.first_activity.EntryType;
 import src.stracker.first_activity.HeaderEntry;
 import src.stracker.first_activity.IEntry;
 import src.stracker.first_activity.ItemEntry;
@@ -21,6 +22,7 @@ import src.stracker.model.EpisodeSynopse;
 public class CalendarActivity extends RoboListActivity {
 
 	private ArrayList<EpisodeSynopse> _arrayList;
+	private MainListAdapter _adapter;
 	
 	/**
 	 * (non-Javadoc)
@@ -31,8 +33,8 @@ public class CalendarActivity extends RoboListActivity {
 		super.onCreate(savedInstanceState);
 		_arrayList = getIntent().getParcelableArrayListExtra("list");
 		List<IEntry> items = buildCalendarView();
-        MainListAdapter adapter = new MainListAdapter(this, items); 
-        setListAdapter(adapter);
+        _adapter = new MainListAdapter(this, items); 
+        setListAdapter(_adapter);
 	} 
 	
 	/**
@@ -42,6 +44,8 @@ public class CalendarActivity extends RoboListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
+		if(_adapter.getItem(position).getViewType() == EntryType.HEADER_ITEM.ordinal())
+			return;
 		EpisodeSynopse episode = _arrayList.get(position);
 		new EpisodeRequest(this).get(getString(R.string.uri_host_api)+episode.getUri());
 	}

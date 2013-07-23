@@ -21,7 +21,6 @@ public class ProfileActivity extends RoboActivity {
 	@InjectView(R.id.profile_photo_id) SmartImageView _profilePhoto;
 	@InjectView(R.id.profile_email) TextView _profileEmail;
 	private User _user;
-	private STrackerApp _app;
 	
 	/**
 	 * (non-Javadoc)
@@ -31,7 +30,6 @@ public class ProfileActivity extends RoboActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setTitle("Profile");
-		_app = (STrackerApp) getApplication();
 		_user = getIntent().getParcelableExtra("user");
 		_profileName.setText("Name: " + _user.getName());
 		_profilePhoto.setImageUrl(_user.getPhotoUrl());
@@ -61,7 +59,7 @@ public class ProfileActivity extends RoboActivity {
     	case R.id.action_add_user:
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("",_user.getId());
-    		new DummyRequest(this).authorizedPost(getString(R.string.uri_host_api)+getString(R.string.uri_user_friends), _app, params);
+    		new DummyRequest(this).authorizedPost(getString(R.string.uri_host_api)+getString(R.string.uri_user_friends), params);
     		break;
     	}
     	return true;

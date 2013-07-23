@@ -5,6 +5,7 @@ import com.loopj.android.image.SmartImageView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RatingBar;
@@ -46,19 +47,12 @@ public class EpisodeActivity extends RoboActivity {
 		_app = (STrackerApp) getApplication();
 		_episode = getIntent().getParcelableExtra("episode");
 		_context = this;
-		setTitle(_episode.getName());
-		//build rating uri
-		String uri = getString(R.string.uri_episode_rating);
-		uri = uri.replace("tvShowId", _episode.getTvShowId());
-		uri = uri.replace("seasonNumber", _episode.getSeasonNumber()+"");
-		uri = uri.replace("episodeNumber", _episode.getNumber()+"");
 		
-		new EpisodeRatingRequest(this).get(getString(R.string.uri_host_api) + uri);
+		setTitle(_episode.getName());
 		_episodeInfo.setText("Season: " + _episode.getSeasonNumber() + " Episode: " + _episode.getNumber());
 		_description.setText(_episode.getDescription());
 		_banner.setImageUrl(_episode.getPosterUrl());
 		_date.setText("Release Date: " + _episode.getDate());
-		
 		_rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {	
 			@Override
 			public void onRatingChanged(RatingBar ratingBar, float rating,
@@ -69,9 +63,21 @@ public class EpisodeActivity extends RoboActivity {
 				uri = uri.replace("tvShowId", _episode.getTvShowId());
 				uri = uri.replace("seasonNumber", _episode.getSeasonNumber()+"");
 				uri = uri.replace("episodeNumber", _episode.getNumber()+"");
-				Utils.initRatingSubmission(getString(R.string.uri_host_api) + uri , _context, _app, (int) rating);
+				Utils.initRatingSubmission(getString(R.string.uri_host_api) + uri , _context, (int) rating);
 			}
 		});
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		Log.d("STRACKER", "onResume");
+		//build rating uri
+		String uri = getString(R.string.uri_episode_rating);
+		uri = uri.replace("tvShowId", _episode.getTvShowId());
+		uri = uri.replace("seasonNumber", _episode.getSeasonNumber()+"");
+		uri = uri.replace("episodeNumber", _episode.getNumber()+"");
+		new EpisodeRatingRequest(this).get(getString(R.string.uri_host_api) + uri);
 	}
 	
 	public void onRatingSuccess(Ratings rating){

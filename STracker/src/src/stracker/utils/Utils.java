@@ -66,7 +66,7 @@ public class Utils {
 	/**
 	 * This method pop's up an AlertDialog to begin the rating submission.
 	 */
-	public static void initRatingSubmission(final String url, final Activity activity, final STrackerApp app, final int rating){
+	public static void initRatingSubmission(final String url, final Activity activity, final int rating){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
 		adBuilder.setMessage("Do you really want to submit the Rating?");
 		adBuilder.setCancelable(true);
@@ -81,7 +81,7 @@ public class Utils {
 			public void onClick(DialogInterface dialog, int id) {
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("", rating+"");
-				new DummyRequest(activity).authorizedPost(url, app, params);
+				new DummyRequest(activity).authorizedPost(url, params);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();
@@ -91,7 +91,7 @@ public class Utils {
 	/**
 	 * This method pop's up an AlertDialog to write new comment
 	 */
-	public static void addComment(final String url, final Activity activity, final STrackerApp app){
+	public static void addComment(final String url, final Activity activity){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
 		adBuilder.setMessage("Please insert text comment:");
 		final EditText input = new EditText(activity);
@@ -108,7 +108,7 @@ public class Utils {
 			public void onClick(DialogInterface dialog, int id) {
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("", input.getText().toString());
-				new DummyRequest(activity).authorizedPost(url, app, params);
+				new DummyRequest(activity).authorizedPost(url, params);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();
@@ -118,7 +118,7 @@ public class Utils {
 	/**
 	 * This method pop's up an AlertDialog to begin the Search a friend in STracker.
 	 */
-	public static void initSearchFriend(final Activity activity, final STrackerApp app){
+	public static void initSearchFriend(final Activity activity){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
 		adBuilder.setMessage("Enter Friend's Name:");
 		adBuilder.setCancelable(true);
@@ -135,7 +135,7 @@ public class Utils {
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				String url = activity.getString(R.string.uri_host_api)+activity.getString(R.string.uri_user_search)+input.getText();
-				new FriendsRequest(activity).authorizedGet(url.replaceAll(" ", "+"), app);
+				new FriendsRequest(activity).authorizedGet(url.replaceAll(" ", "+"));
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();

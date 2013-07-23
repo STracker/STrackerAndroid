@@ -7,7 +7,6 @@ import com.loopj.android.image.SmartImageView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout.LayoutParams;
@@ -54,13 +53,7 @@ public class TvShowActivity extends RoboActivity {
 		super.onCreate(savedInstanceState); 
 		_app = (STrackerApp) getApplication();
 		_tvshow = getIntent().getParcelableExtra("tvshow");
-		setTitle(_tvshow.getName());
-		//Build rating uri
-		String uri = getString(R.string.uri_tvshow_rating);
-		uri = uri.replace("tvShowId", _tvshow.getId());
-		Log.d("URI", uri);
-		new TvShowRatingRequest(this).get(getString(R.string.uri_host_api) + uri);
-		
+		setTitle(_tvshow.getName());		
 		_description.setText(_tvshow.getDescription());
 		_airday.setText("Airday: " + _tvshow.getAirday());
 		_runtime.setText("Runtime: " + _tvshow.getRuntime() + " min");
@@ -77,9 +70,22 @@ public class TvShowActivity extends RoboActivity {
 					return;
 				String uri = getString(R.string.uri_tvshow_rating);
 				uri = uri.replace("tvShowId", _tvshow.getId());
-				Utils.initRatingSubmission(getString(R.string.uri_host_api) + uri , _context, _app, (int) rating);
+				Utils.initRatingSubmission(getString(R.string.uri_host_api) + uri , _context, (int) rating);
 			}
 		});
+	}
+	
+	/**
+	 * (non-Javadoc)
+	 * @see roboguice.activity.RoboActivity#onResume()
+	 */
+	@Override
+	public void onResume(){
+		super.onResume();
+		//Build rating uri
+		String uri = getString(R.string.uri_tvshow_rating);
+		uri = uri.replace("tvShowId", _tvshow.getId());
+		new TvShowRatingRequest(this).get(getString(R.string.uri_host_api) + uri);
 	}
 	
 	/**
@@ -121,7 +127,7 @@ public class TvShowActivity extends RoboActivity {
     	case R.id.form_subscribe_tvshow:
     		HashMap<String, String> params = new HashMap<String, String>();
     		params.put("", _tvshow.getId());
-    		new DummyRequest(this).authorizedPost(getString(R.string.uri_host_api) + getString(R.string.uri_user_subscriptions), _app, params);
+    		new DummyRequest(this).authorizedPost(getString(R.string.uri_host_api) + getString(R.string.uri_user_subscriptions), params);
     		break; 
     	}
     	return true;

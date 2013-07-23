@@ -43,7 +43,7 @@ public class CommentActivity extends RoboActivity {
 	    public void onClick(View v) {
 	    	if(!Utils.checkLogin((Activity)_context, _app))
 				return;
-	    	new UserRequest(_context).authorizedGet(getString(R.string.uri_host_api) + _comment.getUserUri(), _app);
+	    	new UserRequest(_context).authorizedGet(getString(R.string.uri_host_api) + _comment.getUserUri());
 	    }
 	  };
 	  
@@ -70,7 +70,7 @@ public class CommentActivity extends RoboActivity {
     		if(!Utils.checkLogin(this, _app))
     			break;
     		if(_app.getFbUser().getId().equals(_comment.getUserId())){
-    			new DummyRequest(this).authorizedDelete(getString(R.string.uri_host_api) + _comment.getUri(), _app);
+    			new DummyRequest(this).authorizedDelete(getString(R.string.uri_host_api) + _comment.getUri());
     			finish();
     		} else {
     			Toast.makeText(this, "You don't have permission to delete this comment!", Toast.LENGTH_SHORT).show();

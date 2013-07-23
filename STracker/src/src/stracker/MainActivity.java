@@ -79,15 +79,15 @@ public class MainActivity extends ListActivity {
 					startActivity(intentProfile);
 					break;
 				case R.id.action_series:
-					new SubscriptionsRequest(this).authorizedGet(getString(R.string.uri_host_api) + getString(R.string.uri_user_subscriptions), _app);
+					new SubscriptionsRequest(this).authorizedGet(getString(R.string.uri_host_api) + getString(R.string.uri_user_subscriptions));
 					break;
 				case R.id.action_messages:
 					break;
 				case R.id.action_friends:
-					new FriendsRequest(this).authorizedGet(getString(R.string.uri_host_api)+getString(R.string.uri_user_friends), _app);
+					new FriendsRequest(this).authorizedGet(getString(R.string.uri_host_api)+getString(R.string.uri_user_friends));
 					break;
 				case R.id.form_friend:
-					Utils.initSearchFriend(this, _app);
+					Utils.initSearchFriend(this);
 					break;
 				case R.id.form_genre:
 					new GenresRequest(this).get(getString(R.string.uri_host_api)+getString(R.string.uri_genres));
@@ -96,7 +96,7 @@ public class MainActivity extends ListActivity {
 					Utils.initSearchByName(this);
 					break;
 				case R.id.action_calendar:
-					new CalendarRequest(this).authorizedGet(getString(R.string.uri_host_api)+getString(R.string.uri_user_newepisodes), _app);
+					new CalendarRequest(this).authorizedGet(getString(R.string.uri_host_api)+getString(R.string.uri_user_newepisodes));
 					break;
 			}
 		return true;
