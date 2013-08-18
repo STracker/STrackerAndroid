@@ -14,7 +14,6 @@ import src.stracker.model.*;
 public class TvShowSynopseSerializer implements ISerialize<ArrayList<TvShowSynopse>> {
   
 	/**
-	 * (non-Javadoc)
 	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
 	 */
 	@Override

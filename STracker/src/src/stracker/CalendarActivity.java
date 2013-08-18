@@ -5,10 +5,12 @@ import java.util.List;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.MainListAdapter;
-import src.stracker.asynchttp.EpisodeRequest;
+import src.stracker.asynchttp.CalendarRequest;
+import src.stracker.asynchttp.MyRunnable;
 import src.stracker.first_activity.EntryType;
 import src.stracker.first_activity.HeaderEntry;
 import src.stracker.first_activity.IEntry;
@@ -16,6 +18,7 @@ import src.stracker.first_activity.ItemEntry;
 import src.stracker.model.EpisodeSynopse;
 
 /**
+ * @author diogomatos
  * This activity represents the calendar of episodes of tv shows
  */
 @ContentView(R.layout.activity_list)
@@ -25,20 +28,28 @@ public class CalendarActivity extends RoboListActivity {
 	private MainListAdapter _adapter;
 	
 	/**
-	 * (non-Javadoc)
 	 * @see roboguice.activity.RoboListActivity#onCreate(android.os.Bundle)
 	 */
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		_arrayList = getIntent().getParcelableArrayListExtra("list");
-		List<IEntry> items = buildCalendarView();
-        _adapter = new MainListAdapter(this, items); 
-        setListAdapter(_adapter);
+		new CalendarRequest(this, new MyRunnable() {
+			@Override
+			public void run() {
+				Toast.makeText(CalendarActivity.this, R.string.error_calendar, Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public <T> void runWithArgument(T response) {
+				_arrayList = (ArrayList<EpisodeSynopse>) response;
+				List<IEntry> items = buildCalendarView();
+		        _adapter = new MainListAdapter(CalendarActivity.this, items); 
+		        setListAdapter(_adapter);
+			}
+		}).authorizedGet(getString(R.string.uri_user_newepisodes));
 	} 
 	
 	/**
-	 * (non-Javadoc)
 	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
 	 * When a list result is pressed make the specific request according the type of the results
 	 */
@@ -46,10 +57,14 @@ public class CalendarActivity extends RoboListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		if(_adapter.getItem(position).getViewType() == EntryType.HEADER_ITEM.ordinal())
 			return;
-		EpisodeSynopse episode = _arrayList.get(position);
-		new EpisodeRequest(this).get(getString(R.string.uri_host_api)+episode.getUri());
+		//EpisodeSynopse episode = _arrayList.get(position);
+		//new EpisodeRequest(this).get(episode.getUri());
 	}
 	
+	/**
+	 * This method return a list of entries to show in calendar view
+	 * @return list of IEntry items
+	 */
 	private List<IEntry> buildCalendarView(){
 		List<IEntry> items = new ArrayList<IEntry>();
 		String last = null, current = null;
@@ -64,12 +79,15 @@ public class CalendarActivity extends RoboListActivity {
 		return items;
 	}
 	
+	/**
+	 * This method construct a string title with episode information
+	 * @param episode - episode synopse
+	 * @return string - episode title
+	 */
 	private String buildEpisodePrefix(EpisodeSynopse episode){
 		return "S"+
-			   ((episode.getSeasonNumber() < 10) ? "0" : "") + 
-			   episode.getSeasonNumber() + 
+			   ((episode.getSeasonNumber() < 10) ? "0" : "") + episode.getSeasonNumber() + 
 			   "E" +
-			   ((episode.getNumber() < 10) ? "0" : "") +
-			   episode.getNumber();
+			   ((episode.getNumber() < 10) ? "0" : "") + episode.getNumber();
 	}
 }

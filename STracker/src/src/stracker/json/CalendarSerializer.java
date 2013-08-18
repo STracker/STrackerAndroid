@@ -20,7 +20,8 @@ public class CalendarSerializer implements ISerialize<ArrayList<EpisodeSynopse>>
 	public ArrayList<EpisodeSynopse> deserialize(String json) {
 		ArrayList<EpisodeSynopse> episodes = new ArrayList<EpisodeSynopse>();
 		try {
-			JSONArray jsonArray = new JSONArray(json);
+			JSONObject jsonObj = new JSONObject(json);
+			JSONArray jsonArray = jsonObj.getJSONArray("EpisodeSynopsis");
 			for (int i = 0; i < jsonArray.length(); i++) {
 		        JSONObject jObj = jsonArray.getJSONObject(i);
 		        episodes.add(new EpisodeSynopse(

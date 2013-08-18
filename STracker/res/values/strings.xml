@@ -8,18 +8,24 @@
 	<string name="app_id">516839011711939</string>
 	<string name="hawk_key">werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
 	<string name="fb_login">To perform this action you need to login!</string>
+	<string name="separator">. </string>
 	
 	<!-- Information about TvShow -->
-	<string name="serie_name">Name: </string>
-	<string name="serie_desc">Description: </string>
-	<string name="serie_runtime">Runtime: </string>
-	<string name="serie_airday">Airday: </string>
-	<string name="serie_genres">Genres: </string>
-	<string name="serie_rating">Rating: </string>
-	<string name="serie_date">Date: </string>
+	<string name="serie_name">Name:&#160;</string>
+	<string name="serie_desc">Description:&#160;</string>
+	<string name="serie_runtime">Runtime:&#160;</string>
+	<string name="serie_airday">Airday:&#160;</string>
+	<string name="serie_genres">Genres:&#160;</string>
+	<string name="serie_rating">Rating:&#160;</string>
+	<string name="serie_date">Date:&#160;</string>
 	<string name="poster_desc">Poster</string>
-	<string name="rating_tvshow_avg">Average: </string>
-	<string name="rating_tvshow_total">Total: </string>
+	<string name="serie_seasons">Season&#160;</string>
+	<string name="season_list">Season\'s List</string>
+	<string name="rating_tvshow_avg">Average:&#160;</string>
+	<string name="rating_tvshow_total">Total:&#160;</string>
+	<string name="from">from:&#160;</string>
+	<string name="users">&#160;user(s).</string>
+	<string name="min">&#160;min</string>
 	
 	<!-- Menu Items -->
 	<string name="action_profile">Profile</string>
@@ -38,16 +44,19 @@
 	<string name="subitem_comments">Comments</string>
 	<string name="subitem_cast">Cast</string>
 	<string name="subitem_subscribe">Subscribe</string>
+	<string name="list_genres">List of Genres</string>
 	
 	<!-- Episode Information -->
 	<string name="banner_desc">Banner</string>
 	<string name="episode_desc">Description</string>
 	<string name="episode_info">Episode Info</string>
 	<string name="episode_rating">Rating</string>
-	<string name="episode_date">Date</string>
-	<string name="rating_episode_avg">Average</string>
-	<string name="rating_episode_total">Total</string>
-	<string name="episodes_watched">Episodes Watched: </string>
+	<string name="episode_date">Release Date:&#160;</string>
+	<string name="rating_episode_avg">Average:&#160;</string>
+	<string name="rating_episode_total">Total:&#160;</string>
+	<string name="episodes_watched">Episodes Watched:&#160;</string>
+	<string name="episode_season">Season:&#160;</string>
+	<string name="episode">Episode:&#160;</string>
 	
 	<!-- Actor Information -->
 	<string name="photo_desc">Photo</string>
@@ -62,12 +71,14 @@
 	<string name="toprated_header">Top Rated STracker TvShows</string>
 	
 	<!-- Profile Information -->
-	<string name="profile_name">Profile Name</string>
+	<string name="profile_name">Name:&#160;</string>
 	<string name="profile_photo">Profile Photo</string>
-	<string name="profile_email">Profile Email</string>
+	<string name="profile_email">Email:&#160;</string>
+	<string name="profile_title">Profile</string>
+	<string name="title_subs">Subscriptions</string>
 	
 	<!-- Comment Information -->
-	<string name="comment_user_label">User: </string>
+	<string name="comment_user_label">User:&#160;</string>
 	<string name="comment_user">user</string>
 	<string name="comment_text">comment</string>
 	<string name="comment_btn">Info</string>
@@ -83,7 +94,7 @@
 	<string name="uri_user_subscriptions">usersubscriptions</string>
 	<string name="uri_genres">genres</string>
 	<string name="uri_user_friends">userfriends</string>
-	<string name="uri_user_newepisodes">newepisodes</string>
+	<string name="uri_user_newepisodes">usernewepisodes</string>
 	<string name="uri_tvshow_toprated">tvshows/toprated</string>
 	<string name="uri_episode_comments">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber/comments"</string>
 	<string name="uri_episode_rating">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber/ratings"</string>
@@ -92,4 +103,33 @@
 	<string name="uri_users">users</string>
 	<string name="uri_tvshow_search">tvshows?name=</string>
 	<string name="uri_user_search">users?name=</string>
+	
+	<!-- Display messages -->
+	<string name="not_found">Results not found!</string>
+	<string name="unexpected">An unexpected error occurred!</string>
+	<string name="error_rating">Error requesting the Rating!</string>
+	<string name="error_comment">Error requesting the Comments!</string>
+	<string name="error_subscribe">Error subscribing the TvShow!</string>
+	<string name="success_subscribe">TvShow subscribed successfully!</string>
+	<string name="comment_permission">You don\'t have permission to delete this comment!</string>
+	<string name="comment_success">Your comment will be processed.</string>
+	<string name="comment_error">Error sending the comment.</string>
+	<string name="error_friend_req">Error in friend request!</string>
+	<string name="success_friend_req">Friend request sended!</string>
+	<string name="error_login">Login failed.</string>
+	<string name="success_login">Login successful!</string>
+	<string name="error_subs">Error requesting the Subscriptions!</string>
+	<string name="error_friends">Error requesting the List of Friends!</string>
+	<string name="error_profile">Error requesting user profile.</string>
+	<string name="error_genres">Error requesting the list of genres!</string>
+	<string name="error_calendar">Error requesting the calendar!</string>
+	<string name="error_episode">Error requesting episode information!</string>
+	<string name="error_sub_rating">Error submitting rating!</string>
+	<string name="submit_rating">Your rating request will be processed.</string>
+	<string name="error_sub_comment">Error submitting your comment!</string>
+	<string name="submit_comment">Your comment will be processed.</string>
+	<string name="error_search_by_name">We don\'t know this TvShow yet.</string>
+	<string name="error_search_by_genre">Error in search by genre.</string>
+	<string name="error_epi_synopses">Error in episode synopsis.</string>
+	<string name="error_sea_synopses">Error in season synopsis.</string>
 </resources>

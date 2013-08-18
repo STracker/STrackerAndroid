@@ -1,7 +1,6 @@
 package src.stracker;
 
-import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,9 +12,8 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import src.stracker.asynchttp.DummyRequest;
-import src.stracker.asynchttp.UserRequest;
+import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.Comment;
-import src.stracker.utils.Utils;
 
 @ContentView(R.layout.activity_comment)
 public class CommentActivity extends RoboActivity {
@@ -26,12 +24,10 @@ public class CommentActivity extends RoboActivity {
   
 	private STrackerApp _app;
 	private Comment _comment;
-	private Context _context;
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_context = this;
 		_app = (STrackerApp) getApplication();
 		_comment = getIntent().getParcelableExtra("comment");
 		_userName.setText(_comment.getUserName());
@@ -41,14 +37,13 @@ public class CommentActivity extends RoboActivity {
 	
 	View.OnClickListener btnHandler = new View.OnClickListener() {
 	    public void onClick(View v) {
-	    	if(!Utils.checkLogin((Activity)_context, _app))
-				return;
-	    	new UserRequest(_context).authorizedGet(getString(R.string.uri_host_api) + _comment.getUserUri());
+	    	Intent intent = new Intent(CommentActivity.this, ProfileActivity.class);
+	    	intent.putExtra("uri", _comment.getUserUri());
+	    	startActivity(intent);
 	    }
 	  };
 	  
     /**
-	 * (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
@@ -59,7 +54,6 @@ public class CommentActivity extends RoboActivity {
     }
 	
 	/**
-	 * (non-Javadoc)
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
@@ -67,13 +61,20 @@ public class CommentActivity extends RoboActivity {
     {
     	switch(item.getItemId()){
     	case R.id.action_delete_comment:
-    		if(!Utils.checkLogin(this, _app))
-    			break;
     		if(_app.getFbUser().getId().equals(_comment.getUserId())){
-    			new DummyRequest(this).authorizedDelete(getString(R.string.uri_host_api) + _comment.getUri());
+    			new DummyRequest(this, new MyRunnable() {
+					@Override
+					public void run() {
+						Toast.makeText(CommentActivity.this, R.string.comment_error, Toast.LENGTH_SHORT).show();
+					}
+					@Override
+					public <T> void runWithArgument(T response) {
+						Toast.makeText(CommentActivity.this, R.string.comment_success, Toast.LENGTH_SHORT).show();
+					}
+				}).authorizedDelete(_comment.getUri());
     			finish();
     		} else {
-    			Toast.makeText(this, "You don't have permission to delete this comment!", Toast.LENGTH_SHORT).show();
+    			Toast.makeText(this, R.string.comment_permission, Toast.LENGTH_SHORT).show();
     		}
     	}
     	return true;

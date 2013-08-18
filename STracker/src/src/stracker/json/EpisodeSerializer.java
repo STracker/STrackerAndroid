@@ -13,7 +13,6 @@ public class EpisodeSerializer implements ISerialize<Episode> {
 	private PersonSerializer _serializer = new PersonSerializer();
 	
 	/**
-	 * (non-Javadoc)
 	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
 	 */
 	@Override
@@ -23,12 +22,12 @@ public class EpisodeSerializer implements ISerialize<Episode> {
 			JSONObject jObj = new JSONObject(json);
 			episode = new Episode(
 					jObj.getString("Name"),
-					jObj.getInt("EpisodeNumber"),
+					jObj.getJSONObject("Id").getInt("EpisodeNumber"),
 					jObj.getString("Date"),
-					jObj.getString("TvShowId"),
+					jObj.getJSONObject("Id").getString("TvShowId"),
 					jObj.getString("Description"),
 					jObj.getString("Poster"),
-					jObj.getInt("SeasonNumber"),
+					jObj.getJSONObject("Id").getInt("SeasonNumber"),
 					_serializer.deserialize(jObj.getJSONArray("Directors").toString()),
 					_serializer.deserialize(jObj.getJSONArray("GuestActors").toString())
 					);

@@ -2,11 +2,12 @@ package src.stracker.utils;
 
 import java.util.HashMap;
 import src.stracker.FbLoginActivity;
+import src.stracker.FriendsActivity;
 import src.stracker.R;
 import src.stracker.STrackerApp;
+import src.stracker.TvShowsByNameActivity;
 import src.stracker.asynchttp.DummyRequest;
-import src.stracker.asynchttp.FriendsRequest;
-import src.stracker.asynchttp.SearchByNameRequest;
+import src.stracker.asynchttp.MyRunnable;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -35,8 +36,10 @@ public class Utils {
 		adBuilder.setNegativeButton("Search",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				String url = activity.getString(R.string.uri_host_api)+activity.getString(R.string.uri_tvshow_search)+input.getText();
-				new SearchByNameRequest(activity).get(url.replaceAll(" ", "+"));
+				String url = activity.getString(R.string.uri_tvshow_search)+input.getText();
+				Intent intent = new Intent(activity, TvShowsByNameActivity.class);
+				intent.putExtra("uri", url.replaceAll(" ", "+"));
+				activity.startActivity(intent);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();
@@ -50,17 +53,6 @@ public class Utils {
 		if(!app.isLoggedIn())
 			activity.startActivity(new Intent(activity,FbLoginActivity.class));
 		return app.isLoggedIn();
-	}
-	
-	/**
-	 * This method check if the device has internet connectivity
-	 */
-	public static boolean checkConectivity(Activity activity, STrackerApp app){
-		if(!app.verifyInternetConnection()){
-			Toast.makeText(activity, "No internet connection!", Toast.LENGTH_SHORT).show();
-			return false;
-		}
-		return true;
 	}
 	
 	/**
@@ -81,7 +73,16 @@ public class Utils {
 			public void onClick(DialogInterface dialog, int id) {
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("", rating+"");
-				new DummyRequest(activity).authorizedPost(url, params);
+				new DummyRequest(activity, new MyRunnable() {
+					@Override
+					public void run() {
+						Toast.makeText(activity, R.string.error_sub_rating, Toast.LENGTH_SHORT).show();
+					}
+					@Override
+					public <T> void runWithArgument(T response) {
+						Toast.makeText(activity, R.string.submit_rating, Toast.LENGTH_SHORT).show();
+					}
+				}).authorizedPost(url, params);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();
@@ -108,7 +109,16 @@ public class Utils {
 			public void onClick(DialogInterface dialog, int id) {
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("", input.getText().toString());
-				new DummyRequest(activity).authorizedPost(url, params);
+				new DummyRequest(activity, new MyRunnable() {
+					@Override
+					public void run() {
+						Toast.makeText(activity, R.string.error_sub_comment, Toast.LENGTH_SHORT).show();
+					}
+					@Override
+					public <T> void runWithArgument(T response) {
+						Toast.makeText(activity, R.string.submit_comment, Toast.LENGTH_SHORT).show();
+					}
+				}).authorizedPost(url, params);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();
@@ -134,8 +144,10 @@ public class Utils {
 		adBuilder.setNegativeButton("Search",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				String url = activity.getString(R.string.uri_host_api)+activity.getString(R.string.uri_user_search)+input.getText();
-				new FriendsRequest(activity).authorizedGet(url.replaceAll(" ", "+"));
+				String uri = activity.getString(R.string.uri_user_search)+input.getText();
+				Intent intent = new Intent(activity, FriendsActivity.class);
+				intent.putExtra("uri", uri.replaceAll(" ", "+"));
+				activity.startActivity(intent);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();

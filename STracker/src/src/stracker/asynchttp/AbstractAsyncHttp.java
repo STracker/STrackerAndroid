@@ -30,17 +30,23 @@ public abstract class AbstractAsyncHttp {
 	protected Context _context;
 	private ProgressDialog _dialog;
 	final int DEFAULT_TIMEOUT = 30000;
+	final MyRunnable _runnable;
 	protected STrackerApp _app;
+	private String BASE_URL;
 
 	/**
-	 * @param context
+	 * The constructor of the abstract asynchronous http request
+	 * @param context - activity context where the context was made
+	 * @param runnable - callback function 
 	 */
-	public AbstractAsyncHttp(Context context){
+	public AbstractAsyncHttp(Context context, MyRunnable runnable){
 		_context = context;
 		_dialog = new ProgressDialog(context); 
 		_client = new AsyncHttpClient();
 		_client.setTimeout(DEFAULT_TIMEOUT);
 		_app = (STrackerApp) _context.getApplicationContext();
+		_runnable = runnable;
+		BASE_URL = _context.getString(R.string.uri_host_api);
 	}
 
 	/**
@@ -53,7 +59,7 @@ public abstract class AbstractAsyncHttp {
 		_dialog.show();
 		_client.addHeader("Cache-Control", "no-cache");
 		_client.addHeader("Accept", "application/json");
-		_client.get(url, _handler);
+		_client.get(getAbsoluteUrl(url), _handler);
 	}
 	
 	public void authorizedGet(String url) {
@@ -61,21 +67,21 @@ public abstract class AbstractAsyncHttp {
 		//Waiting message
 		_dialog.setMessage("loading...");
 		_dialog.show();
-		_client.addHeader("Authorization", getAuthorizationHeader("GET",url, null));
-		_client.get(url, _handler);
+		_client.addHeader("Authorization", getAuthorizationHeader("GET",getAbsoluteUrl(url), null));
+		_client.get(getAbsoluteUrl(url), _handler);
 	}
 	
 	public void authorizedPost(String url, HashMap<String, String> params){
 		if(!Utils.checkLogin((Activity)_context, _app)) return;
 		PostParams postParams = buildRequestBody(params);
-		_client.addHeader("Authorization", getAuthorizationHeader("POST",url, postParams.payload));
-		_client.post(url,postParams.params,_handler);
+		_client.addHeader("Authorization", getAuthorizationHeader("POST",getAbsoluteUrl(url), postParams.payload));
+		_client.post(getAbsoluteUrl(url),postParams.params,_handler);
 	}
 	
 	public void authorizedDelete(String url){
 		if(!Utils.checkLogin((Activity)_context, _app)) return;
-		_client.addHeader("Authorization", getAuthorizationHeader("DELETE",url, null));
-		_client.delete(url,_handler);
+		_client.addHeader("Authorization", getAuthorizationHeader("DELETE",getAbsoluteUrl(url), null));
+		_client.delete(getAbsoluteUrl(url),_handler);
 	}
 	
 	/**
@@ -91,7 +97,7 @@ public abstract class AbstractAsyncHttp {
 		@Override
 		public void onFailure(Throwable e, String response){
 			if(_dialog.isShowing()) _dialog.dismiss();
-			onErrorHook(e,response);
+			_runnable.run();
 		}
 	};
 	
@@ -141,13 +147,10 @@ public abstract class AbstractAsyncHttp {
 	
 	/**
 	 * This method must implement the behavior of the class after the http method returns successfully.
+	 * @param response - string that contains the Http response
 	 */
 	protected abstract void onSuccessHook(String response);
-	/**
-	 * This method must implement the behavior of the class after the http method returns in error.
-	 */
-	protected abstract void onErrorHook(Throwable e,String response);
-	
+
 	private class PostParams{
 		public RequestParams params;
 		String payload;
@@ -156,5 +159,9 @@ public abstract class AbstractAsyncHttp {
 			params = requestParams;
 			payload = pl;
 		}
+	}
+	
+	private String getAbsoluteUrl(String url){
+		return BASE_URL + url;
 	}
 }

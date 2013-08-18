@@ -15,7 +15,6 @@ public class TvShowSerializer implements ISerialize<TvShow> {
     private ActorSerializer _actorSerializer = new ActorSerializer();
     
     /**
-     * (non-Javadoc)
      * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
      */
 	@Override
@@ -24,7 +23,7 @@ public class TvShowSerializer implements ISerialize<TvShow> {
 		try {
 			JSONObject jObj = new JSONObject(json);
 			tvShow = new TvShow(
-					jObj.getString("TvShowId"),
+					jObj.getString("Id"),
 					jObj.getString("Name"),
 					jObj.getString("Description"),
 					jObj.getString("AirDay"),
@@ -33,7 +32,7 @@ public class TvShowSerializer implements ISerialize<TvShow> {
 					jObj.getString("FirstAired"),
 					jObj.getString("Poster"),
 					_genreSerializer.deserialize(jObj.getJSONArray("Genres").toString()),
-					_seasonSerializer.deserialize(jObj.getJSONArray("SeasonSynopses").toString()),
+					_seasonSerializer.deserialize(jObj.getJSONArray("Seasons").toString()),
 					_actorSerializer.deserialize(jObj.getJSONArray("Actors").toString())
 					);
 		} catch (JSONException e) {

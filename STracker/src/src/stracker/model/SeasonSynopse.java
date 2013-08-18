@@ -7,15 +7,25 @@ public class SeasonSynopse implements Parcelable{
 
 	private int Number;
 	private String Uri;
+	private String Name;
 	
     public SeasonSynopse(Parcel in){
     	readFromParcel(in);
     }
 	
-	public SeasonSynopse(int number, String uri) {
+	public SeasonSynopse(int number, String uri, String name) {
 		super();
 		Number = number;
 		Uri = uri;
+		Name = name;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
 	}
 
 	public String getUri() {
@@ -43,11 +53,13 @@ public class SeasonSynopse implements Parcelable{
 	public void writeToParcel(Parcel dest, int arg1) {
 		dest.writeInt(Number);
 		dest.writeString(Uri);
+		dest.writeString(Name);
 	}
 	
 	public void readFromParcel(Parcel in){
 		setNumber(in.readInt());
 		setUri(in.readString());
+		setName(in.readString());
 	}
 
 	public static final Parcelable.Creator<SeasonSynopse> CREATOR =

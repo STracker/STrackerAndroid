@@ -7,9 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.CommentsAdapter;
+import src.stracker.asynchttp.CommentsRequest;
+import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.Comment;
 import src.stracker.utils.Utils;
 
@@ -18,39 +21,42 @@ public class CommentsActivity extends RoboListActivity {
 
 	private CommentsAdapter _adapter;
 	private ArrayList<Comment> _comments;
-	private STrackerApp _app;
 	private String _uri;
 	
 	/**
-	 * (non-Javadoc)
 	 * @see roboguice.activity.RoboListActivity#onCreate(android.os.Bundle)
 	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_app = (STrackerApp) getApplication();
-		setTitle("Comments");
-		_comments = getIntent().getParcelableArrayListExtra("list");
-		_uri = getIntent().getStringExtra("uri");
-		_adapter = new CommentsAdapter(this, _comments);
-		setListAdapter(_adapter);
+		String uri = getIntent().getStringExtra("uri");
+		new CommentsRequest(this, new MyRunnable() {
+			@Override
+			public void run() {
+				Toast.makeText(CommentsActivity.this, R.string.error_comment, Toast.LENGTH_SHORT).show();
+			}
+			@Override
+			public <T> void runWithArgument(T response) {
+				setTitle("Comments");
+				_comments = (ArrayList<Comment>) response;
+				_uri = getIntent().getStringExtra("uri");
+				_adapter = new CommentsAdapter(CommentsActivity.this, _comments);
+				setListAdapter(_adapter);
+			}
+		}).get(uri);
 	}
 	
 	/**
-	 * (non-Javadoc)
 	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		if(!Utils.checkLogin(this, _app))
-			return;
 		Intent intent = new Intent(this, CommentActivity.class);
 		intent.putExtra("comment", _comments.get(position));
 		startActivity(intent);
 	}
 	
 	/**
-	 * (non-Javadoc)
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
 	 */
 	@Override
@@ -61,7 +67,6 @@ public class CommentsActivity extends RoboListActivity {
     }
 	
 	/**
-	 * (non-Javadoc)
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
@@ -69,9 +74,7 @@ public class CommentsActivity extends RoboListActivity {
     {
     	switch(item.getItemId()){
     	case R.id.action_add_comment:
-    		if(!Utils.checkLogin(this, _app))
-    			break;
-    		Utils.addComment(getString(R.string.uri_host_api) + _uri, this);
+    		Utils.addComment(_uri, this);
     		break; 
     	}
     	return true;

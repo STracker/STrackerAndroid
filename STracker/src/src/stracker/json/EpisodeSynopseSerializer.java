@@ -13,7 +13,6 @@ import src.stracker.model.EpisodeSynopse;
 public class EpisodeSynopseSerializer implements ISerialize<ArrayList<EpisodeSynopse>> {
 
 	/**
-	 * (non-Javadoc)
 	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
 	 */
 	@Override
@@ -21,15 +20,15 @@ public class EpisodeSynopseSerializer implements ISerialize<ArrayList<EpisodeSyn
 		ArrayList<EpisodeSynopse> episodes = new ArrayList<EpisodeSynopse>();
 		try {
 			JSONObject jObject = new JSONObject(json);
-			JSONArray jsonArray = jObject.getJSONArray("EpisodeSynopses");
+			JSONArray jsonArray = jObject.getJSONArray("Episodes");
 			for (int i = 0; i < jsonArray.length(); i++) {
 		        JSONObject jObj = jsonArray.getJSONObject(i);
 		        episodes.add(new EpisodeSynopse(
-					jObj.getInt("EpisodeNumber"),
+					jObj.getJSONObject("Id").getInt("EpisodeNumber"),
 					jObj.getString("Name"),
 					jObj.getString("Uri"),
 					jObj.getString("Date"),
-					jObj.getInt("SeasonNumber")
+					jObj.getJSONObject("Id").getInt("SeasonNumber")
 					));
 			}
 		} catch (JSONException e) {

@@ -1,29 +1,35 @@
 package src.stracker.asynchttp;
 
-import src.stracker.TvShowActivity;
 import src.stracker.json.JSONLocator;
 import src.stracker.json.RatingsSerializer;
 import src.stracker.model.Ratings;
 import android.content.Context;
-import android.widget.Toast;
 
+/**
+ * @author diogomatos
+ * This implementation represents a request to a rating of a television show
+ */
 public class TvShowRatingRequest extends AbstractAsyncHttp {
 
 	private RatingsSerializer _serializer;
 	
-	public TvShowRatingRequest(Context context) {
-		super(context);
+	/**
+	 * The constructor of the television show rating request 
+	 * @param context - activity context
+	 * @param runnable - callback to be invoked
+	 */
+	public TvShowRatingRequest(Context context, MyRunnable runnable) {
+		super(context, runnable);
 		_serializer = (RatingsSerializer) JSONLocator.getInstance().getSerializer(Ratings.class);
 	}
 
+	/**
+	 * @see src.stracker.asynchttp.AbstractAsyncHttp#onSuccessHook(java.lang.String)
+	 * @param response - string with the Http Response 
+	 */
 	@Override
 	protected void onSuccessHook(String response) {
 		Ratings rating = _serializer.deserialize(response);
-		((TvShowActivity) _context).onRatingSuccess(rating);
-	}
-
-	@Override
-	protected void onErrorHook(Throwable e, String response) {
-		Toast.makeText(_context, "No results found", Toast.LENGTH_SHORT).show();
+		_runnable.runWithArgument(rating);
 	}
 }

@@ -8,7 +8,8 @@ import src.stracker.adapters.ActorsAdapter;
 import src.stracker.model.Actor;
 
 /**
- * This Activity represents the list of Actors from a tv show
+ * @author diogomatos
+ * This Activity represents the list of Actors from a telvision show
  */
 @ContentView(R.layout.activity_list)
 public class ActorsActivity extends RoboListActivity {
@@ -17,7 +18,6 @@ public class ActorsActivity extends RoboListActivity {
 	private ActorsAdapter _adapter;
 	
 	/**
-	 * (non-Javadoc)
 	 * @see roboguice.activity.RoboListActivity#onCreate(android.os.Bundle)
 	 */
 	@Override 

@@ -14,7 +14,7 @@ public class CommentsSerializer implements ISerialize<ArrayList<Comment>> {
 	public ArrayList<Comment> deserialize(String json) {
 		ArrayList<Comment> comments = new ArrayList<Comment>();
 		try {
-			JSONArray jsonArray = new JSONArray(json);
+			JSONArray jsonArray = new JSONObject(json).getJSONArray("Comments");
 			for (int i = 0; i < jsonArray.length(); i++) {
 		        JSONObject jObj = jsonArray.getJSONObject(i);
 		        comments.add(new Comment(
