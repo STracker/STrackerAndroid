@@ -8,7 +8,7 @@
 	<string name="app_id">516839011711939</string>
 	<string name="hawk_key">werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
 	<string name="fb_login">To perform this action you need to login!</string>
-	<string name="separator">. </string>
+	<string name="separator">.&#160;</string>
 	
 	<!-- Information about TvShow -->
 	<string name="serie_name">Name:&#160;</string>

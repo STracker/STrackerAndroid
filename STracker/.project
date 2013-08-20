@@ -3,6 +3,7 @@
 	<name>STracker</name>
 	<comment></comment>
 	<projects>
+		<project>pulltorefresh</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

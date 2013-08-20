@@ -9,7 +9,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.Toast;
-import roboguice.activity.RoboActivity;
+import roboguice.event.Observes;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import src.stracker.asynchttp.EpisodeRatingRequest;
@@ -17,6 +17,7 @@ import src.stracker.asynchttp.EpisodeRequest;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.Episode;
 import src.stracker.model.Ratings;
+import src.stracker.utils.ShakeDetector;
 import src.stracker.utils.Utils;
 
 /**
@@ -24,7 +25,7 @@ import src.stracker.utils.Utils;
  * This Activity represents the information about an episode of a tv show
  */
 @ContentView(R.layout.activity_episode)
-public class EpisodeActivity extends RoboActivity {
+public class EpisodeActivity extends BaseActivity {
 
 	@InjectView(R.id.episode_info) 		   TextView _episodeInfo;
 	@InjectView(R.id.episode_date) 		   TextView _date;
@@ -36,7 +37,7 @@ public class EpisodeActivity extends RoboActivity {
 	private Episode _episode;
 	
 	/**
-	 * @see roboguice.activity.RoboActivity#onCreate(android.os.Bundle)
+	 * @see src.stracker.BaseActivity#onCreate(android.os.Bundle)
 	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,25 +68,8 @@ public class EpisodeActivity extends RoboActivity {
 						Utils.initRatingSubmission(uri , EpisodeActivity.this, (int) rating);
 					}
 				});
-				
-				//build rating URI
-				String uri = getString(R.string.uri_episode_rating)
-									.replace("tvShowId", _episode.getTvShowId())
-									.replace("seasonNumber", _episode.getSeasonNumber()+"")
-									.replace("episodeNumber", _episode.getNumber()+"");
-				new EpisodeRatingRequest(EpisodeActivity.this, new MyRunnable() {
-					@Override
-					public void run() {
-						Toast.makeText(EpisodeActivity.this, R.string.error_rating, Toast.LENGTH_SHORT).show();
-					}
-					
-					@Override
-					public <T> void runWithArgument(T response) {
-						Ratings rating = (Ratings) response;
-						_ratingAvg.setText(getString(R.string.rating_episode_avg) + rating.getRating());
-						_ratingTotal.setText(getString(R.string.rating_episode_total) + rating.getTotal());
-					}
-				}).get(uri);
+				//Get rating information
+				performRequest();
 			}
 		}).get(episodeUri);	
 	}
@@ -99,6 +83,7 @@ public class EpisodeActivity extends RoboActivity {
         getMenuInflater().inflate(R.menu.episode, menu);   
         return true;
     }
+	
 	/**
 	 * This method defines the callback's when a button of the menu is pressed
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
@@ -129,4 +114,36 @@ public class EpisodeActivity extends RoboActivity {
     	}
     	return true;
     }
+	
+	/**
+	 * Event associated to shake motion
+	 * @param event - shake event
+	 */
+	public void handleShake(@Observes ShakeDetector.OnShakeEvent event) {
+		performRequest();
+	}
+	
+	/**
+	 * This method is used to perform the http request command
+	 */
+	private void performRequest(){
+		//build rating URI
+		String uri = getString(R.string.uri_episode_rating)
+							.replace("tvShowId", _episode.getTvShowId())
+							.replace("seasonNumber", _episode.getSeasonNumber()+"")
+							.replace("episodeNumber", _episode.getNumber()+"");
+		new EpisodeRatingRequest(EpisodeActivity.this, new MyRunnable() {
+			@Override
+			public void run() {
+				Toast.makeText(EpisodeActivity.this, R.string.error_rating, Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public <T> void runWithArgument(T response) {
+				Ratings rating = (Ratings) response;
+				_ratingAvg.setText(getString(R.string.rating_episode_avg) + rating.getRating());
+				_ratingTotal.setText(getString(R.string.rating_episode_total) + rating.getTotal());
+			}
+		}).get(uri);
+	}
 }

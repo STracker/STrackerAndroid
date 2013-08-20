@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.AdapterView;
 import android.widget.Toast;
-import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.MainListAdapter;
 import src.stracker.asynchttp.CalendarRequest;
@@ -22,13 +21,13 @@ import src.stracker.model.EpisodeSynopse;
  * This activity represents the calendar of episodes of tv shows
  */
 @ContentView(R.layout.activity_list)
-public class CalendarActivity extends RoboListActivity {
+public class CalendarActivity extends BaseListActivity {
 
 	private ArrayList<EpisodeSynopse> _arrayList;
 	private MainListAdapter _adapter;
 	
 	/**
-	 * @see roboguice.activity.RoboListActivity#onCreate(android.os.Bundle)
+	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
 	 */
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
@@ -44,22 +43,10 @@ public class CalendarActivity extends RoboListActivity {
 				_arrayList = (ArrayList<EpisodeSynopse>) response;
 				List<IEntry> items = buildCalendarView();
 		        _adapter = new MainListAdapter(CalendarActivity.this, items); 
-		        setListAdapter(_adapter);
+		        _listView.setAdapter(_adapter);
 			}
 		}).authorizedGet(getString(R.string.uri_user_newepisodes));
 	} 
-	
-	/**
-	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
-	 * When a list result is pressed make the specific request according the type of the results
-	 */
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		if(_adapter.getItem(position).getViewType() == EntryType.HEADER_ITEM.ordinal())
-			return;
-		//EpisodeSynopse episode = _arrayList.get(position);
-		//new EpisodeRequest(this).get(episode.getUri());
-	}
 	
 	/**
 	 * This method return a list of entries to show in calendar view
@@ -89,5 +76,16 @@ public class CalendarActivity extends RoboListActivity {
 			   ((episode.getSeasonNumber() < 10) ? "0" : "") + episode.getSeasonNumber() + 
 			   "E" +
 			   ((episode.getNumber() < 10) ? "0" : "") + episode.getNumber();
+	}
+
+	/**
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
+		if(_adapter.getItem(position).getViewType() == EntryType.HEADER_ITEM.ordinal())
+			return;
+		//EpisodeSynopse episode = _arrayList.get(position);
+		//new EpisodeRequest(this).get(episode.getUri());
 	}
 }

@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.AdapterView;
 import android.widget.Toast;
-import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.UserAdapter;
 import src.stracker.asynchttp.FriendsRequest;
@@ -14,13 +13,13 @@ import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.UserSynopse;
 
 @ContentView(R.layout.activity_list)
-public class FriendsActivity extends RoboListActivity {
+public class FriendsActivity extends BaseListActivity {
 
 	private ArrayList<UserSynopse> _users;
 	private UserAdapter _adapter;
 	
 	/**
-	 * @see roboguice.activity.RoboListActivity#onCreate(android.os.Bundle)
+	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
 	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,16 +34,16 @@ public class FriendsActivity extends RoboListActivity {
 			public <T> void runWithArgument(T response) {
 				_users = (ArrayList<UserSynopse>) response;
 				_adapter = new UserAdapter(FriendsActivity.this, _users);
-				setListAdapter(_adapter);
+				_listView.setAdapter(_adapter);
 			}
 		}).authorizedGet(getString(R.string.uri_user_friends));
 	}
-	
+
 	/**
-	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
 	 */
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		UserSynopse user = _users.get(position);
 		Intent intent = new Intent(this, ProfileActivity.class);
 		intent.putExtra("uri", user.getUri());

@@ -2,10 +2,9 @@ package src.stracker;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.Intent;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.AdapterView;
 import android.widget.Toast;
 import src.stracker.asynchttp.EpisodesRequest;
 import src.stracker.asynchttp.MyRunnable;
@@ -13,6 +12,9 @@ import src.stracker.model.EpisodeSynopse;
 
 public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
 
+	/**
+	 * @see src.stracker.SynopsisActivity#fetchRequest(java.lang.String)
+	 */
 	@Override
 	protected void fetchRequest(String uri) {
 		new EpisodesRequest(this, new MyRunnable() {
@@ -34,10 +36,10 @@ public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
 	
 	/**
 	 * When a list result is pressed make the specific request according the type of the results
-	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
 	 */
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onItemClick(AdapterView<?> adapt, View v, int position, long id) {
 		Intent intent = new Intent(this, EpisodeActivity.class);
 		intent.putExtra("uri", _synopses.get(position).getUri());
 		startActivity(intent);

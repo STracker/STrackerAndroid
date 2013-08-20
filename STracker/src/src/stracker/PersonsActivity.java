@@ -2,23 +2,25 @@ package src.stracker;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 import src.stracker.model.Person;
 
 @ContentView(R.layout.activity_list)
-public class PersonsActivity extends RoboListActivity {
+public class PersonsActivity extends BaseListActivity {
 
 	private ArrayAdapter<String> _adapter;
 	private ArrayList<Person> _arrayList;
 	
+	/**
+	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
+	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
@@ -37,6 +39,12 @@ public class PersonsActivity extends RoboListActivity {
                 return view; 
         	}
         };
-        setListAdapter(_adapter);
+        _listView.setAdapter(_adapter);
 	}
+
+	/**
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 */
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {}
 }

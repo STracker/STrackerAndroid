@@ -2,13 +2,10 @@ package src.stracker;
 
 import java.util.Arrays;
 import java.util.HashMap;
-
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -17,6 +14,7 @@ import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 
+import roboguice.inject.ContentView;
 import src.stracker.asynchttp.DummyRequest;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.User;
@@ -25,10 +23,10 @@ import src.stracker.model.User;
  * The login activity.
  * @author diogomatos
  */
-public class FbLoginActivity extends Activity {
+@ContentView(R.layout.activity_login)
+public class FbLoginActivity extends BaseActivity {
 	
 	private UiLifecycleHelper uiHelper;
-	private STrackerApp _app;
 	private ProgressDialog _dialog;
 	LoginButton _loginBtn;
 	
@@ -40,15 +38,13 @@ public class FbLoginActivity extends Activity {
 	};
 	
 	/**
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 * @see src.stracker.BaseActivity#onCreate(android.os.Bundle)
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
-	    setContentView(R.layout.activity_login);
 	    uiHelper = new UiLifecycleHelper(this, callback);
 	    uiHelper.onCreate(savedInstanceState);
-	    _app = (STrackerApp) getApplication();
 	    _dialog = new ProgressDialog(this);
 	    _loginBtn = (LoginButton) findViewById(R.id.loginBtn);
 	    _loginBtn.setReadPermissions(Arrays.asList("basic_info","email"));
@@ -70,13 +66,13 @@ public class FbLoginActivity extends Activity {
 				@Override
 				public void onCompleted(GraphUser user, Response response) {
 					if(user != null){
-						_app.setFbUser(new User(user.getName(),user.getId(), user.asMap().get("email").toString()));
+						_application.setFbUser(new User(user.getName(),user.getId(), user.asMap().get("email").toString()));
 					}
 					_dialog.dismiss();
 					HashMap<String, String> params = new HashMap<String, String>();
-					params.put("Name", _app.getFbUser().getName());
-					params.put("Email", _app.getFbUser().getEmail());
-					params.put("Photo", _app.getFbUser().getPhotoUrl());
+					params.put("Name", _application.getFbUser().getName());
+					params.put("Email", _application.getFbUser().getEmail());
+					params.put("Photo", _application.getFbUser().getPhotoUrl());
 					new DummyRequest(FbLoginActivity.this, new MyRunnable() {
 						@Override
 						public void run() {
@@ -93,12 +89,12 @@ public class FbLoginActivity extends Activity {
 	    }
 		//if logged out then
 		else if (state.isClosed()) {
-	    	_app.logout();
+	    	_application.logout();
 	    }
 	}
 
 	/**
-	 * @see android.app.Activity#onResume()
+	 * @see roboguice.activity.RoboActivity#onResume()
 	 */
 	@Override
 	public void onResume() {
@@ -107,7 +103,7 @@ public class FbLoginActivity extends Activity {
 	}
 
 	/**
-	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
+	 * @see roboguice.activity.RoboActivity#onActivityResult(int, int, android.content.Intent)
 	 */
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -116,7 +112,7 @@ public class FbLoginActivity extends Activity {
 	}
 
 	/**
-	 * @see android.app.Activity#onPause()
+	 * @see roboguice.activity.RoboActivity#onPause()
 	 */
 	@Override
 	public void onPause() {
@@ -125,7 +121,7 @@ public class FbLoginActivity extends Activity {
 	}
 
 	/**
-	 * @see android.app.Activity#onDestroy()
+	 * @see roboguice.activity.RoboActivity#onDestroy()
 	 */
 	@Override
 	public void onDestroy() {

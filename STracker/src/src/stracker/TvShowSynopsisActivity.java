@@ -2,17 +2,17 @@ package src.stracker;
 
 import android.content.Intent;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.AdapterView;
 import src.stracker.model.TvShowSynopse;
 
 public abstract class TvShowSynopsisActivity extends SynopsisActivity<TvShowSynopse> {
 	
 	/**
 	 * When a list result is pressed make the specific request according the type of the results
-	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
 	 */
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		Intent intent = new Intent(this, TvShowActivity.class);
 		intent.putExtra("tvShowUri", _synopses.get(position).getUri());
 		startActivity(intent);

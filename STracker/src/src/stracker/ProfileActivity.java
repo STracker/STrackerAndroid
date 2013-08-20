@@ -1,15 +1,12 @@
 package src.stracker;
 
 import java.util.HashMap;
-
 import com.loopj.android.image.SmartImageView;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import src.stracker.asynchttp.DummyRequest;
@@ -22,13 +19,12 @@ import src.stracker.model.User;
  * @author diogomatos
  */
 @ContentView(R.layout.activity_profile)
-public class ProfileActivity extends RoboActivity {
+public class ProfileActivity extends BaseActivity {
 
 	@InjectView(R.id.profile_name) TextView _profileName;
 	@InjectView(R.id.profile_photo_id) SmartImageView _profilePhoto;
 	@InjectView(R.id.profile_email) TextView _profileEmail;
 	private User _user;
-	private STrackerApp _app;
 	
 	/**
 	 * @see roboguice.activity.RoboActivity#onCreate(android.os.Bundle)
@@ -36,11 +32,10 @@ public class ProfileActivity extends RoboActivity {
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		_app = (STrackerApp) getApplication();
 		setTitle(getString(R.string.profile_title));
 		String uri = getIntent().getStringExtra("uri");
 		if(uri == null){
-			_user = _app.getFbUser();
+			_user = _application.getFbUser();
 			setProfileInformation();
 		}
 		else {

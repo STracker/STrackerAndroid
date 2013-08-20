@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import roboguice.activity.RoboListActivity;
 import roboguice.inject.ContentView;
 
 /**
@@ -17,13 +16,13 @@ import roboguice.inject.ContentView;
  * When a request to the STracker Server is a list of synopses this Activity is used to show the results.
  */
 @ContentView(R.layout.activity_list)
-public abstract class SynopsisActivity<T> extends RoboListActivity {
+public abstract class SynopsisActivity<T> extends BaseListActivity {
 
 	private ArrayAdapter<String> _adapter;
 	protected ArrayList<T> _synopses;
 	
 	/**
-	 * @see roboguice.activity.RoboListActivity#onCreate(android.os.Bundle)
+	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
 	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +30,10 @@ public abstract class SynopsisActivity<T> extends RoboListActivity {
 		fetchRequest(getIntent().getStringExtra("uri"));
 	}
 	
+	/**
+	 * This method creates the adapter to affect the list in the activity
+	 * @param elems - list of string with the elements
+	 */
 	protected void setAdapter(List<String> elems){
 		//Create the list view adapter with the specific results
         _adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, elems){
@@ -42,8 +45,12 @@ public abstract class SynopsisActivity<T> extends RoboListActivity {
                 return view; 
         	}
         };
-        setListAdapter(_adapter);
+        _listView.setAdapter(_adapter);
 	}
 	
+	/**
+	 * This method implements the request of the information to show in the activity
+	 * @param uri - URI to request the information
+	 */
 	protected abstract void fetchRequest(String uri);
 }

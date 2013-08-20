@@ -1,66 +1,42 @@
 package src.stracker;
 
 import java.util.ArrayList;
+
+import roboguice.event.Observes;
+import roboguice.inject.ContentView;
 import src.stracker.adapters.TvShowSynopseAdapter;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.TopRatedRequest;
 import src.stracker.model.TvShowSynopse;
+import src.stracker.utils.ShakeDetector;
 import src.stracker.utils.Utils;
-import android.app.ListActivity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 /**
  * This Activity is the initial activity of STracker Android application.
  * @author diogomatos
  */
-public class MainActivity extends ListActivity {
+@ContentView(R.layout.activity_main)
+public class MainActivity extends BaseListActivity {
 
-	private STrackerApp _app;
 	private ArrayList<TvShowSynopse> _elems;
 	
 	/**
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
-	@Override  
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState); 
-		setContentView(R.layout.activity_main);
-		_app = (STrackerApp) getApplication();	
-	} 
-	
-	/**
-	 * @see android.app.Activity#onResume()
+	 * @see roboguice.activity.RoboActivity#onResume()
 	 */
 	@Override
 	public void onResume(){
 		super.onResume();
-		//Request top rated shows
-		new TopRatedRequest(this, new MyRunnable() {
-			@Override
-			public void run() 
-			{
-				Toast.makeText(MainActivity.this, R.string.not_found, Toast.LENGTH_SHORT).show(); 
-			}
-			
-			@Override
-			public <T> void runWithArgument(T response) 
-			{
-				_elems = (ArrayList<TvShowSynopse>) response;
-				TvShowSynopseAdapter adapter = new TvShowSynopseAdapter(MainActivity.this, _elems);
-				setListAdapter(adapter);
-			}
-		}).get(getString(R.string.uri_tvshow_toprated));
+		performRequest();
 	}
-	 
+	
 	/**
 	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-	 * @param menu - reference to activity menu
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) 
@@ -71,9 +47,7 @@ public class MainActivity extends ListActivity {
 	}
 
 	/**
-	 * This method defines the callback's when a button of the menu is pressed
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
-	 * @param item - reference to pressed menu item
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
@@ -81,7 +55,7 @@ public class MainActivity extends ListActivity {
 		switch(item.getItemId()){
 			case R.id.action_profile:
 				Intent intentProfile = new Intent(this,ProfileActivity.class);
-				intentProfile.putExtra("user", _app.getFbUser());
+				intentProfile.putExtra("user", _application.getFbUser());
 				startActivity(intentProfile);
 				break;
 			case R.id.action_series:
@@ -105,20 +79,49 @@ public class MainActivity extends ListActivity {
 		}
 		return true;
 	}
-
+	
 	/**
 	 * When a genre of the list is pressed, create a request to get all tv shows from that genre
-	 * @see android.app.ListActivity#onListItemClick(android.widget.ListView, android.view.View, int, long)
-	 * @param l - listview 
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 * @param adapt - adapterview 
 	 * @param v - view
 	 * @param position - position in list of the triggered item
 	 * @param id - identifier
 	 */
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) 
-	{
+	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		Intent intent = new Intent(this,TvShowActivity.class);
 		intent.putExtra("tvShowUri", _elems.get(position).getUri());
 		startActivity(intent);
+	}
+	
+	/**
+	 * Event associated to shake motion
+	 * @param event - shake event
+	 */
+	public void handleShake(@Observes ShakeDetector.OnShakeEvent event) {
+		performRequest();
+	}
+	
+	/**
+	 * This method is used to perform the http request command
+	 */
+	private void performRequest(){
+		//Request top rated shows
+		new TopRatedRequest(this, new MyRunnable() {
+			@Override
+			public void run() 
+			{
+				Toast.makeText(MainActivity.this, R.string.not_found, Toast.LENGTH_SHORT).show(); 
+			}
+			
+			@Override
+			public <T> void runWithArgument(T response) 
+			{
+				_elems = (ArrayList<TvShowSynopse>) response;
+				TvShowSynopseAdapter adapter = new TvShowSynopseAdapter(MainActivity.this, _elems);
+				_listView.setAdapter(adapter);
+			}
+		}).get(getString(R.string.uri_tvshow_toprated));
 	}
 }

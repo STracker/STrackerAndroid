@@ -2,7 +2,6 @@ package src.stracker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.loopj.android.image.SmartImageView;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 import roboguice.activity.RoboActivity;
+import roboguice.event.Observes;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import src.stracker.asynchttp.DummyRequest;
@@ -23,6 +23,7 @@ import src.stracker.model.GenreSynopse;
 import src.stracker.model.Ratings;
 import src.stracker.model.TvShow;
 import src.stracker.asynchttp.TvShowRequest;
+import src.stracker.utils.ShakeDetector;
 import src.stracker.utils.Utils;
 
 /**
@@ -78,22 +79,8 @@ public class TvShowActivity extends RoboActivity {
 											      );
 					}
 				});
-				
-				//Build rating URI
-				String uri = getString(R.string.uri_tvshow_rating).replace("tvShowId", _tvshow.getId());
-				new TvShowRatingRequest(TvShowActivity.this, new MyRunnable() {
-					@Override
-					public void run() {
-						Toast.makeText(TvShowActivity.this, R.string.error_rating, Toast.LENGTH_SHORT).show();
-					}
-					
-					@Override
-					public <T> void runWithArgument(T response) {
-						Ratings rating = (Ratings) response;
-						_ratingAvg.setText(getString(R.string.rating_tvshow_avg) + rating.getRating());
-						_ratingTotal.setText(getString(R.string.from) + rating.getTotal() + getString(R.string.users));
-					}
-				}).get(uri);
+				//Rating request
+				performRequest();
 			}
 		}).get(tvShowUri);
 	}
@@ -161,5 +148,34 @@ public class TvShowActivity extends RoboActivity {
 				ret.append(", ");
 		}
 		return ret.toString();
+	}
+	
+	/**
+	 * Event associated to shake motion
+	 * @param event - shake event
+	 */
+	public void handleShake(@Observes ShakeDetector.OnShakeEvent event) {
+		performRequest();
+	}
+	
+	/**
+	 * This method is used to perform the http request command
+	 */
+	private void performRequest(){
+		//Build rating URI
+		String uri = getString(R.string.uri_tvshow_rating).replace("tvShowId", _tvshow.getId());
+		new TvShowRatingRequest(TvShowActivity.this, new MyRunnable() {
+			@Override
+			public void run() {
+				Toast.makeText(TvShowActivity.this, R.string.error_rating, Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public <T> void runWithArgument(T response) {
+				Ratings rating = (Ratings) response;
+				_ratingAvg.setText(getString(R.string.rating_tvshow_avg) + rating.getRating());
+				_ratingTotal.setText(getString(R.string.from) + rating.getTotal() + getString(R.string.users));
+			}
+		}).get(uri);
 	}
 }

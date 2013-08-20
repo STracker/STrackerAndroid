@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import src.stracker.asynchttp.DummyRequest;
@@ -16,19 +15,16 @@ import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.Comment;
 
 @ContentView(R.layout.activity_comment)
-public class CommentActivity extends RoboActivity {
+public class CommentActivity extends BaseActivity {
 
 	@InjectView(R.id.act_comment_user) TextView _userName;
 	@InjectView(R.id.comment_text_act) TextView _commentText;
 	@InjectView(R.id.act_comment_profile) Button _profileBtn;
-  
-	private STrackerApp _app;
 	private Comment _comment;
 	
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_app = (STrackerApp) getApplication();
 		_comment = getIntent().getParcelableExtra("comment");
 		_userName.setText(_comment.getUserName());
 		_commentText.setText(_comment.getBody());
@@ -44,8 +40,8 @@ public class CommentActivity extends RoboActivity {
 	  };
 	  
     /**
-	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
-	 */
+     * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+     */
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -61,7 +57,7 @@ public class CommentActivity extends RoboActivity {
     {
     	switch(item.getItemId()){
     	case R.id.action_delete_comment:
-    		if(_app.getFbUser().getId().equals(_comment.getUserId())){
+    		if(_application.getFbUser().getId().equals(_comment.getUserId())){
     			new DummyRequest(this, new MyRunnable() {
 					@Override
 					public void run() {
