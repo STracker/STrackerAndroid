@@ -91,10 +91,10 @@
 	
 	<!-- Application URI's -->
 	<string name="uri_host_api">http://strackerserverdev.apphb.com/api/</string>
-	<string name="uri_user_subscriptions">usersubscriptions</string>
+	<string name="uri_user_subscriptions">user/subscriptions</string>
 	<string name="uri_genres">genres</string>
-	<string name="uri_user_friends">userfriends</string>
-	<string name="uri_user_newepisodes">usernewepisodes</string>
+	<string name="uri_user_friends">user/friends</string>
+	<string name="uri_user_newepisodes">user/newepisodes</string>
 	<string name="uri_tvshow_toprated">tvshows/toprated</string>
 	<string name="uri_episode_comments">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber/comments"</string>
 	<string name="uri_episode_rating">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber/ratings"</string>
@@ -103,6 +103,7 @@
 	<string name="uri_users">users</string>
 	<string name="uri_tvshow_search">tvshows?name=</string>
 	<string name="uri_user_search">users?name=</string>
+	<string name="uri_user_info">users/userId</string>
 	
 	<!-- Display messages -->
 	<string name="not_found">Results not found!</string>
@@ -132,4 +133,6 @@
 	<string name="error_search_by_genre">Error in search by genre.</string>
 	<string name="error_epi_synopses">Error in episode synopsis.</string>
 	<string name="error_sea_synopses">Error in season synopsis.</string>
+	<string name="error_user_req">Error in user information request!</string>
+	<string name="loading_message">loading&#8230;</string>
 </resources>

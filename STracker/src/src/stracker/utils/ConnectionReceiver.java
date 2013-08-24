@@ -12,8 +12,8 @@ public class ConnectionReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent ){
 		STrackerApp app = (STrackerApp) context.getApplicationContext();
-		app.set_Connectivity(!intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false));
-		if(!app.is_Connected())
+		app.setConnectivity(!intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false));
+		if(!app.isConnected())
 			Toast.makeText(context, "Lost internet connection", Toast.LENGTH_SHORT).show();
 	}
 }

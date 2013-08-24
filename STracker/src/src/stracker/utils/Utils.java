@@ -1,13 +1,13 @@
 package src.stracker.utils;
 
-import java.util.HashMap;
 import src.stracker.FbLoginActivity;
 import src.stracker.FriendsActivity;
 import src.stracker.R;
 import src.stracker.STrackerApp;
 import src.stracker.TvShowsByNameActivity;
-import src.stracker.asynchttp.DummyRequest;
+import src.stracker.asynchttp.CommentRequests;
 import src.stracker.asynchttp.MyRunnable;
+import src.stracker.asynchttp.RatingRequests;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,7 +18,7 @@ import android.widget.Toast;
 public class Utils {
 
 	/**
-	 * This method pop's up an AlertDialog to begin the Search a tv show by the name.
+	 * This method pop's up an AlertDialog to begin the Search a television show by the name.
 	 */
 	public static void initSearchByName(final Activity activity){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
@@ -36,9 +36,8 @@ public class Utils {
 		adBuilder.setNegativeButton("Search",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				String url = activity.getString(R.string.uri_tvshow_search)+input.getText();
 				Intent intent = new Intent(activity, TvShowsByNameActivity.class);
-				intent.putExtra("uri", url.replaceAll(" ", "+"));
+				intent.putExtra("uri", input.getText().toString().replaceAll(" ", "+"));
 				activity.startActivity(intent);
 			}
 		});
@@ -49,9 +48,9 @@ public class Utils {
 	/**
 	 * This method check if the application user is logged in with facebook
 	 */
-	public static boolean checkLogin(Activity activity, STrackerApp app){
+	public static boolean checkLogin(STrackerApp app){
 		if(!app.isLoggedIn())
-			activity.startActivity(new Intent(activity,FbLoginActivity.class));
+			app.startActivity(new Intent(app,FbLoginActivity.class));
 		return app.isLoggedIn();
 	}
 	
@@ -71,9 +70,7 @@ public class Utils {
 		adBuilder.setNegativeButton("Submit",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				HashMap<String, String> params = new HashMap<String, String>();
-				params.put("", rating+"");
-				new DummyRequest(activity, new MyRunnable() {
+				RatingRequests.postRating((STrackerApp)activity.getApplication(), new MyRunnable() {
 					@Override
 					public void run() {
 						Toast.makeText(activity, R.string.error_sub_rating, Toast.LENGTH_SHORT).show();
@@ -82,7 +79,7 @@ public class Utils {
 					public <T> void runWithArgument(T response) {
 						Toast.makeText(activity, R.string.submit_rating, Toast.LENGTH_SHORT).show();
 					}
-				}).authorizedPost(url, params);
+				}, url, rating+"");
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();
@@ -107,9 +104,7 @@ public class Utils {
 		adBuilder.setNegativeButton("Submit",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				HashMap<String, String> params = new HashMap<String, String>();
-				params.put("", input.getText().toString());
-				new DummyRequest(activity, new MyRunnable() {
+				CommentRequests.postComment((STrackerApp)activity.getApplication(), new MyRunnable() {
 					@Override
 					public void run() {
 						Toast.makeText(activity, R.string.error_sub_comment, Toast.LENGTH_SHORT).show();
@@ -118,7 +113,7 @@ public class Utils {
 					public <T> void runWithArgument(T response) {
 						Toast.makeText(activity, R.string.submit_comment, Toast.LENGTH_SHORT).show();
 					}
-				}).authorizedPost(url, params);
+				}, url, input.getText().toString());
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();

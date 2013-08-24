@@ -3,6 +3,7 @@ package src.stracker.json;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import src.stracker.model.Calendar;
 import src.stracker.model.Comment;
 import src.stracker.model.Actor;
 import src.stracker.model.Episode;
@@ -38,6 +39,7 @@ public class JSONLocator {
 		_dictionary.put(User.class, 		  new UserSerializer());
 		_dictionary.put(Subscription.class,   new SubscriptionSerializer());
 		_dictionary.put(UserSynopse.class,    new FriendsSerializer());
+		_dictionary.put(Calendar.class,       new CalendarSerializer());
 	}
 	
 	/**

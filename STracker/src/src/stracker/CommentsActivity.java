@@ -11,7 +11,7 @@ import android.widget.Toast;
 import roboguice.event.Observes;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.CommentsAdapter;
-import src.stracker.asynchttp.CommentsRequest;
+import src.stracker.asynchttp.CommentRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.Comment;
 import src.stracker.utils.ShakeDetector;
@@ -76,15 +76,15 @@ public class CommentsActivity extends BaseListActivity {
 	}
 	
 	/**
-	 * This method is used to perform the http request command
+	 * This method is used to perform the HTTP request command
 	 */
 	private void performRequest(){
-		final String uri = getIntent().getStringExtra("uri");
-		new CommentsRequest(this, new MyRunnable() {
+		CommentRequests.getComments(this, new MyRunnable() {
 			@Override
 			public void run() {
 				Toast.makeText(CommentsActivity.this, R.string.error_comment, Toast.LENGTH_SHORT).show();
 			}
+			@SuppressWarnings("unchecked")
 			@Override
 			public <T> void runWithArgument(T response) {
 				setTitle("Comments");
@@ -93,6 +93,6 @@ public class CommentsActivity extends BaseListActivity {
 				_adapter = new CommentsAdapter(CommentsActivity.this, _comments);
 				_listView.setAdapter(_adapter);
 			}
-		}).get(uri);
+		}, getIntent().getStringExtra("uri"));
 	}
 }

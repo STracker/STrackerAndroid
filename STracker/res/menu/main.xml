@@ -1,15 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
+        android:id="@+id/action_profile"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/action_profile"/>
+    
+    <item
         android:id="@+id/action_calendar"
-        android:orderInCategory="600"
+        android:orderInCategory="200"
         android:showAsAction="always"
         android:icon="@android:drawable/ic_menu_today"
         android:title="@string/action_calendar"/>
     
     <item
         android:id="@+id/action_search"
-        android:orderInCategory="700"
+        android:orderInCategory="300"
         android:showAsAction="always"
         android:icon="@android:drawable/ic_menu_search"
         android:title="@string/action_search" >
@@ -21,34 +28,5 @@
             <item android:id="@+id/form_friend"
                   android:title="@string/subitem_search_friend" />
         </menu>
-    </item>
-    
-    <item
-        android:id="@+id/action_profile"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/action_profile"/>
-	
-    <item
-        android:id="@+id/action_series"
-        android:orderInCategory="200"
-        android:showAsAction="never"
-        android:icon="@drawable/ic_tv"
-        android:title="@string/action_series"/>
-    
-    <item
-        android:id="@+id/action_friends"
-        android:orderInCategory="300"
-        android:showAsAction="never"
-        android:icon="@drawable/ic_friends"
-        android:title="@string/action_friends"/>
-    
-    <item
-        android:id="@+id/action_messages"
-        android:orderInCategory="400"
-        android:showAsAction="never"
-        android:icon="@drawable/ic_messages"
-        android:title="@string/action_messages"/>
-       
+    </item>   
 </menu>

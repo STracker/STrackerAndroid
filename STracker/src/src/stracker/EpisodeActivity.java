@@ -12,9 +12,9 @@ import android.widget.Toast;
 import roboguice.event.Observes;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
-import src.stracker.asynchttp.EpisodeRatingRequest;
-import src.stracker.asynchttp.EpisodeRequest;
+import src.stracker.asynchttp.EpisodeRequests;
 import src.stracker.asynchttp.MyRunnable;
+import src.stracker.asynchttp.RatingRequests;
 import src.stracker.model.Episode;
 import src.stracker.model.Ratings;
 import src.stracker.utils.ShakeDetector;
@@ -43,7 +43,7 @@ public class EpisodeActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		String episodeUri = getIntent().getStringExtra("uri");
-		new EpisodeRequest(this, new MyRunnable() {	
+		EpisodeRequests.getEpisode(this, new MyRunnable() {	
 			@Override
 			public void run() {
 				Toast.makeText(EpisodeActivity.this, R.string.error_episode, Toast.LENGTH_SHORT).show();
@@ -69,9 +69,9 @@ public class EpisodeActivity extends BaseActivity {
 					}
 				});
 				//Get rating information
-				performRequest();
+				performRatingRequest();
 			}
-		}).get(episodeUri);	
+		}, episodeUri);
 	}
 	
 	/**
@@ -120,19 +120,14 @@ public class EpisodeActivity extends BaseActivity {
 	 * @param event - shake event
 	 */
 	public void handleShake(@Observes ShakeDetector.OnShakeEvent event) {
-		performRequest();
+		performRatingRequest();
 	}
 	
 	/**
 	 * This method is used to perform the http request command
 	 */
-	private void performRequest(){
-		//build rating URI
-		String uri = getString(R.string.uri_episode_rating)
-							.replace("tvShowId", _episode.getTvShowId())
-							.replace("seasonNumber", _episode.getSeasonNumber()+"")
-							.replace("episodeNumber", _episode.getNumber()+"");
-		new EpisodeRatingRequest(EpisodeActivity.this, new MyRunnable() {
+	private void performRatingRequest(){
+		RatingRequests.getEpisodeRating(this, new MyRunnable() {
 			@Override
 			public void run() {
 				Toast.makeText(EpisodeActivity.this, R.string.error_rating, Toast.LENGTH_SHORT).show();
@@ -144,6 +139,6 @@ public class EpisodeActivity extends BaseActivity {
 				_ratingAvg.setText(getString(R.string.rating_episode_avg) + rating.getRating());
 				_ratingTotal.setText(getString(R.string.rating_episode_total) + rating.getTotal());
 			}
-		}).get(uri);
+		}, _episode);
 	}
 }

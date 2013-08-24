@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
-import src.stracker.asynchttp.EpisodesRequest;
 import src.stracker.asynchttp.MyRunnable;
+import src.stracker.asynchttp.SeasonRequests;
 import src.stracker.model.EpisodeSynopse;
 
 public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
@@ -17,12 +17,12 @@ public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
 	 */
 	@Override
 	protected void fetchRequest(String uri) {
-		new EpisodesRequest(this, new MyRunnable() {
-			
+		SeasonRequests.getSeasonEpisodes(this, new MyRunnable() {
 			@Override
 			public void run() {
 				Toast.makeText(EpisodeSynopsisActivity.this, R.string.error_epi_synopses, Toast.LENGTH_SHORT).show();
 			}
+			@SuppressWarnings("unchecked")
 			@Override
 			public <T> void runWithArgument(T response) {
 				_synopses = (ArrayList<EpisodeSynopse>) response;
@@ -31,7 +31,7 @@ public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
 	        		elems.add(synopse.getNumber() + getString(R.string.separator) + synopse.getName());
 				setAdapter(elems);
 			}
-		}).get(uri);
+		}, uri);
 	}
 	
 	/**

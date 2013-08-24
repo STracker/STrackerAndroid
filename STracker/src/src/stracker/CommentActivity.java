@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
-import src.stracker.asynchttp.DummyRequest;
+import src.stracker.asynchttp.CommentRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.Comment;
 
@@ -57,21 +57,17 @@ public class CommentActivity extends BaseActivity {
     {
     	switch(item.getItemId()){
     	case R.id.action_delete_comment:
-    		if(_application.getFbUser().getId().equals(_comment.getUserId())){
-    			new DummyRequest(this, new MyRunnable() {
-					@Override
-					public void run() {
-						Toast.makeText(CommentActivity.this, R.string.comment_error, Toast.LENGTH_SHORT).show();
-					}
-					@Override
-					public <T> void runWithArgument(T response) {
-						Toast.makeText(CommentActivity.this, R.string.comment_success, Toast.LENGTH_SHORT).show();
-					}
-				}).authorizedDelete(_comment.getUri());
-    			finish();
-    		} else {
-    			Toast.makeText(this, R.string.comment_permission, Toast.LENGTH_SHORT).show();
-    		}
+    		CommentRequests.deleteComment(this, new MyRunnable() {
+				@Override
+				public void run() {
+					Toast.makeText(CommentActivity.this, R.string.comment_error, Toast.LENGTH_SHORT).show();
+				}
+				@Override
+				public <T> void runWithArgument(T response) {
+					Toast.makeText(CommentActivity.this, R.string.comment_success, Toast.LENGTH_SHORT).show();
+					finish();
+				}
+			}, _comment);
     	}
     	return true;
     }

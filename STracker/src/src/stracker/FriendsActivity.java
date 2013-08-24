@@ -5,11 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.UserAdapter;
-import src.stracker.asynchttp.FriendsRequest;
-import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.UserSynopse;
 
 @ContentView(R.layout.activity_list)
@@ -24,19 +21,9 @@ public class FriendsActivity extends BaseListActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		new FriendsRequest(this, new MyRunnable() {
-			@Override
-			public void run() {
-				Toast.makeText(FriendsActivity.this, R.string.error_friends, Toast.LENGTH_SHORT).show();
-			}
-			
-			@Override
-			public <T> void runWithArgument(T response) {
-				_users = (ArrayList<UserSynopse>) response;
-				_adapter = new UserAdapter(FriendsActivity.this, _users);
-				_listView.setAdapter(_adapter);
-			}
-		}).authorizedGet(getString(R.string.uri_user_friends));
+		_users = _application.getFbUser().getFriends();
+		_adapter = new UserAdapter(FriendsActivity.this, _users);
+		_listView.setAdapter(_adapter);
 	}
 
 	/**

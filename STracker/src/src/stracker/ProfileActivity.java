@@ -1,17 +1,13 @@
 package src.stracker;
 
-import java.util.HashMap;
 import com.loopj.android.image.SmartImageView;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
-import src.stracker.asynchttp.DummyRequest;
-import src.stracker.asynchttp.MyRunnable;
-import src.stracker.asynchttp.UserRequest;
 import src.stracker.model.User;
 
 /**
@@ -27,31 +23,13 @@ public class ProfileActivity extends BaseActivity {
 	private User _user;
 	
 	/**
-	 * @see roboguice.activity.RoboActivity#onCreate(android.os.Bundle)
+	 * @see src.stracker.BaseActivity#onCreate(android.os.Bundle)
 	 */
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setTitle(getString(R.string.profile_title));
-		String uri = getIntent().getStringExtra("uri");
-		if(uri == null){
-			_user = _application.getFbUser();
-			setProfileInformation();
-		}
-		else {
-			new UserRequest(this, new MyRunnable() {
-				@Override
-				public void run() {
-					Toast.makeText(ProfileActivity.this, R.string.error_profile, Toast.LENGTH_SHORT).show();
-				}
-				
-				@Override
-				public <T> void runWithArgument(T response) {
-					_user = (User) response;
-					setProfileInformation();
-				}
-			}).authorizedGet(uri);
-		}
+		_user = _application.getFbUser();
+		setProfileInformation();
 	}
 	
 	/**
@@ -72,21 +50,12 @@ public class ProfileActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
     	switch(item.getItemId()){
-    	case R.id.action_add_user:
-    		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("",_user.getId());
-    		new DummyRequest(this, new MyRunnable() {
-				@Override
-				public void run() {
-					Toast.makeText(ProfileActivity.this, R.string.error_friend_req, Toast.LENGTH_SHORT).show();
-				}
-				
-				@Override
-				public <T> void runWithArgument(T response) {
-					Toast.makeText(ProfileActivity.this, R.string.success_friend_req, Toast.LENGTH_SHORT).show();
-				}
-			}).authorizedPost(getString(R.string.uri_user_friends), params);
-    		break;
+		case R.id.action_series:
+			startActivity(new Intent(this, SubscriptionsActivity.class));
+			break;
+		case R.id.action_friends:
+			startActivity(new Intent(this, FriendsActivity.class));
+			break;	
     	}
     	return true;
     }

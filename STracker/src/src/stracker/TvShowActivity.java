@@ -1,7 +1,6 @@
 package src.stracker;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import com.loopj.android.image.SmartImageView;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,17 +11,16 @@ import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import roboguice.activity.RoboActivity;
 import roboguice.event.Observes;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
-import src.stracker.asynchttp.DummyRequest;
 import src.stracker.asynchttp.MyRunnable;
-import src.stracker.asynchttp.TvShowRatingRequest;
+import src.stracker.asynchttp.RatingRequests;
+import src.stracker.asynchttp.TvShowRequests;
+import src.stracker.asynchttp.UserRequests;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.Ratings;
 import src.stracker.model.TvShow;
-import src.stracker.asynchttp.TvShowRequest;
 import src.stracker.utils.ShakeDetector;
 import src.stracker.utils.Utils;
 
@@ -31,7 +29,7 @@ import src.stracker.utils.Utils;
  * This Activity is used to show all information about a television show.
  */
 @ContentView(R.layout.activity_tvshow)
-public class TvShowActivity extends RoboActivity {
+public class TvShowActivity extends BaseActivity {
 
 	@InjectView(R.id.title_description)   TextView _description;
 	@InjectView(R.id.poster_id) 		  SmartImageView _poster;
@@ -45,13 +43,14 @@ public class TvShowActivity extends RoboActivity {
 	private TvShow _tvshow;
 	
 	/**
-	 * @see roboguice.activity.RoboActivity#onCreate(android.os.Bundle)
+	 * @see src.stracker.BaseActivity#onCreate(android.os.Bundle)
 	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		String tvShowUri = getIntent().getStringExtra("tvShowUri");
-		new TvShowRequest(this, new MyRunnable() {
+		
+		TvShowRequests.getTvShow(this, new MyRunnable() {
 			@Override
 			public void run() {
 				Toast.makeText(TvShowActivity.this, R.string.unexpected, Toast.LENGTH_SHORT).show();
@@ -72,6 +71,7 @@ public class TvShowActivity extends RoboActivity {
 					@Override
 					public void onRatingChanged(RatingBar ratingBar, float rating,
 							boolean fromUser) {
+						if(!Utils.checkLogin(_application)) return;
 						Utils.initRatingSubmission(getString(R.string.uri_tvshow_rating)
 														.replace("tvShowId", _tvshow.getId()), 
 											       TvShowActivity.this, 
@@ -80,9 +80,9 @@ public class TvShowActivity extends RoboActivity {
 					}
 				});
 				//Rating request
-				performRequest();
+				performRatingRequest();
 			}
-		}).get(tvShowUri);
+		}, tvShowUri);
 	}
 	
 	/**
@@ -119,18 +119,16 @@ public class TvShowActivity extends RoboActivity {
     		startActivity(intent_comments);
     		break; 
     	case R.id.form_subscribe_tvshow:
-    		HashMap<String, String> params = new HashMap<String, String>();
-    		params.put("", _tvshow.getId());
-    		new DummyRequest(this, new MyRunnable() {
-				@Override
-				public void run() {
-					Toast.makeText(TvShowActivity.this, R.string.error_subscribe, Toast.LENGTH_SHORT).show();
-				}
-				@Override
-				public <T> void runWithArgument(T response) {
-					Toast.makeText(TvShowActivity.this, R.string.success_subscribe, Toast.LENGTH_SHORT).show();
-				}
-			}).authorizedPost(getString(R.string.uri_user_subscriptions), params);
+    		UserRequests.postSubscription(this, new MyRunnable() {
+					@Override
+					public void run() {
+						Toast.makeText(TvShowActivity.this, R.string.error_subscribe, Toast.LENGTH_SHORT).show();
+					}
+					@Override
+					public <T> void runWithArgument(T response) {
+						Toast.makeText(TvShowActivity.this, R.string.success_subscribe, Toast.LENGTH_SHORT).show();
+					}
+				}, _tvshow.getId());
     		break; 
     	}
     	return true;
@@ -155,27 +153,24 @@ public class TvShowActivity extends RoboActivity {
 	 * @param event - shake event
 	 */
 	public void handleShake(@Observes ShakeDetector.OnShakeEvent event) {
-		performRequest();
+		performRatingRequest();
 	}
 	
 	/**
-	 * This method is used to perform the http request command
+	 * This method is used to perform the HTTP request command
 	 */
-	private void performRequest(){
-		//Build rating URI
-		String uri = getString(R.string.uri_tvshow_rating).replace("tvShowId", _tvshow.getId());
-		new TvShowRatingRequest(TvShowActivity.this, new MyRunnable() {
+	private void performRatingRequest(){
+		RatingRequests.getTvShowRating(this, new MyRunnable() {
 			@Override
 			public void run() {
 				Toast.makeText(TvShowActivity.this, R.string.error_rating, Toast.LENGTH_SHORT).show();
 			}
-			
 			@Override
 			public <T> void runWithArgument(T response) {
 				Ratings rating = (Ratings) response;
 				_ratingAvg.setText(getString(R.string.rating_tvshow_avg) + rating.getRating());
 				_ratingTotal.setText(getString(R.string.from) + rating.getTotal() + getString(R.string.users));
 			}
-		}).get(uri);
+		}, _tvshow.getId());
 	}
 }

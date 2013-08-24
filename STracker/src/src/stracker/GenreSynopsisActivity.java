@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
-import src.stracker.asynchttp.GenresRequest;
 import src.stracker.asynchttp.MyRunnable;
+import src.stracker.asynchttp.TvShowRequests;
 import src.stracker.model.GenreSynopse;
 
 public class GenreSynopsisActivity extends SynopsisActivity<GenreSynopse> {
@@ -17,11 +17,13 @@ public class GenreSynopsisActivity extends SynopsisActivity<GenreSynopse> {
 	 */
 	@Override
 	protected void fetchRequest(String uri) {
-		new GenresRequest(this, new MyRunnable() {
+		
+		TvShowRequests.getGenres(this, new MyRunnable() {
 			@Override
 			public void run() {
 				Toast.makeText(GenreSynopsisActivity.this, R.string.error_genres, Toast.LENGTH_SHORT).show();
 			}
+			@SuppressWarnings("unchecked")
 			@Override
 			public <T> void runWithArgument(T response) {
 				_synopses = (ArrayList<GenreSynopse>) response;

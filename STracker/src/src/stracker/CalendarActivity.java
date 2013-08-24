@@ -8,15 +8,15 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.MainListAdapter;
-import src.stracker.asynchttp.CalendarRequest;
 import src.stracker.asynchttp.MyRunnable;
+import src.stracker.asynchttp.UserRequests;
 import src.stracker.first_activity.EntryType;
 import src.stracker.first_activity.HeaderEntry;
 import src.stracker.first_activity.IEntry;
 import src.stracker.first_activity.ItemEntry;
 import src.stracker.model.EpisodeSynopse;
 
-/**
+/** 
  * @author diogomatos
  * This activity represents the calendar of episodes of tv shows
  */
@@ -32,12 +32,12 @@ public class CalendarActivity extends BaseListActivity {
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		new CalendarRequest(this, new MyRunnable() {
+		UserRequests.getCalendar(this, new MyRunnable() {
 			@Override
 			public void run() {
 				Toast.makeText(CalendarActivity.this, R.string.error_calendar, Toast.LENGTH_SHORT).show();
 			}
-			
+			@SuppressWarnings("unchecked")
 			@Override
 			public <T> void runWithArgument(T response) {
 				_arrayList = (ArrayList<EpisodeSynopse>) response;
@@ -45,7 +45,7 @@ public class CalendarActivity extends BaseListActivity {
 		        _adapter = new MainListAdapter(CalendarActivity.this, items); 
 		        _listView.setAdapter(_adapter);
 			}
-		}).authorizedGet(getString(R.string.uri_user_newepisodes));
+		});
 	} 
 	
 	/**

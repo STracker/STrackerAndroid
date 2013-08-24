@@ -1,7 +1,6 @@
 package src.stracker;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +12,9 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
-
 import roboguice.inject.ContentView;
-import src.stracker.asynchttp.DummyRequest;
 import src.stracker.asynchttp.MyRunnable;
+import src.stracker.asynchttp.UserRequests;
 import src.stracker.model.User;
 
 /**
@@ -64,16 +62,10 @@ public class FbLoginActivity extends BaseActivity {
 			_dialog.show();
 			Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
 				@Override
-				public void onCompleted(GraphUser user, Response response) {
-					if(user != null){
-						_application.setFbUser(new User(user.getName(),user.getId(), user.asMap().get("email").toString()));
-					}
+				public void onCompleted(final GraphUser user, Response response) {
 					_dialog.dismiss();
-					HashMap<String, String> params = new HashMap<String, String>();
-					params.put("Name", _application.getFbUser().getName());
-					params.put("Email", _application.getFbUser().getEmail());
-					params.put("Photo", _application.getFbUser().getPhotoUrl());
-					new DummyRequest(FbLoginActivity.this, new MyRunnable() {
+					//send information if is a new user
+					UserRequests.postUser(FbLoginActivity.this, new MyRunnable() {
 						@Override
 						public void run() {
 							Toast.makeText(FbLoginActivity.this, R.string.error_login, Toast.LENGTH_SHORT).show();
@@ -81,9 +73,21 @@ public class FbLoginActivity extends BaseActivity {
 						@Override
 						public <T> void runWithArgument(T response) {
 							Toast.makeText(FbLoginActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
+							
+							UserRequests.getSelf(FbLoginActivity.this, new MyRunnable() {
+								@Override
+								public void run() {
+									Toast.makeText(FbLoginActivity.this, R.string.error_user_req, Toast.LENGTH_SHORT).show();
+								}
+								@SuppressWarnings("hiding")
+								@Override
+								public <T> void runWithArgument(T response) {
+									_application.setFbUser((User) response);
+									finish();
+								}
+							}, user.getId());
 						}
-					}).authorizedPost(getString(R.string.uri_users), params);
-					finish();		
+					}, user.getName(), user.asMap().get("email").toString(), "http://graph.facebook.com/" + user.getId() + "/picture?type=large");
 				}
 			});
 	    }

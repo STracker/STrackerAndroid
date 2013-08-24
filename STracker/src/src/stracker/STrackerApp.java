@@ -1,6 +1,7 @@
 package src.stracker;
 
 import src.stracker.model.User;
+import HawkClient.HawkCredentials;
 import android.app.Application;
 
 /**
@@ -9,7 +10,8 @@ import android.app.Application;
 public class STrackerApp extends Application {
 	
 	private User _fbUser;
-	private boolean _Connectivity;
+	private boolean _connectivity;
+	private HawkCredentials _credentials;
 	
 	public void setFbUser(User user){
 		if(_fbUser == null)
@@ -28,11 +30,19 @@ public class STrackerApp extends Application {
 		return _fbUser != null;
 	}
 
-	public boolean is_Connected() {
-		return _Connectivity;
+	public boolean isConnected() {
+		return _connectivity;
 	}
 
-	public void set_Connectivity(boolean connected) {
-		_Connectivity = connected;
+	public void setConnectivity(boolean connected) {
+		_connectivity = connected;
+	}
+	
+	public void createHawkCreadentials(String id){
+		_credentials = new HawkCredentials(id, getString(R.string.hawk_key));
+	}
+	
+	public HawkCredentials getHawkCredentials(){
+		return _credentials;
 	}
 }
