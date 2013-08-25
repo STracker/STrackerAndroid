@@ -54,7 +54,7 @@ public class MainActivity extends BaseListActivity {
 	{
 		switch(item.getItemId()){
 			case R.id.action_profile:
-				if(!Utils.checkLogin(_application)) break;
+				if(!Utils.checkLogin(this)) break;
 				startActivity(new Intent(this,ProfileActivity.class));
 				break;  
 			case R.id.form_friend:
@@ -64,9 +64,11 @@ public class MainActivity extends BaseListActivity {
 				startActivity(new Intent(this, GenreSynopsisActivity.class));
 				break;
 			case R.id.form_name:
+				if(!Utils.checkLogin(this)) break;
 				Utils.initSearchByName(this);
 				break;
 			case R.id.action_calendar:
+				if(!Utils.checkLogin(this)) break;
 				startActivity(new Intent(this, CalendarActivity.class));
 				break;
 		}

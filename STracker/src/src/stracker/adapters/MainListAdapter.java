@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 /**
+ * @author diogomatos
  * Adapter to list of episodes releases by date
  */
 public class MainListAdapter extends ArrayAdapter<IEntry> {
@@ -24,7 +25,6 @@ public class MainListAdapter extends ArrayAdapter<IEntry> {
     }
 
     /**
-     * (non-Javadoc)
      * @see android.widget.BaseAdapter#getViewTypeCount()
      */
     @Override
@@ -34,7 +34,6 @@ public class MainListAdapter extends ArrayAdapter<IEntry> {
     }
 
     /**
-     * (non-Javadoc)
      * @see android.widget.BaseAdapter#getItemViewType(int)
      */
     @Override
@@ -43,7 +42,6 @@ public class MainListAdapter extends ArrayAdapter<IEntry> {
     }
 
     /**
-     * (non-Javadoc)
      * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
      */
     @Override

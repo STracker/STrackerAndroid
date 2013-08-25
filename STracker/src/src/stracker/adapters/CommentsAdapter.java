@@ -11,6 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * @author diogomatos
+ * This class represents the adapter to a list of comments
+ */
 public class CommentsAdapter extends ArrayAdapter<Comment>{
 
 	private LayoutInflater _inflater;
@@ -25,7 +29,6 @@ public class CommentsAdapter extends ArrayAdapter<Comment>{
 	}
 	
 	/**
-	 * (non-Javadoc)
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
 	 */
 	@Override

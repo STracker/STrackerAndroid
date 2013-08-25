@@ -13,9 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/**
+ * @author diogomatos
+ * This class represents an adapter to a list of user synopsis
+ */
 public class UserAdapter extends ArrayAdapter<UserSynopse> {
 
-private LayoutInflater _inflater;
+	private LayoutInflater _inflater;
 	
 	/**
 	 * @param context - Represents the context of an Activity
@@ -27,7 +31,6 @@ private LayoutInflater _inflater;
 	}
 
 	/**
-	 * (non-Javadoc)
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
 	 */
 	@Override

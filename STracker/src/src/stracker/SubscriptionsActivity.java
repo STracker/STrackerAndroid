@@ -26,7 +26,7 @@ public class SubscriptionsActivity extends BaseListActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		setTitle(getString(R.string.title_subs));
+		setTitle(getString(R.string.profile_subscriptions));
 		_subscriptions = _application.getFbUser().getSubscriptions();
 		_adapter = new SubscriptionAdapter(SubscriptionsActivity.this, _subscriptions);
 		_listView.setAdapter(_adapter);

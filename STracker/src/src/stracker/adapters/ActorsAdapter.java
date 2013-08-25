@@ -29,7 +29,6 @@ public class ActorsAdapter extends ArrayAdapter<Actor>{
 	}
 
 	/**
-	 * (non-Javadoc)
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
 	 */
 	@Override

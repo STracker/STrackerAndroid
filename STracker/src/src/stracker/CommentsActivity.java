@@ -17,6 +17,10 @@ import src.stracker.model.Comment;
 import src.stracker.utils.ShakeDetector;
 import src.stracker.utils.Utils;
 
+/**
+ * @author diogomatos
+ * This class represents a list of comments.
+ */
 @ContentView(R.layout.activity_list)
 public class CommentsActivity extends BaseListActivity {
 

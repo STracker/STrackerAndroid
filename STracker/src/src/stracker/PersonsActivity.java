@@ -12,6 +12,10 @@ import android.widget.TextView;
 import roboguice.inject.ContentView;
 import src.stracker.model.Person;
 
+/**
+ * @author diogomatos
+ * This activity represents a list of persons
+ */
 @ContentView(R.layout.activity_list)
 public class PersonsActivity extends BaseListActivity {
 

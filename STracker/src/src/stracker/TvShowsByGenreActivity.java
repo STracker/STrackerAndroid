@@ -7,8 +7,15 @@ import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.TvShowRequests;
 import src.stracker.model.TvShowSynopse;
 
+/**
+ * @author diogomatos
+ * This class represents a list of television show synopsis obtained by it's genre.
+ */
 public class TvShowsByGenreActivity extends TvShowSynopsisActivity {
 
+	/**
+	 * @see src.stracker.SynopsisActivity#fetchRequest(java.lang.String)
+	 */
 	@Override
 	protected void fetchRequest(String uri) {
 		TvShowRequests.getGenre(this, new MyRunnable() {

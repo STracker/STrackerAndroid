@@ -7,8 +7,15 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.widget.Toast;
 
+/**
+ * @author diogomatos
+ * This class represents a creation of a broadcast receiver to handle the application connectivity to the internet.
+ */
 public class ConnectionReceiver extends BroadcastReceiver {
 	
+	/**
+	 * @see android.content.BroadcastReceiver#onReceive(android.content.Context, android.content.Intent)
+	 */
 	@Override
 	public void onReceive(Context context, Intent intent ){
 		STrackerApp app = (STrackerApp) context.getApplicationContext();

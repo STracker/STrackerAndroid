@@ -2,6 +2,8 @@ package src.stracker;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,17 +16,20 @@ import src.stracker.first_activity.EntryType;
 import src.stracker.first_activity.HeaderEntry;
 import src.stracker.first_activity.IEntry;
 import src.stracker.first_activity.ItemEntry;
+import src.stracker.model.Calendar;
+import src.stracker.model.Calendar.CalendarEntry;
 import src.stracker.model.EpisodeSynopse;
 
 /** 
  * @author diogomatos
- * This activity represents the calendar of episodes of tv shows
+ * This activity represents the calendar of episodes of television shows
  */
 @ContentView(R.layout.activity_list)
 public class CalendarActivity extends BaseListActivity {
 
-	private ArrayList<EpisodeSynopse> _arrayList;
+	private ArrayList<Calendar> _arrayList;
 	private MainListAdapter _adapter;
+	private ArrayList<String> _uris;
 	
 	/**
 	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
@@ -40,7 +45,8 @@ public class CalendarActivity extends BaseListActivity {
 			@SuppressWarnings("unchecked")
 			@Override
 			public <T> void runWithArgument(T response) {
-				_arrayList = (ArrayList<EpisodeSynopse>) response;
+				_arrayList = (ArrayList<Calendar>) response;
+				_uris = new ArrayList<String>();
 				List<IEntry> items = buildCalendarView();
 		        _adapter = new MainListAdapter(CalendarActivity.this, items); 
 		        _listView.setAdapter(_adapter);
@@ -54,14 +60,15 @@ public class CalendarActivity extends BaseListActivity {
 	 */
 	private List<IEntry> buildCalendarView(){
 		List<IEntry> items = new ArrayList<IEntry>();
-		String last = null, current = null;
-		for(int i = 0; i<_arrayList.size(); i++){
-			EpisodeSynopse episode = _arrayList.get(i);
-			current = episode.getDate();
-			if(!current.equals(last))
-				items.add(new HeaderEntry(episode.getDate()));
-			items.add(new ItemEntry(buildEpisodePrefix(episode), episode.getName()));
-			last = current;
+		for(Calendar calendar : _arrayList){
+			items.add(new HeaderEntry(calendar.getDate()));
+			_uris.add("");
+			for(CalendarEntry entrie : calendar.getEntries()){
+				for(EpisodeSynopse synopse : entrie.getEpisodes()){
+					items.add(new ItemEntry(buildEpisodePrefix(synopse), entrie.getTvShow().getName()));
+					_uris.add(synopse.getUri());
+				}
+			}
 		}
 		return items;
 	}
@@ -85,7 +92,8 @@ public class CalendarActivity extends BaseListActivity {
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		if(_adapter.getItem(position).getViewType() == EntryType.HEADER_ITEM.ordinal())
 			return;
-		//EpisodeSynopse episode = _arrayList.get(position);
-		//new EpisodeRequest(this).get(episode.getUri());
+		Intent intent = new Intent(this, EpisodeActivity.class);
+		intent.putExtra("uri", _uris.get(position));
+		startActivity(intent);
 	}
 }

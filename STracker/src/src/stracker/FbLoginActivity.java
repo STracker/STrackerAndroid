@@ -33,7 +33,7 @@ public class FbLoginActivity extends BaseActivity {
 	    public void call(Session session, SessionState state, Exception exception) {
 	        onSessionStateChange(session, state, exception);
 	    }
-	};
+	};    
 	
 	/**
 	 * @see src.stracker.BaseActivity#onCreate(android.os.Bundle)
@@ -58,22 +58,22 @@ public class FbLoginActivity extends BaseActivity {
 	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
 	    //if logged in then
 		if (state.isOpened()) {
-			_dialog.setMessage("logging in...");
+			_dialog.setMessage(getString(R.string.login_message));
 			_dialog.show();
 			Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
 				@Override
 				public void onCompleted(final GraphUser user, Response response) {
-					_dialog.dismiss();
+					_application.createHawkCreadentials(user.getId());
 					//send information if is a new user
 					UserRequests.postUser(FbLoginActivity.this, new MyRunnable() {
 						@Override
 						public void run() {
+							_dialog.dismiss();
 							Toast.makeText(FbLoginActivity.this, R.string.error_login, Toast.LENGTH_SHORT).show();
 						}
 						@Override
 						public <T> void runWithArgument(T response) {
 							Toast.makeText(FbLoginActivity.this, R.string.success_login, Toast.LENGTH_SHORT).show();
-							
 							UserRequests.getSelf(FbLoginActivity.this, new MyRunnable() {
 								@Override
 								public void run() {
@@ -82,6 +82,7 @@ public class FbLoginActivity extends BaseActivity {
 								@SuppressWarnings("hiding")
 								@Override
 								public <T> void runWithArgument(T response) {
+									_dialog.dismiss();
 									_application.setFbUser((User) response);
 									finish();
 								}

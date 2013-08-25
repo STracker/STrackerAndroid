@@ -29,7 +29,7 @@ public class AsyncHttpRequest {
 	private static final int DEFAULT_TIMEOUT = 30000;
 
 	/**
-	 * The constructor of the abstract asynchronous HTTP request
+	 * The constructor of the asynchronous HTTP request
 	 */
 	AsyncHttpRequest(){
 		_client.setTimeout(DEFAULT_TIMEOUT);
@@ -38,26 +38,54 @@ public class AsyncHttpRequest {
 	}
 
 	/**
-	 * This method execute a GET HTTP method to the URL that receives by parameter.
-	 * @param url
+	 * This method execute a GET HTTP method to the URI that receives by parameter.
+	 * @param context - context of the activity where the request is occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param serializer - JSON serializer used to resolve the HTTP JSON response
+	 * @param uri - string with the URI of the resource
 	 */
 	public static void get(Context context, final MyRunnable runnable, final ISerialize<?> serializer, String uri){
 		showProgressDialog(context);
 		_client.get(getAbsoluteUrl(context, uri), createHandler(runnable, serializer));
 	}
 	
+	/**
+	 * This method execute a GET HTTP method to the URI that receives by parameter.
+	 * An authorized method uses the Hawk protocol to produce a secure HTTP request.
+	 * @param context - context of the activity where the request is occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param serializer - JSON serializer used to resolve the HTTP JSON response
+	 * @param uri - string with the URI of the resource
+	 */
 	public static void authorizedGet(Context context, MyRunnable runnable, ISerialize<?> serializer, String uri) {
 		_client.addHeader("Authorization", getAuthorizationHeader(context, "GET",getAbsoluteUrl(context, uri), null));
 		get(context, runnable, serializer, uri);
 	}
 	
+	/**
+	 * This method execute a POST HTTP method to the URI that receives by parameter.
+	 * An authorized method uses the Hawk protocol to produce a secure HTTP request.
+	 * @param context - context of the activity where the request is occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param serializer - JSON serializer used to resolve the HTTP JSON response
+	 * @param uri - string with the URI of the resource
+	 * @param params - hash map with the parameters used in body of the request
+	 */
 	public static void authorizedPost(Context context, MyRunnable runnable, ISerialize<?> serializer, String uri, HashMap<String, String> params){
-		PostParams postParams = buildRequestBody(params);
+		PostParams postParams = (params == null) ? null : buildRequestBody(params);
 		String absoluteUrl = getAbsoluteUrl(context, uri);
-		_client.addHeader("Authorization", getAuthorizationHeader(context, "POST", absoluteUrl, postParams.payload));
-		_client.post(absoluteUrl, postParams.params, createHandler(runnable, serializer));
+		_client.addHeader("Authorization", getAuthorizationHeader(context, "POST", absoluteUrl, (postParams == null) ? null : postParams.payload));
+		_client.post(absoluteUrl, (postParams == null) ? null : postParams.params, createHandler(runnable, serializer));
 	}
 	
+	/**
+	 * This method execute a DELETE HTTP method to the URI that receives by parameter.
+	 * An authorized method uses the Hawk protocol to produce a secure HTTP request.
+	 * @param context - context of the activity where the request is occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param serializer - JSON serializer used to resolve the HTTP JSON response
+	 * @param uri - string with the URI of the resource
+	 */
 	public static void authorizedDelete(Context context, MyRunnable runnable, ISerialize<?> serializer, String uri){
 		String absoluteUrl = getAbsoluteUrl(context, uri);
 		_client.addHeader("Authorization", getAuthorizationHeader(context, "DELETE",absoluteUrl, null));
@@ -66,6 +94,10 @@ public class AsyncHttpRequest {
 	
 	/**
 	 * Build and return authorization header according Hawk Protocol specifications
+	 * @param context - context of the activity where the request is occur
+	 * @param method - HTTP method 
+	 * @param payload - HTTP request payload
+	 * @return authorization header to be used in the HTTP request
 	 */
 	private static String getAuthorizationHeader(Context context, String method, String url, String payload){
 		URL objUrl = null;
@@ -89,6 +121,11 @@ public class AsyncHttpRequest {
 		return header;
 	}
 	
+	/**
+	 * This method build a PostParams object used to create the payload of a POST HTTP method.
+	 * @param params - hash map with payload parameters
+	 * @return PostParams 
+	 */
 	private static PostParams buildRequestBody(HashMap<String, String> params){
 		RequestParams requestParams = new RequestParams();
 		StringBuilder payload = new StringBuilder();
@@ -107,20 +144,36 @@ public class AsyncHttpRequest {
 		return new PostParams(requestParams, payload.toString()); 
 	}
 
+	/**
+	 * This object is used to encapsulate the payload and the RequestParams for a HTTP Post method.
+	 */
 	private static class PostParams{
 		public RequestParams params;
 		String payload;
 		
+		/**
+		 * This constructor build a PostParams.
+		 */
 		public PostParams(RequestParams requestParams, String pl){
 			params = requestParams;
 			payload = pl;
 		}
 	}
 	
+	/**
+	 * This method build the absolute URL to all HTTP requests.
+	 * @param context - context of the Activity where the request is made
+	 * @param uri - URI of the resource
+	 * @return absolute URL of the resource
+	 */
 	private static String getAbsoluteUrl(Context context, String uri) {
 		return context.getString(R.string.uri_host_api) + uri;
 	}
 	
+	/**
+	 * This method show a progress dialog 
+	 * @param context - Context of the Activity where the progress dialog will be showed
+	 */
 	private static void showProgressDialog(Context context){
 		//Waiting message
 		if(_dialog == null){
@@ -130,10 +183,19 @@ public class AsyncHttpRequest {
 		_dialog.show();
 	}
 	
+	/**
+	 * This method hides the an active progress dialog 
+	 */
 	private static void hideProgressDialog(){
-		if(_dialog.isShowing()) _dialog.dismiss();
+		if(_dialog != null && _dialog.isShowing()) _dialog.dismiss();
 	}
 	
+	/**
+	 * This method create an handler that implements the behavior after a successful or unsuccessful HTTP request.
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param serializer - JSON serializer used to resolve the HTTP JSON response
+	 * @return AsyncHttpResponseHandler
+	 */
 	private static AsyncHttpResponseHandler createHandler(final MyRunnable runnable, final ISerialize<?> serializer){
 		return new AsyncHttpResponseHandler(){
 			@Override
@@ -141,6 +203,8 @@ public class AsyncHttpRequest {
 				hideProgressDialog();
 				if(serializer != null) 
 					runnable.runWithArgument(serializer.deserialize(response));
+				else
+					runnable.runWithArgument(null);
 			}
 	
 			@Override

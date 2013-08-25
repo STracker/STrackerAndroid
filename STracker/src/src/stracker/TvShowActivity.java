@@ -71,7 +71,7 @@ public class TvShowActivity extends BaseActivity {
 					@Override
 					public void onRatingChanged(RatingBar ratingBar, float rating,
 							boolean fromUser) {
-						if(!Utils.checkLogin(_application)) return;
+						if(!Utils.checkLogin(TvShowActivity.this)) return;
 						Utils.initRatingSubmission(getString(R.string.uri_tvshow_rating)
 														.replace("tvShowId", _tvshow.getId()), 
 											       TvShowActivity.this, 

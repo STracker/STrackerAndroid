@@ -6,7 +6,7 @@
     android:background="@layout/backrepeat" >
     
     <com.loopj.android.image.SmartImageView
-	        android:id="@+id/profile_photo_id"
+	        android:id="@+id/user_photo_id"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="10dp"
@@ -16,8 +16,8 @@
 	        android:src="@drawable/img_unknown" />
     
     <TextView 
-            android:id="@+id/profile_name"
-            android:src="@string/profile_name"
+            android:id="@+id/user_name"
+            android:src="@string/user_name"
        		android:textIsSelectable="false" 
        		android:textColor="@color/Snow"
        		android:paddingLeft="5sp"
@@ -25,8 +25,8 @@
             android:layout_width="match_parent"
         	android:layout_height="wrap_content" />
     <TextView 
-            android:id="@+id/profile_email"
-            android:src="@string/profile_email"
+            android:id="@+id/user_email"
+            android:src="@string/user_email"
        		android:textIsSelectable="false" 
        		android:textColor="@color/Snow"
        		android:paddingLeft="5sp"
@@ -42,7 +42,7 @@
     
         <TextView 
             android:id="@+id/subscriptions_id"
-         	android:text="@string/profile_subscriptions"
+         	android:text="@string/user_subscriptions"
     		android:textIsSelectable="false" 
     		android:textColor="@color/Snow"
     		android:textSize="18sp"
@@ -53,7 +53,7 @@
         
         <TextView 
             android:id="@+id/subscriptions_count"
-         	android:text="@string/profile_subs_count"
+         	android:text="@string/user_subs_count"
     		android:textIsSelectable="false" 
     		android:textColor="@color/Snow"
     		android:background="@color/Red"
@@ -75,7 +75,7 @@
     
         <TextView 
             android:id="@+id/friend_id"
-         	android:text="@string/profile_friends"
+         	android:text="@string/user_friends"
     		android:textIsSelectable="false" 
     		android:textColor="@color/Snow"
     		android:textSize="18sp"
@@ -86,7 +86,7 @@
         
         <TextView 
             android:id="@+id/friend_count"
-         	android:text="@string/profile_frie_count"
+         	android:text="@string/user_frie_count"
     		android:textIsSelectable="false" 
     		android:textColor="@color/Snow"
     		android:background="@color/Blue"
@@ -98,71 +98,5 @@
     		android:paddingBottom="2sp"
          	android:layout_width="wrap_content"
      		android:layout_height="wrap_content" />
-	</LinearLayout> 
-	<LinearLayout 
-        android:id="@+id/suggestions_layout"
-        android:orientation="horizontal"
-        android:clickable="true"
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content" >
-    
-        <TextView 
-            android:id="@+id/suggestions_id"
-         	android:text="@string/profile_suggestions"
-    		android:textIsSelectable="false" 
-    		android:textColor="@color/Snow"
-    		android:textSize="18sp"
-    		android:paddingLeft="5sp"
-    		android:paddingTop="10sp"
-         	android:layout_width="wrap_content"
-     		android:layout_height="wrap_content" />
-        
-        <TextView 
-            android:id="@+id/suggestions_count"
-         	android:text="@string/profile_sugg_count"
-    		android:textIsSelectable="false" 
-    		android:textColor="@color/Snow"
-    		android:background="@color/Green"
-    		android:gravity="right"
-    		android:textSize="18sp"
-    		android:paddingTop="2sp"
-    		android:paddingLeft="2sp"
-    		android:paddingRight="2sp"
-    		android:paddingBottom="2sp"
-         	android:layout_width="wrap_content"
-     		android:layout_height="wrap_content" />
-	</LinearLayout> 
-	<LinearLayout 
-        android:id="@+id/friendrequests_layout"
-        android:orientation="horizontal"
-        android:clickable="true"
-    	android:layout_width="wrap_content"
-    	android:layout_height="wrap_content" >
-    
-        <TextView 
-            android:id="@+id/friendrequest_id"
-         	android:text="@string/profile_friendrequests"
-    		android:textIsSelectable="false" 
-    		android:textColor="@color/Snow"
-    		android:textSize="18sp"
-    		android:paddingLeft="5sp"
-    		android:paddingTop="10sp"
-         	android:layout_width="wrap_content"
-     		android:layout_height="wrap_content" />
-        
-        <TextView 
-            android:id="@+id/friendrequest_count"
-         	android:text="@string/profile_freq_count"
-    		android:textIsSelectable="false" 
-    		android:textColor="@color/Snow"
-    		android:background="@color/Orange"
-    		android:gravity="right"
-    		android:textSize="18sp"
-    		android:paddingTop="2sp"
-    		android:paddingLeft="2sp"
-    		android:paddingRight="2sp"
-    		android:paddingBottom="2sp"
-         	android:layout_width="wrap_content"
-     		android:layout_height="wrap_content" />
-	</LinearLayout> 
+	</LinearLayout>  
 </LinearLayout>

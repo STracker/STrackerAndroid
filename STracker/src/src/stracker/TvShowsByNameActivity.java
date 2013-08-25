@@ -6,7 +6,10 @@ import android.widget.Toast;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.TvShowRequests;
 import src.stracker.model.TvShowSynopse;
-
+/**
+ * @author diogomatos
+ * This class represents a list of television show synopsis obtained by it's name.
+ */
 public class TvShowsByNameActivity extends TvShowSynopsisActivity {
 
 	/**

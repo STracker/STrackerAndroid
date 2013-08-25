@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import src.stracker.model.SeasonSynopse;
 
+/**
+ * @author diogomatos
+ * This class represents a list of season synopses
+ */
 public class SeasonSynopsisActivity extends SynopsisActivity<SeasonSynopse> {
 
 	/**

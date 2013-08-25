@@ -11,14 +11,31 @@ import src.stracker.json.JSONLocator;
 import src.stracker.model.Comment;
 import src.stracker.utils.Utils;
 
+/**
+ * @author diogomatos
+ * This class have all the HTTP requests for a Comment.
+ */
 public class CommentRequests {
 
 	private static CommentsSerializer commentsSerializer = (CommentsSerializer) JSONLocator.getInstance().getSerializer(Comment.class);
 	
+	/**
+	 * This method represents a request to a comment.
+	 * @param context - context of the Activity where the request occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param uri - URI of the resource
+	 */
 	public static void getComments(Context context, MyRunnable runnable, String uri){
 		AsyncHttpRequest.get(context, runnable, commentsSerializer, uri);
 	}
 	
+	/**
+	 * This method represents a post of a new comment.
+	 * @param context - context of the Activity where the request occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param uri - URI of the resource
+	 * @param comment - reference to the comment.
+	 */
 	public static void postComment(Context context, MyRunnable runnable, String uri, String comment){
 		if(!Utils.checkLogin((STrackerApp)context.getApplicationContext())) return;
 		HashMap<String, String> params = new HashMap<String, String>();
@@ -26,6 +43,12 @@ public class CommentRequests {
 		AsyncHttpRequest.authorizedPost(context, runnable, commentsSerializer, uri, params);
 	}
 	
+	/**
+	 * This method represents a delete of a comment.
+	 * @param context - context of the Activity where the request occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param comment - reference to the comment.
+	 */
 	public static void deleteComment(Context context, MyRunnable runnable, Comment comment){
 		if(!Utils.checkLogin((STrackerApp)context.getApplicationContext())) return;
 		if(((STrackerApp)context.getApplicationContext()).getFbUser().getId().equals(comment.getUserId())){

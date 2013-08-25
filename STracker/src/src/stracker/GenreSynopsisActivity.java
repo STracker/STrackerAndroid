@@ -10,6 +10,10 @@ import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.TvShowRequests;
 import src.stracker.model.GenreSynopse;
 
+/**
+ * @author diogomatos
+ * This class represents a list of genre synopsis.
+ */
 public class GenreSynopsisActivity extends SynopsisActivity<GenreSynopse> {
 
 	/**

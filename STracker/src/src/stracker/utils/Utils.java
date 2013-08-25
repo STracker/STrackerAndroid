@@ -1,24 +1,30 @@
 package src.stracker.utils;
 
 import src.stracker.FbLoginActivity;
-import src.stracker.FriendsActivity;
 import src.stracker.R;
 import src.stracker.STrackerApp;
+import src.stracker.SearchFriendActivity;
 import src.stracker.TvShowsByNameActivity;
 import src.stracker.asynchttp.CommentRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.RatingRequests;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * @author diogomatos
+ * This class represents a few utility methods used in STracker application.
+ */
 public class Utils {
 
 	/**
 	 * This method pop's up an AlertDialog to begin the Search a television show by the name.
+	 * @param activity - Activity where the method is called.
 	 */
 	public static void initSearchByName(final Activity activity){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
@@ -46,16 +52,21 @@ public class Utils {
 	}
 	
 	/**
-	 * This method check if the application user is logged in with facebook
+	 * This method check if the application user is logged in with facebook.
+	 * @param context - Context of the Activity where the login is needed.
+	 * @return boolean - true if the user is logged in.
 	 */
-	public static boolean checkLogin(STrackerApp app){
-		if(!app.isLoggedIn())
-			app.startActivity(new Intent(app,FbLoginActivity.class));
-		return app.isLoggedIn();
+	public static boolean checkLogin(Context context){
+		if(!((STrackerApp)context.getApplicationContext()).isLoggedIn())
+			context.startActivity(new Intent(context,FbLoginActivity.class));
+		return ((STrackerApp)context.getApplicationContext()).isLoggedIn();
 	}
 	
 	/**
 	 * This method pop's up an AlertDialog to begin the rating submission.
+	 * @param url - URL of the resource where the rating is saved.
+	 * @param activity - Activity where the method is called.
+	 * @param rating - rating given by the user
 	 */
 	public static void initRatingSubmission(final String url, final Activity activity, final int rating){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
@@ -87,7 +98,9 @@ public class Utils {
 	}
 	
 	/**
-	 * This method pop's up an AlertDialog to write new comment
+	 * This method pop's up an AlertDialog to write new comment.
+	 * @param url - URL of the resource where the comment will be posted.
+	 * @param activity - Activity where the method is called.
 	 */
 	public static void addComment(final String url, final Activity activity){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
@@ -122,6 +135,7 @@ public class Utils {
 	
 	/**
 	 * This method pop's up an AlertDialog to begin the Search a friend in STracker.
+	 * @param activity - Activity where the method is called.
 	 */
 	public static void initSearchFriend(final Activity activity){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
@@ -139,9 +153,8 @@ public class Utils {
 		adBuilder.setNegativeButton("Search",
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				String uri = activity.getString(R.string.uri_user_search)+input.getText();
-				Intent intent = new Intent(activity, FriendsActivity.class);
-				intent.putExtra("uri", uri.replaceAll(" ", "+"));
+				Intent intent = new Intent(activity, SearchFriendActivity.class);
+				intent.putExtra("name", input.getText().toString().replaceAll(" ", "+"));
 				activity.startActivity(intent);
 			}
 		});

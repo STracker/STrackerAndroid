@@ -5,6 +5,10 @@ import android.os.Bundle;
 import roboguice.activity.RoboActivity;
 import src.stracker.utils.ShakeDetector;
 
+/**
+ * @author diogomatos
+ * This activity is a base activity where all STracker activities must extend.
+ */
 public class BaseActivity extends RoboActivity {
 	
 	protected STrackerApp _application;

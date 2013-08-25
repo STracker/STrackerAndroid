@@ -6,18 +6,4 @@
         android:showAsAction="always"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/action_more_info" />
-
-    <item
-        android:id="@+id/action_series"
-        android:orderInCategory="200"
-        android:showAsAction="never"
-        android:icon="@drawable/ic_tv"
-        android:title="@string/action_series"/>
-    
-    <item
-        android:id="@+id/action_friends"
-        android:orderInCategory="300"
-        android:showAsAction="never"
-        android:icon="@drawable/ic_friends"
-        android:title="@string/action_friends"/>
 </menu>

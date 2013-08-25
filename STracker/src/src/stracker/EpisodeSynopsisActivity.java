@@ -10,6 +10,10 @@ import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.SeasonRequests;
 import src.stracker.model.EpisodeSynopse;
 
+/**
+ * @author diogomatos
+ * This class represents a list of episode synopsis.
+ */
 public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
 
 	/**

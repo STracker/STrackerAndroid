@@ -13,7 +13,11 @@ import roboguice.inject.InjectView;
 import src.stracker.asynchttp.CommentRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.Comment;
-
+ 
+/**
+ * @author diogomatos
+ * This class represent the information of a comment.
+ */
 @ContentView(R.layout.activity_comment)
 public class CommentActivity extends BaseActivity {
 
@@ -22,6 +26,9 @@ public class CommentActivity extends BaseActivity {
 	@InjectView(R.id.act_comment_profile) Button _profileBtn;
 	private Comment _comment;
 	
+	/**
+	 * @see src.stracker.BaseActivity#onCreate(android.os.Bundle)
+	 */
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
@@ -67,7 +74,7 @@ public class CommentActivity extends BaseActivity {
 					Toast.makeText(CommentActivity.this, R.string.comment_success, Toast.LENGTH_SHORT).show();
 					finish();
 				}
-			}, _comment);
+			}, _comment); 
     	}
     	return true;
     }

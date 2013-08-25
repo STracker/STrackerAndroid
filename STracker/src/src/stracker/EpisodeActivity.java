@@ -124,7 +124,7 @@ public class EpisodeActivity extends BaseActivity {
 	}
 	
 	/**
-	 * This method is used to perform the http request command
+	 * This method is used to perform the HTTP request command
 	 */
 	private void performRatingRequest(){
 		RatingRequests.getEpisodeRating(this, new MyRunnable() {
