@@ -1,11 +1,12 @@
 package src.stracker;
 
 import java.util.ArrayList;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import roboguice.inject.ContentView;
 import src.stracker.adapters.SubscriptionAdapter;
 import src.stracker.model.Subscription;
 import src.stracker.model.TvShowSynopse;
@@ -14,11 +15,11 @@ import src.stracker.model.TvShowSynopse;
  * This Activity is the list with the user subscriptions.
  * @author diogomatos
  */
-@ContentView(R.layout.activity_list)
-public class SubscriptionsActivity extends BaseListActivity {
+public class BaseSubscriptionsActivity extends BaseListActivity {
 
-	private SubscriptionAdapter _adapter;
-	private ArrayList<Subscription> _subscriptions;
+	protected SubscriptionAdapter _adapter;
+	protected ArrayList<Subscription> _subscriptions;
+	protected Activity _activity;
 	
 	/**
 	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
@@ -27,9 +28,6 @@ public class SubscriptionsActivity extends BaseListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setTitle(getString(R.string.profile_subscriptions));
-		_subscriptions = _application.getFbUser().getSubscriptions();
-		_adapter = new SubscriptionAdapter(SubscriptionsActivity.this, _subscriptions);
-		_listView.setAdapter(_adapter);
 	}
 
 	/**
@@ -39,7 +37,7 @@ public class SubscriptionsActivity extends BaseListActivity {
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		TvShowSynopse tvshow = _subscriptions.get(position).getTvShowSynope();
-		Intent intent = new Intent(this,TvShowActivity.class);
+		Intent intent = new Intent(_activity,TvShowActivity.class);
 		intent.putExtra("tvShowUri", tvshow.getUri());
 		startActivity(intent);
 	}

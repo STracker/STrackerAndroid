@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import src.stracker.adapters.UserAdapter;
 import src.stracker.model.UserSynopse;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ public class BaseFriendActivity extends BaseListActivity {
 
 	protected ArrayList<UserSynopse> _users;
 	protected UserAdapter _adapter;
+	protected Activity _activity;
 	
 	/**
 	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
@@ -29,7 +31,7 @@ public class BaseFriendActivity extends BaseListActivity {
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		UserSynopse user = _users.get(position);
-		Intent intent = new Intent(this, UserActivity.class);
+		Intent intent = new Intent(_activity, UserActivity.class);
 		intent.putExtra("uri", user.getUri());
 		startActivity(intent);
 	}

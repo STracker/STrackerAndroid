@@ -47,7 +47,7 @@ public class ProfileActivity extends BaseActivity {
 		_subscriptionsLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(ProfileActivity.this, SubscriptionsActivity.class));
+				startActivity(new Intent(ProfileActivity.this, MySubscriptionsActivity.class));
 			}
 		});
 		// - Friends

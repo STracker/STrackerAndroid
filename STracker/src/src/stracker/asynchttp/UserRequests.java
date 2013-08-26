@@ -90,7 +90,17 @@ public class UserRequests {
 	public static void postFriendRequest(Context context, MyRunnable runnable, String id){
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("",id);
-		AsyncHttpRequest.authorizedPost(context, runnable, null, context.getString(R.string.uri_user_friends), params);
+		AsyncHttpRequest.authorizedPost(context, runnable, null, context.getString(R.string.uri_user_friends).replace("/userId", ""), params);
+	}
+	
+	/**
+	 * This method represents a delete of a friend
+	 * @param context - context of the Activity where the request occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param id - identifier of an user to delete
+	 */
+	public static void deleteFriend(Context context, MyRunnable runnable, String id){
+		AsyncHttpRequest.authorizedDelete(context, runnable, null, context.getString(R.string.uri_user_friends).replace("userId", id));
 	}
 	
 	/**
@@ -100,7 +110,9 @@ public class UserRequests {
 	 * @param id - identifier of the user
 	 */
 	public static void postAcceptFriendRequest(Context context, MyRunnable runnable, String id){
-		AsyncHttpRequest.authorizedPost(context, runnable, null, context.getString(R.string.uri_user_friends_req).replace("userId", id), null);
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("",id);
+		AsyncHttpRequest.authorizedPost(context, runnable, null, context.getString(R.string.uri_user_friends_req).replace("/userId", ""), params);
 	}
 	
 	/**

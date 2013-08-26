@@ -20,5 +20,6 @@ public class MyFriendsActivity extends BaseFriendActivity {
 		_users = _application.getFbUser().getFriends();
 		_adapter = new UserAdapter(this, _users);
 		_listView.setAdapter(_adapter);
+		_activity = this;
 	}   
 }

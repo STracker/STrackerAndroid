@@ -32,7 +32,8 @@
         <activity android:name="src.stracker.CommentsActivity" />
         <activity android:name="src.stracker.CommentActivity"  />
         <activity android:name="src.stracker.PersonsActivity"  />
-        <activity android:name="src.stracker.SubscriptionsActivity"   />
+        <activity android:name="src.stracker.MySubscriptionsActivity" />
+        <activity android:name="src.stracker.UserSubscriptionsActivity" />
         <activity android:name="src.stracker.FriendsActivity"         />
         <activity android:name="src.stracker.EpisodeSynopsisActivity" />
         <activity android:name="src.stracker.GenreSynopsisActivity"   />

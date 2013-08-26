@@ -18,8 +18,7 @@ public class STrackerApp extends Application {
 	 * @param user - represents the user
 	 */
 	public void setFbUser(User user){
-		if(_fbUser == null)
-			_fbUser = user;
+		_fbUser = user;
 	}
 	
 	/**

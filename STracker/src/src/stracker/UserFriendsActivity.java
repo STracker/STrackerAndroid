@@ -19,6 +19,7 @@ public class UserFriendsActivity extends BaseFriendActivity{
 		super.onCreate(savedInstanceState); 
 		_users = getIntent().getParcelableArrayListExtra("list");
 		_adapter = new UserAdapter(this, _users);
-		_listView.setAdapter(_adapter);
+		_listView.setAdapter(_adapter); 
+		_activity = this;
 	}
 }

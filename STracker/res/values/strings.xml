@@ -109,7 +109,7 @@
 	<string name="uri_host_api">http://strackerserverdev.apphb.com/api/</string>
 	<string name="uri_user_subscriptions">user/subscriptions</string>
 	<string name="uri_genres">genres</string>
-	<string name="uri_user_friends">user/friends</string>
+	<string name="uri_user_friends">user/friends/userId</string>
 	<string name="uri_user_friends_req">user/friendrequests/userId</string>
 	<string name="uri_user_suggestion">user/suggestions/tvShowId</string>
 	<string name="uri_user_newepisodes">user/calendar</string>
@@ -157,6 +157,8 @@
 	<string name="error_friend_req">Friend Request Error!</string>
 	<string name="friend_req_accept">Friend Request Accepted!</string>
 	<string name="friend_req_reject">Friend Request Rejected!</string>
+	<string name="error_friend_del">Error in friend remove!</string>
+	<string name="friend_removed">Friend Removed Successfully.</string>
 	<string name="error_suggestion">Suggestion Error!</string>
 	<string name="suggestion_rejected">Suggestion Deleted!</string>
 	<string name="error_search_friend">Error Searching Friends!</string>

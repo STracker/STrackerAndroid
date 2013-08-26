@@ -34,14 +34,14 @@
         	android:layout_height="wrap_content" />
 	
     <LinearLayout 
-        android:id="@+id/subscriptions_layout"
+        android:id="@+id/subscriptions_layout2"
         android:orientation="horizontal"
         android:clickable="true"
     	android:layout_width="wrap_content"
     	android:layout_height="wrap_content" >
     
         <TextView 
-            android:id="@+id/subscriptions_id"
+            android:id="@+id/subscriptions_id2"
          	android:text="@string/user_subscriptions"
     		android:textIsSelectable="false" 
     		android:textColor="@color/Snow"
@@ -52,7 +52,7 @@
      		android:layout_height="wrap_content" />
         
         <TextView 
-            android:id="@+id/subscriptions_count"
+            android:id="@+id/subscriptions_count2"
          	android:text="@string/user_subs_count"
     		android:textIsSelectable="false" 
     		android:textColor="@color/Snow"
@@ -67,14 +67,14 @@
      		android:layout_height="wrap_content" />
 	</LinearLayout> 
 	<LinearLayout 
-        android:id="@+id/friends_layout"
+        android:id="@+id/friends_layout2"
         android:orientation="horizontal"
     	android:layout_width="wrap_content"
     	android:clickable="true"
     	android:layout_height="wrap_content" >
     
         <TextView 
-            android:id="@+id/friend_id"
+            android:id="@+id/friend_id2"
          	android:text="@string/user_friends"
     		android:textIsSelectable="false" 
     		android:textColor="@color/Snow"
@@ -85,7 +85,7 @@
      		android:layout_height="wrap_content" />
         
         <TextView 
-            android:id="@+id/friend_count"
+            android:id="@+id/friend_count2"
          	android:text="@string/user_frie_count"
     		android:textIsSelectable="false" 
     		android:textColor="@color/Snow"

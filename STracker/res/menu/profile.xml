@@ -6,4 +6,11 @@
         android:showAsAction="always"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/action_more_info" />
+    
+    <item
+        android:id="@+id/action_del_user"
+        android:orderInCategory="200"
+        android:showAsAction="always"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/action_more_info" />
 </menu>

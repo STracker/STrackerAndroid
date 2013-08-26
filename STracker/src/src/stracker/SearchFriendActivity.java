@@ -22,6 +22,7 @@ public class SearchFriendActivity extends BaseFriendActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
+		_activity = this;
 		UserRequests.getSearchFriends(this, new MyRunnable() {
 			@Override
 			public void run() {
