@@ -46,7 +46,7 @@ public class GenreSynopsisActivity extends SynopsisActivity<GenreSynopse> {
 	@Override
 	public void onItemClick(AdapterView<?> adapt,  View v, int position, long id) {
 		Intent intent = new Intent(this,TvShowsByGenreActivity.class);
-		intent.putExtra("uri", _synopses.get(position).getUri());
+		intent.putExtra(URI_PARAM, _synopses.get(position).getUri());
 		startActivity(intent);
 	}
 }

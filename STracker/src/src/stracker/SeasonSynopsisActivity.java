@@ -18,7 +18,7 @@ public class SeasonSynopsisActivity extends SynopsisActivity<SeasonSynopse> {
 	 */
 	@Override
 	protected void fetchRequest(String uri) {
-		_synopses = getIntent().getParcelableArrayListExtra("list");
+		_synopses = getIntent().getParcelableArrayListExtra(LIST_PARAM);
 		List<String> elems = new ArrayList<String>();
 		for(SeasonSynopse synopse : _synopses)
         	elems.add(synopse.getName());
@@ -32,7 +32,7 @@ public class SeasonSynopsisActivity extends SynopsisActivity<SeasonSynopse> {
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		Intent intent = new Intent(this, EpisodeSynopsisActivity.class);
-		intent.putExtra("uri", _synopses.get(position).getUri());
+		intent.putExtra(URI_PARAM, _synopses.get(position).getUri());
 		startActivity(intent);
 	}
 }

@@ -14,15 +14,18 @@ import android.widget.Toast;
 import roboguice.event.Observes;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+import src.stracker.actions.SharedActions;
+import src.stracker.actions.TvShowActions;
+import src.stracker.actions.UserActions;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.RatingRequests;
 import src.stracker.asynchttp.TvShowRequests;
 import src.stracker.asynchttp.UserRequests;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.Ratings;
+import src.stracker.model.Subscription;
 import src.stracker.model.TvShow;
 import src.stracker.utils.ShakeDetector;
-import src.stracker.utils.Utils;
 
 /**
  * @author diogomatos
@@ -48,7 +51,7 @@ public class TvShowActivity extends BaseActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		String tvShowUri = getIntent().getStringExtra("tvShowUri");
+		String tvShowUri = getIntent().getStringExtra(TVSHOW_URI_PARAM);
 		
 		TvShowRequests.getTvShow(this, new MyRunnable() {
 			@Override
@@ -71,12 +74,12 @@ public class TvShowActivity extends BaseActivity {
 					@Override
 					public void onRatingChanged(RatingBar ratingBar, float rating,
 							boolean fromUser) {
-						if(!Utils.checkLogin(TvShowActivity.this)) return;
-						Utils.initRatingSubmission(getString(R.string.uri_tvshow_rating)
-														.replace("tvShowId", _tvshow.getId()), 
-											       TvShowActivity.this, 
-											       (int) rating
-											      );
+						if(!UserActions.checkLogin(TvShowActivity.this)) return;
+						SharedActions.initRatingSubmission(getString(R.string.uri_tvshow_rating)
+														    .replace(TVSHOW_ID_PARAM, _tvshow.getId()), 
+													        TvShowActivity.this, 
+													        (int) rating
+													      );
 					}
 				});
 				//Rating request
@@ -105,40 +108,56 @@ public class TvShowActivity extends BaseActivity {
     	switch(item.getItemId()){
     	case R.id.form_seasons: 
     		Intent intent_seasons = new Intent(this,SeasonSynopsisActivity.class);
-    		intent_seasons.putExtra("list", _tvshow.getSeasons());
+    		intent_seasons.putExtra(LIST_PARAM, _tvshow.getSeasons());
 			startActivity(intent_seasons);
     		break;
     	case R.id.form_cast:
     		Intent intent_cast = new Intent(this,ActorsActivity.class);
-    		intent_cast.putExtra("list", _tvshow.getActors());
+    		intent_cast.putExtra(LIST_PARAM, _tvshow.getActors());
     		startActivity(intent_cast);
     		break;
     	case R.id.form_comments:
     		Intent intent_comments = new Intent(this, CommentsActivity.class);
-    		intent_comments.putExtra("uri", getString(R.string.uri_tvshow_comments).replace("tvShowId", _tvshow.getId()));
+    		intent_comments.putExtra(URI_PARAM, getString(R.string.uri_tvshow_comments).replace(TVSHOW_ID_PARAM, _tvshow.getId()));
     		startActivity(intent_comments);
     		break; 
     	case R.id.form_subscribe_tvshow:
-    		UserRequests.postSubscription(this, new MyRunnable() {
-					@Override
-					public void run() {
-						Toast.makeText(TvShowActivity.this, R.string.error_subscribe, Toast.LENGTH_SHORT).show();
-					}
-					@Override
-					public <T> void runWithArgument(T response) {
-						Toast.makeText(TvShowActivity.this, R.string.success_subscribe, Toast.LENGTH_SHORT).show();
-					}
-				}, _tvshow.getId());
+    		if(!UserActions.checkLogin(this)) break;
+    		handleSubscription();
     		break; 
     	case R.id.form_suggest_tvshow:
-    		if(!Utils.checkLogin(this)) break;
+    		if(!UserActions.checkLogin(this)) break;
     		Intent intent_suggest = new Intent(this, MyFriendSuggestActivity.class);
-    		intent_suggest.putExtra("tvShowId", _tvshow.getId());
+    		intent_suggest.putExtra(TVSHOW_ID_PARAM, _tvshow.getId());
     		startActivity(intent_suggest);
     		break;
     	}
     	return true;
     }
+	
+	/**
+	 * Auxiliary method to handle user subscriptions to the television show.
+	 */
+	private void handleSubscription(){
+		//Search in subscriptions if this television show is already subscribed
+		for(Subscription subscription : _application.getFbUser().getSubscriptions()){
+			if(subscription.getTvShowSynope().getId().equals(_tvshow.getId())){
+				TvShowActions.unsubscribeTvShow(this, _tvshow);
+				return;
+			}
+		}
+		//If isn't subscribed 
+		UserRequests.postSubscription(this, new MyRunnable() {
+			@Override
+			public void run() {
+				Toast.makeText(TvShowActivity.this, R.string.error_subscribe, Toast.LENGTH_SHORT).show();
+			}
+			@Override
+			public <T> void runWithArgument(T response) {
+				Toast.makeText(TvShowActivity.this, R.string.success_subscribe, Toast.LENGTH_SHORT).show();
+			}
+		}, _tvshow.getId());
+	}
 	
 	/**
 	 * This method creates a string with all the Genres of a television show

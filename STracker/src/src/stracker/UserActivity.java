@@ -41,49 +41,17 @@ public class UserActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setTitle(getString(R.string.profile_title));
-		String uri = getIntent().getStringExtra("uri");
-		UserRequests.getUser(this, new MyRunnable() {
-			@Override
-			public void run() {
-				Toast.makeText(UserActivity.this, R.string.error_user_req, Toast.LENGTH_SHORT).show();
-			}
-			@Override
-			public <T> void runWithArgument(T response) {
-				_user = (User) response;
-				setuserInformation();
-				
-			}
-		}, uri);
-		//Create clickable listeners
-		// - Subscriptions
-		_subscriptionsLayout.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(UserActivity.this, UserSubscriptionsActivity.class);
-				intent.putExtra("list", _user.getSubscriptions());
-				startActivity(intent);
-			}
-		});
-		// - Friends
-		_friendsLayout.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(UserActivity.this, UserFriendsActivity.class); 
-				intent.putExtra("list", _user.getFriends());
-				startActivity(intent);
-			}
-		});
 	}
 	
 	/**
 	 * This method is used to affect the user information
 	 */
 	private void setuserInformation(){
-		_userName.setText(getString(R.string.user_name) + _user.getName());
-		_userPhoto.setImageUrl(_user.getPhotoUrl());
-		_userEmail.setText(getString(R.string.user_email) + _user.getEmail());
-		_friendCount.setText(_user.getFriends().size()+"");
-		_subscriptionsCount.setText(_user.getSubscriptions().size()+"");
+		_userName          .setText(getString(R.string.user_name) + _user.getName());
+		_userPhoto         .setImageUrl(_user.getPhotoUrl());
+		_userEmail         .setText(getString(R.string.user_email) + _user.getEmail());
+		_friendCount       .setText(_user.getFriends().size()+EMPTY_STRING);
+		_subscriptionsCount.setText(_user.getSubscriptions().size()+EMPTY_STRING);
 	}
 	
 	/**
@@ -97,26 +65,57 @@ public class UserActivity extends BaseActivity {
     }
 	
 	/**
+	 * Because the user information request is asynchronous and the menu displayed
+	 * depends on that, the request must be implemented in this method.
 	 * @see android.app.Activity#onPrepareOptionsMenu(android.view.Menu)
 	 */
 	@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        if(_user == null) return true;
-        //Prepare menu items
-		MenuItem add = menu.findItem(R.id.action_add_user), 
-        		 del = menu.findItem(R.id.action_del_user);
-        //if the user already is a friend disable friend request option
-  		for(UserSynopse user : _application.getFbUser().getFriends()){
-  	    	if(user.getId().equals(_user.getId())){
-  	    		add.setVisible(false);
-  	    		break;
-  	    	}
-  		}
-  		//if the friend request is visible, remove friend is disabled
-  		if(add.isVisible())
-  			del.setVisible(false);
-        
+        String uri = getIntent().getStringExtra(URI_PARAM);
+		UserRequests.getUser(this, new MyRunnable() {
+			@Override
+			public void run() {
+				Toast.makeText(UserActivity.this, R.string.error_user_req, Toast.LENGTH_SHORT).show();
+			}
+			@Override
+			public <T> void runWithArgument(T response) {
+				_user = (User) response;
+				setuserInformation();
+				//Prepare menu items
+				MenuItem add = menu.findItem(R.id.action_add_user), 
+		        		 del = menu.findItem(R.id.action_del_user);
+		        //if the user already is a friend disable friend request option
+		  		for(UserSynopse user : _application.getFbUser().getFriends()){
+		  	    	if(user.getId().equals(_user.getId())){
+		  	    		add.setVisible(false);
+		  	    		break;
+		  	    	}
+		  		}
+		  		//if the friend request is visible, remove friend is disabled
+		  		if(add.isVisible())
+		  			del.setVisible(false);
+			}
+		}, uri);
+		//Create clickable listeners
+		// - Subscriptions
+		_subscriptionsLayout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(UserActivity.this, UserSubscriptionsActivity.class);
+				intent.putExtra(LIST_PARAM, _user.getSubscriptions());
+				startActivity(intent);
+			}
+		});
+		// - Friends
+		_friendsLayout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(UserActivity.this, UserFriendsActivity.class); 
+				intent.putExtra(LIST_PARAM, _user.getFriends());
+				startActivity(intent);
+			}
+		});
         return true;
     }
 	

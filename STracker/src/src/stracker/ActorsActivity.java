@@ -24,7 +24,7 @@ public class ActorsActivity extends BaseListActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_actors = getIntent().getParcelableArrayListExtra("list");
+		_actors = getIntent().getParcelableArrayListExtra(LIST_PARAM);
 		_adapter = new ActorsAdapter(this, _actors);
 		_listView.setAdapter(_adapter);
 	}

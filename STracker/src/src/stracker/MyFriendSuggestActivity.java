@@ -14,7 +14,7 @@ public class MyFriendSuggestActivity extends MyFriendsActivity {
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		UserSynopse user = _users.get(position);
-		String tvShowId = getIntent().getStringExtra("tvShowId");
+		String tvShowId = getIntent().getStringExtra(TVSHOW_ID_PARAM);
 		TvShowRequests.postSuggestion(this, new MyRunnable() {
 			@Override
 			public void run() {

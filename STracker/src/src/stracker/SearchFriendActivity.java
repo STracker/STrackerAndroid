@@ -32,9 +32,16 @@ public class SearchFriendActivity extends BaseFriendActivity {
 			@Override
 			public <T> void runWithArgument(T response) {
 				_users = (ArrayList<UserSynopse>) response;
+				//if i am a result, remove my entry from that list
+				for(UserSynopse synopse : _users){
+					if(synopse.getId().equals(_application.getFbUser().getId())){
+						_users.remove(synopse);
+						break;
+					}
+				}
 				_adapter = new UserAdapter(SearchFriendActivity.this, _users);
 				_listView.setAdapter(_adapter);
 			}
-		}, getIntent().getStringExtra("name"));
+		}, getIntent().getStringExtra(NAME_PARAM));
 	}
 }

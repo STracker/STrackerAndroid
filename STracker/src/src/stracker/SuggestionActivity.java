@@ -38,7 +38,7 @@ public class SuggestionActivity extends BaseListActivity {
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		Intent intent = new Intent(this,TvShowActivity.class);
-		intent.putExtra("tvShowUri", _suggestions.get(position).getTvShow().getUri());
+		intent.putExtra(TVSHOW_URI_PARAM, _suggestions.get(position).getTvShow().getUri());
 		startActivity(intent);
 	}
 }

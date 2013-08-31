@@ -38,7 +38,7 @@ public class BaseSubscriptionsActivity extends BaseListActivity {
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		TvShowSynopse tvshow = _subscriptions.get(position).getTvShowSynope();
 		Intent intent = new Intent(_activity,TvShowActivity.class);
-		intent.putExtra("tvShowUri", tvshow.getUri());
+		intent.putExtra(TVSHOW_URI_PARAM, tvshow.getUri());
 		startActivity(intent);
 	}
 }

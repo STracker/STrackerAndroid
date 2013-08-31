@@ -10,12 +10,12 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import roboguice.event.Observes;
 import roboguice.inject.ContentView;
+import src.stracker.actions.SharedActions;
 import src.stracker.adapters.CommentsAdapter;
 import src.stracker.asynchttp.CommentRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.model.Comment;
 import src.stracker.utils.ShakeDetector;
-import src.stracker.utils.Utils;
 
 /**
  * @author diogomatos
@@ -55,7 +55,7 @@ public class CommentsActivity extends BaseListActivity {
     {
     	switch(item.getItemId()){
     	case R.id.action_add_comment:
-    		Utils.addComment(_uri, this);
+    		SharedActions.addComment(_uri, this);
     		break; 
     	}
     	return true;
@@ -67,7 +67,7 @@ public class CommentsActivity extends BaseListActivity {
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		Intent intent = new Intent(this, CommentActivity.class);
-		intent.putExtra("comment", _comments.get(position));
+		intent.putExtra(COMMENT_PARAM, _comments.get(position));
 		startActivity(intent);
 	}
 	
@@ -91,12 +91,12 @@ public class CommentsActivity extends BaseListActivity {
 			@SuppressWarnings("unchecked")
 			@Override
 			public <T> void runWithArgument(T response) {
-				setTitle("Comments");
+				setTitle(getString(R.string.subitem_comments));
 				_comments = (ArrayList<Comment>) response;
-				_uri = getIntent().getStringExtra("uri");
+				_uri = getIntent().getStringExtra(URI_PARAM);
 				_adapter = new CommentsAdapter(CommentsActivity.this, _comments);
 				_listView.setAdapter(_adapter);
 			}
-		}, getIntent().getStringExtra("uri"));
+		}, getIntent().getStringExtra(URI_PARAM));
 	}
 }

@@ -532,27 +532,27 @@ containing a value of this type.
         public static final int tvshow=0x7f0a0005;
     }
     public static final class string {
-        public static final int act_comment_user=0x7f05006b;
-        public static final int action_calendar=0x7f050052;
-        public static final int action_friends=0x7f050032;
-        public static final int action_messages=0x7f050036;
+        public static final int act_comment_user=0x7f050074;
+        public static final int action_calendar=0x7f05005b;
+        public static final int action_friends=0x7f05003b;
+        public static final int action_messages=0x7f05003f;
         /**  Menu TvShow 
  Menu TvShow 
  Menu TvShow 
  Menu TvShow 
          */
-        public static final int action_more_info=0x7f05003a;
+        public static final int action_more_info=0x7f050043;
         /**  Menu Items 
  Menu Items 
  Menu Items 
  Menu Items 
          */
-        public static final int action_profile=0x7f050031;
-        public static final int action_search=0x7f050035;
-        public static final int action_series=0x7f050033;
-        public static final int action_settings=0x7f050034;
-        public static final int actor_arrow=0x7f05004f;
-        public static final int actor_name=0x7f05004d;
+        public static final int action_profile=0x7f05003a;
+        public static final int action_search=0x7f05003e;
+        public static final int action_series=0x7f05003c;
+        public static final int action_settings=0x7f05003d;
+        public static final int actor_arrow=0x7f050058;
+        public static final int actor_name=0x7f050056;
         public static final int app_id=0x7f05001e;
         public static final int app_name=0x7f050019;
         public static final int async_task=0x7f05001d;
@@ -561,8 +561,16 @@ containing a value of this type.
  Episode Information 
  Episode Information 
          */
-        public static final int banner_desc=0x7f050041;
-        public static final int char_name=0x7f05004e;
+        public static final int banner_desc=0x7f05004a;
+        /**  Actions Items 
+         */
+        public static final int button_cancel=0x7f050031;
+        public static final int button_remove=0x7f050037;
+        public static final int button_search=0x7f050036;
+        public static final int button_submit=0x7f050032;
+        public static final int button_unsubscribe=0x7f050039;
+        public static final int button_watch=0x7f050038;
+        public static final int char_name=0x7f050057;
         public static final int com_facebook_choose_friends=0x7f05000f;
         public static final int com_facebook_dialogloginactivity_ok_button=0x7f050000;
         public static final int com_facebook_internet_permission_error_message=0x7f050013;
@@ -588,55 +596,58 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_log_in_button=0x7f050008;
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f050009;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f05000a;
-        public static final int comment_btn=0x7f05006a;
-        public static final int comment_delete=0x7f050088;
-        public static final int comment_error=0x7f050089;
-        public static final int comment_permission=0x7f050086;
-        public static final int comment_success=0x7f050087;
-        public static final int comment_text=0x7f050069;
-        public static final int comment_user=0x7f050068;
+        public static final int comment_btn=0x7f050073;
+        public static final int comment_delete=0x7f050091;
+        public static final int comment_error=0x7f050092;
+        public static final int comment_message=0x7f050034;
+        public static final int comment_permission=0x7f05008f;
+        public static final int comment_success=0x7f050090;
+        public static final int comment_text=0x7f050072;
+        public static final int comment_user=0x7f050071;
         /**  Comment Information 
          */
-        public static final int comment_user_label=0x7f050067;
-        public static final int delete=0x7f050060;
-        public static final int episode=0x7f05004a;
-        public static final int episode_date=0x7f050045;
-        public static final int episode_desc=0x7f050042;
-        public static final int episode_info=0x7f050043;
-        public static final int episode_rating=0x7f050044;
-        public static final int episode_season=0x7f050049;
-        public static final int episode_watched_desc=0x7f05004b;
-        public static final int episodes_watched=0x7f050048;
-        public static final int error_calendar=0x7f050092;
-        public static final int error_comment=0x7f050083;
-        public static final int error_epi_synopses=0x7f05009a;
-        public static final int error_episode=0x7f050093;
-        public static final int error_ew_already_watched=0x7f0500aa;
-        public static final int error_ew_date=0x7f0500a8;
-        public static final int error_ew_remove=0x7f0500a1;
-        public static final int error_ew_subscribed=0x7f0500a9;
-        public static final int error_ew_watch=0x7f0500a2;
-        public static final int error_friend_del=0x7f0500a3;
-        public static final int error_friend_req=0x7f05008a;
-        public static final int error_friends=0x7f05008f;
-        public static final int error_genres=0x7f050091;
-        public static final int error_login=0x7f05008c;
-        public static final int error_profile=0x7f050090;
-        public static final int error_rating=0x7f050082;
-        public static final int error_sea_synopses=0x7f05009b;
-        public static final int error_search_by_genre=0x7f050099;
-        public static final int error_search_by_name=0x7f050098;
-        public static final int error_search_friend=0x7f0500a7;
-        public static final int error_sub_comment=0x7f050096;
-        public static final int error_sub_rating=0x7f050094;
-        public static final int error_subs=0x7f05008e;
-        public static final int error_subscribe=0x7f050084;
-        public static final int error_suggestion=0x7f0500a5;
-        public static final int error_user_req=0x7f05009c;
+        public static final int comment_user_label=0x7f050070;
+        public static final int delete=0x7f050069;
+        public static final int episode=0x7f050053;
+        public static final int episode_date=0x7f05004e;
+        public static final int episode_desc=0x7f05004b;
+        public static final int episode_info=0x7f05004c;
+        public static final int episode_rating=0x7f05004d;
+        public static final int episode_season=0x7f050052;
+        public static final int episode_watched_desc=0x7f050054;
+        public static final int episodes_watched=0x7f050051;
+        public static final int error_calendar=0x7f05009b;
+        public static final int error_comment=0x7f05008c;
+        public static final int error_epi_synopses=0x7f0500a3;
+        public static final int error_episode=0x7f05009c;
+        public static final int error_ew_already_watched=0x7f0500b6;
+        public static final int error_ew_date=0x7f0500b4;
+        public static final int error_ew_remove=0x7f0500aa;
+        public static final int error_ew_subscribed=0x7f0500b5;
+        public static final int error_ew_watch=0x7f0500ab;
+        public static final int error_friend_del=0x7f0500ac;
+        public static final int error_friend_req=0x7f050093;
+        public static final int error_friends=0x7f050098;
+        public static final int error_genres=0x7f05009a;
+        public static final int error_login=0x7f050095;
+        public static final int error_profile=0x7f050099;
+        public static final int error_rating=0x7f05008b;
+        public static final int error_sea_synopses=0x7f0500a4;
+        public static final int error_search_by_genre=0x7f0500a2;
+        public static final int error_search_by_name=0x7f0500a1;
+        public static final int error_search_friend=0x7f0500b0;
+        public static final int error_sub_comment=0x7f05009f;
+        public static final int error_sub_rating=0x7f05009d;
+        public static final int error_subs=0x7f050097;
+        public static final int error_subscribe=0x7f05008d;
+        public static final int error_suggestion=0x7f0500ae;
+        public static final int error_tv_unsubscribe=0x7f0500b1;
+        public static final int error_unsubscribe=0x7f0500b2;
+        public static final int error_user_req=0x7f0500a5;
         public static final int fb_login=0x7f050020;
-        public static final int friend_removed=0x7f0500a4;
-        public static final int friend_req_accept=0x7f05009f;
-        public static final int friend_req_reject=0x7f0500a0;
+        public static final int friend_removed=0x7f0500ad;
+        public static final int friend_req_accept=0x7f0500a8;
+        public static final int friend_req_reject=0x7f0500a9;
         public static final int from=0x7f05002e;
         public static final int hawk_key=0x7f05001f;
         /**  Calendar ListView Information 
@@ -644,40 +655,41 @@ containing a value of this type.
  Calendar ListView Information 
  Calendar ListView Information 
          */
-        public static final int header_entry=0x7f050050;
-        public static final int info_ew_watch=0x7f0500ab;
-        public static final int item_entry=0x7f050051;
-        public static final int list_genres=0x7f05003f;
-        public static final int loading_message=0x7f05009d;
-        public static final int login_message=0x7f05009e;
+        public static final int header_entry=0x7f050059;
+        public static final int info_ew_watch=0x7f0500b7;
+        public static final int item_entry=0x7f05005a;
+        public static final int list_genres=0x7f050048;
+        public static final int loading_message=0x7f0500a6;
+        public static final int login_message=0x7f0500a7;
         public static final int min=0x7f050030;
         public static final int next_episode=0x7f05001b;
         /**  Display messages 
          */
-        public static final int not_found=0x7f050080;
+        public static final int not_found=0x7f050089;
         /**  Actor Information 
  Actor Information 
  Actor Information 
  Actor Information 
          */
-        public static final int photo_desc=0x7f05004c;
+        public static final int photo_desc=0x7f050055;
         public static final int poster_desc=0x7f050029;
-        public static final int profile_email=0x7f050056;
-        public static final int profile_freq_count=0x7f05005f;
-        public static final int profile_frie_count=0x7f05005d;
-        public static final int profile_friendrequests=0x7f05005b;
-        public static final int profile_friends=0x7f050059;
+        public static final int profile_email=0x7f05005f;
+        public static final int profile_freq_count=0x7f050068;
+        public static final int profile_frie_count=0x7f050066;
+        public static final int profile_friendrequests=0x7f050064;
+        public static final int profile_friends=0x7f050062;
         /**  Profile Information 
          */
-        public static final int profile_name=0x7f050054;
-        public static final int profile_photo=0x7f050055;
-        public static final int profile_subs_count=0x7f05005c;
-        public static final int profile_subscriptions=0x7f050058;
-        public static final int profile_sugg_count=0x7f05005e;
-        public static final int profile_suggestions=0x7f05005a;
-        public static final int profile_title=0x7f050057;
-        public static final int rating_episode_avg=0x7f050046;
-        public static final int rating_episode_total=0x7f050047;
+        public static final int profile_name=0x7f05005d;
+        public static final int profile_photo=0x7f05005e;
+        public static final int profile_subs_count=0x7f050065;
+        public static final int profile_subscriptions=0x7f050061;
+        public static final int profile_sugg_count=0x7f050067;
+        public static final int profile_suggestions=0x7f050063;
+        public static final int profile_title=0x7f050060;
+        public static final int rating_episode_avg=0x7f05004f;
+        public static final int rating_episode_total=0x7f050050;
+        public static final int rating_message=0x7f050033;
         public static final int rating_tvshow_avg=0x7f05002c;
         public static final int rating_tvshow_total=0x7f05002d;
         public static final int search_hint=0x7f05001a;
@@ -697,57 +709,59 @@ containing a value of this type.
         public static final int serie_runtime=0x7f050024;
         public static final int serie_seasons=0x7f05002a;
         public static final int start_btn=0x7f05001c;
-        public static final int subitem_cast=0x7f05003d;
-        public static final int subitem_comments=0x7f05003c;
+        public static final int subitem_cast=0x7f050046;
+        public static final int subitem_comments=0x7f050045;
         /**  Menu Episode 
          */
-        public static final int subitem_directors=0x7f05006d;
-        public static final int subitem_guest_actors=0x7f05006e;
-        public static final int subitem_search_by_genre=0x7f050038;
-        public static final int subitem_search_by_name=0x7f050037;
-        public static final int subitem_search_friend=0x7f050039;
-        public static final int subitem_seasons=0x7f05003b;
-        public static final int subitem_subscribe=0x7f05003e;
-        public static final int subitem_suggest=0x7f050040;
-        public static final int submit_comment=0x7f050097;
-        public static final int submit_rating=0x7f050095;
-        public static final int success_ew_episode=0x7f0500ad;
-        public static final int success_ew_remove=0x7f0500ac;
-        public static final int success_friend_req=0x7f05008b;
-        public static final int success_login=0x7f05008d;
-        public static final int success_subscribe=0x7f050085;
-        public static final int success_suggestion=0x7f0500ae;
-        public static final int suggestion_rejected=0x7f0500a6;
-        public static final int title_comment=0x7f05006c;
-        public static final int toprated_header=0x7f050053;
-        public static final int unexpected=0x7f050081;
-        public static final int uri_episode_comments=0x7f050077;
-        public static final int uri_episode_rating=0x7f050078;
-        public static final int uri_episode_watched=0x7f05007f;
-        public static final int uri_genres=0x7f050071;
+        public static final int subitem_directors=0x7f050076;
+        public static final int subitem_guest_actors=0x7f050077;
+        public static final int subitem_search_by_genre=0x7f050041;
+        public static final int subitem_search_by_name=0x7f050040;
+        public static final int subitem_search_friend=0x7f050042;
+        public static final int subitem_seasons=0x7f050044;
+        public static final int subitem_subscribe=0x7f050047;
+        public static final int subitem_suggest=0x7f050049;
+        public static final int submit_comment=0x7f0500a0;
+        public static final int submit_rating=0x7f05009e;
+        public static final int success_ew_episode=0x7f0500b9;
+        public static final int success_ew_remove=0x7f0500b8;
+        public static final int success_friend_req=0x7f050094;
+        public static final int success_login=0x7f050096;
+        public static final int success_subscribe=0x7f05008e;
+        public static final int success_suggestion=0x7f0500ba;
+        public static final int success_unsubscribe=0x7f0500b3;
+        public static final int suggestion_rejected=0x7f0500af;
+        public static final int title_comment=0x7f050075;
+        public static final int toprated_header=0x7f05005c;
+        public static final int tvshow_message=0x7f050035;
+        public static final int unexpected=0x7f05008a;
+        public static final int uri_episode_comments=0x7f050080;
+        public static final int uri_episode_rating=0x7f050081;
+        public static final int uri_episode_watched=0x7f050088;
+        public static final int uri_genres=0x7f05007a;
         /**  Application URI's 
          */
-        public static final int uri_host_api=0x7f05006f;
-        public static final int uri_tvshow_comments=0x7f050079;
-        public static final int uri_tvshow_rating=0x7f05007a;
-        public static final int uri_tvshow_search=0x7f05007c;
-        public static final int uri_tvshow_toprated=0x7f050076;
-        public static final int uri_user_friends=0x7f050072;
-        public static final int uri_user_friends_req=0x7f050073;
-        public static final int uri_user_info=0x7f05007e;
-        public static final int uri_user_newepisodes=0x7f050075;
-        public static final int uri_user_search=0x7f05007d;
-        public static final int uri_user_subscriptions=0x7f050070;
-        public static final int uri_user_suggestion=0x7f050074;
-        public static final int uri_users=0x7f05007b;
-        public static final int user_email=0x7f050062;
-        public static final int user_frie_count=0x7f050066;
-        public static final int user_friends=0x7f050065;
+        public static final int uri_host_api=0x7f050078;
+        public static final int uri_tvshow_comments=0x7f050082;
+        public static final int uri_tvshow_rating=0x7f050083;
+        public static final int uri_tvshow_search=0x7f050085;
+        public static final int uri_tvshow_toprated=0x7f05007f;
+        public static final int uri_user_friends=0x7f05007b;
+        public static final int uri_user_friends_req=0x7f05007c;
+        public static final int uri_user_info=0x7f050087;
+        public static final int uri_user_newepisodes=0x7f05007e;
+        public static final int uri_user_search=0x7f050086;
+        public static final int uri_user_subscriptions=0x7f050079;
+        public static final int uri_user_suggestion=0x7f05007d;
+        public static final int uri_users=0x7f050084;
+        public static final int user_email=0x7f05006b;
+        public static final int user_frie_count=0x7f05006f;
+        public static final int user_friends=0x7f05006e;
         /**  User Information 
          */
-        public static final int user_name=0x7f050061;
-        public static final int user_subs_count=0x7f050064;
-        public static final int user_subscriptions=0x7f050063;
+        public static final int user_name=0x7f05006a;
+        public static final int user_subs_count=0x7f05006d;
+        public static final int user_subscriptions=0x7f05006c;
         public static final int users=0x7f05002f;
     }
     public static final class style {

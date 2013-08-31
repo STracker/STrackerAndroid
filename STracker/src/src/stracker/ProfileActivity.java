@@ -77,13 +77,13 @@ public class ProfileActivity extends BaseActivity {
 	 * This method is used to affect the profile information
 	 */
 	private void setProfileInformation(){
-		_profileName.setText(getString(R.string.profile_name) + _application.getFbUser().getName());
-		_profilePhoto.setImageUrl(_application.getFbUser().getPhotoUrl());
-		_profileEmail.setText(getString(R.string.profile_email) + _application.getFbUser().getEmail());
-		_subscriptionsCount.setText(_application.getFbUser().getSubscriptions().size()+"");
-		_friendRequestsCount.setText(_application.getFbUser().getFriendRequests().size()+"");
-		_suggestionsCount.setText(_application.getFbUser().getSuggestions().size()+"");
-		_friendCount.setText(_application.getFbUser().getFriends().size()+"");
+		_profileName        .setText(getString(R.string.profile_name) + _application.getFbUser().getName());
+		_profilePhoto       .setImageUrl(_application.getFbUser().getPhotoUrl());
+		_profileEmail       .setText(getString(R.string.profile_email) + _application.getFbUser().getEmail());
+		_subscriptionsCount .setText(_application.getFbUser().getSubscriptions().size()+EMPTY_STRING);
+		_friendRequestsCount.setText(_application.getFbUser().getFriendRequests().size()+EMPTY_STRING);
+		_suggestionsCount   .setText(_application.getFbUser().getSuggestions().size()+EMPTY_STRING);
+		_friendCount        .setText(_application.getFbUser().getFriends().size()+EMPTY_STRING);
 	}
 	
 	/**

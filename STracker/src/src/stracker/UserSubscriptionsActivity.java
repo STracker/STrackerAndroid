@@ -18,7 +18,7 @@ public class UserSubscriptionsActivity extends BaseSubscriptionsActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setTitle(getString(R.string.profile_subscriptions));
-		_subscriptions = getIntent().getParcelableArrayListExtra("list");
+		_subscriptions = getIntent().getParcelableArrayListExtra(LIST_PARAM);
 		_adapter = new SubscriptionAdapter(UserSubscriptionsActivity.this, _subscriptions);
 		_listView.setAdapter(_adapter);
 		_activity = this;

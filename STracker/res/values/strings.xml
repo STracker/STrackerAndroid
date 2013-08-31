@@ -8,7 +8,7 @@
 	<string name="app_id">516839011711939</string>
 	<string name="hawk_key">werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
 	<string name="fb_login">To perform this action you need to login!</string>
-	<string name="separator">.&#160;</string>
+	<string name="separator">&#160;-&#160;</string>
 	
 	<!-- Information about TvShow -->
 	<string name="serie_name">Name:&#160;</string>
@@ -26,6 +26,18 @@
 	<string name="from">from:&#160;</string>
 	<string name="users">&#160;user(s).</string>
 	<string name="min">&#160;min</string>
+	
+	<!-- Actions Items -->
+	<string name="button_cancel">Cancel</string>
+	<string name="button_submit">Submit</string>
+	<string name="rating_message">Do you really want to submit the Rating?</string>
+	<string name="comment_message">Please insert text comment:</string>
+	<string name="tvshow_message">Enter TvShow\'s Name:</string>
+	<string name="rating_message">Enter Friend\'s Name:</string>
+	<string name="button_search">Search</string>
+	<string name="button_remove">Remove</string>
+	<string name="button_watch">Watch</string>
+	<string name="button_unsubscribe">Unsubscribe</string>
 	
 	<!-- Menu Items -->
 	<string name="action_profile">Profile</string>
@@ -109,7 +121,7 @@
 	
 	<!-- Application URI's -->
 	<string name="uri_host_api">http://strackerserverdev.apphb.com/api/</string>
-	<string name="uri_user_subscriptions">user/subscriptions</string>
+	<string name="uri_user_subscriptions">user/subscriptions/tvShowId</string>
 	<string name="uri_genres">genres</string>
 	<string name="uri_user_friends">user/friends/userId</string>
 	<string name="uri_user_friends_req">user/friendrequests/userId</string>
@@ -169,6 +181,9 @@
 	<string name="error_suggestion">Suggestion Error!</string>
 	<string name="suggestion_rejected">Suggestion Deleted!</string>
 	<string name="error_search_friend">Error Searching Friends!</string>
+	<string name="error_tv_unsubscribe">Tv Show already subscribed! Do you want to unsubscribe?</string>
+	<string name="error_unsubscribe">Error in unsubscribe Tv Show!</string>
+	<string name="success_unsubscribe">Tv Show Unsubscribed!</string>
 	<string name="error_ew_date">Episode not premiered!</string>
 	<string name="error_ew_subscribed">You need to be subscribed in this Tv Show!</string>
 	<string name="error_ew_already_watched">Episode already seen! Do you wish to remove this?</string>

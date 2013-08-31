@@ -17,7 +17,7 @@ public abstract class TvShowSynopsisActivity extends SynopsisActivity<TvShowSyno
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		Intent intent = new Intent(this, TvShowActivity.class);
-		intent.putExtra("tvShowUri", _synopses.get(position).getUri());
+		intent.putExtra(TVSHOW_URI_PARAM, _synopses.get(position).getUri());
 		startActivity(intent);
 	}
 }

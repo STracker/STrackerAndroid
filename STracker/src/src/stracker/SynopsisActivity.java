@@ -27,7 +27,7 @@ public abstract class SynopsisActivity<T> extends BaseListActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		fetchRequest(getIntent().getStringExtra("uri"));
+		fetchRequest(getIntent().getStringExtra(URI_PARAM));
 	}
 	
 	/**

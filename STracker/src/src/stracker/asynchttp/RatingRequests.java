@@ -1,16 +1,14 @@
 package src.stracker.asynchttp;
 
 import java.util.HashMap;
-
 import android.content.Context;
-
 import src.stracker.R;
 import src.stracker.STrackerApp;
+import src.stracker.actions.UserActions;
 import src.stracker.json.JSONLocator;
 import src.stracker.json.RatingsSerializer;
 import src.stracker.model.Episode;
 import src.stracker.model.Ratings;
-import src.stracker.utils.Utils;
 
 /**
  * @author diogomatos
@@ -38,7 +36,7 @@ public class RatingRequests {
 	 * @param rating - user rating to submit
 	 */
 	public static void postRating(Context context, MyRunnable runnable, String uri, String rating){
-		if(!Utils.checkLogin((STrackerApp) context.getApplicationContext())) return;
+		if(!UserActions.checkLogin((STrackerApp) context.getApplicationContext())) return;
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("", rating);
 		AsyncHttpRequest.authorizedPost(context, runnable, null, uri, params);

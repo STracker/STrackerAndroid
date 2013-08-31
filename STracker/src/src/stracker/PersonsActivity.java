@@ -28,7 +28,7 @@ public class PersonsActivity extends BaseListActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_arrayList = getIntent().getParcelableArrayListExtra("list");
+		_arrayList = getIntent().getParcelableArrayListExtra(LIST_PARAM);
 		List<String> elems = new ArrayList<String>();
 		for(Person person : _arrayList)
         	elems.add(person.getName());

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
+import src.stracker.actions.EpisodeActions;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.SeasonRequests;
 import src.stracker.model.EpisodeSynopse;
@@ -32,7 +33,7 @@ public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
 				_synopses = ((Season) response).getEpisodes();
 				List<String> elems = new ArrayList<String>();
 				for(EpisodeSynopse synopse : _synopses)
-	        		elems.add(synopse.getNumber() + getString(R.string.separator) + synopse.getName());
+	        		elems.add(EpisodeActions.buildEpisodePrefix(synopse) + getString(R.string.separator) + synopse.getName());
 				setAdapter(elems);
 			}
 		}, uri);
@@ -45,7 +46,7 @@ public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View v, int position, long id) {
 		Intent intent = new Intent(this, EpisodeActivity.class);
-		intent.putExtra("uri", _synopses.get(position).getUri());
+		intent.putExtra(URI_PARAM, _synopses.get(position).getUri());
 		startActivity(intent);
 	}
 }

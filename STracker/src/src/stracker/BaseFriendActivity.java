@@ -32,7 +32,7 @@ public class BaseFriendActivity extends BaseListActivity {
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		UserSynopse user = _users.get(position);
 		Intent intent = new Intent(_activity, UserActivity.class);
-		intent.putExtra("uri", user.getUri());
+		intent.putExtra(URI_PARAM, user.getUri());
 		startActivity(intent);
 	}
 }

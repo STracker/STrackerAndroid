@@ -3,6 +3,7 @@ package src.stracker.asynchttp;
 import java.util.HashMap;
 import android.content.Context;
 import src.stracker.R;
+import src.stracker.actions.UserActions;
 import src.stracker.json.CalendarSerializer;
 import src.stracker.json.FriendsSerializer;
 import src.stracker.json.JSONLocator;
@@ -10,7 +11,6 @@ import src.stracker.json.UserSerializer;
 import src.stracker.model.Calendar;
 import src.stracker.model.User;
 import src.stracker.model.UserSynopse;
-import src.stracker.utils.Utils;
 /**
  * @author diogomatos
  * This class have all the HTTP requests for an User.
@@ -28,19 +28,30 @@ public class UserRequests {
 	 * @param tvShowId - identifier of a television show for the subscription
 	 */
 	public static void postSubscription(Context context, MyRunnable runnable, String tvShowId){
-		if(!Utils.checkLogin(context)) return;
+		if(!UserActions.checkLogin(context)) return;
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("", tvShowId);
-		AsyncHttpRequest.authorizedPost(context, runnable, userSerializer, context.getString(R.string.uri_user_subscriptions), params);
+		AsyncHttpRequest.authorizedPost(context, runnable, null, context.getString(R.string.uri_user_subscriptions).replace("/tvShowId", ""), params);
 	}
 
+	/**
+	 * This method represents a subscription to a television show
+	 * @param context - context of the Activity where the request occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param tvShowId - identifier of a television show for the subscription
+	 */
+	public static void deleteSubscription(Context context, MyRunnable runnable, String tvShowId){
+		if(!UserActions.checkLogin(context)) return;
+		AsyncHttpRequest.authorizedDelete(context, runnable, null, context.getString(R.string.uri_user_subscriptions).replace("tvShowId", tvShowId));
+	}
+	
 	/**
 	 * This method represents a calendar of an user
 	 * @param context - context of the Activity where the request occur
 	 * @param runnable - callback that will be called after the HTTP request
 	 */
 	public static void getCalendar(Context context, MyRunnable runnable){
-		if(!Utils.checkLogin(context)) return;
+		if(!UserActions.checkLogin(context)) return;
 		AsyncHttpRequest.authorizedGet(context, runnable, calendarSerializer, context.getString(R.string.uri_user_newepisodes));
 	}
 	
@@ -61,7 +72,7 @@ public class UserRequests {
 	 * @param uri - URI of the resource
 	 */
 	public static void getUser(Context context, MyRunnable runnable, String uri){
-		if(!Utils.checkLogin(context)) return;
+		if(!UserActions.checkLogin(context)) return;
 		AsyncHttpRequest.authorizedGet(context, runnable, userSerializer, uri);
 	}
 	

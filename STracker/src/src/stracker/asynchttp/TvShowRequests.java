@@ -1,9 +1,9 @@
 package src.stracker.asynchttp;
 
 import java.util.HashMap;
-
 import android.content.Context;
 import src.stracker.R;
+import src.stracker.actions.UserActions;
 import src.stracker.json.GenreSerializer;
 import src.stracker.json.GenresSerializer;
 import src.stracker.json.JSONLocator;
@@ -13,7 +13,6 @@ import src.stracker.model.Genre;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.TvShow;
 import src.stracker.model.TvShowSynopse;
-import src.stracker.utils.Utils;
 
 /**
  * @author diogomatos
@@ -82,7 +81,7 @@ public class TvShowRequests {
 	 * @param id - identifier of the friend to send the suggestions
 	 */
 	public static void postSuggestion(Context context, MyRunnable runnable, String tvShowId, String id){
-		if(!Utils.checkLogin(context)) return;
+		if(!UserActions.checkLogin(context)) return;
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("", id);
 		AsyncHttpRequest.authorizedPost(context, runnable, null, context.getString(R.string.uri_user_suggestion).replace("tvShowId", tvShowId), params);

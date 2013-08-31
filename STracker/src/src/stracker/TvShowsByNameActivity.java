@@ -13,7 +13,7 @@ import src.stracker.model.TvShowSynopse;
 public class TvShowsByNameActivity extends TvShowSynopsisActivity {
 
 	/**
-	 * In this method the uri isn't used. Instead the parameter is used to 
+	 * In this method the URI isn't used. Instead the parameter is used to 
 	 * keep the name in television show search
 	 * @see src.stracker.SynopsisActivity#fetchRequest(java.lang.String)
 	 */

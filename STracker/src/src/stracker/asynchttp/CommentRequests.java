@@ -1,15 +1,14 @@
 package src.stracker.asynchttp;
 
 import java.util.HashMap;
-
 import android.content.Context;
 import android.widget.Toast;
 import src.stracker.R;
 import src.stracker.STrackerApp;
+import src.stracker.actions.UserActions;
 import src.stracker.json.CommentsSerializer;
 import src.stracker.json.JSONLocator;
 import src.stracker.model.Comment;
-import src.stracker.utils.Utils;
 
 /**
  * @author diogomatos
@@ -37,7 +36,7 @@ public class CommentRequests {
 	 * @param comment - reference to the comment.
 	 */
 	public static void postComment(Context context, MyRunnable runnable, String uri, String comment){
-		if(!Utils.checkLogin((STrackerApp)context.getApplicationContext())) return;
+		if(!UserActions.checkLogin((STrackerApp)context.getApplicationContext())) return;
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("", comment);
 		AsyncHttpRequest.authorizedPost(context, runnable, commentsSerializer, uri, params);
@@ -50,7 +49,7 @@ public class CommentRequests {
 	 * @param comment - reference to the comment.
 	 */
 	public static void deleteComment(Context context, MyRunnable runnable, Comment comment){
-		if(!Utils.checkLogin((STrackerApp)context.getApplicationContext())) return;
+		if(!UserActions.checkLogin((STrackerApp)context.getApplicationContext())) return;
 		if(((STrackerApp)context.getApplicationContext()).getFbUser().getId().equals(comment.getUserId())){
 			AsyncHttpRequest.authorizedDelete(context, runnable, commentsSerializer, comment.getUri());
 		} else {

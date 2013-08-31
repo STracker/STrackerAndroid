@@ -1,6 +1,7 @@
 /**
  * Third-party code
  * Source: https://gist.github.com/alecplumb/1302404
+ * Just added an annotation to remove deprecated warnings 
  */
 package src.stracker.utils;
 
@@ -40,6 +41,7 @@ import com.google.inject.Inject;
  *
  * @author <a href="mailto:alec@etherwalker.com">Alec B. Plumb</a>
  */
+@SuppressWarnings("deprecation")
 public class ShakeDetector implements SensorEventListener {
  
 	private static final int FORCE_THRESHOLD = 350;

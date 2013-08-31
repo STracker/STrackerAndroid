@@ -14,6 +14,9 @@ import android.widget.Toast;
 import roboguice.event.Observes;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+import src.stracker.actions.EpisodeActions;
+import src.stracker.actions.SharedActions;
+import src.stracker.actions.UserActions;
 import src.stracker.asynchttp.EpisodeRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.RatingRequests;
@@ -22,7 +25,6 @@ import src.stracker.model.EpisodeSynopse;
 import src.stracker.model.Ratings;
 import src.stracker.model.Subscription;
 import src.stracker.utils.ShakeDetector;
-import src.stracker.utils.Utils;
 
 /**
  * @author diogomatos
@@ -46,7 +48,7 @@ public class EpisodeActivity extends BaseActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		String episodeUri = getIntent().getStringExtra("uri");
+		String episodeUri = getIntent().getStringExtra(URI_PARAM);
 		EpisodeRequests.getEpisode(this, new MyRunnable() {	
 			@Override
 			public void run() {
@@ -57,7 +59,9 @@ public class EpisodeActivity extends BaseActivity {
 			public <T> void runWithArgument(T response) {
 				_episode = (Episode) response;
 				setTitle(_episode.getName());
-				_episodeInfo.setText(getString(R.string.episode_season) + _episode.getSeasonNumber() + getString(R.string.episode) + _episode.getNumber());
+				_episodeInfo.setText(EpisodeActions.buildEpisodePrefix(
+						new EpisodeSynopse(_episode.getNumber(), null, null, null, _episode.getSeasonNumber()))
+						+ getString(R.string.separator) + _episode.getName());
 				_description.setText(_episode.getDescription());
 				_banner.setImageUrl(_episode.getPosterUrl());
 				_date.setText(getString(R.string.episode_date) + _episode.getDate());
@@ -66,10 +70,10 @@ public class EpisodeActivity extends BaseActivity {
 					public void onRatingChanged(RatingBar ratingBar, float rating,
 							boolean fromUser) {
 						String uri = getString(R.string.uri_episode_rating)
-											.replace("tvShowId", _episode.getTvShowId())
-											.replace("seasonNumber", _episode.getSeasonNumber()+"")
-											.replace("episodeNumber", _episode.getNumber()+"");
-						Utils.initRatingSubmission(uri , EpisodeActivity.this, (int) rating);
+											.replace(TVSHOW_ID_PARAM, _episode.getTvShowId())
+											.replace(SEASON_NUMBER_PARAM, _episode.getSeasonNumber()+EMPTY_STRING)
+											.replace(EPISODE_NUMBER_PARAM, _episode.getNumber()+EMPTY_STRING);
+						SharedActions.initRatingSubmission(uri , EpisodeActivity.this, (int) rating);
 					}
 				});
 				//Get rating information
@@ -98,25 +102,25 @@ public class EpisodeActivity extends BaseActivity {
     	switch(item.getItemId()){
 	    	case R.id.form_directors:
 	    		Intent intent_directors = new Intent(this,PersonsActivity.class);
-	    		intent_directors.putExtra("list", _episode.getDirectors());
+	    		intent_directors.putExtra(LIST_PARAM, _episode.getDirectors());
 				startActivity(intent_directors);
 	    		break;
 	    	case R.id.form_guest_actors:
 	    		Intent intent_guest_actors = new Intent(this,PersonsActivity.class);
-	    		intent_guest_actors.putExtra("list", _episode.getGuestActors());
+	    		intent_guest_actors.putExtra(LIST_PARAM, _episode.getGuestActors());
 	    		startActivity(intent_guest_actors);
 	    		break;
 	    	case R.id.form_episode_comments:
 	    		String uri = getString(R.string.uri_episode_comments)
-									.replace("tvShowId", _episode.getTvShowId())
-									.replace("seasonNumber", _episode.getSeasonNumber()+"")
-									.replace("episodeNumber", _episode.getNumber()+"");
+									.replace(TVSHOW_ID_PARAM, _episode.getTvShowId())
+									.replace(SEASON_NUMBER_PARAM, _episode.getSeasonNumber()+EMPTY_STRING)
+									.replace(EPISODE_NUMBER_PARAM, _episode.getNumber()+EMPTY_STRING);
 	    		Intent intent_comments = new Intent(this, CommentsActivity.class);
-	    		intent_comments.putExtra("uri", uri);
+	    		intent_comments.putExtra(URI_PARAM, uri);
 	    		startActivity(intent_comments);
 	    		break; 
 	    	case R.id.action_ep_watched:
-	    		if(!Utils.checkLogin(this)) break;
+	    		if(!UserActions.checkLogin(this)) break;
 	    		performWatchedEpisode();
 	    		break;
 	    } 
@@ -127,7 +131,7 @@ public class EpisodeActivity extends BaseActivity {
 	 * This method has the logic of the watched episode
 	 */
 	private void performWatchedEpisode() {
-		SimpleDateFormat sdm = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdm = new SimpleDateFormat(DATE_MASK);
 		Date current_date = new Date();
 		try {
 			if(current_date.compareTo(sdm.parse(_episode.getDate())) <= 0){
@@ -149,12 +153,12 @@ public class EpisodeActivity extends BaseActivity {
 			//Verify if the user already watched this episode
 			for(EpisodeSynopse epi : subscription.getWatchedEpisodes()){
 				if(epi.getSeasonNumber() == _episode.getSeasonNumber() && epi.getNumber() == _episode.getNumber()){
-					Utils.unwatchEpisode(this, _episode);
+					EpisodeActions.unwatchEpisode(this, _episode);
 					return;
 				}
 			}
 			//Ask to watch the episode
-			Utils.watchEpisode(this, _episode);
+			EpisodeActions.watchEpisode(this, _episode);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -176,8 +180,7 @@ public class EpisodeActivity extends BaseActivity {
 			@Override
 			public void run() {
 				Toast.makeText(EpisodeActivity.this, R.string.error_rating, Toast.LENGTH_SHORT).show();
-			}
-			
+			}	
 			@Override
 			public <T> void runWithArgument(T response) {
 				Ratings rating = (Ratings) response;

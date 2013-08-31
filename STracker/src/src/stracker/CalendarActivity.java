@@ -2,13 +2,13 @@ package src.stracker;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 import roboguice.inject.ContentView;
+import src.stracker.actions.EpisodeActions;
 import src.stracker.adapters.MainListAdapter;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.UserRequests;
@@ -65,24 +65,12 @@ public class CalendarActivity extends BaseListActivity {
 			_uris.add("");
 			for(CalendarEntry entrie : calendar.getEntries()){
 				for(EpisodeSynopse synopse : entrie.getEpisodes()){
-					items.add(new ItemEntry(buildEpisodePrefix(synopse), entrie.getTvShow().getName()));
+					items.add(new ItemEntry(EpisodeActions.buildEpisodePrefix(synopse), entrie.getTvShow().getName()));
 					_uris.add(synopse.getUri());
 				}
 			}
 		}
 		return items;
-	}
-	
-	/**
-	 * This method construct a string title with episode information
-	 * @param episode - episode synopse
-	 * @return string - episode title
-	 */
-	private String buildEpisodePrefix(EpisodeSynopse episode){
-		return "S"+
-			   ((episode.getSeasonNumber() < 10) ? "0" : "") + episode.getSeasonNumber() + 
-			   "E" +
-			   ((episode.getNumber() < 10) ? "0" : "") + episode.getNumber();
 	}
 
 	/**
@@ -93,7 +81,7 @@ public class CalendarActivity extends BaseListActivity {
 		if(_adapter.getItem(position).getViewType() == EntryType.HEADER_ITEM.ordinal())
 			return;
 		Intent intent = new Intent(this, EpisodeActivity.class);
-		intent.putExtra("uri", _uris.get(position));
+		intent.putExtra(URI_PARAM, _uris.get(position));
 		startActivity(intent);
 	}
 }

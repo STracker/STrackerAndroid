@@ -3,12 +3,13 @@ package src.stracker;
 import java.util.ArrayList;
 import roboguice.event.Observes;
 import roboguice.inject.ContentView;
+import src.stracker.actions.TvShowActions;
+import src.stracker.actions.UserActions;
 import src.stracker.adapters.TvShowSynopseAdapter;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.TvShowRequests;
 import src.stracker.model.TvShowSynopse;
 import src.stracker.utils.ShakeDetector;
-import src.stracker.utils.Utils;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -54,21 +55,21 @@ public class MainActivity extends BaseListActivity {
 	{
 		switch(item.getItemId()){
 			case R.id.action_profile:
-				if(!Utils.checkLogin(this)) break;
+				if(!UserActions.checkLogin(this)) break;
 				startActivity(new Intent(this,ProfileActivity.class));
 				break;  
 			case R.id.form_friend:
-				Utils.initSearchFriend(this);
+				UserActions.searchFriend(this);
 				break;
 			case R.id.form_genre:
 				startActivity(new Intent(this, GenreSynopsisActivity.class));
 				break;
 			case R.id.form_name:
-				if(!Utils.checkLogin(this)) break;
-				Utils.initSearchByName(this);
+				if(!UserActions.checkLogin(this)) break;
+				TvShowActions.searchTvShowByName(this);
 				break;
 			case R.id.action_calendar:
-				if(!Utils.checkLogin(this)) break;
+				if(!UserActions.checkLogin(this)) break;
 				startActivity(new Intent(this, CalendarActivity.class));
 				break;
 		}
@@ -86,7 +87,7 @@ public class MainActivity extends BaseListActivity {
 	@Override
 	public void onItemClick(AdapterView<?> adapt, View view, int position, long id) {
 		Intent intent = new Intent(this,TvShowActivity.class);
-		intent.putExtra("tvShowUri", _elems.get(position).getUri());
+		intent.putExtra(TVSHOW_URI_PARAM, _elems.get(position).getUri());
 		startActivity(intent);
 	}
 	

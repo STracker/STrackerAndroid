@@ -32,7 +32,7 @@ public class CommentActivity extends BaseActivity {
 	@Override 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
-		_comment = getIntent().getParcelableExtra("comment");
+		_comment = getIntent().getParcelableExtra(COMMENT_PARAM);
 		_userName.setText(_comment.getUserName());
 		_commentText.setText(_comment.getBody());
 		_profileBtn.setOnClickListener(btnHandler);
@@ -41,7 +41,7 @@ public class CommentActivity extends BaseActivity {
 	View.OnClickListener btnHandler = new View.OnClickListener() {
 	    public void onClick(View v) {
 	    	Intent intent = new Intent(CommentActivity.this, ProfileActivity.class);
-	    	intent.putExtra("uri", _comment.getUserUri());
+	    	intent.putExtra(URI_PARAM, _comment.getUserUri());
 	    	startActivity(intent);
 	    }
 	  };
