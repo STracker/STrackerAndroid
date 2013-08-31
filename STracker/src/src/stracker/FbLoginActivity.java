@@ -2,7 +2,6 @@ package src.stracker;
 
 import java.util.Arrays;
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -17,8 +16,6 @@ import roboguice.inject.ContentView;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.UserRequests;
 import src.stracker.model.User;
-import src.stracker.user_info.UserManager;
-import src.stracker.user_info.UserTableContract;
 
 /**
  * The login activity.
@@ -87,17 +84,6 @@ public class FbLoginActivity extends BaseActivity {
 								public <T> void runWithArgument(T response) {
 									_dialog.dismiss();
 									_application.setFbUser((User) response);
-									ContentValues values = new ContentValues();
-									values.put(UserTableContract.USER_ID, _application.getFbUser().getId());
-									values.put(UserTableContract.NAME, _application.getFbUser().getName());
-									values.put(UserTableContract.EMAIL, _application.getFbUser().getEmail());
-									values.put(UserTableContract.VERSION, 1);
-									values.put(UserTableContract.PHOTO_URL, _application.getFbUser().getPhotoUrl());
-									values.put(UserTableContract.SUBSCRIPTIONS, UserManager.serialize(_application.getFbUser().getSubscriptions()));
-									values.put(UserTableContract.SUGGESTIONS, UserManager.serialize(_application.getFbUser().getSuggestions()));
-									values.put(UserTableContract.FRIENDS, UserManager.serialize(_application.getFbUser().getFriends()));
-									values.put(UserTableContract.FRIEND_REQUESTS, UserManager.serialize(_application.getFbUser().getFriendRequests()));
-									getContentResolver().insert(UserTableContract.USER_TABLE_URI, values);
 									finish();
 								}
 							}, user.getId());

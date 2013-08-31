@@ -19,7 +19,7 @@ public class SuggestionActivity extends BaseListActivity {
 
 	private ArrayList<Suggestion> _suggestions;
 	private SuggestionAdapter _adapter;
-	
+	 
 	/**
 	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
 	 */

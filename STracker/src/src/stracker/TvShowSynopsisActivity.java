@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import src.stracker.model.TvShowSynopse;
 /**
- * @author diogomatos
+ * @author diogomatos 
  * This class represents a list of television show synopsis.
  */
 public abstract class TvShowSynopsisActivity extends SynopsisActivity<TvShowSynopse> {

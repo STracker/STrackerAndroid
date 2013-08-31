@@ -19,8 +19,7 @@ public class EpisodeSynopseSerializer implements ISerialize<ArrayList<EpisodeSyn
 	public ArrayList<EpisodeSynopse> deserialize(String json) {
 		ArrayList<EpisodeSynopse> episodes = new ArrayList<EpisodeSynopse>();
 		try {
-			JSONObject jObject = new JSONObject(json);
-			JSONArray jsonArray = jObject.getJSONArray("Episodes");
+			JSONArray jsonArray = new JSONArray(json);
 			for (int i = 0; i < jsonArray.length(); i++) {
 		        JSONObject jObj = jsonArray.getJSONObject(i);
 		        episodes.add(new EpisodeSynopse(

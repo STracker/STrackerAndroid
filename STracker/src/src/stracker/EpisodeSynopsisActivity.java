@@ -9,6 +9,7 @@ import android.widget.Toast;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.SeasonRequests;
 import src.stracker.model.EpisodeSynopse;
+import src.stracker.model.Season;
 
 /**
  * @author diogomatos
@@ -26,10 +27,9 @@ public class EpisodeSynopsisActivity extends SynopsisActivity<EpisodeSynopse> {
 			public void run() {
 				Toast.makeText(EpisodeSynopsisActivity.this, R.string.error_epi_synopses, Toast.LENGTH_SHORT).show();
 			}
-			@SuppressWarnings("unchecked")
 			@Override
 			public <T> void runWithArgument(T response) {
-				_synopses = (ArrayList<EpisodeSynopse>) response;
+				_synopses = ((Season) response).getEpisodes();
 				List<String> elems = new ArrayList<String>();
 				for(EpisodeSynopse synopse : _synopses)
 	        		elems.add(synopse.getNumber() + getString(R.string.separator) + synopse.getName());

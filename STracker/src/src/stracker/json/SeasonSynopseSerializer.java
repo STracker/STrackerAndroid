@@ -13,7 +13,6 @@ import src.stracker.model.SeasonSynopse;
 public class SeasonSynopseSerializer implements ISerialize<ArrayList<SeasonSynopse>> {
 
 	/**
-	 * (non-Javadoc)
 	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
 	 */
 	@Override

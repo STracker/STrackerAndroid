@@ -1,5 +1,7 @@
 package src.stracker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import com.loopj.android.image.SmartImageView;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +18,9 @@ import src.stracker.asynchttp.EpisodeRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.RatingRequests;
 import src.stracker.model.Episode;
+import src.stracker.model.EpisodeSynopse;
 import src.stracker.model.Ratings;
+import src.stracker.model.Subscription;
 import src.stracker.utils.ShakeDetector;
 import src.stracker.utils.Utils;
 
@@ -92,29 +96,70 @@ public class EpisodeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
     	switch(item.getItemId()){
-    	case R.id.form_directors:
-    		Intent intent_directors = new Intent(this,PersonsActivity.class);
-    		intent_directors.putExtra("list", _episode.getDirectors());
-			startActivity(intent_directors);
-    		break;
-    	case R.id.form_guest_actors:
-    		Intent intent_guest_actors = new Intent(this,PersonsActivity.class);
-    		intent_guest_actors.putExtra("list", _episode.getGuestActors());
-    		startActivity(intent_guest_actors);
-    		break;
-    	case R.id.form_episode_comments:
-    		String uri = getString(R.string.uri_episode_comments)
-								.replace("tvShowId", _episode.getTvShowId())
-								.replace("seasonNumber", _episode.getSeasonNumber()+"")
-								.replace("episodeNumber", _episode.getNumber()+"");
-    		Intent intent_comments = new Intent(this, CommentsActivity.class);
-    		intent_comments.putExtra("uri", uri);
-    		startActivity(intent_comments);
-    		break; 
-    	}
+	    	case R.id.form_directors:
+	    		Intent intent_directors = new Intent(this,PersonsActivity.class);
+	    		intent_directors.putExtra("list", _episode.getDirectors());
+				startActivity(intent_directors);
+	    		break;
+	    	case R.id.form_guest_actors:
+	    		Intent intent_guest_actors = new Intent(this,PersonsActivity.class);
+	    		intent_guest_actors.putExtra("list", _episode.getGuestActors());
+	    		startActivity(intent_guest_actors);
+	    		break;
+	    	case R.id.form_episode_comments:
+	    		String uri = getString(R.string.uri_episode_comments)
+									.replace("tvShowId", _episode.getTvShowId())
+									.replace("seasonNumber", _episode.getSeasonNumber()+"")
+									.replace("episodeNumber", _episode.getNumber()+"");
+	    		Intent intent_comments = new Intent(this, CommentsActivity.class);
+	    		intent_comments.putExtra("uri", uri);
+	    		startActivity(intent_comments);
+	    		break; 
+	    	case R.id.action_ep_watched:
+	    		if(!Utils.checkLogin(this)) break;
+	    		performWatchedEpisode();
+	    		break;
+	    } 
     	return true;
     }
 	
+	/**
+	 * This method has the logic of the watched episode
+	 */
+	private void performWatchedEpisode() {
+		SimpleDateFormat sdm = new SimpleDateFormat("yyyy-MM-dd");
+		Date current_date = new Date();
+		try {
+			if(current_date.compareTo(sdm.parse(_episode.getDate())) <= 0){
+				Toast.makeText(this, R.string.error_ew_date, Toast.LENGTH_SHORT).show();
+				return;
+			}
+			//Verify if the user is subscribed
+			Subscription subscription = null;
+			for(Subscription sub : _application.getFbUser().getSubscriptions()){
+				if(sub.getTvShowSynope().getId().equals(_episode.getTvShowId())){
+					subscription = sub;
+					break;
+				}
+			}
+			if(subscription == null){ 
+				Toast.makeText(this, R.string.error_ew_subscribed, Toast.LENGTH_SHORT).show();
+				return;
+			}
+			//Verify if the user already watched this episode
+			for(EpisodeSynopse epi : subscription.getWatchedEpisodes()){
+				if(epi.getSeasonNumber() == _episode.getSeasonNumber() && epi.getNumber() == _episode.getNumber()){
+					Utils.unwatchEpisode(this, _episode);
+					return;
+				}
+			}
+			//Ask to watch the episode
+			Utils.watchEpisode(this, _episode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * Event associated to shake motion
 	 * @param event - shake event

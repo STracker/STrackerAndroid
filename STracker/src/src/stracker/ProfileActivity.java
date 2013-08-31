@@ -18,9 +18,9 @@ import src.stracker.utils.ShakeDetector;
 
 /**
  * This Activity represents an user profile information.
- * @author diogomatos
- */
-@ContentView(R.layout.activity_profile)
+ * @author diogomatos 
+ */ 
+@ContentView(R.layout.activity_profile) 
 public class ProfileActivity extends BaseActivity {
 
 	@InjectView(R.id.profile_name)          TextView       _profileName;
@@ -32,7 +32,7 @@ public class ProfileActivity extends BaseActivity {
 	@InjectView(R.id.friendrequests_layout) LinearLayout   _friendRequestsLayout;
 	@InjectView(R.id.subscriptions_count)   TextView       _subscriptionsCount;
 	@InjectView(R.id.friend_count)          TextView       _friendCount;
-	@InjectView(R.id.suggestions_count)     TextView       _suggestionsCount;
+	@InjectView(R.id.suggestions_count)     TextView       _suggestionsCount; 
 	@InjectView(R.id.friendrequest_count)   TextView       _friendRequestsCount;
 	
 	/**

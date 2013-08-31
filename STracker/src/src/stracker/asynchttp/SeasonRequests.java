@@ -1,9 +1,9 @@
 package src.stracker.asynchttp;
 
 import android.content.Context;
-import src.stracker.json.EpisodeSynopseSerializer;
 import src.stracker.json.JSONLocator;
-import src.stracker.model.EpisodeSynopse;
+import src.stracker.json.SeasonSerializer;
+import src.stracker.model.Season;
 
 /**
  * @author diogomatos
@@ -11,7 +11,7 @@ import src.stracker.model.EpisodeSynopse;
  */
 public class SeasonRequests {
 
-	private static EpisodeSynopseSerializer episodeSynopseSerializer = (EpisodeSynopseSerializer) JSONLocator.getInstance().getSerializer(EpisodeSynopse.class);
+	private static SeasonSerializer seasonSerializer = (SeasonSerializer) JSONLocator.getInstance().getSerializer(Season.class);
 	
 	/**
 	 * This method represents a request the season episodes.
@@ -20,6 +20,6 @@ public class SeasonRequests {
 	 * @param uri - URI of the resource
 	 */
 	public static void getSeasonEpisodes(Context context, MyRunnable runnable, String uri){
-		AsyncHttpRequest.get(context, runnable, episodeSynopseSerializer, uri);
+		AsyncHttpRequest.get(context, runnable, seasonSerializer, uri);
 	}
 }

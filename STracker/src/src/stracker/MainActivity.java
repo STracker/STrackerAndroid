@@ -7,7 +7,6 @@ import src.stracker.adapters.TvShowSynopseAdapter;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.TvShowRequests;
 import src.stracker.model.TvShowSynopse;
-import src.stracker.user_info.UserManager;
 import src.stracker.utils.ShakeDetector;
 import src.stracker.utils.Utils;
 import android.content.Intent;
@@ -53,7 +52,6 @@ public class MainActivity extends BaseListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
-		UserManager manager = new UserManager();
 		switch(item.getItemId()){
 			case R.id.action_profile:
 				if(!Utils.checkLogin(this)) break;
@@ -70,7 +68,7 @@ public class MainActivity extends BaseListActivity {
 				Utils.initSearchByName(this);
 				break;
 			case R.id.action_calendar:
-				manager.getUser(this);
+				if(!Utils.checkLogin(this)) break;
 				startActivity(new Intent(this, CalendarActivity.class));
 				break;
 		}
@@ -101,7 +99,7 @@ public class MainActivity extends BaseListActivity {
 	}
 	
 	/**
-	 * This method is used to perform the http request command
+	 * This method is used to perform the HTTP request command
 	 */
 	private void performRequest(){
 		//Request top rated shows

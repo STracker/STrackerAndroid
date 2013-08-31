@@ -10,7 +10,6 @@ public class UserSynopse implements Parcelable {
 	private String Uri;
 	
 	public UserSynopse(String name, String id, String uri) {
-		super();
 		Name = name;
 		Id = id;
 		Uri = uri;

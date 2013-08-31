@@ -6,8 +6,10 @@ import src.stracker.STrackerApp;
 import src.stracker.SearchFriendActivity;
 import src.stracker.TvShowsByNameActivity;
 import src.stracker.asynchttp.CommentRequests;
+import src.stracker.asynchttp.EpisodeRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.RatingRequests;
+import src.stracker.model.Episode;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -156,6 +158,70 @@ public class Utils {
 				Intent intent = new Intent(activity, SearchFriendActivity.class);
 				intent.putExtra("name", input.getText().toString().replaceAll(" ", "+"));
 				activity.startActivity(intent);
+			}
+		});
+		AlertDialog alertDialog = adBuilder.create();
+		alertDialog.show();
+	}
+	/**
+	 * This method pop's up an AlertDialog to ask for clear watched in an episode.
+	 * @param activity - Activity where the method is called.
+	 */
+	public static void unwatchEpisode(final Activity activity, final Episode episode){
+		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
+		adBuilder.setMessage(activity.getString(R.string.error_ew_already_watched));
+		adBuilder.setCancelable(true);
+		adBuilder.setPositiveButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		}); 
+		adBuilder.setNegativeButton("Remove",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				EpisodeRequests.deleteEpisodeWatched(activity, new MyRunnable() {
+					@Override
+					public void run() {
+						Toast.makeText(activity, R.string.error_ew_remove, Toast.LENGTH_SHORT).show();
+					}
+					@Override
+					public <T> void runWithArgument(T response) {
+						Toast.makeText(activity, R.string.success_ew_remove, Toast.LENGTH_SHORT).show();
+					}
+				}, episode);
+			}
+		});
+		AlertDialog alertDialog = adBuilder.create();
+		alertDialog.show();
+	}
+	/**
+	 * This method pop's up an AlertDialog to ask for watch an episode.
+	 * @param activity - Activity where the method is called.
+	 */
+	public static void watchEpisode(final Activity activity, final Episode episode){
+		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
+		adBuilder.setMessage(activity.getString(R.string.info_ew_watch));
+		adBuilder.setCancelable(true);
+		adBuilder.setPositiveButton("Cancel",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				dialog.cancel();
+			}
+		}); 
+		adBuilder.setNegativeButton("Watch",
+				new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				EpisodeRequests.postEpisodeWatched(activity, new MyRunnable() {
+					@Override
+					public void run() {
+						Toast.makeText(activity, R.string.error_ew_watch, Toast.LENGTH_SHORT).show();
+					}
+					@Override
+					public <T> void runWithArgument(T response) {
+						Toast.makeText(activity, R.string.success_ew_episode, Toast.LENGTH_SHORT).show();
+					}
+				}, episode);
 			}
 		});
 		AlertDialog alertDialog = adBuilder.create();

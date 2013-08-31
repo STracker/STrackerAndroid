@@ -71,7 +71,7 @@ public class CommentActivity extends BaseActivity {
 				}
 				@Override
 				public <T> void runWithArgument(T response) {
-					Toast.makeText(CommentActivity.this, R.string.comment_success, Toast.LENGTH_SHORT).show();
+					Toast.makeText(CommentActivity.this, R.string.comment_delete, Toast.LENGTH_SHORT).show();
 					finish();
 				}
 			}, _comment); 

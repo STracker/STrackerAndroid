@@ -36,7 +36,7 @@ public class CalendarSerializer implements ISerialize<ArrayList<Calendar>> {
 		        					jsonEntrie.getJSONObject("TvShow").getString("Uri"),
 		        					jsonEntrie.getJSONObject("TvShow").getString("Poster")
 		        					), 
-		        			_episodeSerializer.deserialize(jsonEntrie.toString()));
+		        			_episodeSerializer.deserialize(jsonEntrie.getJSONArray("Episodes").toString()));
 		        }
 		        calendarEntries.add(calendar);
 			}

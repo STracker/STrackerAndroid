@@ -51,6 +51,7 @@ public class UserActivity extends BaseActivity {
 			public <T> void runWithArgument(T response) {
 				_user = (User) response;
 				setuserInformation();
+				
 			}
 		}, uri);
 		//Create clickable listeners
@@ -91,9 +92,34 @@ public class UserActivity extends BaseActivity {
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profile, menu);   
+        getMenuInflater().inflate(R.menu.profile, menu); 
+  	    return true;
+    }
+	
+	/**
+	 * @see android.app.Activity#onPrepareOptionsMenu(android.view.Menu)
+	 */
+	@Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        if(_user == null) return true;
+        //Prepare menu items
+		MenuItem add = menu.findItem(R.id.action_add_user), 
+        		 del = menu.findItem(R.id.action_del_user);
+        //if the user already is a friend disable friend request option
+  		for(UserSynopse user : _application.getFbUser().getFriends()){
+  	    	if(user.getId().equals(_user.getId())){
+  	    		add.setVisible(false);
+  	    		break;
+  	    	}
+  		}
+  		//if the friend request is visible, remove friend is disabled
+  		if(add.isVisible())
+  			del.setVisible(false);
+        
         return true;
     }
+	
 	
 	/**
 	 * This method defines the callback's when a button of the menu is pressed
@@ -132,22 +158,4 @@ public class UserActivity extends BaseActivity {
     	}
     	return true;
     }
-	
-	/**
-	 * @see android.app.Activity#onPrepareOptionsMenu(android.view.Menu)
-	 */
-	@Override
-	public boolean onPrepareOptionsMenu (Menu menu) {
-	    //if the user already is a friend disable friend request option
-		for(UserSynopse user : _application.getFbUser().getFriends()){
-	    	if(user.getId().equals(_user.getId())){
-	    		menu.findItem(R.id.action_add_user).setVisible(false);
-	    		break;
-	    	}
-		}
-		//if the friend request is visible, remove friend is disabled
-		if(menu.findItem(R.id.action_add_user).isVisible())
-			menu.findItem(R.id.action_del_user).setVisible(false);
-	    return true;
-	}
 }

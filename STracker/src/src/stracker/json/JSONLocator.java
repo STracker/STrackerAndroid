@@ -8,6 +8,8 @@ import src.stracker.model.Comment;
 import src.stracker.model.Actor;
 import src.stracker.model.Episode;
 import src.stracker.model.EpisodeSynopse;
+import src.stracker.model.Genre;
+import src.stracker.model.Season;
 import src.stracker.model.User;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.Ratings;
@@ -40,6 +42,8 @@ public class JSONLocator {
 		_dictionary.put(Subscription.class,   new SubscriptionSerializer());
 		_dictionary.put(UserSynopse.class,    new FriendsSerializer());
 		_dictionary.put(Calendar.class,       new CalendarSerializer());
+		_dictionary.put(Genre.class,          new GenreSerializer());
+		_dictionary.put(Season.class, 		  new SeasonSerializer());
 	}
 	
 	/**

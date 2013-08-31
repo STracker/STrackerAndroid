@@ -66,7 +66,7 @@ public class TvShowActivity extends BaseActivity {
 				_genres.setText(genreToString(_tvshow.getGenres()));
 				_poster.setImageUrl(_tvshow.getPosterUrl());
 				_poster.setLayoutParams(new LayoutParams(168,251));
-				_date.setText(getString(R.string.serie_date)+ _tvshow.getFirstAired() + " " + _tvshow.getAirTime());
+				_date.setText(getString(R.string.serie_date)+ _tvshow.getFirstAired());
 				_rating.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {	
 					@Override
 					public void onRatingChanged(RatingBar ratingBar, float rating,
@@ -130,6 +130,12 @@ public class TvShowActivity extends BaseActivity {
 					}
 				}, _tvshow.getId());
     		break; 
+    	case R.id.form_suggest_tvshow:
+    		if(!Utils.checkLogin(this)) break;
+    		Intent intent_suggest = new Intent(this, MyFriendSuggestActivity.class);
+    		intent_suggest.putExtra("tvShowId", _tvshow.getId());
+    		startActivity(intent_suggest);
+    		break;
     	}
     	return true;
     }
@@ -155,7 +161,7 @@ public class TvShowActivity extends BaseActivity {
 	public void handleShake(@Observes ShakeDetector.OnShakeEvent event) {
 		performRatingRequest();
 	}
-	
+	 
 	/**
 	 * This method is used to perform the HTTP request command
 	 */

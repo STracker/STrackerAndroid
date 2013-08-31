@@ -12,7 +12,6 @@ import src.stracker.json.ISerialize;
 import HawkClient.*;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -210,8 +209,6 @@ public class AsyncHttpRequest {
 	
 			@Override
 			public void onFailure(Throwable e, String response){
-				Log.d("HTTP", response);
-				Log.d("Log", e.getMessage());
 				hideProgressDialog();
 				runnable.run();
 			}

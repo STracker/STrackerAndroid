@@ -13,7 +13,7 @@ import src.stracker.model.SeasonSynopse;
  */
 public class SeasonSynopsisActivity extends SynopsisActivity<SeasonSynopse> {
 
-	/**
+	/** 
 	 * @see src.stracker.SynopsisActivity#fetchRequest(java.lang.String)
 	 */
 	@Override

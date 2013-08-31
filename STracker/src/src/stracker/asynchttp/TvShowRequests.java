@@ -1,14 +1,19 @@
 package src.stracker.asynchttp;
 
+import java.util.HashMap;
+
 import android.content.Context;
 import src.stracker.R;
+import src.stracker.json.GenreSerializer;
 import src.stracker.json.GenresSerializer;
 import src.stracker.json.JSONLocator;
 import src.stracker.json.TvShowSerializer;
 import src.stracker.json.TvShowSynopseSerializer;
+import src.stracker.model.Genre;
 import src.stracker.model.GenreSynopse;
 import src.stracker.model.TvShow;
 import src.stracker.model.TvShowSynopse;
+import src.stracker.utils.Utils;
 
 /**
  * @author diogomatos
@@ -19,6 +24,7 @@ public class TvShowRequests {
 	private static TvShowSerializer tvShowSerializer = (TvShowSerializer) JSONLocator.getInstance().getSerializer(TvShow.class);
 	private static GenresSerializer genresSerializer = (GenresSerializer) JSONLocator.getInstance().getSerializer(GenreSynopse.class);
 	private static TvShowSynopseSerializer tvShowSynopseSerializer = (TvShowSynopseSerializer) JSONLocator.getInstance().getSerializer(TvShowSynopse.class);
+	private static GenreSerializer genreSerializer = (GenreSerializer) JSONLocator.getInstance().getSerializer(Genre.class);
 	
 	/**
 	 * This method represents a request to a television show.
@@ -46,7 +52,7 @@ public class TvShowRequests {
 	 * @param uri - URI of the resource
 	 */
 	public static void getGenre(Context context, MyRunnable runnable, String uri){
-		AsyncHttpRequest.get(context, runnable, tvShowSynopseSerializer, uri);
+		AsyncHttpRequest.get(context, runnable, genreSerializer, uri);
 	}
 	
 	/**
@@ -66,5 +72,19 @@ public class TvShowRequests {
 	 */
 	public static void getTvShowByName(Context context, MyRunnable runnable, String name){
 		AsyncHttpRequest.get(context, runnable, tvShowSynopseSerializer, context.getString(R.string.uri_tvshow_search)+name);
+	}
+	
+	/**
+	 * This method represents post of a suggestion to a friend
+	 * @param context - context of the Activity where the request occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param tvShowId - suggest the television show with this identifier
+	 * @param id - identifier of the friend to send the suggestions
+	 */
+	public static void postSuggestion(Context context, MyRunnable runnable, String tvShowId, String id){
+		if(!Utils.checkLogin(context)) return;
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("", id);
+		AsyncHttpRequest.authorizedPost(context, runnable, null, context.getString(R.string.uri_user_suggestion).replace("tvShowId", tvShowId), params);
 	}
 }
