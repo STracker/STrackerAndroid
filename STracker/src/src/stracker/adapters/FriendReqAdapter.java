@@ -1,7 +1,10 @@
 package src.stracker.adapters;
 
 import java.util.List;
+
+import src.stracker.BaseActivity;
 import src.stracker.R;
+import src.stracker.actions.UserActions;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.UserRequests;
 import src.stracker.model.UserSynopse;
@@ -21,7 +24,7 @@ import android.widget.Toast;
  */
 public class FriendReqAdapter extends ArrayAdapter<UserSynopse> {
 
-private LayoutInflater _inflater;
+	private LayoutInflater _inflater;
 	
 	/**
 	 * @param context - Represents the context of an Activity
@@ -50,7 +53,8 @@ private LayoutInflater _inflater;
         else
         	holder = (ValueHolder) vi.getTag();
         	        
-        final UserSynopse synopse = getItem(position);	        
+        final UserSynopse synopse = getItem(position);	
+   
         // Setting all values in listview
         holder.user_name.setText(synopse.getName());
         //Reject button
@@ -65,6 +69,7 @@ private LayoutInflater _inflater;
 					@Override
 					public <T> void runWithArgument(T response) {
 						Toast.makeText(getContext(), R.string.friend_req_reject, Toast.LENGTH_SHORT).show();
+						UserActions.removeFriendFromRequests((BaseActivity) getContext(), synopse);
 						remove(synopse);
 					}
 				}, synopse.getId());
@@ -82,6 +87,7 @@ private LayoutInflater _inflater;
 					@Override
 					public <T> void runWithArgument(T response) {
 						Toast.makeText(getContext(), R.string.friend_req_accept, Toast.LENGTH_SHORT).show();
+						UserActions.acceptFriendRequest((BaseActivity) getContext(), synopse);
 						remove(synopse);
 					}
 				}, synopse.getId());

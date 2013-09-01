@@ -4,7 +4,6 @@ import java.util.HashMap;
 import android.content.Context;
 import src.stracker.R;
 import src.stracker.STrackerApp;
-import src.stracker.actions.UserActions;
 import src.stracker.json.JSONLocator;
 import src.stracker.json.RatingsSerializer;
 import src.stracker.model.Episode;
@@ -36,7 +35,7 @@ public class RatingRequests {
 	 * @param rating - user rating to submit
 	 */
 	public static void postRating(Context context, MyRunnable runnable, String uri, String rating){
-		if(!UserActions.checkLogin((STrackerApp) context.getApplicationContext())) return;
+		if(((STrackerApp)context.getApplicationContext()).getUserManager().get(context) == null) return;
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("", rating);
 		AsyncHttpRequest.authorizedPost(context, runnable, null, uri, params);

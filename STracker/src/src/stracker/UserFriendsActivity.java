@@ -21,7 +21,7 @@ public class UserFriendsActivity extends BaseFriendActivity{
 		_users = getIntent().getParcelableArrayListExtra(LIST_PARAM);
 		//if i am a friend, remove my entry from that list
 		for(UserSynopse synopse : _users){
-			if(synopse.getId().equals(_application.getFbUser().getId())){
+			if(synopse.getId().equals(_application.getUserManager().get(this).getId())){
 				_users.remove(synopse);
 				break;
 			}

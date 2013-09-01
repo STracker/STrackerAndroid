@@ -16,7 +16,6 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import src.stracker.actions.EpisodeActions;
 import src.stracker.actions.SharedActions;
-import src.stracker.actions.UserActions;
 import src.stracker.asynchttp.EpisodeRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.RatingRequests;
@@ -28,7 +27,7 @@ import src.stracker.utils.ShakeDetector;
 
 /**
  * @author diogomatos
- * This Activity represents the information about an episode of a tv show
+ * This Activity represents the information about an episode of a television show
  */
 @ContentView(R.layout.activity_episode)
 public class EpisodeActivity extends BaseActivity {
@@ -120,7 +119,7 @@ public class EpisodeActivity extends BaseActivity {
 	    		startActivity(intent_comments);
 	    		break; 
 	    	case R.id.action_ep_watched:
-	    		if(!UserActions.checkLogin(this)) break;
+	    		if(_application.getUserManager().get(this) == null) break;
 	    		performWatchedEpisode();
 	    		break;
 	    } 
@@ -140,7 +139,7 @@ public class EpisodeActivity extends BaseActivity {
 			}
 			//Verify if the user is subscribed
 			Subscription subscription = null;
-			for(Subscription sub : _application.getFbUser().getSubscriptions()){
+			for(Subscription sub : _application.getUserManager().get(this).getSubscriptions()){
 				if(sub.getTvShowSynope().getId().equals(_episode.getTvShowId())){
 					subscription = sub;
 					break;

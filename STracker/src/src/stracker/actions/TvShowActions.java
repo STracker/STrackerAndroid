@@ -73,6 +73,7 @@ public class TvShowActions {
 					@Override
 					public <T> void runWithArgument(T response) {
 						Toast.makeText(activity, R.string.success_unsubscribe, Toast.LENGTH_SHORT).show();
+						UserActions.removeSubscriptionFromUser(activity, tvShow);
 					}
 				}, tvShow.getId());
 			}

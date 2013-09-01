@@ -74,7 +74,7 @@ public class TvShowActivity extends BaseActivity {
 					@Override
 					public void onRatingChanged(RatingBar ratingBar, float rating,
 							boolean fromUser) {
-						if(!UserActions.checkLogin(TvShowActivity.this)) return;
+						if(_application.getUserManager().get(TvShowActivity.this) == null) return;
 						SharedActions.initRatingSubmission(getString(R.string.uri_tvshow_rating)
 														    .replace(TVSHOW_ID_PARAM, _tvshow.getId()), 
 													        TvShowActivity.this, 
@@ -122,11 +122,11 @@ public class TvShowActivity extends BaseActivity {
     		startActivity(intent_comments);
     		break; 
     	case R.id.form_subscribe_tvshow:
-    		if(!UserActions.checkLogin(this)) break;
+    		if(_application.getUserManager().get(this) == null) break;
     		handleSubscription();
     		break; 
     	case R.id.form_suggest_tvshow:
-    		if(!UserActions.checkLogin(this)) break;
+    		if(_application.getUserManager().get(this) == null) break;
     		Intent intent_suggest = new Intent(this, MyFriendSuggestActivity.class);
     		intent_suggest.putExtra(TVSHOW_ID_PARAM, _tvshow.getId());
     		startActivity(intent_suggest);
@@ -140,7 +140,7 @@ public class TvShowActivity extends BaseActivity {
 	 */
 	private void handleSubscription(){
 		//Search in subscriptions if this television show is already subscribed
-		for(Subscription subscription : _application.getFbUser().getSubscriptions()){
+		for(Subscription subscription : _application.getUserManager().get(this).getSubscriptions()){
 			if(subscription.getTvShowSynope().getId().equals(_tvshow.getId())){
 				TvShowActions.unsubscribeTvShow(this, _tvshow);
 				return;
@@ -155,6 +155,7 @@ public class TvShowActivity extends BaseActivity {
 			@Override
 			public <T> void runWithArgument(T response) {
 				Toast.makeText(TvShowActivity.this, R.string.success_subscribe, Toast.LENGTH_SHORT).show();
+				UserActions.addSubscriptionToUser(TvShowActivity.this, _tvshow);
 			}
 		}, _tvshow.getId());
 	}

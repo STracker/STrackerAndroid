@@ -34,7 +34,7 @@ public class SearchFriendActivity extends BaseFriendActivity {
 				_users = (ArrayList<UserSynopse>) response;
 				//if i am a result, remove my entry from that list
 				for(UserSynopse synopse : _users){
-					if(synopse.getId().equals(_application.getFbUser().getId())){
+					if(synopse.getId().equals(_application.getUserManager().get(SearchFriendActivity.this).getId())){
 						_users.remove(synopse);
 						break;
 					}

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+import src.stracker.actions.UserActions;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.UserRequests;
 import src.stracker.model.User;
@@ -27,7 +28,6 @@ public class UserActivity extends BaseActivity {
  
 	@InjectView(R.id.user_name)     		TextView       _userName;
 	@InjectView(R.id.user_photo_id) 		SmartImageView _userPhoto;
-	@InjectView(R.id.user_email)    		TextView       _userEmail;
 	@InjectView(R.id.subscriptions_layout2) LinearLayout   _subscriptionsLayout;
 	@InjectView(R.id.friends_layout2)       LinearLayout   _friendsLayout;
 	@InjectView(R.id.subscriptions_count2)  TextView       _subscriptionsCount;
@@ -49,7 +49,6 @@ public class UserActivity extends BaseActivity {
 	private void setuserInformation(){
 		_userName          .setText(getString(R.string.user_name) + _user.getName());
 		_userPhoto         .setImageUrl(_user.getPhotoUrl());
-		_userEmail         .setText(getString(R.string.user_email) + _user.getEmail());
 		_friendCount       .setText(_user.getFriends().size()+EMPTY_STRING);
 		_subscriptionsCount.setText(_user.getSubscriptions().size()+EMPTY_STRING);
 	}
@@ -60,7 +59,7 @@ public class UserActivity extends BaseActivity {
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.profile, menu); 
+        getMenuInflater().inflate(R.menu.user_profile, menu); 
   	    return true;
     }
 	
@@ -86,7 +85,7 @@ public class UserActivity extends BaseActivity {
 				MenuItem add = menu.findItem(R.id.action_add_user), 
 		        		 del = menu.findItem(R.id.action_del_user);
 		        //if the user already is a friend disable friend request option
-		  		for(UserSynopse user : _application.getFbUser().getFriends()){
+		  		for(UserSynopse user : _application.getUserManager().get(UserActivity.this).getFriends()){
 		  	    	if(user.getId().equals(_user.getId())){
 		  	    		add.setVisible(false);
 		  	    		break;
@@ -150,6 +149,7 @@ public class UserActivity extends BaseActivity {
 					@Override
 					public <T> void runWithArgument(T response) {
 						Toast.makeText(UserActivity.this, R.string.friend_removed, Toast.LENGTH_SHORT).show();
+						UserActions.removeFriendFromUser(UserActivity.this, _user.generateSynopse(getString(R.string.uri_user_info)));
 						finish();
 					}
 				}, _user.getId());

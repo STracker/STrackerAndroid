@@ -6,6 +6,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
+import org.apache.http.client.HttpResponseException;
+
 import src.stracker.R;
 import src.stracker.STrackerApp;
 import src.stracker.json.ISerialize;
@@ -27,6 +30,7 @@ public class AsyncHttpRequest {
 	private static final AsyncHttpClient _client = new AsyncHttpClient();
 	private static ProgressDialog _dialog;
 	private static final int DEFAULT_TIMEOUT = 30000;
+	private static final int NOT_MODIFIED = 304;
 
 	/**
 	 * The constructor of the asynchronous HTTP request
@@ -60,6 +64,21 @@ public class AsyncHttpRequest {
 	public static void authorizedGet(Context context, MyRunnable runnable, ISerialize<?> serializer, String uri) {
 		_client.addHeader("Authorization", getAuthorizationHeader(context, "GET",getAbsoluteUrl(context, uri), null));
 		get(context, runnable, serializer, uri);
+	}
+	
+	/**
+	 * This method execute a GET HTTP method to the URI that receives by parameter.
+	 * An authorized method uses the Hawk protocol to produce a secure HTTP request.
+	 * The version is to see if the object don't have changed.
+	 * @param context - context of the activity where the request is occur
+	 * @param runnable - callback that will be called after the HTTP request
+	 * @param serializer - JSON serializer used to resolve the HTTP JSON response
+	 * @param uri - string with the URI of the resource
+	 * @param version - version of the information in memory
+	 */
+	public static void authorizedGetWithVersion(Context context, MyRunnable runnable, ISerialize<?> serializer, String uri, int version) {
+		_client.addHeader("If-None-Match", version+"");
+		authorizedGet(context, runnable, serializer, uri);
 	}
 	
 	/**
@@ -201,16 +220,19 @@ public class AsyncHttpRequest {
 			@Override
 			public void onSuccess(String response) {
 				hideProgressDialog();
+				_client.addHeader("If-None-Match", "");
 				if(serializer != null) 
 					runnable.runWithArgument(serializer.deserialize(response));
 				else
 					runnable.runWithArgument(null);
 			}
-	
 			@Override
 			public void onFailure(Throwable e, String response){
 				hideProgressDialog();
-				runnable.run();
+				_client.addHeader("If-None-Match", "");
+				//If the response is 304 (Not Modified) it's because the information as no updates
+				if(((HttpResponseException) e).getStatusCode() != NOT_MODIFIED)
+					runnable.run();
 			}
 		};
 	}

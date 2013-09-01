@@ -44,6 +44,7 @@ public class JSONLocator {
 		_dictionary.put(Calendar.class,       new CalendarSerializer());
 		_dictionary.put(Genre.class,          new GenreSerializer());
 		_dictionary.put(Season.class, 		  new SeasonSerializer());
+		_dictionary.put(String.class,         new DummySerializer());
 	}
 	
 	/**

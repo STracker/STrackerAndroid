@@ -1,77 +1,87 @@
 package src.stracker.user_info;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
+import com.google.gson.Gson;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.util.Log;
+import android.content.SharedPreferences;
+import android.widget.Toast;
 import src.stracker.FbLoginActivity;
-import src.stracker.model.Subscription;
-import src.stracker.model.Suggestion;
+import src.stracker.R;
+import src.stracker.asynchttp.MyRunnable;
+import src.stracker.asynchttp.UserRequests;
 import src.stracker.model.User;
-import src.stracker.model.UserSynopse;
+import src.stracker.STrackerApp;
 
-public class UserManager {
+public class UserManager implements IManager<User>{
 	
-	private User _user;
+	private static final String USER_INFO = "user_info";
+	private User user;
+	private final SharedPreferences preferences;
+	private final Gson gson;
 	
-	@SuppressWarnings("unchecked")
-	public User getUser(Context context){
+	public UserManager(SharedPreferences prefs){
+		preferences = prefs;
+		gson = new Gson();
+	}
+	
+	@Override
+	public User get(Context context) {
 		//verify in memory if exists
-		if(_user != null) return _user;
-		//verify db. In this table is always only one user
-		Cursor cursor = context.getContentResolver().query(UserTableContract.USER_TABLE_URI, null, null, null, null);
-		if(cursor.moveToNext()){
-			_user = new User(cursor.getString(cursor.getColumnIndex(UserTableContract.USER_ID)), 
-					         cursor.getString(cursor.getColumnIndex(UserTableContract.NAME)),
-					         cursor.getString(cursor.getColumnIndex(UserTableContract.EMAIL)),
-					         (ArrayList<Subscription>) deserialize(cursor.getBlob(cursor.getColumnIndex(UserTableContract.SUBSCRIPTIONS))),
-					         (ArrayList<UserSynopse>)  deserialize(cursor.getBlob(cursor.getColumnIndex(UserTableContract.FRIENDS))),
-					         (ArrayList<UserSynopse>)  deserialize(cursor.getBlob(cursor.getColumnIndex(UserTableContract.FRIEND_REQUESTS))),
-					         (ArrayList<Suggestion>)   deserialize(cursor.getBlob(cursor.getColumnIndex(UserTableContract.SUGGESTIONS))));
-			return _user;
+		if(user != null) return user;
+		//verify in preferences if the user is created
+	    String jsonInfo = preferences.getString(USER_INFO, null);
+		if(jsonInfo != null){
+			user = gson.fromJson(jsonInfo, User.class);
+			((STrackerApp) context.getApplicationContext()).createHawkCreadentials(user.getId());
+			return user;
 		}
-		//if there's no user in db then login 
+		//if there's no user in file then login 
 		context.startActivity(new Intent(context, FbLoginActivity.class));
 		return null;
 	}
-	
-	public void syncUser(Context context){
-		//TODO
+
+	@Override
+	public void sync(final Context context) {
+		if(user != null){
+			//Request for get the information about the user
+			UserRequests.getSelf(context, new MyRunnable() {
+				@Override
+				public void run() {
+					Toast.makeText(context, R.string.error_user_req, Toast.LENGTH_SHORT).show();
+				}
+				@Override
+				public <T> void runWithArgument(T response) {
+					savePersistently((User) response);
+				}
+			}, user.getId(), user.getVersion());
+		}
 	}
-	
-	public void updateUser(Context context, User user){
-		
+
+	@Override
+	public void update(User elem) {
+		//increment version then save the user
+		user = elem;
+		user.incVersion();
+		savePersistently(user);
 	}
-	
-	public void deleteUser(Context context){
-		//TODO: logout
+
+	@Override
+	public void delete() {
+		//Clear user
+		user = null;
+		//Remove previous data
+		SharedPreferences.Editor edit = preferences.edit();
+		edit.remove(USER_INFO);
+		edit.commit();
 	}
-	
-	private static Object deserialize(byte[] data) {
-	    try{
-			ByteArrayInputStream in = new ByteArrayInputStream(data);
-		    ObjectInputStream is = new ObjectInputStream(in);
-		    return is.readObject();
-	    } catch (Exception e){
-	    	Log.d("BLOB: deserialize", e.getMessage());
-	    	return null;
-	    }
-	}
-	
-	public static byte[] serialize(Object obj) {
-	    try{
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-		    ObjectOutputStream os = new ObjectOutputStream(out);
-		    os.writeObject(obj);
-		    return out.toByteArray();
-		} catch (Exception e){
-			Log.d("BLOB: serialize", e.getMessage());
-	    	return null;
-	    }
-	}
+
+	@Override
+	public void savePersistently(User elem) {
+		user = elem;
+		SharedPreferences.Editor edit = preferences.edit();
+		//Use shared preferences to save information about user
+	    String json = gson.toJson(elem);
+	    edit.putString(USER_INFO, json);
+	    edit.commit();
+	}	
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="@string/cat_title">
+        <CheckBoxPreference 
+            android:key="pref_check"
+            android:title="@string/pref_check" />
+        
+        <EditTextPreference 
+            android:key="pref_delay"
+            android:inputType="number"
+            android:title="@string/pref_delay" />
+    </PreferenceCategory>
+</PreferenceScreen>

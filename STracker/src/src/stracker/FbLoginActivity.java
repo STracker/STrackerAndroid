@@ -55,7 +55,7 @@ public class FbLoginActivity extends BaseActivity {
 	 * @param state - new state
 	 * @param exception - exception
 	 */
-	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+	private void onSessionStateChange(final Session session, SessionState state, Exception exception) {
 	    //if logged in then
 		if (state.isOpened()) {
 			_dialog.setMessage(getString(R.string.login_message));
@@ -79,22 +79,19 @@ public class FbLoginActivity extends BaseActivity {
 								public void run() {
 									Toast.makeText(FbLoginActivity.this, R.string.error_user_req, Toast.LENGTH_SHORT).show();
 								}
-								@SuppressWarnings("hiding")
+								@SuppressWarnings("hiding") 
 								@Override
 								public <T> void runWithArgument(T response) {
 									_dialog.dismiss();
-									_application.setFbUser((User) response);
+									_application.getUserManager().savePersistently((User)response);
+									session.closeAndClearTokenInformation();
 									finish();
 								}
-							}, user.getId());
+							}, user.getId(), -1);
 						}
 					}, user.getName(), user.asMap().get("email").toString(), "http://graph.facebook.com/" + user.getId() + "/picture?type=large");
 				}
 			});
-	    }
-		//if logged out then
-		else if (state.isClosed()) {
-	    	_application.logout();
 	    }
 	}
 

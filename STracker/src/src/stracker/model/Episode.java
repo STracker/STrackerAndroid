@@ -141,6 +141,16 @@ public class Episode implements Parcelable {
 		in.readTypedList(GuestActors, Person.CREATOR);
 	}
 	
+	public EpisodeSynopse generateSynopse(String uri){
+		return new EpisodeSynopse(Number, 
+								  Name, 
+								  uri.replace("tvShowId", TvShowId)
+								  	 .replace("seasonNumber", SeasonNumber+"")
+								  	 .replace("episodeNumber",Number+""),
+								  Date,
+								  SeasonNumber);
+	}
+	
 	public static final Parcelable.Creator<Episode> CREATOR =
 		    new Parcelable.Creator<Episode>() {
 	            public Episode createFromParcel(Parcel in) {

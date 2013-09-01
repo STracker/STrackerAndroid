@@ -3,7 +3,7 @@ package src.stracker.asynchttp;
 import java.util.HashMap;
 import android.content.Context;
 import src.stracker.R;
-import src.stracker.actions.UserActions;
+import src.stracker.STrackerApp;
 import src.stracker.json.CalendarSerializer;
 import src.stracker.json.FriendsSerializer;
 import src.stracker.json.JSONLocator;
@@ -28,7 +28,7 @@ public class UserRequests {
 	 * @param tvShowId - identifier of a television show for the subscription
 	 */
 	public static void postSubscription(Context context, MyRunnable runnable, String tvShowId){
-		if(!UserActions.checkLogin(context)) return;
+		if(((STrackerApp)context.getApplicationContext()).getUserManager().get(context) == null) return;
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("", tvShowId);
 		AsyncHttpRequest.authorizedPost(context, runnable, null, context.getString(R.string.uri_user_subscriptions).replace("/tvShowId", ""), params);
@@ -41,7 +41,7 @@ public class UserRequests {
 	 * @param tvShowId - identifier of a television show for the subscription
 	 */
 	public static void deleteSubscription(Context context, MyRunnable runnable, String tvShowId){
-		if(!UserActions.checkLogin(context)) return;
+		if(((STrackerApp)context.getApplicationContext()).getUserManager().get(context) == null) return;
 		AsyncHttpRequest.authorizedDelete(context, runnable, null, context.getString(R.string.uri_user_subscriptions).replace("tvShowId", tvShowId));
 	}
 	
@@ -51,7 +51,7 @@ public class UserRequests {
 	 * @param runnable - callback that will be called after the HTTP request
 	 */
 	public static void getCalendar(Context context, MyRunnable runnable){
-		if(!UserActions.checkLogin(context)) return;
+		if(((STrackerApp)context.getApplicationContext()).getUserManager().get(context) == null) return;
 		AsyncHttpRequest.authorizedGet(context, runnable, calendarSerializer, context.getString(R.string.uri_user_newepisodes));
 	}
 	
@@ -60,9 +60,10 @@ public class UserRequests {
 	 * @param context - context of the Activity where the request occur
 	 * @param runnable - callback that will be called after the HTTP request
 	 * @param userId - identifier of a user
+	 * @param version - user version
 	 */
-	public static void getSelf(Context context, MyRunnable runnable, String userId){
-		AsyncHttpRequest.authorizedGet(context, runnable, userSerializer, context.getString(R.string.uri_user_info).replace("userId", userId));
+	public static void getSelf(Context context, MyRunnable runnable, String userId, int version){
+		AsyncHttpRequest.authorizedGetWithVersion(context, runnable, userSerializer, context.getString(R.string.uri_user_info).replace("userId", userId), version);
 	}
 	
 	/**
@@ -72,7 +73,7 @@ public class UserRequests {
 	 * @param uri - URI of the resource
 	 */
 	public static void getUser(Context context, MyRunnable runnable, String uri){
-		if(!UserActions.checkLogin(context)) return;
+		if(((STrackerApp)context.getApplicationContext()).getUserManager().get(context) == null) return;
 		AsyncHttpRequest.authorizedGet(context, runnable, userSerializer, uri);
 	}
 	

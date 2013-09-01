@@ -166,6 +166,10 @@ public class TvShow implements Parcelable{
 		in.readTypedList(Actors, Actor.CREATOR);
 	}
 	
+	public TvShowSynopse generateSynopse(String uri){
+		return new TvShowSynopse(Id, Name, uri.replace("tvShowId", Id), PosterUrl);
+	}
+	
 	public static final Parcelable.Creator<TvShow> CREATOR =
 		    new Parcelable.Creator<TvShow>() {
 	            public TvShow createFromParcel(Parcel in) {

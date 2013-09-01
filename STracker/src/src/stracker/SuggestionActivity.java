@@ -27,7 +27,7 @@ public class SuggestionActivity extends BaseListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setTitle(getString(R.string.profile_suggestions));
-		_suggestions = _application.getFbUser().getSuggestions();
+		_suggestions = _application.getUserManager().get(this).getSuggestions();
 		_adapter = new SuggestionAdapter(this, _suggestions);
 		_listView.setAdapter(_adapter);
 	}

@@ -20,6 +20,7 @@ public class UserSerializer implements ISerialize<User> {
 								jObj.getString("Name"), 
 								jObj.getString("Id"), 
 								jObj.getString("Email"),
+								jObj.getInt("Version"),
 								_subscriptionSerializer.deserialize(jObj.getJSONArray("Subscriptions").toString()),
 								_friendSerializer.deserialize(jObj.getJSONArray("Friends").toString()),
 								_friendSerializer.deserialize(jObj.getJSONArray("FriendRequests").toString()),

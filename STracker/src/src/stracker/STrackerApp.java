@@ -1,51 +1,49 @@
 package src.stracker;
 
-import src.stracker.model.User;
+import src.stracker.service.UpdaterManager;
+import src.stracker.user_info.UserManager;
 import HawkClient.HawkCredentials;
 import android.app.Application;
+import android.preference.PreferenceManager;
 
 /**
  * This class represents the application. It's needed to keep the global application state.
  */
 public class STrackerApp extends Application {
 	
-	private User _fbUser;
-	private boolean _connectivity;
+	private boolean         _connectivity;
 	private HawkCredentials _credentials;
+	private UserManager     _userManager;
+	private UpdaterManager  _updater;
 	
 	/**
-	 * This method set the user field
-	 * @param user - represents the user
+	 * @see android.app.Application#onCreate()
 	 */
-	public void setFbUser(User user){
-		_fbUser = user;
+	@Override
+	public void onCreate(){
+		_userManager = new UserManager(PreferenceManager.getDefaultSharedPreferences(this));
+		_updater = new UpdaterManager(this);
 	}
 	
 	/**
-	 * This method gets the user
-	 * @return user
+	 * This method returns the updater manager.
+	 * @return Updater Manager
 	 */
-	public User getFbUser(){
-		return _fbUser;
+	public UpdaterManager getUpdaterManager(){
+		return _updater;
+	}
+	
+	/**
+	 * This method is used to get the user manager object
+	 * @param preferences - shared preferences of the application
+	 * @return user manager
+	 */
+	public UserManager getUserManager(){
+		return _userManager;
 	}
 
 	/**
-	 * This method clear the user information
-	 */
-	public void logout(){
-		setFbUser(null);
-	}
-	
-	/**
-	 * This method returns if an user is logged in or not
-	 * @return boolean
-	 */
-	public boolean isLoggedIn(){
-		return _fbUser != null;
-	}
-
-	/**
-	 * This method returns if the device is connected to the internet
+	 * This method returns if the device is connected to the Internet
 	 * @return boolean
 	 */
 	public boolean isConnected() {

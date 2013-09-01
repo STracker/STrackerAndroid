@@ -1,6 +1,5 @@
 package src.stracker;
 
-import android.os.Bundle;
 import roboguice.inject.ContentView;
 import src.stracker.adapters.UserAdapter;
 
@@ -12,14 +11,14 @@ import src.stracker.adapters.UserAdapter;
 public class MyFriendsActivity extends BaseFriendActivity {
 
 	/**
-	 * @see src.stracker.BaseListActivity#onCreate(android.os.Bundle)
+	 * @see roboguice.activity.RoboActivity#onResume()
 	 */
-	@Override 
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState); 
-		_users = _application.getFbUser().getFriends();
+	@Override
+	public void onResume(){
+		super.onResume();
+		_users = _application.getUserManager().get(this).getFriends();
 		_adapter = new UserAdapter(this, _users);
 		_listView.setAdapter(_adapter);
 		_activity = this;
-	}   
+	}
 }

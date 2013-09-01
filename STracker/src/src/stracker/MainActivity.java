@@ -55,7 +55,7 @@ public class MainActivity extends BaseListActivity {
 	{
 		switch(item.getItemId()){
 			case R.id.action_profile:
-				if(!UserActions.checkLogin(this)) break;
+				if(_application.getUserManager().get(this) == null) break;
 				startActivity(new Intent(this,ProfileActivity.class));
 				break;  
 			case R.id.form_friend:
@@ -65,11 +65,11 @@ public class MainActivity extends BaseListActivity {
 				startActivity(new Intent(this, GenreSynopsisActivity.class));
 				break;
 			case R.id.form_name:
-				if(!UserActions.checkLogin(this)) break;
+				if(_application.getUserManager().get(this) == null) break;
 				TvShowActions.searchTvShowByName(this);
 				break;
 			case R.id.action_calendar:
-				if(!UserActions.checkLogin(this)) break;
+				if(_application.getUserManager().get(this) == null) break;
 				startActivity(new Intent(this, CalendarActivity.class));
 				break;
 		}

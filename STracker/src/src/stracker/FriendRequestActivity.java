@@ -25,7 +25,7 @@ public class FriendRequestActivity extends BaseListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		setTitle(getString(R.string.profile_friendrequests));
-		_requests = _application.getFbUser().getFriendRequests();
+		_requests = _application.getUserManager().get(this).getFriendRequests();
 		_adapter = new FriendReqAdapter(this, _requests);
 		_listView.setAdapter(_adapter);
 	}
