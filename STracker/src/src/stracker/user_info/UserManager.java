@@ -9,21 +9,34 @@ import src.stracker.FbLoginActivity;
 import src.stracker.R;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.UserRequests;
+import src.stracker.model.Calendar;
 import src.stracker.model.User;
 import src.stracker.STrackerApp;
-
+/**
+ * @author diogomatos
+ * This class represents a manager for user information.
+ */
 public class UserManager implements IManager<User>{
 	
 	private static final String USER_INFO = "user_info";
 	private User user;
 	private final SharedPreferences preferences;
 	private final Gson gson;
+	private final CalendarManager calendar;
 	
+	/**
+	 * Constructor of user manager
+	 * @param prefs - shared preferences
+	 */
 	public UserManager(SharedPreferences prefs){
 		preferences = prefs;
 		gson = new Gson();
+		calendar = new CalendarManager(prefs);
 	}
 	
+	/**
+	 * @see src.stracker.user_info.IManager#get(android.content.Context)
+	 */
 	@Override
 	public User get(Context context) {
 		//verify in memory if exists
@@ -40,6 +53,9 @@ public class UserManager implements IManager<User>{
 		return null;
 	}
 
+	/**
+	 * @see src.stracker.user_info.IManager#sync(android.content.Context)
+	 */
 	@Override
 	public void sync(final Context context) {
 		if(user != null){
@@ -52,11 +68,15 @@ public class UserManager implements IManager<User>{
 				@Override
 				public <T> void runWithArgument(T response) {
 					savePersistently((User) response);
+					calendar.sync(context);
 				}
 			}, user.getId(), user.getVersion());
 		}
 	}
 
+	/**
+	 * @see src.stracker.user_info.IManager#update(java.lang.Object)
+	 */
 	@Override
 	public void update(User elem) {
 		//increment version then save the user
@@ -65,6 +85,9 @@ public class UserManager implements IManager<User>{
 		savePersistently(user);
 	}
 
+	/**
+	 * @see src.stracker.user_info.IManager#delete()
+	 */
 	@Override
 	public void delete() {
 		//Clear user
@@ -73,8 +96,12 @@ public class UserManager implements IManager<User>{
 		SharedPreferences.Editor edit = preferences.edit();
 		edit.remove(USER_INFO);
 		edit.commit();
+		calendar.delete();
 	}
 
+	/**
+	 * @see src.stracker.user_info.IManager#savePersistently(java.lang.Object)
+	 */
 	@Override
 	public void savePersistently(User elem) {
 		user = elem;
@@ -84,4 +111,13 @@ public class UserManager implements IManager<User>{
 	    edit.putString(USER_INFO, json);
 	    edit.commit();
 	}	
+	
+	/**
+	 * This method returns the user calendar.
+	 * @param context - context of the activity where is called
+	 * @return calendar
+	 */
+	public Calendar getCalendar(Context context){
+		return calendar.get(context);
+	}
 }

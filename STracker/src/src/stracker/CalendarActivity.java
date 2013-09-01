@@ -37,6 +37,8 @@ public class CalendarActivity extends BaseListActivity {
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		
 		UserRequests.getCalendar(this, new MyRunnable() {
 			@Override
 			public void run() {
