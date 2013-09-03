@@ -1,8 +1,12 @@
 package src.stracker.user_info;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.widget.Toast;
 import src.stracker.R;
 import src.stracker.asynchttp.MyRunnable;
@@ -12,53 +16,62 @@ import src.stracker.model.Calendar;
  * @author diogomatos
  * This class represents a manager for user calendar.
  */
-public class CalendarManager implements IManager<Calendar> {
+public class CalendarManager implements IManager<ArrayList<Calendar>> {
 
-	private static final String CALENDAR_INFO = "calendar_info";
-	private Calendar calendar;
-	private final SharedPreferences preferences;
+	private ArrayList<Calendar> calendar;
+	private final Context context;
 	private final Gson gson;
+	private final Type arrayListType;
 	
 	/**
 	 * Constructor for CalendarManager
-	 * @param prefs - Shared Preference
+	 * @param context - context where the manager is needed
 	 */
-	public CalendarManager(SharedPreferences prefs){
-		preferences = prefs;
+	public CalendarManager(Context context){
+		this.context = context;
 		gson = new Gson();
+		arrayListType = new TypeToken<ArrayList<Calendar>>(){}.getType();
 	}
 	
 	/**
 	 * @see src.stracker.user_info.IManager#get(android.content.Context)
 	 */
 	@Override
-	public Calendar get(Context context) {
+	public ArrayList<Calendar> get(Context context) {
 		//if exists in memory
 		if(calendar != null) return calendar;
-		//if exists in shared preference
-		String jsonInfo = preferences.getString(CALENDAR_INFO, null);
-		if(jsonInfo != null){
-			calendar = gson.fromJson(jsonInfo, Calendar.class);
+		//if exists in database
+		Cursor cursor = context.getContentResolver().query(UserInfoProvider.CONTENT_URI, null, null, null, null);
+		cursor.moveToNext();
+		String json = cursor.getString(cursor.getColumnIndex(UserTableContract.CALENDAR));
+		if(json != null){
+			calendar = gson.fromJson(json, arrayListType);
+			cursor.close();
 			return calendar;
 		}
 		//make request
-		sync(context);
+		sync(new Runnable() {
+			@Override
+			public void run() {}
+		});
 		return null;
 	}
 
 	/**
-	 * @see src.stracker.user_info.IManager#sync(android.content.Context)
+	 * @see src.stracker.user_info.IManager#sync(java.lang.Runnable)
 	 */
 	@Override
-	public void sync(final Context context) {
+	public void sync(final Runnable runnable) {
 		UserRequests.getCalendar(context, new MyRunnable() {
 			@Override
 			public void run() {
 				Toast.makeText(context, R.string.error_calendar, Toast.LENGTH_SHORT).show();
 			}
+			@SuppressWarnings("unchecked")
 			@Override
 			public <T> void runWithArgument(T response) {
-				savePersistently((Calendar) response);
+				update((ArrayList<Calendar>) response);
+				runnable.run();
 			}
 		});
 	}
@@ -67,11 +80,11 @@ public class CalendarManager implements IManager<Calendar> {
 	 * @see src.stracker.user_info.IManager#update(java.lang.Object)
 	 */
 	@Override
-	public void update(Calendar elem) {
-		//increment version then save the calendar
+	public void update(ArrayList<Calendar> elem) {
 		calendar = elem;
-		//user.incVersion();
-		savePersistently(calendar);
+		ContentValues values = new ContentValues();
+		values.put(UserTableContract.CALENDAR, gson.toJson(calendar, arrayListType));
+		context.getContentResolver().update(UserInfoProvider.CONTENT_URI, values, null, null);
 	}
 
 	/**
@@ -79,24 +92,16 @@ public class CalendarManager implements IManager<Calendar> {
 	 */
 	@Override
 	public void delete() {
-		//Clear calendar
+		//Clear calendar because delete of the calendar is the same as deleting the user
 		calendar = null;
-		//Remove previous data
-		SharedPreferences.Editor edit = preferences.edit();
-		edit.remove(CALENDAR_INFO);
-		edit.commit();
 	}
 
 	/**
 	 * @see src.stracker.user_info.IManager#savePersistently(java.lang.Object)
 	 */
 	@Override
-	public void savePersistently(Calendar elem) {
+	public void savePersistently(ArrayList<Calendar> elem) {
 		calendar = elem;
-		SharedPreferences.Editor edit = preferences.edit();
-		//Use shared preferences to save information about user
-	    String json = gson.toJson(elem);
-	    edit.putString(CALENDAR_INFO, json);
-	    edit.commit();
+		update(elem);
 	}
 }

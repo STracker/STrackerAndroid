@@ -12,7 +12,12 @@ public class UserInfoService extends Service{
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		UserManager manager = ((STrackerApp) getApplication()).getUserManager();
-		manager.sync(getApplicationContext());
+		manager.sync(new Runnable() {
+			@Override
+			public void run() {
+				stopSelf();
+			}
+		});
 		Log.d("updater", "toma");
 	    return START_NOT_STICKY;
 	}

@@ -6,12 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Toast;
+import roboguice.event.Observes;
 import roboguice.inject.ContentView;
 import src.stracker.actions.EpisodeActions;
 import src.stracker.adapters.MainListAdapter;
-import src.stracker.asynchttp.MyRunnable;
-import src.stracker.asynchttp.UserRequests;
 import src.stracker.first_activity.EntryType;
 import src.stracker.first_activity.HeaderEntry;
 import src.stracker.first_activity.IEntry;
@@ -19,6 +17,7 @@ import src.stracker.first_activity.ItemEntry;
 import src.stracker.model.Calendar;
 import src.stracker.model.Calendar.CalendarEntry;
 import src.stracker.model.EpisodeSynopse;
+import src.stracker.utils.ShakeDetector;
 
 /** 
  * @author diogomatos
@@ -37,23 +36,11 @@ public class CalendarActivity extends BaseListActivity {
 	@Override  
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		
-		UserRequests.getCalendar(this, new MyRunnable() {
-			@Override
-			public void run() {
-				Toast.makeText(CalendarActivity.this, R.string.error_calendar, Toast.LENGTH_SHORT).show();
-			}
-			@SuppressWarnings("unchecked")
-			@Override
-			public <T> void runWithArgument(T response) {
-				_arrayList = (ArrayList<Calendar>) response;
-				_uris = new ArrayList<String>();
-				List<IEntry> items = buildCalendarView();
-		        _adapter = new MainListAdapter(CalendarActivity.this, items); 
-		        _listView.setAdapter(_adapter);
-			}
-		});
+		_arrayList = _application.getUserManager().getCalendar().get(this);
+		_uris = new ArrayList<String>();
+		List<IEntry> items = buildCalendarView();
+        _adapter = new MainListAdapter(CalendarActivity.this, items); 
+        _listView.setAdapter(_adapter);
 	} 
 	
 	/**
@@ -85,5 +72,22 @@ public class CalendarActivity extends BaseListActivity {
 		Intent intent = new Intent(this, EpisodeActivity.class);
 		intent.putExtra(URI_PARAM, _uris.get(position));
 		startActivity(intent);
+	}
+	
+	/**
+	 * Event associated to shake motion
+	 * @param event - shake event
+	 */
+	public void handleShake(@Observes ShakeDetector.OnShakeEvent event) {
+		_application.getUserManager().getCalendar().sync(new Runnable() {
+			@Override
+			public void run() {
+				_adapter.clear();
+				_arrayList = _application.getUserManager().getCalendar().get(CalendarActivity.this);
+				_uris = new ArrayList<String>();
+				List<IEntry> items = buildCalendarView();
+				_adapter.addAll(items);
+			}
+		});
 	}
 }

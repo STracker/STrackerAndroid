@@ -231,7 +231,7 @@ public class AsyncHttpRequest {
 				hideProgressDialog();
 				_client.addHeader("If-None-Match", "");
 				//If the response is 304 (Not Modified) it's because the information as no updates
-				if(((HttpResponseException) e).getStatusCode() != NOT_MODIFIED)
+				if((e instanceof HttpResponseException) && ((HttpResponseException) e).getStatusCode() != NOT_MODIFIED)
 					runnable.run();
 			}
 		};

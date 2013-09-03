@@ -4,7 +4,6 @@ import src.stracker.service.UpdaterManager;
 import src.stracker.user_info.UserManager;
 import HawkClient.HawkCredentials;
 import android.app.Application;
-import android.preference.PreferenceManager;
 
 /**
  * This class represents the application. It's needed to keep the global application state.
@@ -21,7 +20,7 @@ public class STrackerApp extends Application {
 	 */
 	@Override
 	public void onCreate(){
-		_userManager = new UserManager(PreferenceManager.getDefaultSharedPreferences(this));
+		_userManager = new UserManager(this);
 		_updater = new UpdaterManager(this);
 	}
 	

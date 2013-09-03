@@ -11,16 +11,16 @@ public interface IManager<E> {
 	
 	/**
 	 * Get information
-	 * @param context - activity where the information is needed
+	 * @param context - context of the activity where manager is needed
 	 * @return information
 	 */
 	public E get(Context context);
 	
 	/**
 	 * Synchronize information from the server
-	 * @param context - activity where the information is needed
+	 * @param runnable - action to do after the synchronization
 	 */
-	public void sync(Context context);
+	public void sync(Runnable runnable);
 	
 	/**
 	 * Update information changed by the user
@@ -30,7 +30,6 @@ public interface IManager<E> {
 	
 	/**
 	 * Delete information
-	 * @param context - activity where the information is needed
 	 */
 	public void delete();
 	

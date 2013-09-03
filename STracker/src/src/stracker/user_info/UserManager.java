@@ -1,15 +1,15 @@
 package src.stracker.user_info;
 
 import com.google.gson.Gson;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.widget.Toast;
 import src.stracker.FbLoginActivity;
 import src.stracker.R;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.UserRequests;
-import src.stracker.model.Calendar;
 import src.stracker.model.User;
 import src.stracker.STrackerApp;
 /**
@@ -18,20 +18,19 @@ import src.stracker.STrackerApp;
  */
 public class UserManager implements IManager<User>{
 	
-	private static final String USER_INFO = "user_info";
 	private User user;
-	private final SharedPreferences preferences;
+	private final Context _context;
 	private final Gson gson;
 	private final CalendarManager calendar;
 	
 	/**
 	 * Constructor of user manager
-	 * @param prefs - shared preferences
+	 * @param context - context where the manager is needed
 	 */
-	public UserManager(SharedPreferences prefs){
-		preferences = prefs;
+	public UserManager(Context context){
+		_context = context;
 		gson = new Gson();
-		calendar = new CalendarManager(prefs);
+		calendar = new CalendarManager(context);
 	}
 	
 	/**
@@ -41,11 +40,12 @@ public class UserManager implements IManager<User>{
 	public User get(Context context) {
 		//verify in memory if exists
 		if(user != null) return user;
-		//verify in preferences if the user is created
-	    String jsonInfo = preferences.getString(USER_INFO, null);
-		if(jsonInfo != null){
-			user = gson.fromJson(jsonInfo, User.class);
+		//verify in database if the user is created
+	    Cursor cursor = context.getContentResolver().query(UserInfoProvider.CONTENT_URI, null, null, null, null);
+	    if(cursor.moveToNext()){
+			user = gson.fromJson(cursor.getString(cursor.getColumnIndex(UserTableContract.USER)), User.class);
 			((STrackerApp) context.getApplicationContext()).createHawkCreadentials(user.getId());
+			cursor.close();
 			return user;
 		}
 		//if there's no user in file then login 
@@ -54,24 +54,26 @@ public class UserManager implements IManager<User>{
 	}
 
 	/**
-	 * @see src.stracker.user_info.IManager#sync(android.content.Context)
+	 * @see src.stracker.user_info.IManager#sync(java.lang.Runnable)
 	 */
 	@Override
-	public void sync(final Context context) {
-		if(user != null){
-			//Request for get the information about the user
-			UserRequests.getSelf(context, new MyRunnable() {
-				@Override
-				public void run() {
-					Toast.makeText(context, R.string.error_user_req, Toast.LENGTH_SHORT).show();
-				}
-				@Override
-				public <T> void runWithArgument(T response) {
-					savePersistently((User) response);
-					calendar.sync(context);
-				}
-			}, user.getId(), user.getVersion());
-		}
+	public void sync(final Runnable runnable) {
+		//Request for get the information about the user
+		UserRequests.getSelf(_context, new MyRunnable() {
+			@Override
+			public void run() {
+				Toast.makeText(_context, R.string.error_user_req, Toast.LENGTH_SHORT).show();
+			}
+			@Override
+			public <T> void runWithArgument(T response) {
+				update((User) response);
+				calendar.sync(new Runnable() {
+					@Override
+					public void run() {}
+				});
+				runnable.run();
+			}
+		}, user.getId(), user.getVersion());
 	}
 
 	/**
@@ -82,7 +84,9 @@ public class UserManager implements IManager<User>{
 		//increment version then save the user
 		user = elem;
 		user.incVersion();
-		savePersistently(user);
+		ContentValues values = new ContentValues();
+		values.put(UserTableContract.USER, gson.toJson(user));
+		_context.getContentResolver().update(UserInfoProvider.CONTENT_URI, values, null, null);
 	}
 
 	/**
@@ -93,10 +97,7 @@ public class UserManager implements IManager<User>{
 		//Clear user
 		user = null;
 		//Remove previous data
-		SharedPreferences.Editor edit = preferences.edit();
-		edit.remove(USER_INFO);
-		edit.commit();
-		calendar.delete();
+		_context.getContentResolver().delete(UserInfoProvider.CONTENT_URI, null, null);
 	}
 
 	/**
@@ -104,20 +105,19 @@ public class UserManager implements IManager<User>{
 	 */
 	@Override
 	public void savePersistently(User elem) {
-		user = elem;
-		SharedPreferences.Editor edit = preferences.edit();
-		//Use shared preferences to save information about user
-	    String json = gson.toJson(elem);
-	    edit.putString(USER_INFO, json);
-	    edit.commit();
+		if(user == null){
+			user = elem;
+			ContentValues values = new ContentValues();
+			values.put(UserTableContract.USER, gson.toJson(elem));
+			_context.getContentResolver().insert(UserInfoProvider.CONTENT_URI, values);
+		}
 	}	
 	
 	/**
-	 * This method returns the user calendar.
-	 * @param context - context of the activity where is called
+	 * This method returns the user calendar manager.
 	 * @return calendar
 	 */
-	public Calendar getCalendar(Context context){
-		return calendar.get(context);
+	public CalendarManager getCalendar(){
+		return calendar;
 	}
 }

@@ -84,7 +84,7 @@ public class FbLoginActivity extends BaseActivity {
 								public <T> void runWithArgument(T response) {
 									_dialog.dismiss();
 									_application.getUserManager().savePersistently((User)response);
-									_application.getUserManager().getCalendar(FbLoginActivity.this);
+									_application.getUserManager().getCalendar().get(FbLoginActivity.this);
 									session.closeAndClearTokenInformation();
 									finish();
 								}

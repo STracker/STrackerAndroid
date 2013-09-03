@@ -96,8 +96,12 @@ public class ProfileActivity extends BaseActivity {
 	 * @param event - shake event
 	 */
 	public void handleShake(@Observes ShakeDetector.OnShakeEvent event) {
-		_application.getUserManager().sync(this);
-		setProfileInformation();
+		_application.getUserManager().sync(new Runnable() {
+			@Override
+			public void run() {
+				setProfileInformation();
+			}
+		});
 	}
 	
 	/**
