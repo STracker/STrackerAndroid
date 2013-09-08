@@ -6,7 +6,7 @@ import src.stracker.model.*;
 
 /**
  * @author diogomatos
- * This class represent the serializer to a tv show
+ * This class represent the serializer to a television show
  */
 public class TvShowSerializer implements ISerialize<TvShow> {
 

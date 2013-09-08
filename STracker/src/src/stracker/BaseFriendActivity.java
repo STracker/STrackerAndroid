@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
+/**
+ * @author diogomatos
+ * This activity represents a base friend list activity
+ */
 public class BaseFriendActivity extends BaseListActivity {
 
 	protected ArrayList<UserSynopse> _users;

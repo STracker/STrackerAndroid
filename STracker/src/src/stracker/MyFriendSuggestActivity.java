@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+/**
+ * @author diogomatos
+ * This activity represents the suggestions of a friend
+ */
 public class MyFriendSuggestActivity extends MyFriendsActivity {
 	/**
 	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)

@@ -59,6 +59,7 @@ public class MainActivity extends BaseListActivity {
 				startActivity(new Intent(this,ProfileActivity.class));
 				break;  
 			case R.id.form_friend:
+				if(_application.getUserManager().get(this) == null) break;
 				UserActions.searchFriend(this);
 				break;
 			case R.id.form_genre:

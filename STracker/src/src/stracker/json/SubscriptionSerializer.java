@@ -8,10 +8,17 @@ import org.json.JSONObject;
 import src.stracker.model.Subscription;
 import src.stracker.model.TvShowSynopse;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an array of subscriptions
+ */
 public class SubscriptionSerializer implements ISerialize<ArrayList<Subscription>> {
 
 	private EpisodeSynopseSerializer _episodeSerializer = new EpisodeSynopseSerializer();
 	
+	/**
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public ArrayList<Subscription> deserialize(String json) {
 		ArrayList<Subscription> subscriptions = new ArrayList<Subscription>();

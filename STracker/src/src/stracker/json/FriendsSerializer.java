@@ -8,8 +8,15 @@ import org.json.JSONObject;
 
 import src.stracker.model.UserSynopse;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an array of user synopses
+ */
 public class FriendsSerializer implements ISerialize<ArrayList<UserSynopse>> {
 
+	/**
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public ArrayList<UserSynopse> deserialize(String json) {
 		ArrayList<UserSynopse> friends = new ArrayList<UserSynopse>();

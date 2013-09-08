@@ -6,16 +6,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map.Entry;
-
 import org.apache.http.client.HttpResponseException;
-
 import src.stracker.R;
 import src.stracker.STrackerApp;
 import src.stracker.json.ISerialize;
 import HawkClient.*;
-import android.app.ProgressDialog;
 import android.content.Context;
-
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -28,7 +24,6 @@ import com.loopj.android.http.RequestParams;
 public class AsyncHttpRequest {
 
 	private static final AsyncHttpClient _client = new AsyncHttpClient();
-	private static ProgressDialog _dialog;
 	private static final int DEFAULT_TIMEOUT = 30000;
 	private static final int NOT_MODIFIED = 304;
 
@@ -49,7 +44,6 @@ public class AsyncHttpRequest {
 	 * @param uri - string with the URI of the resource
 	 */
 	public static void get(Context context, final MyRunnable runnable, final ISerialize<?> serializer, String uri){
-		showProgressDialog(context);
 		_client.get(getAbsoluteUrl(context, uri), createHandler(runnable, serializer));
 	}
 	
@@ -127,7 +121,7 @@ public class AsyncHttpRequest {
 		}
 		Long time = System.currentTimeMillis();
 		Long timestamp = time / 1000L;
-		String nonce = "NONO";//HawkClient.generateNonce();
+		String nonce = "NONO";
 		String header = "";
 		try {
 			if(method.equals("POST")){
@@ -190,26 +184,6 @@ public class AsyncHttpRequest {
 	}
 	
 	/**
-	 * This method show a progress dialog 
-	 * @param context - Context of the Activity where the progress dialog will be showed
-	 */
-	private static void showProgressDialog(Context context){
-		//Waiting message
-		if(_dialog == null){
-			_dialog = new ProgressDialog(context); 
-			_dialog.setMessage(context.getString(R.string.loading_message));
-		}
-		_dialog.show();
-	}
-	
-	/**
-	 * This method hides the an active progress dialog 
-	 */
-	private static void hideProgressDialog(){
-		if(_dialog != null && _dialog.isShowing()) _dialog.dismiss();
-	}
-	
-	/**
 	 * This method create an handler that implements the behavior after a successful or unsuccessful HTTP request.
 	 * @param runnable - callback that will be called after the HTTP request
 	 * @param serializer - JSON serializer used to resolve the HTTP JSON response
@@ -219,7 +193,6 @@ public class AsyncHttpRequest {
 		return new AsyncHttpResponseHandler(){
 			@Override
 			public void onSuccess(String response) {
-				hideProgressDialog();
 				_client.addHeader("If-None-Match", "");
 				if(serializer != null) 
 					runnable.runWithArgument(serializer.deserialize(response));
@@ -228,7 +201,6 @@ public class AsyncHttpRequest {
 			}
 			@Override
 			public void onFailure(Throwable e, String response){
-				hideProgressDialog();
 				_client.addHeader("If-None-Match", "");
 				//If the response is 304 (Not Modified) it's because the information as no updates
 				if((e instanceof HttpResponseException) && ((HttpResponseException) e).getStatusCode() != NOT_MODIFIED)

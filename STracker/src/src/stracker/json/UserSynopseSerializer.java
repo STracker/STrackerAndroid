@@ -4,8 +4,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import src.stracker.model.UserSynopse;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an user synopse object
+ */
 public class UserSynopseSerializer implements ISerialize<UserSynopse> {
 
+	/**
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public UserSynopse deserialize(String json) {
 		UserSynopse user = null;

@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 import src.stracker.FbLoginActivity;
 import src.stracker.R;
@@ -66,7 +68,7 @@ public class UserManager implements IManager<User>{
 			}
 			@Override
 			public <T> void runWithArgument(T response) {
-				update((User) response);
+				localUpdate((User) response);
 				calendar.sync(new Runnable() {
 					@Override
 					public void run() {}
@@ -81,9 +83,17 @@ public class UserManager implements IManager<User>{
 	 */
 	@Override
 	public void update(User elem) {
-		//increment version then save the user
+		elem.incVersion();
+		localUpdate(elem);
+	}
+	
+	/**
+	 * Auxiliary method to update user information without changing his version
+	 * @param elem - user to update
+	 */
+	private void localUpdate(User elem){
+		//save the user
 		user = elem;
-		user.incVersion();
 		ContentValues values = new ContentValues();
 		values.put(UserTableContract.USER, gson.toJson(user));
 		_context.getContentResolver().update(UserInfoProvider.CONTENT_URI, values, null, null);
@@ -98,6 +108,13 @@ public class UserManager implements IManager<User>{
 		user = null;
 		//Remove previous data
 		_context.getContentResolver().delete(UserInfoProvider.CONTENT_URI, null, null);
+		//Stop the updater service
+		((STrackerApp)_context.getApplicationContext()).getUpdaterManager().cancelAlarmManager();
+		//Clear shared preferences
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(_context);
+		SharedPreferences.Editor editor = preferences.edit();
+		editor.clear();
+		editor.commit();
 	}
 
 	/**
@@ -119,5 +136,13 @@ public class UserManager implements IManager<User>{
 	 */
 	public CalendarManager getCalendar(){
 		return calendar;
+	}
+	
+	/**
+	 * Verify if user is logged in
+	 * @return boolean
+	 */
+	public boolean isLogged(){
+		return user != null;
 	}
 }

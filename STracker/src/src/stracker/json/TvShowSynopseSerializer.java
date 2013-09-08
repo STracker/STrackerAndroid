@@ -9,7 +9,7 @@ import src.stracker.model.*;
 
 /**
  * @author diogomatos
- * This class represent the serializer to an array of tv show synopses
+ * This class represent the serializer to an array of television show synopses
  */
 public class TvShowSynopseSerializer implements ISerialize<ArrayList<TvShowSynopse>> {
   

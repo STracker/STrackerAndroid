@@ -7,10 +7,17 @@ import org.json.JSONObject;
 import src.stracker.model.Suggestion;
 import src.stracker.model.TvShowSynopse;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an array of suggestions
+ */
 public class SuggestionSerializer implements ISerialize<ArrayList<Suggestion>> {
 
 	private UserSynopseSerializer userSerializer = new UserSynopseSerializer();
 	
+	/**
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public ArrayList<Suggestion> deserialize(String json) {
 		ArrayList<Suggestion> suggestion = new ArrayList<Suggestion>();

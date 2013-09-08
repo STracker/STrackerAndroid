@@ -6,9 +6,12 @@
 	<string name="start_btn">Serie Request!</string>
 	<string name="async_task">Serie Information</string>
 	<string name="app_id">516839011711939</string>
-	<string name="hawk_key">werxhqb98rpaxn39848xrunpaw3489ruxnpa98w4rxn</string>
+	<string name="hawk_key">mnbvcxzlkjhgfdsapoiuytrewq246813579stracker</string>
 	<string name="fb_login">To perform this action you need to login!</string>
 	<string name="separator">&#160;-&#160;</string>
+	<string name="range_begin">0</string>
+	<string name="range_end">5</string>
+	<string name="range_interval">5</string>
 	
 	<!-- Information about TvShow -->
 	<string name="serie_name">Name:&#160;</string>
@@ -125,7 +128,7 @@
 	<string name="subitem_guest_actors">Guest Actors</string>
 	
 	<!-- Application URI's -->
-	<string name="uri_host_api">http://strackerserverdev.apphb.com/api/</string>
+	<string name="uri_host_api">http://stracker.apphb.com/api/</string>
 	<string name="uri_user_subscriptions">user/subscriptions/tvShowId</string>
 	<string name="uri_genres">genres</string>
 	<string name="uri_user_friends">user/friends/userId</string>
@@ -141,8 +144,8 @@
 	<string name="uri_tvshow_rating">tvshows/tvShowId/ratings"</string>
 	<string name="uri_users">users</string>
 	<string name="uri_user_suggestion">user/suggestions/tvShowId</string>
-	<string name="uri_tvshow_search">tvshows?name=</string>
-	<string name="uri_user_search">users?name=</string>
+	<string name="uri_tvshow_search">tvshows?name=name_arg&amp;start=start_arg&amp;end=end_arg</string>
+	<string name="uri_user_search">users?name=name_arg&amp;start=start_arg&amp;end=end_arg</string>
 	<string name="uri_user_info">users/userId</string>
 	<string name="uri_episode_watched">user/subscriptions/tvShowId/watchedepisodes/seasonNumber/episodeNumber</string>
 	
@@ -197,7 +200,11 @@
 	<string name="info_ew_watch">Do you want to mark this episode as watched?</string>
 	<string name="success_ew_remove">Episode Removed!</string>
 	<string name="success_ew_episode">Episode Watched!</string>
+	<string name="lost_connection">Lost internet connection</string>
 	<string name="error_suggestion">Error in suggestion!</string>
+	<string name="no_connectivity">No Internet Connection!</string>
+	<string name="service_message_sug">You have new suggestions!</string>
+	<string name="service_message_fri">You have new friend requests!</string>
 	<string name="user_info_updated">You have new updates in your profile!</string>
 	<string name="success_suggestion">Suggestion sent to your friend!</string>
 </resources>

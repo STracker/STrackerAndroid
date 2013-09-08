@@ -68,9 +68,19 @@ public class TvShowRequests {
 	 * @param context - context of the Activity where the request occur
 	 * @param runnable - callback that will be called after the HTTP request
 	 * @param name - search string
+	 * @param start - start number for range results in response
+	 * @param end - end number for range results in response
 	 */
-	public static void getTvShowByName(Context context, MyRunnable runnable, String name){
-		AsyncHttpRequest.get(context, runnable, tvShowSynopseSerializer, context.getString(R.string.uri_tvshow_search)+name);
+	public static void getTvShowByName(Context context, MyRunnable runnable, String name, int start, int end){
+		AsyncHttpRequest.get(
+								context, 
+								runnable, 
+								tvShowSynopseSerializer, 
+								context.getString(R.string.uri_tvshow_search)
+									.replace("name_arg", name)
+									.replace("start_arg", start+"")
+									.replace("end_arg", end+"")
+							);
 	}
 	
 	/**

@@ -29,13 +29,13 @@ public class TvShowActions {
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(activity);
 		adBuilder.setView(input);
-		adBuilder.setPositiveButton(activity.getString(R.string.button_cancel),
+		adBuilder.setNegativeButton(activity.getString(R.string.button_cancel),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 			}
 		}); 
-		adBuilder.setNegativeButton(activity.getString(R.string.button_search),
+		adBuilder.setPositiveButton(activity.getString(R.string.button_search),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				Intent intent = new Intent(activity, TvShowsByNameActivity.class);
@@ -56,13 +56,13 @@ public class TvShowActions {
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
 		adBuilder.setMessage(activity.getString(R.string.error_tv_unsubscribe));
 		adBuilder.setCancelable(true);
-		adBuilder.setPositiveButton(activity.getString(R.string.button_cancel),
+		adBuilder.setNegativeButton(activity.getString(R.string.button_cancel),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 			}
 		}); 
-		adBuilder.setNegativeButton(activity.getString(R.string.button_unsubscribe),
+		adBuilder.setPositiveButton(activity.getString(R.string.button_unsubscribe),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				UserRequests.deleteSubscription(activity, new MyRunnable() {

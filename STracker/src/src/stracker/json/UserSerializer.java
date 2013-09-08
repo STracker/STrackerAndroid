@@ -5,12 +5,19 @@ import org.json.JSONObject;
 
 import src.stracker.model.User;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an user object
+ */
 public class UserSerializer implements ISerialize<User> {
 
 	private FriendsSerializer _friendSerializer = new FriendsSerializer();
 	private SubscriptionSerializer _subscriptionSerializer = new SubscriptionSerializer();
 	private SuggestionSerializer _suggestionSerializer = new SuggestionSerializer();
 	
+	/**
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public User deserialize(String json) {
 		User user = null;

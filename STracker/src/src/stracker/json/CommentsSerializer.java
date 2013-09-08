@@ -8,8 +8,15 @@ import org.json.JSONObject;
 
 import src.stracker.model.Comment;
 
+/**
+ * @author diogomatos
+ * This class represent the serializer to an array of comments
+ */
 public class CommentsSerializer implements ISerialize<ArrayList<Comment>> {
 
+	/**
+	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
+	 */
 	@Override
 	public ArrayList<Comment> deserialize(String json) {
 		ArrayList<Comment> comments = new ArrayList<Comment>();

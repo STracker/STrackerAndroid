@@ -2,6 +2,7 @@ package src.stracker;
 
 import com.google.inject.Inject;
 import android.os.Bundle;
+import android.widget.Toast;
 import roboguice.activity.RoboActivity;
 import src.stracker.utils.ShakeDetector;
 
@@ -33,5 +34,7 @@ public class BaseActivity extends RoboActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState); 
 		_application = (STrackerApp) getApplication();
+		if(!_application.isConnected())
+			Toast.makeText(this, R.string.no_connectivity, Toast.LENGTH_SHORT).show();
 	}	
 }

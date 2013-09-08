@@ -34,13 +34,13 @@ public class UserActions {
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(activity);
 		adBuilder.setView(input);
-		adBuilder.setPositiveButton(activity.getString(R.string.button_cancel),
+		adBuilder.setNegativeButton(activity.getString(R.string.button_cancel),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 			}
 		}); 
-		adBuilder.setNegativeButton(activity.getString(R.string.button_search),
+		adBuilder.setPositiveButton(activity.getString(R.string.button_search),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				Intent intent = new Intent(activity, SearchFriendActivity.class);

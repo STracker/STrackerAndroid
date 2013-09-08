@@ -28,13 +28,13 @@ public class EpisodeActions {
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
 		adBuilder.setMessage(activity.getString(R.string.error_ew_already_watched));
 		adBuilder.setCancelable(true);
-		adBuilder.setPositiveButton(activity.getString(R.string.button_cancel),
+		adBuilder.setNegativeButton(activity.getString(R.string.button_cancel),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 			}
 		}); 
-		adBuilder.setNegativeButton(activity.getString(R.string.button_remove),
+		adBuilder.setPositiveButton(activity.getString(R.string.button_remove),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				EpisodeRequests.deleteEpisodeWatched(activity, new MyRunnable() {
@@ -92,13 +92,13 @@ public class EpisodeActions {
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
 		adBuilder.setMessage(activity.getString(R.string.info_ew_watch));
 		adBuilder.setCancelable(true);
-		adBuilder.setPositiveButton(activity.getString(R.string.button_cancel),
+		adBuilder.setNegativeButton(activity.getString(R.string.button_cancel),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 			}
 		}); 
-		adBuilder.setNegativeButton(activity.getString(R.string.button_watch),
+		adBuilder.setPositiveButton(activity.getString(R.string.button_watch),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				EpisodeRequests.postEpisodeWatched(activity, new MyRunnable() {

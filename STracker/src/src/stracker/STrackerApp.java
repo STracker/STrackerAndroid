@@ -4,6 +4,9 @@ import src.stracker.service.UpdaterManager;
 import src.stracker.user_info.UserManager;
 import HawkClient.HawkCredentials;
 import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 /**
  * This class represents the application. It's needed to keep the global application state.
@@ -22,6 +25,7 @@ public class STrackerApp extends Application {
 	public void onCreate(){
 		_userManager = new UserManager(this);
 		_updater = new UpdaterManager(this);
+		verifyConnection();
 	}
 	
 	/**
@@ -71,5 +75,16 @@ public class STrackerApp extends Application {
 	 */
 	public HawkCredentials getHawkCredentials(){
 		return _credentials;
+	}
+	
+	/**
+	 * Auxiliary method for verify the connection type.
+	 * @param boolean
+	 */
+	private void verifyConnection() {
+		ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo info = cm.getActiveNetworkInfo();
+		//No connectivity at all
+		_connectivity = (info != null);
 	}
 }

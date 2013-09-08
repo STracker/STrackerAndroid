@@ -13,7 +13,6 @@ import src.stracker.model.GenreSynopse;
 public class GenresSerializer implements ISerialize<ArrayList<GenreSynopse>> {
 
 	/**
-	 * (non-Javadoc)
 	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
 	 */
 	@Override

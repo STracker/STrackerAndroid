@@ -6,40 +6,79 @@
 	<string name="start_btn">Serie Request!</string>
 	<string name="async_task">Serie Information</string>
 	<string name="app_id">516839011711939</string>
+	<string name="hawk_key">mnbvcxzlkjhgfdsapoiuytrewq246813579stracker</string>
+	<string name="fb_login">To perform this action you need to login!</string>
+	<string name="separator">&#160;-&#160;</string>
+	<string name="range_begin">0</string>
+	<string name="range_end">5</string>
+	<string name="range_interval">5</string>
 	
 	<!-- Information about TvShow -->
-	<string name="serie_name">Name: </string>
-	<string name="serie_desc">Description: </string>
-	<string name="serie_runtime">Runtime: </string>
-	<string name="serie_airday">Airday: </string>
-	<string name="serie_genres">Genres: </string>
-	<string name="serie_rating">Rating: </string>
-	<string name="serie_date">Date: </string>
+	<string name="serie_name">Name:&#160;</string>
+	<string name="serie_desc">Description:&#160;</string>
+	<string name="serie_runtime">Runtime:&#160;</string>
+	<string name="serie_airday">Airday:&#160;</string>
+	<string name="serie_genres">Genres:&#160;</string>
+	<string name="serie_rating">Rating:&#160;</string>
+	<string name="serie_date">Date:&#160;</string>
 	<string name="poster_desc">Poster</string>
+	<string name="serie_seasons">Season&#160;</string>
+	<string name="season_list">Season\'s List</string>
+	<string name="rating_tvshow_avg">Average:&#160;</string>
+	<string name="rating_tvshow_total">Total:&#160;</string>
+	<string name="from">from:&#160;</string>
+	<string name="users">&#160;user(s).</string>
+	<string name="min">&#160;min</string>
+	
+	<!-- Actions Items -->
+	<string name="button_cancel">Cancel</string>
+	<string name="button_submit">Submit</string>
+	<string name="rating_message">Do you really want to submit the Rating?</string>
+	<string name="comment_message">Please insert text comment:</string>
+	<string name="tvshow_message">Enter TvShow\'s Name:</string>
+	<string name="rating_message">Enter Friend\'s Name:</string>
+	<string name="button_search">Search</string>
+	<string name="button_remove">Remove</string>
+	<string name="button_watch">Watch</string>
+	<string name="button_unsubscribe">Unsubscribe</string>
+	<string name="button_logout">Logout</string>
 	
 	<!-- Menu Items -->
 	<string name="action_profile">Profile</string>
 	<string name="action_friends">Friends</string>
-	<string name="action_series">Following</string>
+	<string name="action_series">Subscriptions</string>
 	<string name="action_settings">Settings</string>
 	<string name="action_search">Search</string>
 	<string name="action_messages">Messages</string>
 	<string name="subitem_search_by_name">Search by Name</string>
 	<string name="subitem_search_by_genre">Search by Genre</string>
 	<string name="subitem_search_friend">Search Friend</string>
+	<string name="title_preferences">Preferences</string>
+	<string name="cat_title">Automatic Updates</string>
+	<string name="pref_check">ON/OFF</string>
+	<string name="pref_delay">Delay (in minutes)</string>
 	
 	<!-- Menu TvShow -->
 	<string name="action_more_info">Information</string>
 	<string name="subitem_seasons">Seasons</string>
 	<string name="subitem_comments">Comments</string>
 	<string name="subitem_cast">Cast</string>
+	<string name="subitem_subscribe">Subscribe</string>
+	<string name="list_genres">List of Genres</string>
+	<string name="subitem_suggest">Suggest</string>
 	
 	<!-- Episode Information -->
 	<string name="banner_desc">Banner</string>
 	<string name="episode_desc">Description</string>
 	<string name="episode_info">Episode Info</string>
 	<string name="episode_rating">Rating</string>
-	<string name="episode_date">Date</string>
+	<string name="episode_date">Release Date:&#160;</string>
+	<string name="rating_episode_avg">Average:&#160;</string>
+	<string name="rating_episode_total">Total:&#160;</string>
+	<string name="episodes_watched">Episodes Watched:&#160;</string>
+	<string name="episode_season">Season:&#160;</string>
+	<string name="episode">Episode:&#160;</string>
+	<string name="episode_watched_desc">Episode Watched</string>
 	
 	<!-- Actor Information -->
 	<string name="photo_desc">Photo</string>
@@ -52,4 +91,120 @@
 	<string name="item_entry">Item</string>
 	<string name="action_calendar">Calendar</string>
 	<string name="toprated_header">Top Rated STracker TvShows</string>
+	
+	<!-- Profile Information -->
+	<string name="profile_name">Name:&#160;</string>
+	<string name="profile_photo">Profile Photo</string>
+	<string name="profile_email">Email:&#160;</string>
+	<string name="profile_title">Profile</string>
+	<string name="profile_subscriptions">Subscriptions&#160;</string>
+	<string name="profile_friends">Friends&#160;</string>
+	<string name="profile_suggestions">Suggestions&#160;</string>
+	<string name="profile_friendrequests">Friend Requests&#160;</string>
+	<string name="profile_subs_count">0</string>
+	<string name="profile_frie_count">0</string>
+	<string name="profile_sugg_count">0</string>
+	<string name="profile_freq_count">0</string>
+	<string name="delete">Delete</string>
+	
+	<!-- User Information -->
+	<string name="user_name">Name:&#160;</string>
+	<string name="user_email">Email:&#160;</string>
+	<string name="user_subscriptions">Subscriptions&#160;</string>
+	<string name="user_subs_count">0</string>
+	<string name="user_friends">Friends&#160;</string>
+	<string name="user_frie_count">0</string>
+	
+	<!-- Comment Information -->
+	<string name="comment_user_label">User:&#160;</string>
+	<string name="comment_user">user</string>
+	<string name="comment_text">comment</string>
+	<string name="comment_btn">Info</string>
+	<string name="act_comment_user">comment</string>
+	<string name="title_comment">Comment Text</string>
+	
+	<!-- Menu Episode -->
+	<string name="subitem_directors">Directors</string>
+	<string name="subitem_guest_actors">Guest Actors</string>
+	
+	<!-- Application URI's -->
+	<string name="uri_host_api">http://stracker.apphb.com/api/</string>
+	<string name="uri_user_subscriptions">user/subscriptions/tvShowId</string>
+	<string name="uri_genres">genres</string>
+	<string name="uri_user_friends">user/friends/userId</string>
+	<string name="uri_user_friends_req">user/friendrequests/userId</string>
+	<string name="uri_user_suggestion">user/suggestions/tvShowId</string>
+	<string name="uri_user_newepisodes">user/calendar</string>
+	<string name="uri_tvshow_toprated">tvshows/toprated</string>
+	<string name="uri_tvshow">tvshows/tvShowId</string>
+	<string name="uri_episode">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber"</string>
+	<string name="uri_episode_comments">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber/comments"</string>
+	<string name="uri_episode_rating">tvshows/tvShowId/seasons/seasonNumber/episodes/episodeNumber/ratings"</string>
+	<string name="uri_tvshow_comments">tvshows/tvShowId/comments"</string>
+	<string name="uri_tvshow_rating">tvshows/tvShowId/ratings"</string>
+	<string name="uri_users">users</string>
+	<string name="uri_user_suggestion">user/suggestions/tvShowId</string>
+	<string name="uri_tvshow_search">tvshows?name=name_arg&amp;start=start_arg&amp;end=end_arg</string>
+	<string name="uri_user_search">users?name=name_arg&amp;start=start_arg&amp;end=end_arg</string>
+	<string name="uri_user_info">users/userId</string>
+	<string name="uri_episode_watched">user/subscriptions/tvShowId/watchedepisodes/seasonNumber/episodeNumber</string>
+	
+	<!-- Display messages -->
+	<string name="not_found">Results not found!</string>
+	<string name="unexpected">An unexpected error occurred!</string>
+	<string name="error_rating">Error requesting the Rating!</string>
+	<string name="error_comment">Error requesting the Comments!</string>
+	<string name="error_subscribe">Error subscribing the Tv Show!</string>
+	<string name="success_subscribe">TvShow subscribed successfully!</string>
+	<string name="comment_permission">You don\'t have permission to delete this comment!</string>
+	<string name="comment_success">Your comment will be processed.</string>
+	<string name="comment_delete">Comment Removed!</string>
+	<string name="comment_error">Error sending the comment.</string>
+	<string name="error_friend_req">Error in friend request!</string>
+	<string name="success_friend_req">Friend request sended!</string>
+	<string name="error_login">Login failed.</string>
+	<string name="success_login">Login successful!</string>
+	<string name="error_subs">Error requesting the Subscriptions!</string>
+	<string name="error_friends">Error requesting the List of Friends!</string>
+	<string name="error_profile">Error requesting user profile.</string>
+	<string name="error_genres">Error requesting the list of genres!</string>
+	<string name="error_calendar">Error requesting the calendar!</string>
+	<string name="error_episode">Error requesting episode information!</string>
+	<string name="error_sub_rating">Error submitting rating!</string>
+	<string name="submit_rating">Your rating request will be processed.</string>
+	<string name="error_sub_comment">Error submitting your comment!</string>
+	<string name="submit_comment">Your comment will be processed.</string>
+	<string name="error_search_by_name">We don\'t know this Tv Show yet.</string>
+	<string name="error_search_by_genre">Error in search by genre.</string>
+	<string name="error_epi_synopses">Error in episode synopsis.</string>
+	<string name="error_sea_synopses">Error in season synopsis.</string>
+	<string name="error_user_req">Error in user information request!</string>
+	<string name="loading_message">loading&#8230;</string>
+	<string name="login_message">logging in&#8230;</string>
+	<string name="error_friend_req">Friend Request Error!</string>
+	<string name="friend_req_accept">Friend Request Accepted!</string>
+	<string name="friend_req_reject">Friend Request Rejected!</string>
+	<string name="error_ew_remove">Error in Episode Remove!</string>
+	<string name="error_ew_watch">Error in Watch an Episode!</string>
+	<string name="error_friend_del">Error in friend remove!</string>
+	<string name="friend_removed">Friend Removed Successfully.</string>
+	<string name="error_suggestion">Suggestion Error!</string>
+	<string name="suggestion_rejected">Suggestion Deleted!</string>
+	<string name="error_search_friend">Error Searching Friends!</string>
+	<string name="error_tv_unsubscribe">Tv Show already subscribed! Do you want to unsubscribe?</string>
+	<string name="error_unsubscribe">Error in unsubscribe Tv Show!</string>
+	<string name="success_unsubscribe">Tv Show Unsubscribed!</string>
+	<string name="error_ew_date">Episode not premiered!</string>
+	<string name="error_ew_subscribed">You need to be subscribed in this Tv Show!</string>
+	<string name="error_ew_already_watched">Episode already seen! Do you wish to remove this?</string>
+	<string name="info_ew_watch">Do you want to mark this episode as watched?</string>
+	<string name="success_ew_remove">Episode Removed!</string>
+	<string name="success_ew_episode">Episode Watched!</string>
+	<string name="lost_connection">Lost internet connection</string>
+	<string name="error_suggestion">Error in suggestion!</string>
+	<string name="no_connectivity">No Internet Connection!</string>
+	<string name="service_message_sug">You have new suggestions!</string>
+	<string name="service_message_fri">You have new friend requests!</string>
+	<string name="user_info_updated">You have new updates in your profile!</string>
+	<string name="success_suggestion">Suggestion sent to your friend!</string>
 </resources>

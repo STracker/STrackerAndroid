@@ -155,8 +155,18 @@ public class UserRequests {
 	 * @param context - context of the Activity where the request occur
 	 * @param runnable - callback that will be called after the HTTP request
 	 * @param name - name of the user to search for
+	 * @param start - start number for range results in response
+	 * @param end - end number for range results in response
 	 */
-	public static void getSearchFriends(Context context, MyRunnable runnable, String name){
-		AsyncHttpRequest.authorizedGet(context, runnable, friendsSerializer, context.getString(R.string.uri_user_search)+name);
+	public static void getSearchFriends(Context context, MyRunnable runnable, String name, int start, int end){
+		AsyncHttpRequest.authorizedGet(
+										context, 
+										runnable, 
+										friendsSerializer, 
+										context.getString(R.string.uri_user_search)
+											.replace("name_arg", name)
+											.replace("start_arg", start+"")
+											.replace("end_arg", end+"")
+									  );
 	}
 }

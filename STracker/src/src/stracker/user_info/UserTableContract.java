@@ -3,6 +3,10 @@ package src.stracker.user_info;
 import android.net.Uri;
 import android.provider.BaseColumns; 
 
+/**
+ * @author diogomatos
+ * User information contract
+ */
 public class UserTableContract {
 
 	//Table name

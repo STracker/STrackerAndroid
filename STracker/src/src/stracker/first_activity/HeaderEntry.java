@@ -17,7 +17,6 @@ public class HeaderEntry implements IEntry {
     }
 
     /**
-     * (non-Javadoc)
      * @see src.stracker.first_activity.IEntry#getViewType()
      */
     @Override
@@ -26,7 +25,6 @@ public class HeaderEntry implements IEntry {
     }
 
     /**
-     * (non-Javadoc)
      * @see src.stracker.first_activity.IEntry#getView(android.view.LayoutInflater, android.view.View)
      */
     @Override
@@ -44,6 +42,9 @@ public class HeaderEntry implements IEntry {
         return view;
     }
     
+    /**
+	 * This class is used to save the properties of a row in the list view
+	 */
     private static class ValueHolder{
     	TextView headerText;
     }

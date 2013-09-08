@@ -15,7 +15,6 @@ import src.stracker.model.Actor;
 public class ActorSerializer implements ISerialize<ArrayList<Actor>> {
 
 	/**
-	 * (non-Javadoc)
 	 * @see src.stracker.json.ISerialize#deserialize(java.lang.String)
 	 */
 	@Override

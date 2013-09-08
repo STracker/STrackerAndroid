@@ -19,7 +19,6 @@ public class ItemEntry implements IEntry {
     }
 
     /**
-     * (non-Javadoc)
      * @see src.stracker.first_activity.IEntry#getViewType()
      */
     @Override
@@ -28,7 +27,6 @@ public class ItemEntry implements IEntry {
     }
 
     /**
-     * (non-Javadoc)
      * @see src.stracker.first_activity.IEntry#getView(android.view.LayoutInflater, android.view.View)
      */
     @Override

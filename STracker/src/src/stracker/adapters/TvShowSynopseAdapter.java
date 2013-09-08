@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+/** 
+ * This class represents the adapter to a list of television shows synopsis
+ */
 public class TvShowSynopseAdapter extends ArrayAdapter<TvShowSynopse>{
 
 	private LayoutInflater _inflater;
@@ -21,7 +24,6 @@ public class TvShowSynopseAdapter extends ArrayAdapter<TvShowSynopse>{
 	}
 	
 	/**
-	 * (non-Javadoc)
 	 * @see android.widget.ArrayAdapter#getView(int, android.view.View, android.view.ViewGroup)
 	 */
 	@Override

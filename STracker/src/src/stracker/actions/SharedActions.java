@@ -27,13 +27,13 @@ public class SharedActions {
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
 		adBuilder.setMessage(activity.getString(R.string.rating_message));
 		adBuilder.setCancelable(true);
-		adBuilder.setPositiveButton(activity.getString(R.string.button_cancel),
+		adBuilder.setNegativeButton(activity.getString(R.string.button_cancel),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 			}
 		}); 
-		adBuilder.setNegativeButton(activity.getString(R.string.button_submit),
+		adBuilder.setPositiveButton(activity.getString(R.string.button_submit),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				RatingRequests.postRating((STrackerApp)activity.getApplication(), new MyRunnable() {
@@ -63,13 +63,13 @@ public class SharedActions {
 		final EditText input = new EditText(activity);
 		adBuilder.setView(input);
 		adBuilder.setCancelable(true);
-		adBuilder.setPositiveButton(activity.getString(R.string.button_cancel),
+		adBuilder.setNegativeButton(activity.getString(R.string.button_cancel),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				dialog.cancel();
 			}
 		}); 
-		adBuilder.setNegativeButton(activity.getString(R.string.button_submit),
+		adBuilder.setPositiveButton(activity.getString(R.string.button_submit),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				CommentRequests.postComment((STrackerApp)activity.getApplication(), new MyRunnable() {
