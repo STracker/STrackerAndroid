@@ -2,7 +2,6 @@ package src.stracker.actions;
 
 import src.stracker.BaseActivity;
 import src.stracker.R;
-import src.stracker.STrackerApp;
 import src.stracker.asynchttp.CommentRequests;
 import src.stracker.asynchttp.MyRunnable;
 import src.stracker.asynchttp.RatingRequests;
@@ -36,7 +35,7 @@ public class SharedActions {
 		adBuilder.setPositiveButton(activity.getString(R.string.button_submit),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				RatingRequests.postRating((STrackerApp)activity.getApplication(), new MyRunnable() {
+				RatingRequests.postRating(activity, new MyRunnable() {
 					@Override
 					public void run() {
 						Toast.makeText(activity, R.string.error_sub_rating, Toast.LENGTH_SHORT).show();
@@ -72,7 +71,7 @@ public class SharedActions {
 		adBuilder.setPositiveButton(activity.getString(R.string.button_submit),
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
-				CommentRequests.postComment((STrackerApp)activity.getApplication(), new MyRunnable() {
+				CommentRequests.postComment(activity, new MyRunnable() {
 					@Override
 					public void run() {
 						Toast.makeText(activity, R.string.error_sub_comment, Toast.LENGTH_SHORT).show();

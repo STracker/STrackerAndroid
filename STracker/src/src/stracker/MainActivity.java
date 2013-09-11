@@ -71,6 +71,10 @@ public class MainActivity extends BaseListActivity {
 				break;
 			case R.id.action_calendar:
 				if(_application.getUserManager().get(this) == null) break;
+				if(_application.getUserManager().getCalendar().get(this) == null){
+					Toast.makeText(this, R.string.no_calendar, Toast.LENGTH_SHORT).show();
+					break;
+				}
 				startActivity(new Intent(this, CalendarActivity.class));
 				break;
 		}

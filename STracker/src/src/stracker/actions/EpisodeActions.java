@@ -23,6 +23,7 @@ public class EpisodeActions {
 	/**
 	 * This method pop's up an AlertDialog to ask for clear watched in an episode.
 	 * @param activity - Activity where the method is called.
+	 * @param episode - episode to unwatch
 	 */
 	public static void unwatchEpisode(final BaseActivity activity, final Episode episode){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
@@ -56,6 +57,7 @@ public class EpisodeActions {
 	
 	/**
 	 * Auxiliary method to remove watched episode from user profile
+	 * @param activity - Activity where the method is called.
 	 * @param episode - episode to remove
 	 */
 	private static void removeEpisodeFromUser(BaseActivity activity, Episode episode){
@@ -71,6 +73,7 @@ public class EpisodeActions {
 	
 	/**
 	 * Auxiliary method to add watched episode to user profile
+	 * @param activity - Activity where the method is called.
 	 * @param episode - episode to add
 	 */
 	private static void AddEpisodeToUser(BaseActivity activity, Episode episode){
@@ -87,6 +90,7 @@ public class EpisodeActions {
 	/**
 	 * This method pop's up an AlertDialog to ask for watch an episode.
 	 * @param activity - Activity where the method is called.
+	 * @param episode - episode to watch
 	 */
 	public static void watchEpisode(final BaseActivity activity, final Episode episode){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);

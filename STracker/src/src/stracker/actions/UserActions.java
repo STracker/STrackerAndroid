@@ -29,7 +29,7 @@ public class UserActions {
 	 */
 	public static void searchFriend(final BaseActivity activity){
 		AlertDialog.Builder adBuilder = new AlertDialog.Builder(activity);
-		adBuilder.setMessage(activity.getString(R.string.rating_message));
+		adBuilder.setMessage(activity.getString(R.string.friend_message));
 		adBuilder.setCancelable(true);
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(activity);

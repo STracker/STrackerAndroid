@@ -36,7 +36,7 @@
 	<string name="rating_message">Do you really want to submit the Rating?</string>
 	<string name="comment_message">Please insert text comment:</string>
 	<string name="tvshow_message">Enter TvShow\'s Name:</string>
-	<string name="rating_message">Enter Friend\'s Name:</string>
+	<string name="friend_message">Enter Friend\'s Name:</string>
 	<string name="button_search">Search</string>
 	<string name="button_remove">Remove</string>
 	<string name="button_watch">Watch</string>
@@ -143,13 +143,13 @@
 	<string name="uri_tvshow_comments">tvshows/tvShowId/comments"</string>
 	<string name="uri_tvshow_rating">tvshows/tvShowId/ratings"</string>
 	<string name="uri_users">users</string>
-	<string name="uri_user_suggestion">user/suggestions/tvShowId</string>
 	<string name="uri_tvshow_search">tvshows?name=name_arg&amp;start=start_arg&amp;end=end_arg</string>
 	<string name="uri_user_search">users?name=name_arg&amp;start=start_arg&amp;end=end_arg</string>
 	<string name="uri_user_info">users/userId</string>
 	<string name="uri_episode_watched">user/subscriptions/tvShowId/watchedepisodes/seasonNumber/episodeNumber</string>
 	
 	<!-- Display messages -->
+	<string name="no_calendar">Calendar has no entries!</string>
 	<string name="not_found">Results not found!</string>
 	<string name="unexpected">An unexpected error occurred!</string>
 	<string name="error_rating">Error requesting the Rating!</string>
